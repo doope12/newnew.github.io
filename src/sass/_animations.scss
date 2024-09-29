@@ -1,0 +1,32 @@
+@keyframes swipe-from-left {
+	from {
+		transform: translateX(-500px);
+	}
+
+	to {
+		transform: translateX(0);
+	}
+}
+
+@keyframes swipe-to-left {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-1000px);
+	}
+}
+
+@keyframes showDrop {
+	from {
+		margin-left: -140px;
+		opacity: 0;
+	}
+
+	to {
+		margin-left: 0.3em;
+		opacity: 1;
+	}
+}
+

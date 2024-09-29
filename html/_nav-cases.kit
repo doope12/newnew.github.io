@@ -1,0 +1,111 @@
+<nav class="nav">
+    <div class="wrapper">
+        <div class="nav__container">
+            <div class="nav__left">
+                <a href="../index.html" class="nav__link nav__link--logo">EzSkins</a>
+                <ul class="nav__list">
+                    <li class="nav__item"></li>
+                    </li>
+                    <li id="nav-link" class="nav__item active-site">
+                        <a href="#" class="nav__link"><i class="fa-solid fa-toolbox nav__icon"></i>Cases</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link"><i class="fa-solid fa-bolt nav__icon"></i>Battles</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link"><i class="fa-solid fa-circle-up nav__icon"></i>Upgrader</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link"><i
+                                class="ti ti-rotate-dot nav__icon nav__icon--bigger"></i>Roulette</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link"><i class="fa-solid fa-burst nav__icon"></i>Crash</a>
+                    </li>
+                    <!-- <li class="nav__item">
+                    <a href="#" class="nav__link"><i class="ti ti-route nav__icon nav__icon--bigger"></i>Affiliate</a>
+                </li> -->
+                </ul>
+            </div>
+            <button class="hamburger nav__hamb hamburger--spring" type="button">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+            <div class="user">
+                <div class="user__logged-out hidden">
+                    <button id="login-btn" class="user__btn"><span class="user__btn-span">Login</span></button>
+                </div>
+                <div class="user__logged-in">
+                    <img src="" alt="Your Profile Avatar" class="user__avatar">
+                    <div class="user__middle">
+                        <p class="user__name"></p>
+                        <p class="user__balance">Balance: <span class="user__balance user__balance--amount"></span>
+                        </p>
+                    </div>
+                    <button id="logout-btn" class="user__btn user__btn--logout"><i
+                            class="fa-solid fa-arrow-right-to-bracket user__icon"></i></button>
+                    <button class="user__btn user__btn--deposit"><i
+                            class="fa-solid fa-plus user__icon user__icon--deposit"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="nav-mobile hidden">
+    <div class="user-mobile">
+        <div class="user-mobile__logged-out-mobile hidden">
+            <button id="login-btn-mobile" class="user-mobile__btn">Login</button>
+        </div>
+        <div class="user-mobile__logged-in-mobile">
+            <div class="user-mobile__top">
+                <img src="" alt="Your Profile Avatar" class="user-mobile__avatar">
+                <div class="user-mobile__middle">
+                    <p class="user-mobile__name"></p>
+                    <p class="user-mobile__balance">Balance: <span
+                            class="user-mobile__balance user-mobile__balance--amount"></span></p>
+                </div>
+            </div>
+            <div class="user-mobile__bottom">
+                <button id="logout-btn-mobile" class="user-mobile__btn user-mobile__btn--logout"><i
+                        class="fa-solid fa-arrow-right-to-bracket user-mobile__icon"></i></button>
+                <button class="user-mobile__btn user-mobile__btn--deposit"><i
+                        class="fa-solid fa-plus user-mobile__icon user-mobile__icon--deposit"></i></button>
+            </div>
+        </div>
+    </div>
+    <ul class="nav-mobile__list">
+        <li class="nav-mobile__item"></li>
+        </li>
+        <li class="nav-mobile__item">
+            <a href="#" class="nav-mobile__link"><i class="fa-solid fa-toolbox nav-mobile__icon"></i>Cases</a>
+        </li>
+        <li class="nav-mobile__item">
+            <a href="#" class="nav-mobile__link"><i class="fa-solid fa-bolt nav-mobile__icon"></i>Battles</a>
+        </li>
+        <li class="nav-mobile__item">
+            <a href="#" class="nav-mobile__link"><i class="fa-solid fa-circle-up nav-mobile__icon"></i>Upgrader</a>
+        </li>
+        <li class="nav-mobile__item">
+            <a href="#" class="nav-mobile__link"><i
+                    class="ti ti-rotate-dot nav-mobile__icon nav-mobile__icon--bigger"></i>Roulette</a>
+        </li>
+        <li class="nav-mobile__item">
+            <a href="#" class="nav-mobile__link"><i class="fa-solid fa-burst nav-mobile__icon"></i>Crash</a>
+        </li>
+        <!-- <li class="nav-mobile__item">
+        <a href="#" class="nav-mobile__link"><i class="ti ti-route nav-mobile__icon nav-mobile__icon--bigger"></i>Affiliate</a>
+    </li> -->
+    </ul>
+</div>
+<div class="login-popup hidden">
+    <div class="login-popup__container">
+        <p class="login-popup__text">Img url</p>
+        <input id="login-img" class="login-popup__input" type="text">
+        <p class="login-popup__text">Nickname</p>
+        <input id="login-nickname" class="login-popup__input" type="text">
+        <button class="login-popup__btn">Create Account</button>
+        <i class="fa-solid fa-arrow-left login-popup__icon"></i>
+    </div>
+</div>

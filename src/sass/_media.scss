@@ -1,0 +1,61 @@
+@media (min-width: 576px) {
+	.stats {
+		&__item {
+			display: flex;
+			align-items: center;
+			padding: 1em 0;
+			width: 40%;
+		}
+
+		&__icon {
+			margin: 0 1em;
+			padding: 0.75em;
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.nav-mobile {
+		&__list {
+			font-size: 2.6rem;
+		}
+	}
+
+	.drop {
+		&__item {
+			width: 175px;
+			height: 175px;
+		}
+	}
+
+	.cases {
+		&__item {
+			&-container {
+				width: 250px;
+				height: 250px;
+			}
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.nav {
+		&__list {
+			display: flex;
+		}
+
+		&__hamb {
+			display: none;
+		}
+	}
+
+	.user {
+		display: flex;
+	}
+
+	.stats {
+		&__item {
+			width: 20%;
+		}
+	}
+}

@@ -1,0 +1,322 @@
+@use "./colors" as *;
+
+.nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	border-bottom: 2px solid $border-color;
+	background-color: $main-color;
+	z-index: 555;
+
+	&__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 100px;
+		color: $text-color;
+	}
+
+	&__left {
+		display: flex;
+	}
+
+	&__container,
+	&__link {
+		font-size: 1.8rem;
+	}
+
+	&__list {
+		display: none;
+		align-items: center;
+		letter-spacing: 1px;
+	}
+
+	&__link {
+		padding: 0.2em;
+		color: $text-color-not-active;
+
+		&--logo {
+			margin: 0 1.3em;
+			font-size: 2.6rem;
+			font-weight: bold;
+			text-shadow: 0 0 2px $text-color;
+			color: $text-color;
+			transition: opacity 0.5s;
+
+			&:hover {
+				opacity: 0.75;
+			}
+		}
+	}
+
+	&__item {
+		padding: 0 0.5em;
+	}
+
+	&__icon {
+		padding: 0 0.3em;
+		font-size: 1.4rem;
+
+		&--bigger {
+			font-size: 1.7rem;
+		}
+	}
+
+	&__hamb {
+		margin-right: 1.5em;
+	}
+}
+
+.user {
+	display: none;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	border-radius: 20px;
+	background-image: $user-color;
+
+	&__btn {
+		margin: 0 2em;
+		padding: 0.5em 2em;
+		font-size: 2rem;
+		border: none;
+		border-radius: 10px;
+		text-transform: uppercase;
+		font-weight: bold;
+		letter-spacing: 1px;
+		background-image: $user-btn-color;
+		color: $text-color;
+		cursor: pointer;
+
+		&:hover &-span,
+		&:hover i {
+			transform: scale(1.2);
+		}
+
+		&-span {
+			display: block;
+		}
+
+		&--deposit {
+			margin: 0;
+			margin-right: 1em;
+			padding: 0.5em 0.75em;
+			font-size: 2rem;
+			border-radius: 15%;
+		}
+
+		&--logout {
+			margin: 0 0.7em;
+			padding: 0.3em;
+			background-color: transparent;
+			background-image: none;
+			cursor: pointer;
+		}
+	}
+
+	&__btn-span,
+	&__icon {
+		transition: transform 0.3s;
+	}
+
+	&__logged-in {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__avatar {
+		margin: 0 0.7em;
+		width: 50px;
+		height: 50px;
+		border-radius: 15%;
+		object-fit: cover;
+	}
+
+	&__name {
+		font-size: 1.8rem;
+	}
+
+	&__balance {
+		font-size: 1.6rem;
+		color: $text-color-not-active;
+
+		&--amount {
+			color: $text-color;
+		}
+	}
+
+	&__middle {
+		padding: 0 0.5em;
+	}
+
+	&__icon {
+		font-size: 1.6rem;
+		color: $text-color-not-active;
+
+		&--deposit {
+			padding: 0;
+			font-size: 2rem;
+			color: $text-color;
+		}
+	}
+}
+
+.nav-mobile {
+	position: fixed;
+
+	left: 0;
+	top: 100px;
+	right: 0;
+
+	height: calc(100vh - 100px);
+	background-color: $main-color;
+	z-index: 554;
+	animation: swipe-from-left 0.5s;
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		font-size: 2rem;
+	}
+
+	&__item {
+		padding: 0.5em 0;
+	}
+
+	&__link {
+		color: $text-color;
+	}
+
+	&__icon {
+		padding: 0 0.3em;
+		font-size: 1.4rem;
+
+		&--bigger {
+			font-size: 1.7rem;
+		}
+	}
+}
+
+.user-mobile {
+	padding: 1em;
+	color: $text-color;
+
+	&__logged-in-mobile {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+	}
+
+	&__top,
+	&__bottom {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		margin: 1em 0;
+	}
+
+	&__top {
+		border-top-right-radius: 20px;
+		border-bottom-right-radius: 20px;
+		background-color: $tiles-color;
+	}
+
+	&__avatar {
+		margin-right: 1em;
+		width: 50px;
+		height: 50px;
+		border-radius: 15%;
+		object-fit: cover;
+	}
+
+	&__balance {
+		font-size: 1.6rem;
+		color: $text-color-not-active;
+
+		&--amount {
+			color: $text-color;
+		}
+	}
+
+	&__btn {
+		padding: 0.5em 2em;
+		width: 100%;
+		font-size: 2rem;
+		border: none;
+		border-radius: 10px;
+		text-transform: uppercase;
+		font-weight: bold;
+		letter-spacing: 1px;
+		background-image: $user-btn-color;
+		color: $text-color;
+		cursor: pointer;
+
+		&--deposit {
+			margin: 0;
+			margin-right: 1em;
+			padding: 0.5em 0.75em;
+			font-size: 2rem;
+		}
+
+		&--logout {
+			margin: 0 0.7em;
+			padding: 0.5em 0.75em;
+			background-color: $tiles-color;
+			background-image: none;
+			cursor: pointer;
+		}
+	}
+
+	&__icon {
+		padding: 0;
+		font-size: 1.6rem;
+		color: $text-color-not-active;
+
+		&--deposit {
+			color: $text-color;
+		}
+	}
+}
+
+.login-popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: $main3-color;
+	color: $text-color;
+	z-index: 600;
+
+	&__container {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 3em;
+		text-align: center;
+		border-radius: 20px;
+		background-color: $main-color;
+	}
+
+	&__icon {
+		position: absolute;
+		left: 5%;
+		top: 5%;
+		font-size: 2rem;
+		cursor: pointer;
+	}
+
+	&__input {
+		margin: 0.5em 0;
+		padding: 0.5em;
+	}
+}

@@ -1,0 +1,72 @@
+$main2-color: rgb(45, 45, 45);
+$main3-color: rgba(40, 40, 40, 0.6);
+$tiles-color: rgb(60, 60, 60);
+$main-color: rgb(40, 40, 40);
+$user-color: linear-gradient(
+	90deg,
+	rgba(50, 50, 50, 1) 50%,
+	rgba(40, 40, 40, 1) 100%
+);
+$secondary-color: #a95df5;
+$text-color: rgb(250, 250, 250);
+$text-color-not-active: rgb(175, 175, 175);
+$border-color: rgba(255, 255, 255, 0.15);
+$user-btn-color: linear-gradient(326deg, #be5ea1 0%, #5d8ff5 74%);
+$green: rgb(50, 206, 50);
+$green-low: rgba(50, 206, 50, 0.15);
+$purple: rgb(221, 44, 221);
+$purple-low: rgba(221, 44, 221, 0.15);
+$blue: rgb(56, 56, 231);
+$blue-low: rgba(56, 56, 231, 0.15);
+$red: rgb(231, 49, 49);
+$red-low: rgba(231, 49, 49, 0.15);
+$yellow: rgb(228, 239, 74);
+$yellow-low: rgba(228, 239, 74, 0.15);
+$pink-drop-gradient: linear-gradient(
+	135deg,
+	rgba(211, 44, 230, 0.3) 0%,
+	rgba(0, 0, 0, 0) 35%,
+	rgba(0, 0, 0, 0) 65%,
+	rgba(211, 44, 230, 0.3) 100%
+);
+$pink-drop: #d32ce6;
+$red-drop-gradient: linear-gradient(
+	135deg,
+	rgba(235, 75, 75, 0.3) 0%,
+	rgba(0, 0, 0, 0) 35%,
+	rgba(0, 0, 0, 0) 65%,
+	rgba(235, 75, 75, 0.3) 100%
+);
+$red-drop: rgb(235, 75, 75);
+$gold-drop-gradient: linear-gradient(
+	135deg,
+	rgba(233, 239, 54, 0.3) 0%,
+	rgba(0, 0, 0, 0) 35%,
+	rgba(0, 0, 0, 0) 65%,
+	rgba(233, 239, 54, 0.3) 100%
+);
+$gold-drop: rgb(233, 239, 54);
+$purple-drop-gradient: linear-gradient(
+	135deg,
+	rgba(136, 71, 255, 0.3) 0%,
+	rgba(0, 0, 0, 0) 35%,
+	rgba(0, 0, 0, 0) 65%,
+	rgba(136, 71, 255, 0.3) 100%
+);
+$purple-drop: rgb(136, 71, 255);
+$blue-drop-gradient: linear-gradient(
+	135deg,
+	rgba(75, 105, 255, 0.3) 0%,
+	rgba(0, 0, 0, 0) 35%,
+	rgba(0, 0, 0, 0) 65%,
+	rgba(75, 105, 255, 0.3) 100%
+);
+$blue-drop: rgb(75, 105, 255);
+$light-blue-drop-gradient: linear-gradient(
+	135deg,
+	rgba(94, 152, 217, 0.3) 0%,
+	rgba(0, 0, 0, 0) 35%,
+	rgba(0, 0, 0, 0) 65%,
+	rgba(94, 152, 217, 0.3) 100%
+);
+$light-blue-drop: rgb(94, 152, 217);

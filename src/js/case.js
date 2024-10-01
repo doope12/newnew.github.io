@@ -1,4 +1,4 @@
-const items = {
+const items2 = {
 	id0: {
 		weapon: "M4A1-S",
 		name: "M4A1-S Black Lotus",
@@ -50,7 +50,7 @@ const items = {
 };
 const spinBtn = document.querySelector(".spin");
 const caseItemsBox = document.querySelector(".case__items");
-const countItemsAmount = Object.keys(items).length;
+const countItemsAmount = Object.keys(items2).length;
 const winPupup = document.querySelector(".win-popup");
 const sellBtn = document.querySelector(".win-popup__btn--sell");
 const takeBtn = document.querySelector(".win-popup__btn--take");
@@ -76,10 +76,10 @@ const createItemsInChest = () => {
 
 		const randomItem = Math.floor(Math.random() * countItemsAmount);
 
-		itemImg.setAttribute("src", items[`id${randomItem}`].imgDist);
-		itemImg.setAttribute("alt", items[`id${randomItem}`].name);
-		itemItemName.textContent = items[`id${randomItem}`].weapon;
-		itemSkinName.textContent = items[`id${randomItem}`].skin;
+		itemImg.setAttribute("src", items2[`id${randomItem}`].imgDist);
+		itemImg.setAttribute("alt", items2[`id${randomItem}`].name);
+		itemItemName.textContent = items2[`id${randomItem}`].weapon;
+		itemSkinName.textContent = items2[`id${randomItem}`].skin;
 
 		item.id = `id${randomItem}`;
 		item.append(itemImg, itemItemName, itemSkinName);
@@ -125,10 +125,10 @@ const spinCase = () => {
 		const winningItem = getWinningItem();
 		if (winningItem) {
 			currentWinningItem = winningItem;
-			winningItemImg.setAttribute("src", items[`${winningItem.id}`].imgDist);
-			winningItemImg.setAttribute("alt", items[`${winningItem.id}`].name);
-			winningItemName.textContent = items[`${winningItem.id}`].name;
-			winningItemPrice.textContent = items[`${winningItem.id}`].price;
+			winningItemImg.setAttribute("src", items2[`${winningItem.id}`].imgDist);
+			winningItemImg.setAttribute("alt", items2[`${winningItem.id}`].name);
+			winningItemName.textContent = items2[`${winningItem.id}`].name;
+			winningItemPrice.textContent = items2[`${winningItem.id}`].price;
 			hideWinPopup();
 		}
 	}, 5000); // Uruchom po zakończeniu animacji

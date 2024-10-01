@@ -59,7 +59,7 @@ const createDropOnStart = () => {
 
 		item.classList.add(items[`id${randomItem}`].color + "-drop");
 
-		if (window.location.pathname === "/index.html") {
+		if (document.body.id === "index") {
 			itemImg.setAttribute("src", items[`id${randomItem}`].imgDist);
 		} else {
 			itemImg.setAttribute("src", "." + items[`id${randomItem}`].imgDist);
@@ -87,7 +87,7 @@ const createDrop = () => {
 
 	item.classList.add(items[`id${randomItem}`].color + "-drop");
 
-	if (window.location.pathname === "/index.html") {
+	if (document.body.id === "index") {
 		itemImg.setAttribute("src", items[`id${randomItem}`].imgDist);
 	} else {
 		itemImg.setAttribute("src", "." + items[`id${randomItem}`].imgDist);

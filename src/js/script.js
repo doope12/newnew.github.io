@@ -5,7 +5,7 @@ const loginPopup = document.querySelector(".login-popup");
 
 const setActiveSite = () => {
 	// skrypt dodaje style do itemu nawigacji w zaleznosci od strony na ktorej jestesmy
-	if (window.location.pathname === "/modes/upgrader.html") {
+	if (document.body.id === "upgrader") {
 		// sprawdzamy jaka jest nazwa pliku z ktorego wczytujemy strone
 		navItem.forEach((item) => {
 			item.classList.remove("active-site"); // usuwa stan active site
@@ -16,7 +16,7 @@ const setActiveSite = () => {
 				item.firstElementChild.classList.remove("hidden"); // odkrywa gradientowe tło itemu
 			}
 		});
-	} else if (window.location.pathname === "/modes/battles.html") {
+	} else if (document.body.id === "battles") {
 		navItem.forEach((item) => {
 			item.classList.remove("active-site");
 			item.firstElementChild.classList.add("hidden");
@@ -26,7 +26,7 @@ const setActiveSite = () => {
 				item.firstElementChild.classList.remove("hidden");
 			}
 		});
-	} else if (window.location.pathname === "/modes/roulette.html") {
+	} else if (document.body.id === "roulette") {
 		navItem.forEach((item) => {
 			item.classList.remove("active-site");
 			item.firstElementChild.classList.add("hidden");
@@ -36,7 +36,7 @@ const setActiveSite = () => {
 				item.firstElementChild.classList.remove("hidden");
 			}
 		});
-	} else if (window.location.pathname === "/modes/crash.html") {
+	} else if (document.body.id === "crash") {
 		navItem.forEach((item) => {
 			item.classList.remove("active-site");
 			item.firstElementChild.classList.add("hidden");

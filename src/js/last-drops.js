@@ -38,30 +38,68 @@ const items = {
 };
 const countItemsAmount = Object.keys(items).length;
 const lastDropList = document.querySelector(".drop__list");
+const dropBox = document.querySelector(".drop__box");
 let dropListOrder = 0;
+
+const setDropBoxHeight = () => {
+	dropBox.style.height = lastDropList.offsetHeight + "px";
+};
+
+const createDropOnStart = () => {
+	for (i = 0; i < 24; i++) {
+		dropListOrder++;
+		const item = document.createElement("li");
+		const itemBg = document.createElement("div");
+		const itemImg = document.createElement("img");
+		item.classList.add("drop__item");
+		itemBg.classList.add("drop__item-bg");
+		itemImg.classList.add("drop__img");
+
+		const randomItem = Math.floor(Math.random() * countItemsAmount);
+
+		item.classList.add(items[`id${randomItem}`].color + "-drop");
+
+		if (window.location.pathname === "/index.html") {
+			itemImg.setAttribute("src", items[`id${randomItem}`].imgDist);
+		} else {
+			itemImg.setAttribute("src", "." + items[`id${randomItem}`].imgDist);
+		}
+
+		itemImg.setAttribute("alt", items[`id${randomItem}`].name);
+
+		item.style.order = `-${dropListOrder}`;
+		item.append(itemImg, itemBg);
+		lastDropList.append(item);
+	}
+};
 
 const createDrop = () => {
 	dropListOrder++;
 	const lastDropListFirstChild = lastDropList.firstElementChild;
 	const item = document.createElement("li");
+	const itemBg = document.createElement("div");
 	const itemImg = document.createElement("img");
-	const itemName = document.createElement("p");
 	item.classList.add("drop__item");
+	itemBg.classList.add("drop__item-bg");
 	itemImg.classList.add("drop__img");
-	itemName.classList.add("drop__name");
 
 	const randomItem = Math.floor(Math.random() * countItemsAmount);
 
 	item.classList.add(items[`id${randomItem}`].color + "-drop");
-	itemImg.setAttribute("src", items[`id${randomItem}`].imgDist);
+
+	if (window.location.pathname === "/index.html") {
+		itemImg.setAttribute("src", items[`id${randomItem}`].imgDist);
+	} else {
+		itemImg.setAttribute("src", "." + items[`id${randomItem}`].imgDist);
+	}
+
 	itemImg.setAttribute("alt", items[`id${randomItem}`].name);
-	itemName.textContent = items[`id${randomItem}`].skin;
 
 	item.style.order = `-${dropListOrder}`;
-	item.append(itemImg, itemName);
+	item.append(itemImg, itemBg);
 	lastDropList.append(item);
 
-	if(lastDropList.childElementCount > 14) {
+	if (lastDropList.childElementCount > 25) {
 		lastDropListFirstChild.remove();
 	}
 };
@@ -70,4 +108,6 @@ setInterval(() => {
 	createDrop();
 }, 4000);
 
+createDropOnStart();
 createDrop();
+setDropBoxHeight();

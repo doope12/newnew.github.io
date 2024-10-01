@@ -28,13 +28,7 @@
 			top: 50%;
 			height: 1px;
 			width: 100%;
-			background: linear-gradient(
-				90deg,
-				rgba(255, 255, 255, 0) 0%,
-				rgba(119, 119, 119, 1) 10%,
-				rgba(119, 119, 119, 1) 90%,
-				rgba(255, 255, 255, 0) 100%
-			);
+			background: $title-gradient-line;
 		}
 
 		&-span--color {
@@ -45,6 +39,7 @@
 			position: relative;
 			padding: 0 1em;
 			background-color: $main-color;
+			z-index: 10;
 
 			&--2 {
 				background-color: $main2-color;
@@ -53,51 +48,56 @@
 	}
 }
 
-.stats {
-	background-color: $main2-color;
+// .stats {
+// 	background-color: $main2-color;
 
-	&__list {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-wrap: wrap;
-		width: 100%;
-		text-align: center;
-	}
+// 	&__list {
+// 		display: flex;
+// 		justify-content: center;
+// 		align-items: center;
+// 		flex-wrap: wrap;
+// 		width: 100%;
+// 		text-align: center;
+// 	}
 
-	&__item {
-		width: 100%;
-		margin: 1em;
-		padding: 0.5em 0;
-		border-radius: 25px;
-		box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-		background-image: $user-color;
-	}
+// 	&__item {
+// 		width: 100%;
+// 		margin: 1em;
+// 		padding: 0.5em 0;
+// 		border-radius: 25px;
+// 		box-shadow: $normal-boxshadow;
+// 		background-image: $user-color;
+// 	}
 
-	&__amount {
-		font-weight: bold;
-	}
+// 	&__amount {
+// 		font-weight: bold;
+// 	}
 
-	&__type {
-		color: $text-color-not-active;
-	}
+// 	&__type {
+// 		color: $text-color-not-active;
+// 	}
 
-	&__icon {
-		padding: 0.5em;
-		margin: 0.5em 0;
-		font-size: 2rem;
-	}
-}
+// 	&__icon {
+// 		padding: 0.5em;
+// 		margin: 0.5em 0;
+// 		font-size: 2rem;
+// 	}
+// }
 
 .drop {
 	&__box {
 		position: relative;
-		margin-bottom: 2em;
-		// margin: 0 auto;
-		// max-width: 1300px;
-		// width: 100%;
-		height: 216px;
+		box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.5);
+		z-index: 15;
 		overflow-x: hidden;
+
+		&-bg {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background: $last-drop-bg;
+			z-index: 16;
+		}
 	}
 
 	&__list {
@@ -106,29 +106,38 @@
 		left: 0;
 		display: flex;
 		align-items: center;
+		overflow-y: hidden;
 		color: $text-color;
 	}
 
 	&__item {
-		margin: 0.3em;
+		position: relative;
 		padding: 0.1em;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 		align-items: center;
-		height: 150px;
+		height: 100px;
 		width: 150px;
-		border-radius: 30px;
 		animation: showDrop 0.5s ease forwards;
 		transition: transform 0.5s;
 
-		&:hover {
-			transform: scale(1.02);
+		&-bg {
+			position: absolute;
+			width: 75px;
+			height: 75px;
+			border-radius: 50%;
+			background-color: none;
+			border: 10px solid rgba(0, 0, 0, 0.05);
 		}
 	}
 
 	&__img {
-		padding: 0.5em;
-		width: 100%;
+		padding: 0.2em;
+		// height: 75%;
+		width: 75%;
+		object-fit: cover;
+		z-index: 15;
 	}
 
 	&__name {
@@ -199,4 +208,89 @@
 	&__link {
 		color: $text-color;
 	}
+}
+
+.deposit {
+	&__container {
+		padding: 1em;
+		width: 100%;
+		font-size: 1.6rem;
+		border-radius: 20px;
+		box-shadow: $normal-boxshadow;
+		background-color: $main-color;
+	}
+
+	&__label {
+		&-container {
+			display: flex;
+			align-items: center;
+			margin-bottom: 1em;
+			margin-top: 0.5em;
+			box-shadow: $normal-boxshadow;
+		}
+	}
+
+	&__input {
+		padding: 0.4em;
+		width: 100%;
+		font-size: 1.8rem;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		border: none;
+		background: $main2-color;
+	}
+
+	&__clear-btn {
+		display: inline-block;
+		height: 35.38px;
+		font-size: 1.8rem;
+		border: none;
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 10px;
+		background: $main2-color;
+	}
+
+	&__icon {
+		padding: 0 0.5em;
+		color: $text-color;
+	}
+
+	&__bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	&__btn {
+		margin: 0.5em;
+		padding: 0.5em 0;
+		width: calc(33% - 20px);
+		border: 2px solid $border-color;
+		border-radius: 10px;
+		font-weight: bold;
+		background: $tiles-color;
+		color: $text-color;
+		box-shadow: $normal-boxshadow;
+		cursor: pointer;
+		transition: background 0.5s;
+
+		&:hover {
+			background: $tiles-color-hover;
+		}
+	}
+
+	&__submit-btn {
+		display: block;
+		margin: 0 auto;
+		margin-top: 1em;
+		max-width: 600px;
+		width: 100%;
+		box-shadow: $purple-boxshadow;
+	}
+}
+
+.second-color-main {
+	background-color: $main2-color;
+	height: calc(100vh - 100px);
 }

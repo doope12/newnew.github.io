@@ -1,27 +1,66 @@
-const navLink = document.querySelector("#nav-link");
-const navLinkAfter = document.querySelector(".active-site");
-const nav = document.querySelector(".nav__container");
-const navList = document.querySelector(".nav__list");
+const navItem = document.querySelectorAll(".nav__item");
 const mobileNavBtn = document.querySelector(".nav__hamb");
 const mobileNav = document.querySelector(".nav-mobile");
+const loginPopup = document.querySelector(".login-popup");
 
+const setActiveSite = () => {
+	// skrypt dodaje style do itemu nawigacji w zaleznosci od strony na ktorej jestesmy
+	if (window.location.pathname === "/modes/upgrader.html") {
+		// sprawdzamy jaka jest nazwa pliku z ktorego wczytujemy strone
+		navItem.forEach((item) => {
+			item.classList.remove("active-site"); // usuwa stan active site
+			item.firstElementChild.classList.add("hidden"); // ukrywa gradientowe tło itemu
+
+			if (item.id.includes("upgrader")) {
+				item.classList.add("active-site"); // dodaje stan active site po sprawdzeniu id
+				item.firstElementChild.classList.remove("hidden"); // odkrywa gradientowe tło itemu
+			}
+		});
+	} else if (window.location.pathname === "/modes/battles.html") {
+		navItem.forEach((item) => {
+			item.classList.remove("active-site");
+			item.firstElementChild.classList.add("hidden");
+
+			if (item.id.includes("battles")) {
+				item.classList.add("active-site");
+				item.firstElementChild.classList.remove("hidden");
+			}
+		});
+	} else if (window.location.pathname === "/modes/roulette.html") {
+		navItem.forEach((item) => {
+			item.classList.remove("active-site");
+			item.firstElementChild.classList.add("hidden");
+
+			if (item.id.includes("roulette")) {
+				item.classList.add("active-site");
+				item.firstElementChild.classList.remove("hidden");
+			}
+		});
+	} else if (window.location.pathname === "/modes/crash.html") {
+		navItem.forEach((item) => {
+			item.classList.remove("active-site");
+			item.firstElementChild.classList.add("hidden");
+
+			if (item.id.includes("crash")) {
+				item.classList.add("active-site");
+				item.firstElementChild.classList.remove("hidden");
+			}
+		});
+	} else {
+		navItem.forEach((item) => {
+			item.classList.remove("active-site");
+			item.firstElementChild.classList.add("hidden");
+
+			if (item.id.includes("cases")) {
+				item.classList.add("active-site");
+				item.firstElementChild.classList.remove("hidden");
+			}
+		});
+	}
+};
 
 const addListeners = () => {
 	mobileNavBtn.addEventListener("click", toggleMobileNav);
-};
-
-const getHeightForLinkLine = () => {
-	const navHeight = nav.offsetHeight;
-	const navLinkHeight = navLink.offsetHeight;
-	const navListHeight = navList.offsetHeight;
-	const heightOfLinkLine =
-		(navHeight - navListHeight) / 2 + (navListHeight - navLinkHeight) / 2 + 0.5;
-
-	setHeightToAfter(heightOfLinkLine);
-};
-
-const setHeightToAfter = (height) => {
-	navLinkAfter.style.setProperty("--after-bottom", `-${height}px`);
 };
 
 const toggleMobileNav = () => {
@@ -41,7 +80,6 @@ const toggleMobileNav = () => {
 	}
 };
 
-getHeightForLinkLine();
-
 addListeners();
 
+setActiveSite();

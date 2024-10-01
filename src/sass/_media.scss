@@ -12,6 +12,24 @@
 			padding: 0.75em;
 		}
 	}
+
+	.login-popup {
+		&__container {
+			width: auto;
+			padding: 10em;
+		}
+	}
+
+	.deposit__top {
+		display: flex;
+		justify-content: center;
+
+		&-left,
+		&-right {
+			padding: 0 0.7em;
+			width: 100%;
+		}
+	}
 }
 
 @media (min-width: 768px) {
@@ -21,18 +39,38 @@
 		}
 	}
 
-	.drop {
-		&__item {
-			width: 175px;
-			height: 175px;
-		}
-	}
+	// .drop {
+	// 	&__item {
+	// 		// width: 175px;
+	// 		// height: 125px;
+	// 	}
+	// }
 
 	.cases {
 		&__item {
 			&-container {
 				width: 250px;
 				height: 250px;
+			}
+		}
+	}
+
+	.section {
+		&__title {
+			padding-left: 6em;
+			text-align: left;
+		}
+	}
+
+	.deposit {
+		&__btn {
+			width: calc(14%);
+		}
+
+		&__top {
+			&-left,
+			&-right {
+				padding: 0 2em;
 			}
 		}
 	}

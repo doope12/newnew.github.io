@@ -51,12 +51,21 @@ const checkIfUserCreatedAccount = () => {
 };
 
 const loginToAccount = () => {
-	if(localStorage.getItem("createdAccount") === "1") {
-        loginPopup.classList.add("hidden");
-        logoutFromAccount();
-    } else {
-        loginPopup.classList.toggle("hidden");
-    }
+	if (localStorage.getItem("createdAccount") === "1") {
+		loginPopup.classList.add("hidden");
+		logoutFromAccount();
+	} else {
+		if (!loginPopup.classList.contains("hidden")) {
+			loginPopup.classList.add("hide-login");
+			setTimeout(() => {
+				loginPopup.classList.remove("hide-login");
+				loginPopup.classList.toggle("hidden");
+			}, 500);
+		} else {
+			loginPopup.classList.toggle("hidden");
+			loginPopup.classList.remove("hide-login");
+		}
+	}
 };
 
 const logoutFromAccount = () => {

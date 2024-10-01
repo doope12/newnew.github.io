@@ -14,6 +14,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <link href="../dist/css/hamburgers.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../dist/css/hexagon.css">
     <link rel="stylesheet" href="../dist/css/style.min.css">
     <script src="https://kit.fontawesome.com/bdb2f8ae99.js" crossorigin="anonymous"></script>
 </head>
@@ -23,25 +24,28 @@
     <div class="wrapper">
         <div class="nav__container">
             <div class="nav__left">
-                <a href="../index.html" class="nav__link nav__link--logo">EzSkins</a>
+                <a href="../index.html" class="nav__link nav__link--logo">ezSkins</a>
                 <ul class="nav__list">
-                    <li class="nav__item"></li>
+                    <li id="cases" class="nav__item wider-left">
+                        <div class="nav__link-bg hidden"></div>
+                        <a href="../index.html" class="nav__link"><i class="fa-solid fa-toolbox nav__icon"></i>Cases</a>
                     </li>
-                    <li id="nav-link" class="nav__item active-site">
-                        <a href="#" class="nav__link"><i class="fa-solid fa-toolbox nav__icon"></i>Cases</a>
+                    <li id="battles" class="nav__item">
+                        <div class="nav__link-bg hidden"></div>
+                        <a href="../modes/battles.html" class="nav__link"><i class="fa-solid fa-bolt nav__icon"></i>Battles</a>
                     </li>
-                    <li class="nav__item">
-                        <a href="#" class="nav__link"><i class="fa-solid fa-bolt nav__icon"></i>Battles</a>
+                    <li id="upgrader" class="nav__item">
+                        <div class="nav__link-bg hidden"></div>
+                        <a href="../modes/upgrader.html" class="nav__link"><i class="fa-solid fa-circle-up nav__icon"></i>Upgrader</a>
                     </li>
-                    <li class="nav__item">
-                        <a href="#" class="nav__link"><i class="fa-solid fa-circle-up nav__icon"></i>Upgrader</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#" class="nav__link"><i
+                    <li id="roulette" class="nav__item">
+                        <div class="nav__link-bg hidden"></div>
+                        <a href="../modes/roulette.html" class="nav__link"><i
                                 class="ti ti-rotate-dot nav__icon nav__icon--bigger"></i>Roulette</a>
                     </li>
-                    <li class="nav__item">
-                        <a href="#" class="nav__link"><i class="fa-solid fa-burst nav__icon"></i>Crash</a>
+                    <li id="crash" class="nav__item wider-right">
+                        <div class="nav__link-bg hidden"></div>
+                        <a href="../modes/crash.html" class="nav__link"><i class="fa-solid fa-burst nav__icon"></i>Crash</a>
                     </li>
                     <!-- <li class="nav__item">
                     <a href="#" class="nav__link"><i class="ti ti-route nav__icon nav__icon--bigger"></i>Affiliate</a>
@@ -55,10 +59,10 @@
             </button>
             <div class="user">
                 <div class="user__logged-out hidden">
-                    <button id="login-btn" class="user__btn"><span class="user__btn-span">Login</span></button>
+                    <button id="login-btn" class="user__btn"><span class="user__btn-span">sing in</span></button>
                 </div>
                 <div class="user__logged-in">
-                    <img src="" alt="Your Profile Avatar" class="user__avatar">
+                    <img src="" alt="Your Profile Avatar" class="user__avatar hexagon">
                     <div class="user__middle">
                         <p class="user__name"></p>
                         <p class="user__balance">Balance: <span class="user__balance user__balance--amount"></span>
@@ -66,18 +70,18 @@
                     </div>
                     <button id="logout-btn" class="user__btn user__btn--logout"><i
                             class="fa-solid fa-arrow-right-to-bracket user__icon"></i></button>
-                    <button class="user__btn user__btn--deposit"><i
-                            class="fa-solid fa-plus user__icon user__icon--deposit"></i></button>
+                    <button class="user__btn user__btn--deposit"><a href="../diff/deposit.html" class="user__link user__link--deposit"><i
+                        class="fa-solid fa-plus user-mobile__icon user-mobile__icon--deposit"></i></a></button>
                 </div>
             </div>
         </div>
     </div>
 </nav>
 
-<div class="nav-mobile hidden">
+<div class="nav nav-mobile hidden">
     <div class="user-mobile">
         <div class="user-mobile__logged-out-mobile hidden">
-            <button id="login-btn-mobile" class="user-mobile__btn">Login</button>
+            <button id="login-btn-mobile" class="user-mobile__btn">Sing in</button>
         </div>
         <div class="user-mobile__logged-in-mobile">
             <div class="user-mobile__top">
@@ -91,8 +95,8 @@
             <div class="user-mobile__bottom">
                 <button id="logout-btn-mobile" class="user-mobile__btn user-mobile__btn--logout"><i
                         class="fa-solid fa-arrow-right-to-bracket user-mobile__icon"></i></button>
-                <button class="user-mobile__btn user-mobile__btn--deposit"><i
-                        class="fa-solid fa-plus user-mobile__icon user-mobile__icon--deposit"></i></button>
+                <button class="user-mobile__btn user-mobile__btn--deposit"><a href="../diff/deposit.html" class="user__link user__link--deposit"><i
+                    class="fa-solid fa-plus user-mobile__icon user-mobile__icon--deposit"></i></a></button>
             </div>
         </div>
     </div>
@@ -100,20 +104,20 @@
         <li class="nav-mobile__item"></li>
         </li>
         <li class="nav-mobile__item">
-            <a href="#" class="nav-mobile__link"><i class="fa-solid fa-toolbox nav-mobile__icon"></i>Cases</a>
+            <a href="../index.html" class="nav-mobile__link"><i class="fa-solid fa-toolbox nav-mobile__icon"></i>Cases</a>
         </li>
         <li class="nav-mobile__item">
-            <a href="#" class="nav-mobile__link"><i class="fa-solid fa-bolt nav-mobile__icon"></i>Battles</a>
+            <a href="../modes/battles.html" class="nav-mobile__link"><i class="fa-solid fa-bolt nav-mobile__icon"></i>Battles</a>
         </li>
         <li class="nav-mobile__item">
-            <a href="#" class="nav-mobile__link"><i class="fa-solid fa-circle-up nav-mobile__icon"></i>Upgrader</a>
+            <a href="../modes/upgrader.html" class="nav-mobile__link"><i class="fa-solid fa-circle-up nav-mobile__icon"></i>Upgrader</a>
         </li>
         <li class="nav-mobile__item">
-            <a href="#" class="nav-mobile__link"><i
+            <a href="../modes/roulette.html" class="nav-mobile__link"><i
                     class="ti ti-rotate-dot nav-mobile__icon nav-mobile__icon--bigger"></i>Roulette</a>
         </li>
         <li class="nav-mobile__item">
-            <a href="#" class="nav-mobile__link"><i class="fa-solid fa-burst nav-mobile__icon"></i>Crash</a>
+            <a href="../modes/crash.html" class="nav-mobile__link"><i class="fa-solid fa-burst nav-mobile__icon"></i>Crash</a>
         </li>
         <!-- <li class="nav-mobile__item">
         <a href="#" class="nav-mobile__link"><i class="ti ti-route nav-mobile__icon nav-mobile__icon--bigger"></i>Affiliate</a>
@@ -122,15 +126,21 @@
 </div>
 <div class="login-popup hidden">
     <div class="login-popup__container">
-        <p class="login-popup__text">Img url</p>
-        <input id="login-img" class="login-popup__input" type="text">
-        <p class="login-popup__text">Nickname</p>
-        <input id="login-nickname" class="login-popup__input" type="text">
+        <h3 class="login-pop__title">Sing in</h3>
+        <input id="login-img" class="login-popup__input" type="text" placeholder="Avatar URL">
+        <input id="login-nickname" class="login-popup__input" type="text" placeholder="Nickname">
         <button class="login-popup__btn">Create Account</button>
-        <i class="fa-solid fa-arrow-left login-popup__icon"></i>
+        <i class="fa-solid fa-xmark login-popup__icon"></i>
     </div>
 </div>
     <main class="main">
+        <section class="drop">
+    <div class="drop__box">
+        <div class="drop__box-bg"></div>
+        <ul class="drop__list">
+        </ul>
+    </div>
+</section>
         <div class="wrapper">
             <div class="case__container">
                 <div class="case__middle-point"></div>
@@ -159,6 +169,7 @@
         </div>
     </main>
     <script src="../dist/js/case.min.js"></script>
+    <script src="../dist/js/last-drops.min.js"></script>
     <script src="../dist/js/balance.min.js"></script>
     <script src="../dist/js/account.min.js"></script>
     <script src="../dist/js/script.min.js"></script>

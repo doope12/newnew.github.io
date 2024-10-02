@@ -7,7 +7,7 @@
     <meta name="author" content="Ludzik">
     <meta name="description" content="CSGO Gambling website.">
     <meta name="keywords" content="CSGO, Cases, Upgrader, Roulette, Crash.">
-    <title>EzSkins</title>
+    <title>EzSkins - LuckyLore Case</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
@@ -133,7 +133,7 @@
         <i class="fa-solid fa-xmark login-popup__icon"></i>
     </div>
 </div>
-    <main class="main second-color-main">
+    <main class="main">
         <section class="drop">
     <div class="drop__box">
         <div class="drop__box-bg"></div>
@@ -141,48 +141,31 @@
         </ul>
     </div>
 </section>
-        <section class="deposit">
-            <div class="wrapper">
-                <div class="main__container">
-                    <h2 class="section__title section__title--cases"><span
-                            class="section__title-bg section__title-bg--2">Deposit</span></h2>
-                    <div class="deposit__container">
-                        <div class="deposit__top">
-                            <div class="deposit__top-left">
-                                <label for="" class="deposit__label">How much you want to deposit
-                                </label>
-                                <div class="deposit__label-container">
-                                    <input id="deposit-amount" type="number" class="deposit__input" placeholder="00.00$">
-                                    <button class="deposit__clear-btn"><i
-                                            class="fa-solid fa-xmark deposit__icon"></i></button>
-                                </div>
-                            </div>
-                            <div class="deposit__top-right">
-                                <label for="" class="deposit__label">Your e-mail address</label>
-                                <div class="deposit__label-container">
-                                    <input id="email-input" type="text" class="deposit__input" placeholder="Your e-mail address">
-                                    <button class="deposit__clear-btn"><i
-                                            class="fa-solid fa-xmark deposit__icon"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="deposit__bottom">
-                            <button id="5" class="deposit__btn">5.00$</button>
-                            <button id="10" class="deposit__btn">10.00$</button>
-                            <button id="25" class="deposit__btn">25.00$</button>
-                            <button id="50" class="deposit__btn">50.00$</button>
-                            <button id="75" class="deposit__btn">75.00$</button>
-                            <button id="100" class="deposit__btn">100.00$</button>
-                        </div>
-                        <button class="deposit__submit-btn normal-btn">Deposit</button>
-                    </div>
+        <div class="wrapper">
+            <div class="case__container">
+                <div class="case__middle-point"></div>
+                <div class="case__items">
+                </div>
+
+            </div>
+            <button class="spin">SPIN</button>
+        </div>
+        <div class="win-popup  hidden">
+            <div class="win-popup__container">
+                <p class="win-popup__title">Your drop</p>
+                <img src="" alt="" class="win-popup__img">
+                <p class="win-popup__item-name"></p>
+                <p class="win-popup__item-price"></p>
+                <div class="win-popup__buttons">
+                    <button class="win-popup__btn win-popup__btn--sell">Sell</button>
+                    <button class="win-popup__btn win-popup__btn--take">Take</button>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
-    <script src="../dist/js/last-drops.min.js"></script>
     <script src="../dist/js/balance.min.js"></script>
-    <script src="../dist/js/deposit.min.js"></script>
+    <script src="../dist/js/cases/luckylore.min.js"></script>
+    <script src="../dist/js/last-drops.min.js"></script>
     <script src="../dist/js/account.min.js"></script>
     <script src="../dist/js/script.min.js"></script>
 </body>

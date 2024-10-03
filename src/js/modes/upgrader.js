@@ -91,8 +91,8 @@ const items1 = {
 	},
 	id10: {
 		weapon: "Talon",
-		name: "Talon Tiget Tooth",
-		skin: "Mudder",
+		name: "Talon Tiger Tooth",
+		skin: "Tiger Tooth",
 		color: "gold",
 		imgDist: "../dist/img/weapons/knives/talon/tiger-tooth.jpg",
 		price: 611.78,

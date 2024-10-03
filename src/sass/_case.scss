@@ -2,78 +2,210 @@
 
 .case {
 	&__container {
-        position: relative;
+		position: relative;
 		// margin: 15em auto 2em;
 		// max-width: 1200px;
 		// width: 100%;
-        margin-top: 15em;
-        height: 200px;
-        overflow-x: hidden;
+		margin: 1em 1em 0;
+		height: 202px;
+		border-radius: 20px;
+		border: 2px solid $secondary-color;
+		overflow: hidden;
+		box-shadow: $purple-boxshadow;
+	}
+
+	&__buttons {
+		display: flex;
+		justify-content: space-between;
+		padding-top: 4em;
+	}
+
+	&__btn {
+		margin: 0.5em;
+		padding: 0.5em 1em;
+		border: 2px solid $border-color;
+		border-radius: 10px;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 1.6rem;
+		background: $tiles-color;
+		color: $text-color;
+		box-shadow: $normal-boxshadow;
+		cursor: pointer;
+		transition: background 0.5s;
+
+		&:hover {
+			background: $tiles-color-hover;
+		}
+	}
+
+	&__icon {
+		&--arrow {
+			padding-right: 0.4em;
+		}
 	}
 
 	&__items {
-        position: absolute;
-        top: 0;
-        left: -3950px;
+		position: absolute;
+		top: 0;
+		left: -3950px;
 		display: flex;
 		align-items: center;
-        color: $text-color;
-        z-index: 100;
+		color: $text-color;
+		z-index: 100;
 	}
 
-    &__item {
-        padding: 0.5em;
-        width: 200px;
-        height: 200px;
-        border: 1px solid white;
-    }
+	&__item {
+		padding: 0.5em;
+		width: 200px;
+		height: 200px;
+		text-align: center;
+	}
 
-    &__img {
-        width: 100%;
-        object-fit: cover;
-    }
+	&__item-name {
+		font-size: 1.2rem;
+	}
 
-    &__middle-point {
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%);
-        background-color: red;
-        width: 2px;
-        height: 50px;
-        z-index: 101;
-    }
+	&__img {
+		width: 100%;
+		object-fit: cover;
+	}
+
+	&__middle-point {
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%);
+		width: 30px;
+		height: 30px;
+		overflow: hidden;
+		z-index: 101;
+
+		&::after {
+			position: absolute;
+			content: "";
+			display: block;
+			top: -25%;	
+			left: 50%;
+			transform: translate(-50%) rotate(45deg);
+			width: 20px;
+			height: 20px;
+			border-radius: 0 2px 2px;
+			background-color: $secondary-color;
+		}
+
+		&--bottom {
+			transform: translate(-50%) rotate(180deg);
+			bottom: 0;
+		}
+	}
+
+	&__drop-box {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		padding: 1em;
+		margin-bottom: 3em;
+		border-radius: 20px;
+		background-color: $main2-color;
+		overflow: hidden;
+	}
+
+	&__drop {
+		margin: 1em;
+		padding: 1em;
+		display: flex;
+		flex-direction: column;
+		max-width: 17%;
+		min-width: 200px;
+		width: 100%;
+		border-radius: 20px;
+
+		&-img {
+			height: 100%;
+			object-fit: cover;
+		}
+
+		&-percent {
+			text-align: right;
+		}
+
+		&-item {
+			padding-bottom: 0.5em;
+		}
+
+		&-price {
+			font-weight: bold;
+		}
+
+		&-skin {
+			font-size: 1.8rem;
+		}
+
+		&-item,
+		&-percent {
+			font-size: 1.4rem;
+		}
+
+		&-item,
+		&-percent,
+		&-price {
+			color: $text-color;
+		}
+
+		&-textbox {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
 }
 
 .spin {
-    margin: 2em auto;
-    display: block;
-    font-size: 2rem;
-    cursor: pointer;
+	margin: 2em auto;
+	display: block;
+	font-size: 2rem;
+	cursor: pointer;
+	box-shadow: $purple-boxshadow;
 }
 
 .win-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: black;
+	z-index: 1000;
 
-    &__container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: $text-color;
-    }
+	&__container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		color: $text-color;
+	}
 
-    &__btn {
-        margin: 1em;
-        font-size: 2rem;
-    }
+	&__title {
+		font-size: 3rem;
+	}
 
-    
+	&__item {
+		&-name {
+			padding-bottom: 0.5em;
+			font-size: 2rem;
+		}
+
+		&-price {
+			font-size: 1.8rem;
+			color: $secondary-color;
+		}
+	}
+
+	&__btn {
+		margin: 1em;
+		font-size: 2rem;
+	}
 }

@@ -32,11 +32,13 @@
                     </li>
                     <li id="battles" class="nav__item">
                         <div class="nav__link-bg hidden"></div>
-                        <a href="../modes/battles.html" class="nav__link"><i class="fa-solid fa-bolt nav__icon"></i>Battles</a>
+                        <a href="../modes/battles.html" class="nav__link"><i
+                                class="fa-solid fa-bolt nav__icon"></i>Battles</a>
                     </li>
                     <li id="upgrader" class="nav__item">
                         <div class="nav__link-bg hidden"></div>
-                        <a href="../modes/upgrader.html" class="nav__link"><i class="fa-solid fa-circle-up nav__icon"></i>Upgrader</a>
+                        <a href="../modes/upgrader.html" class="nav__link"><i
+                                class="fa-solid fa-circle-up nav__icon"></i>Upgrader</a>
                     </li>
                     <li id="roulette" class="nav__item">
                         <div class="nav__link-bg hidden"></div>
@@ -45,7 +47,8 @@
                     </li>
                     <li id="crash" class="nav__item wider-right">
                         <div class="nav__link-bg hidden"></div>
-                        <a href="../modes/crash.html" class="nav__link"><i class="fa-solid fa-burst nav__icon"></i>Crash</a>
+                        <a href="../modes/crash.html" class="nav__link"><i
+                                class="fa-solid fa-burst nav__icon"></i>Crash</a>
                     </li>
                     <!-- <li class="nav__item">
                     <a href="#" class="nav__link"><i class="ti ti-route nav__icon nav__icon--bigger"></i>Affiliate</a>
@@ -59,7 +62,7 @@
             </button>
             <div class="user">
                 <div class="user__logged-out hidden">
-                    <button id="login-btn" class="user__btn"><span class="user__btn-span">sing in</span></button>
+                    <button id="login-btn" class="user__btn"><span class="user__btn-span">sign in</span></button>
                 </div>
                 <div class="user__logged-in">
                     <img src="" alt="Your Profile Avatar" class="user__avatar hexagon">
@@ -70,8 +73,9 @@
                     </div>
                     <button id="logout-btn" class="user__btn user__btn--logout"><i
                             class="fa-solid fa-arrow-right-to-bracket user__icon"></i></button>
-                    <button class="user__btn user__btn--deposit"><a href="../diff/deposit.html" class="user__link user__link--deposit"><i
-                        class="fa-solid fa-plus user-mobile__icon user-mobile__icon--deposit"></i></a></button>
+                    <button class="user__btn user__btn--deposit"><a href="../diff/deposit.html"
+                            class="user__link user__link--deposit"><i
+                                class="fa-solid fa-plus user-mobile__icon user-mobile__icon--deposit"></i></a></button>
                 </div>
             </div>
         </div>
@@ -81,7 +85,7 @@
 <div class="nav nav-mobile hidden">
     <div class="user-mobile">
         <div class="user-mobile__logged-out-mobile hidden">
-            <button id="login-btn-mobile" class="user-mobile__btn">Sing in</button>
+            <button id="login-btn-mobile" class="user-mobile__btn">Sign in</button>
         </div>
         <div class="user-mobile__logged-in-mobile">
             <div class="user-mobile__top">
@@ -95,8 +99,9 @@
             <div class="user-mobile__bottom">
                 <button id="logout-btn-mobile" class="user-mobile__btn user-mobile__btn--logout"><i
                         class="fa-solid fa-arrow-right-to-bracket user-mobile__icon"></i></button>
-                <button class="user-mobile__btn user-mobile__btn--deposit"><a href="../diff/deposit.html" class="user__link user__link--deposit"><i
-                    class="fa-solid fa-plus user-mobile__icon user-mobile__icon--deposit"></i></a></button>
+                <button class="user-mobile__btn user-mobile__btn--deposit"><a href="../diff/deposit.html"
+                        class="user__link user__link--deposit"><i
+                            class="fa-solid fa-plus user-mobile__icon user-mobile__icon--deposit"></i></a></button>
             </div>
         </div>
     </div>
@@ -104,20 +109,24 @@
         <li class="nav-mobile__item"></li>
         </li>
         <li class="nav-mobile__item">
-            <a href="../index.html" class="nav-mobile__link"><i class="fa-solid fa-toolbox nav-mobile__icon"></i>Cases</a>
+            <a href="../index.html" class="nav-mobile__link"><i
+                    class="fa-solid fa-toolbox nav-mobile__icon"></i>Cases</a>
         </li>
         <li class="nav-mobile__item">
-            <a href="../modes/battles.html" class="nav-mobile__link"><i class="fa-solid fa-bolt nav-mobile__icon"></i>Battles</a>
+            <a href="../modes/battles.html" class="nav-mobile__link"><i
+                    class="fa-solid fa-bolt nav-mobile__icon"></i>Battles</a>
         </li>
         <li class="nav-mobile__item">
-            <a href="../modes/upgrader.html" class="nav-mobile__link"><i class="fa-solid fa-circle-up nav-mobile__icon"></i>Upgrader</a>
+            <a href="../modes/upgrader.html" class="nav-mobile__link"><i
+                    class="fa-solid fa-circle-up nav-mobile__icon"></i>Upgrader</a>
         </li>
         <li class="nav-mobile__item">
             <a href="../modes/roulette.html" class="nav-mobile__link"><i
                     class="ti ti-rotate-dot nav-mobile__icon nav-mobile__icon--bigger"></i>Roulette</a>
         </li>
         <li class="nav-mobile__item">
-            <a href="../modes/crash.html" class="nav-mobile__link"><i class="fa-solid fa-burst nav-mobile__icon"></i>Crash</a>
+            <a href="../modes/crash.html" class="nav-mobile__link"><i
+                    class="fa-solid fa-burst nav-mobile__icon"></i>Crash</a>
         </li>
         <!-- <li class="nav-mobile__item">
         <a href="#" class="nav-mobile__link"><i class="ti ti-route nav-mobile__icon nav-mobile__icon--bigger"></i>Affiliate</a>
@@ -142,27 +151,41 @@
     </div>
 </section>
         <div class="wrapper">
+            <div class="case__buttons">
+                <button class="case__btn case__btn--back"><i class="fa-solid fa-arrow-left case__icon--arrow"></i>Back</button>
+                <button class="case__btn case__btn--mute not-muted"><i class="fa-solid fa-volume-high case__icon"></i><i
+                        class="fa-solid fa-volume-xmark case__icon" style="display: none;"></i></button>
+            </div>
             <div class="case__container">
                 <div class="case__middle-point"></div>
+                <div class="case__middle-point case__middle-point--bottom"></div>
                 <div class="case__items">
                 </div>
 
             </div>
-            <button class="spin">SPIN</button>
+            <button class="spin normal-btn">SPIN</button>
+            <div class="case__drop-box">
+            </div>
         </div>
-        <div class="win-popup  hidden">
+        </div>
+        <div class="win-popup hidden">
             <div class="win-popup__container">
                 <p class="win-popup__title">Your drop</p>
                 <img src="" alt="" class="win-popup__img">
                 <p class="win-popup__item-name"></p>
                 <p class="win-popup__item-price"></p>
                 <div class="win-popup__buttons">
-                    <button class="win-popup__btn win-popup__btn--sell">Sell</button>
-                    <button class="win-popup__btn win-popup__btn--take">Take</button>
+                    <button class="win-popup__btn win-popup__btn--sell normal-btn">Sell</button>
+                    <button class="win-popup__btn win-popup__btn--take normal-btn">Take</button>
                 </div>
             </div>
         </div>
     </main>
+    <footer class="footer">
+    <p class="footer__text">Created by: <span class="footer__span">Rafał Klocek</span>
+    <p>
+        <a href="https://github.com/Ludzikk" class="footer__link"><i class="fa-brands fa-github footer__icon"></i></a>
+</footer>
     <script src="../dist/js/balance.min.js"></script>
     <script src="../dist/js/cases/redline.min.js"></script>
     <script src="../dist/js/last-drops.min.js"></script>

@@ -7,6 +7,7 @@ const items2 = {
 		imgDist: "../dist/img/weapons/rifles/ak-47/slate.jpg",
 		price: 10.61,
 		id: 3,
+		dropPercent: 50,
 	},
 	item1: {
 		weapon: "AK-47",
@@ -16,6 +17,7 @@ const items2 = {
 		imgDist: "../dist/img/weapons/rifles/ak-47/redline.jpg",
 		price: 113.74,
 		id: 8,
+		dropPercent: 50,
 	},
 };
 
@@ -32,21 +34,66 @@ const balanceAmount = document.querySelector(".user__balance--amount");
 const balanceAmountMobile = document.querySelector(
 	".user-mobile__balance--amount"
 );
-const casePrice = 65.00;
+const backBtn = document.querySelector(".case__btn--back");
+const muteBtn = document.querySelector(".case__btn--mute");
+const caseOpeningSound = new Audio("../dist/audio/open.mp3");
+const casePrice = 65.0;
 let currentWinningItem;
+
+const createInfoAboutItemsInChest = () => {
+	const dropBox = document.querySelector(".case__drop-box");
+
+	for (i = 0; i < countItemsAmount; i++) {
+		const dropItem = document.createElement("div");
+		const dropItemPercent = document.createElement("p");
+		const dropItemImg = document.createElement("img");
+		const dropItemTextBox = document.createElement("div");
+		const dropItemTextBoxLeft = document.createElement("div");
+		const dropItemName = document.createElement("p");
+		const dropItemSkin = document.createElement("p");
+		const dropItemPrice = document.createElement("p");
+
+		dropItem.classList.add("case__drop");
+		dropItem.classList.add(items2[`item${i}`].color + "-drop");
+		dropItemPercent.classList.add("case__drop-percent");
+		dropItemImg.classList.add("case__drop-img");
+		dropItemTextBox.classList.add("case__drop-textbox");
+		dropItemTextBoxLeft.classList.add("case__drop-textbox-left");
+		dropItemName.classList.add("case__drop-item");
+		dropItemSkin.classList.add("case__drop-skin");
+		dropItemSkin.classList.add(items2[`item${i}`].color + "-text");
+		dropItemPrice.classList.add("case__drop-price");
+
+		dropItemImg.setAttribute("src", items2[`item${i}`].imgDist);
+		dropItemImg.setAttribute("alt", items2[`item${i}`].name);
+
+		dropItemPercent.textContent = items2[`item${i}`].dropPercent + "%";
+		dropItemName.textContent = items2[`item${i}`].weapon;
+		dropItemSkin.textContent = items2[`item${i}`].skin;
+		dropItemPrice.textContent = items2[`item${i}`].price + "$";
+
+		dropItemTextBoxLeft.append(dropItemName, dropItemSkin);
+		dropItemTextBox.append(dropItemTextBoxLeft, dropItemPrice);
+		dropItem.append(dropItemPercent, dropItemImg, dropItemTextBox);
+		dropBox.append(dropItem);
+	}
+};
 
 const createItemsInChest = () => {
 	for (i = 0; i < 30; i++) {
+		const randomItem = Math.random() < 0.5 ? 0 : 1;
+
 		const item = document.createElement("div");
 		const itemImg = document.createElement("img");
 		const itemItemName = document.createElement("p");
 		const itemSkinName = document.createElement("p");
 		item.classList.add("case__item");
+		item.classList.add(items2[`item${randomItem}`].color + "-drop");
+		item.style.border = "none";
 		itemImg.classList.add("case__img");
 		itemItemName.classList.add("case__item-name");
 		itemSkinName.classList.add("case__skin-name");
-
-		const randomItem = Math.random() < 0.5 ? 0 : 1;
+		itemSkinName.classList.add(items2[`item${randomItem}`].color + "-text");
 
 		itemImg.setAttribute("src", items2[`item${randomItem}`].imgDist);
 		itemImg.setAttribute("alt", items2[`item${randomItem}`].name);
@@ -70,12 +117,18 @@ const setBtnText = () => {
 
 // Funkcja odpowiedzialna za losowe przesunięcie
 const spinCase = () => {
-	if (parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice && spinBtn.textContent !== "spining") {
+	if (
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice &&
+		spinBtn.textContent !== "spining"
+	) {
 		// Losowe przesunięcie między -2000 a -1000 px
 		const howStrongSpin = Math.floor(Math.random() * 1000 - 2000);
 
 		spinBtn.textContent = "spining";
-		
+
+		if (muteBtn.classList.contains("not-muted")) {
+			caseOpeningSound.play();
+		}
 
 		const balanceAfterOpening = (
 			parseFloat(localStorage.getItem("Balance").slice(0, -1)) - casePrice
@@ -119,7 +172,7 @@ const spinCase = () => {
 				winningItemImg.setAttribute("src", items2[`${winningItem.id}`].imgDist);
 				winningItemImg.setAttribute("alt", items2[`${winningItem.id}`].name);
 				winningItemName.textContent = items2[`${winningItem.id}`].name;
-				winningItemPrice.textContent = items2[`${winningItem.id}`].price;
+				winningItemPrice.textContent = items2[`${winningItem.id}`].price + "$";
 				hideWinPopup();
 			}
 		}, 5000); // Uruchom po zakończeniu animacji
@@ -173,9 +226,28 @@ const resetBoxAnimation = () => {
 	createItemsInChest();
 };
 
+const goBackToMainSite = () => {
+	window.open("../index.html", "_self");
+};
+
+const muteSound = () => {
+	muteBtn.classList.toggle("not-muted");
+
+	if (muteBtn.classList.contains("not-muted")) {
+		muteBtn.lastElementChild.style.display = "none";
+		muteBtn.firstElementChild.style.display = "block";
+	} else {
+		muteBtn.lastElementChild.style.display = "block";
+		muteBtn.firstElementChild.style.display = "none";
+	}
+};
+
 spinBtn.addEventListener("click", spinCase);
 takeBtn.addEventListener("click", takeWinningItem);
 sellBtn.addEventListener("click", sellWinningItem);
+backBtn.addEventListener("click", goBackToMainSite);
+muteBtn.addEventListener("click", muteSound);
 
 createItemsInChest();
 setBtnText();
+createInfoAboutItemsInChest();

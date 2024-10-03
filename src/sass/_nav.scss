@@ -183,10 +183,16 @@
 	}
 
 	&__avatar {
-		margin: 0 0.7em;
 		height: 60px;
 		object-fit: cover;
 		box-shadow: $normal-boxshadow;
+	}
+	
+	&__profile {
+		display: block;
+		margin: 0 0.7em;
+		height: 60px;
+		width: 51.95px;
 	}
 
 	&__name {

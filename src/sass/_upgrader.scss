@@ -1,25 +1,165 @@
 @use "./colors" as *;
 
 .upgrader {
-    &__container {
-        color: $text-color;
-    }
+	&__container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 2em;
+		color: $text-color;
+	}
 
-    &__list {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    }
+	&__top {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 1em;
 
-    &__item {
-        min-width: 200px;
-        width: 20%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+		&-middle {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 25%;
+			border-radius: 20px;
+			box-shadow: $normal-boxshadow;
+			background-color: $main2-color;
+		}
 
-    &__img {
-        width: 100%;
-    }
+		&-left,
+		&-right {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 1em;
+			width: 30%;
+			border-radius: 20px;
+			box-shadow: $normal-boxshadow;
+			background-color: $main2-color;
+		}
+
+		&-img {
+			width: 75%;
+		}
+	}
+
+	&__infobox {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	&__base {
+		width: 200px;
+		height: 200px;
+		background: conic-gradient($secondary-color 0 0%, #292a2d 0%);
+		border-radius: 50%;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: transform 3s ease-out; /* Animacja obrotu */
+
+		&-inner {
+			width: 175px;
+			height: 175px;
+			background-color: #292a2d;
+			border-radius: 50%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+
+	&__percent {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 2rem;
+		font-weight: bold;
+		color: $secondary-color;
+	}
+
+	&__remove-btn {
+		padding: 0.5em 1em;
+		border: 2px solid $border-color;
+		border-radius: 10px;
+		font-weight: bold;
+		background: $tiles-color;
+		color: $text-color;
+		box-shadow: $normal-boxshadow;
+		cursor: pointer;
+		transition: background 0.5s;
+
+		&:hover {
+			background: $tiles-color-hover;
+		}
+	}
+
+	&__item-price {
+		padding: 0.5em 1em;
+		font-size: 1.6rem;
+		border: 2px solid $secondary-color;
+		border-radius: 10px;
+		text-transform: uppercase;
+		font-weight: bold;
+		letter-spacing: 1px;
+		box-shadow: $purple-boxshadow;
+		background: $secondary-color-alpha;
+		color: $text-color;
+	}
+
+	&__list {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	&__item {
+		min-width: 125px;
+		width: 20%;
+		margin: 0.5em;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-radius: 10px;
+		font-size: 1.2rem;
+		background-color: $main-color;
+		cursor: pointer;
+		transition:  0.5s;
+
+		&:hover {
+			transform: translateY(-5px);
+		}
+	}
+
+	&__img {
+		width: 100%;
+	}
+
+	&__bottom {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 1em;
+
+		&-left, &-right {
+			margin: 2em 0;
+			width: 48%;
+			padding: 1em;
+			border-radius: 20px;
+			box-shadow: $normal-boxshadow;
+			background-color: $main2-color;
+
+			&-top {
+				display: flex;
+				justify-content: space-between;
+				padding-bottom: 1em;
+			}
+		}
+
+		&-right-mid {
+			display: flex;
+		}
+	}
 }

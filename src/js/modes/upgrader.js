@@ -86,7 +86,7 @@ const items1 = {
 		skin: "Mudder",
 		color: "gold",
 		imgDist: "../dist/img/weapons/knives/classic/safari-mesh.jpg",
-		price: 175.00,
+		price: 175.0,
 		id: 9,
 	},
 	id10: {
@@ -99,32 +99,184 @@ const items1 = {
 		id: 10,
 	},
 };
-const itemUserOwnList = document.querySelector(".upgrader__list");
+const itemUserOwnList = document.querySelector(".upgrader__list-playeritems");
+const itemAllList = document.querySelector(".upgrader__list-allitems");
+const selectUserItems = document.querySelector("#price-user");
+const selectAllItems = document.querySelector("#price-all");
 const countItemsAmount = Object.keys(items).length;
 
-const addAllItems = () => {
+const addPlayerItems = () => {
 	for (i = 0; i < countItemsAmount; i++) {
 		const itemCount = parseInt(localStorage.getItem(`id${i}`)) || 0;
 		for (j = 0; j < itemCount; j++) {
 			const itemBox = document.createElement("div");
 			const itemImg = document.createElement("img");
 			const itemName = document.createElement("p");
+			const itemSkin = document.createElement("p");
 			const itemPrice = document.createElement("p");
 
 			itemBox.classList.add("upgrader__item");
+			itemBox.classList.add(items1[`id${i}`].color + "-drop");
+			itemBox.classList.add("upgrader__item-useritems");
 			itemImg.classList.add("upgrader__img");
 			itemName.classList.add("upgrader__name");
+			itemSkin.classList.add("upgrader__skin");
+			itemSkin.classList.add(items1[`id${i}`].color + "-text");
 			itemPrice.classList.add("upgrader__price");
 
+			itemBox.id = items1[`id${i}`].id;
 			itemImg.setAttribute("src", items1[`id${i}`].imgDist);
 			itemImg.setAttribute("alt", items1[`id${i}`].name);
-			itemName.textContent = items1[`id${i}`].name;
+			itemName.textContent = items1[`id${i}`].weapon;
+			itemSkin.textContent = items1[`id${i}`].skin;
 			itemPrice.textContent = items1[`id${i}`].price + "$";
 
-			itemBox.append(itemImg, itemName, itemPrice);
+			itemBox.append(itemImg, itemName, itemSkin, itemPrice);
 			itemUserOwnList.append(itemBox);
 		}
 	}
 };
 
+const addAllItems = () => {
+	for (i = 0; i < countItemsAmount; i++) {
+		const itemBox = document.createElement("div");
+		const itemImg = document.createElement("img");
+		const itemName = document.createElement("p");
+		const itemSkin = document.createElement("p");
+		const itemPrice = document.createElement("p");
+
+		itemBox.classList.add("upgrader__item");
+		itemBox.classList.add(items1[`id${i}`].color + "-drop");
+		itemBox.classList.add("upgrader__item-allitems");
+		itemImg.classList.add("upgrader__img");
+		itemName.classList.add("upgrader__name");
+		itemSkin.classList.add("upgrader__skin");
+		itemSkin.classList.add(items1[`id${i}`].color + "-text");
+		itemPrice.classList.add("upgrader__price");
+
+		itemBox.id = items1[`id${i}`].id;
+		itemImg.setAttribute("src", items1[`id${i}`].imgDist);
+		itemImg.setAttribute("alt", items1[`id${i}`].name);
+		itemName.textContent = items1[`id${i}`].weapon;
+		itemSkin.textContent = items1[`id${i}`].skin;
+		itemPrice.textContent = items1[`id${i}`].price + "$";
+
+		itemBox.append(itemImg, itemName, itemSkin, itemPrice);
+		itemAllList.append(itemBox);
+	}
+};
+
+const setUserItemsOrder = () => {
+	const userItems = document.querySelectorAll(".upgrader__item-useritems");
+
+	if (selectUserItems.value === "asc") {
+		userItems.forEach((item) => {
+			const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(
+				0
+			);
+			item.style.order = itemPrice;
+		});
+	} else {
+		userItems.forEach((item) => {
+			const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(
+				0
+			);
+			item.style.order = "-" + itemPrice;
+		});
+	}
+};
+
+const setAllItemsOrder = () => {
+	const allItems = document.querySelectorAll(".upgrader__item-allitems");
+
+	if (selectAllItems.value === "asc") {
+		allItems.forEach((item) => {
+			const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(
+				0
+			);
+			item.style.order = itemPrice;
+		});
+	} else {
+		allItems.forEach((item) => {
+			const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(
+				0
+			);
+			item.style.order = "-" + itemPrice;
+		});
+	}
+};
+
+function addToLeftSide() {
+	const infoBox = document.querySelector(".upgrader__infobox-left");
+	const topLeftBox = document.querySelector(".upgrader__top-left");
+
+	infoBox.firstElementChild.textContent = this.lastElementChild.textContent;
+	topLeftBox.lastElementChild.setAttribute(
+		"src",
+		this.firstElementChild.getAttribute("src")
+	);
+	topLeftBox.id = this.id;
+
+	countPercent();
+}
+
+function addToRightSide() {
+	const infoBox = document.querySelector(".upgrader__infobox-right");
+	const topRightBox = document.querySelector(".upgrader__top-right");
+
+	infoBox.firstElementChild.textContent = this.lastElementChild.textContent;
+	topRightBox.lastElementChild.setAttribute(
+		"src",
+		this.firstElementChild.getAttribute("src")
+	);
+	topRightBox.id = this.id;
+
+	countPercent();
+}
+
+const countPercent = () => {
+	const infoBoxLeft = document.querySelector(".upgrader__infobox-left");
+	const infoBoxRight = document.querySelector(".upgrader__infobox-right");
+	const priceLeft = infoBoxLeft.firstElementChild.textContent;
+	const priceRight = infoBoxRight.firstElementChild.textContent;
+
+	const circle = document.querySelector(".upgrader__base");
+	const percentageText = document.querySelector(".upgrader__percent");
+
+	if (priceLeft !== "0.00$" && priceRight !== "0.00$") {
+		const percentForWin =
+			(parseFloat(priceLeft) / parseFloat(priceRight)) * 100;
+
+		if (percentForWin >= 100) {
+			percentageText.textContent = "100%";
+			circle.style.background = `conic-gradient(#cfa0ff 0 100%, #292a2d 100% 100%)`;
+		} else {
+			percentageText.textContent = percentForWin.toFixed(2) + "%";
+			circle.style.background = `conic-gradient(#cfa0ff 0 ${percentForWin}%, #292a2d ${percentForWin}% 100%)`;
+		}
+	}
+};
+
+addPlayerItems();
 addAllItems();
+
+setUserItemsOrder();
+setAllItemsOrder();
+
+selectAllItems.addEventListener("change", setAllItemsOrder);
+selectUserItems.addEventListener("change", setUserItemsOrder);
+
+const addListenersToItems = () => {
+	const userItems = document.querySelectorAll(".upgrader__item-useritems");
+	const allItems = document.querySelectorAll(".upgrader__item-allitems");
+
+	userItems.forEach((item) => {
+		item.addEventListener("click", addToLeftSide);
+	});
+
+	allItems.forEach((item) => {
+		item.addEventListener("click", addToRightSide);
+	});
+};
+
+addListenersToItems();

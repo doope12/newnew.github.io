@@ -93,6 +93,14 @@ $light-blue-drop-gradient: linear-gradient(
 	rgba(94, 152, 217, 0.6) 100%
 );
 $light-blue-drop: rgb(94, 152, 217);
+$white-drop-gradient: linear-gradient(
+	135deg,
+	rgba(176, 195, 217, 0.6) 0%,
+	rgba(94, 152, 217, 0.2) 35%,
+	rgba(94, 152, 217, 0.2) 65%,
+	rgba(176, 195, 217, 0.6) 100%
+);
+$white-drop: rgb(176, 195, 217);
 $normal-boxshadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
 	rgba(0, 0, 0, 0.23) 0px 3px 6px;
 $purple-boxshadow: rgba(207, 160, 255, 0.16) 0px 3px 6px,

@@ -15,6 +15,7 @@
 		padding: 0 1em;
 
 		&-middle {
+			position: relative;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -48,15 +49,13 @@
 	}
 
 	&__base {
+		position: relative;
 		width: 200px;
 		height: 200px;
-		background: conic-gradient($secondary-color 0 0%, #292a2d 0%);
+		background: conic-gradient(#cfa0ff 0 0%, #292a2d 0 100%);
 		border-radius: 50%;
-		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		transition: transform 3s ease-out; /* Animacja obrotu */
+		transform: rotate(0deg);
+		transition: 5s ease-out;
 
 		&-inner {
 			width: 175px;
@@ -67,16 +66,46 @@
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			cursor: pointer;
+		}
+	}
+
+	&__indicator {
+		position: absolute;
+		left: 50%;
+		top: -30px;
+		transform: translate(-50%);
+		width: 30px;
+		height: 30px;
+		overflow: hidden;
+		z-index: 101;
+
+		&::after {
+			position: absolute;
+			content: "";
+			display: block;
+			top: -25%;
+			left: 50%;
+			transform: translate(-50%) rotate(45deg);
+			width: 20px;
+			height: 20px;
+			border-radius: 0 2px 2px;
+			background-color: $secondary-color;
 		}
 	}
 
 	&__percent {
+		color: white;
+		font-size: 24px;
+		font-weight: bold;
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		font-size: 2rem;
-		font-weight: bold;
 		color: $secondary-color;
 	}
 
@@ -127,7 +156,7 @@
 		font-size: 1.2rem;
 		background-color: $main-color;
 		cursor: pointer;
-		transition:  0.5s;
+		transition: 0.5s;
 
 		&:hover {
 			transform: translateY(-5px);
@@ -143,7 +172,8 @@
 		justify-content: space-between;
 		padding: 0 1em;
 
-		&-left, &-right {
+		&-left,
+		&-right {
 			margin: 2em 0;
 			width: 48%;
 			padding: 1em;

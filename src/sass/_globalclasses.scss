@@ -105,6 +105,10 @@
 	color: rgba(94, 152, 217, 1);
 }
 
+.white-text {
+	color: rgba(176, 195, 217, 1);
+}
+
 .pink-drop {
 	background: $pink-drop-gradient;
 	box-shadow: rgba(255, 0, 251, 0.5) 0px 0px 3px 0px;
@@ -139,6 +143,12 @@
 	background: $light-blue-drop-gradient;
 	box-shadow: rgba(94, 152, 217, 0.5) 0px 0px 3px 0px;
 	border-bottom: 4px solid $light-blue-drop;
+}
+
+.white-drop {
+	background: $white-drop-gradient;
+	box-shadow: rgba(176, 195, 217, 0.5) 0px 0px 3px 0px;
+	border-bottom: 4px solid $white-drop;
 }
 
 .normal-btn {

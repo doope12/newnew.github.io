@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ludzik">
+    <meta name="description" content="CSGO Gambling website.">
+    <meta name="keywords" content="CSGO, Cases, Upgrader, Roulette, Crash.">
+    <title>EzSkins - Desert Eagle Case</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link href="../dist/css/hamburgers.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../dist/css/hexagon.css">
+    <link rel="stylesheet" href="../dist/css/style.min.css">
+    <script src="https://kit.fontawesome.com/bdb2f8ae99.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- @import "../nav-cases.kit" -->
+    <main class="main">
+        <section class="drop">
+            <div class="drop__box">
+                <div class="drop__box-bg"></div>
+                <ul class="drop__list">
+                </ul>
+            </div>
+        </section>
+        <div class="wrapper">
+            <div class="case__buttons">
+                <button class="case__btn case__btn--back"><i class="fa-solid fa-arrow-left case__icon--arrow"></i>Back</button>
+                <button class="case__btn case__btn--mute not-muted"><i class="fa-solid fa-volume-high case__icon"></i><i
+                        class="fa-solid fa-volume-xmark case__icon" style="display: none;"></i></button>
+            </div>
+            <div class="case__container">
+                <div class="case__middle-point"></div>
+                <div class="case__middle-triangle"></div>
+                <div class="case__middle-triangle case__middle-triangle--bottom"></div>
+                <div class="case__items">
+                </div>
+
+            </div>
+            <button class="spin normal-btn">SPIN</button>
+            <div class="case__drop-box">
+            </div>
+        </div>
+        <div class="win-popup  hidden">
+            <div class="win-popup__container">
+                <p class="win-popup__title">Your drop</p>
+                <img src="" alt="" class="win-popup__img">
+                <p class="win-popup__item-name"></p>
+                <p class="win-popup__item-price"></p>
+                <div class="win-popup__buttons">
+                    <button class="win-popup__btn win-popup__btn--sell normal-btn">Sell</button>
+                    <button class="win-popup__btn win-popup__btn--take normal-btn">Take</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- @import "../footer.kit" -->
+    <script src="../dist/js/balance.min.js"></script>
+    <script src="../dist/js/cases/desert-eagle.min.js"></script>
+    <script src="../dist/js/last-drops.min.js"></script>
+    <script src="../dist/js/account.min.js"></script>
+    <script src="../dist/js/script.min.js"></script>
+</body>
+
+</html>

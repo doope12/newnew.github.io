@@ -101,7 +101,7 @@ const items = {
 	id11: {
 		weapon: "Desert Eagle",
 		name: "Desert Eagle Printstream",
-		skin: "Tiger Tooth",
+		skin: "Printstream",
 		color: "red",
 		imgDist: "./dist/img/weapons/pistols/desert-eagle/printstream.jpg",
 		price: 85.72,
@@ -395,11 +395,156 @@ const items = {
 		price: 1.55,
 		id: 43,
 	},
+	id44: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Hand Cannon",
+		skin: "Hand Cannon",
+		color: "purple",
+		imgDist: "./dist/img/weapons/pistols/desert-eagle/hand-cannon.jpg",
+		price: 427.71,
+		id: 44,
+	},
+	id45: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Fennec Fox",
+		skin: "Fennec Fox",
+		color: "pink",
+		imgDist: "./dist/img/weapons/pistols/desert-eagle/fennec-fox.jpg",
+		price: 353.77,
+		id: 45,
+	},
+	id46: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Midnight Storm",
+		skin: "Midnight Storm",
+		color: "light-blue",
+		imgDist: "./dist/img/weapons/pistols/desert-eagle/midnight-storm.jpg",
+		price: 25.03,
+		id: 46,
+	},
+	id47: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Naga",
+		skin: "Naga",
+		color: "purple",
+		imgDist: "./dist/img/weapons/pistols/desert-eagle/naga.jpg",
+		price: 5.26,
+		id: 47,
+	},
+	id48: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Light Rail",
+		skin: "Light Rail",
+		color: "purple",
+		imgDist: "./dist/img/weapons/pistols/desert-eagle/light-rail.jpg",
+		price: 3.23,
+		id: 48,
+	},
+	id49: {
+		weapon: "AK-47",
+		name: "AK-47 Wild Lotus",
+		skin: "Wild Lotus",
+		color: "red",
+		imgDist: "./dist/img/weapons/rifles/ak-47/wild-lotus.jpg",
+		price: 12420.30,
+		id: 49,
+	},
+	id50: {
+		weapon: "AK-47",
+		name: "AK-47 Gold Arabesque",
+		skin: "Gold Arabesque",
+		color: "red",
+		imgDist: "./dist/img/weapons/rifles/ak-47/gold-arabesque.jpg",
+		price: 2780.22,
+		id: 50,
+	},
+	id51: {
+		weapon: "AK-47",
+		name: "AK-47 Fire Serpent",
+		skin: "Fire Serpent",
+		color: "red",
+		imgDist: "./dist/img/weapons/rifles/ak-47/fire-serpent.jpg",
+		price: 2113.72,
+		id: 51,
+	},
+	id52: {
+		weapon: "AK-47",
+		name: "AK-47 X-Ray",
+		skin: "X-Ray",
+		color: "red",
+		imgDist: "./dist/img/weapons/rifles/ak-47/x-ray.jpg",
+		price: 1770.31,
+		id: 52,
+	},
+	id53: {
+		weapon: "AK-47",
+		name: "AK-47 Vulcan",
+		skin: "Vulcan",
+		color: "red",
+		imgDist: "./dist/img/weapons/rifles/ak-47/vulcan.jpg",
+		price: 675.39,
+		id: 53,
+	},
+	id54: {
+		weapon: "AK-47",
+		name: "AK-47 Bloodsport",
+		skin: "Bloodsport",
+		color: "red",
+		imgDist: "./dist/img/weapons/rifles/ak-47/bloodsport.jpg",
+		price: 125.89,
+		id: 54,
+	},
+	id55: {
+		weapon: "AK-47",
+		name: "AK-47 Frontside Misty",
+		skin: "Frontside Misty",
+		color: "pink",
+		imgDist: "./dist/img/weapons/rifles/ak-47/frontside-misty.jpg",
+		price: 73.47,
+		id: 55,
+	},
+	id56: {
+		weapon: "AK-47",
+		name: "AK-47 Legion of Anubis",
+		skin: "Legion of Anubis",
+		color: "red",
+		imgDist: "./dist/img/weapons/rifles/ak-47/legion-of-anubis.jpg",
+		price: 14.04,
+		id: 56,
+	},
+	id57: {
+		weapon: "AK-47",
+		name: "AK-47 Elite Build",
+		skin: "Elite Build",
+		color: "blue",
+		imgDist: "./dist/img/weapons/rifles/ak-47/elite-build.jpg",
+		price: 4.69,
+		id: 57,
+	},
+	id58: {
+		weapon: "AK-47",
+		name: "AK-47 Steel Delta",
+		skin: "Steel Delta",
+		color: "blue",
+		imgDist: "./dist/img/weapons/rifles/ak-47/steel-delta.jpg",
+		price: 2.12,
+		id: 58,
+	},
+	id59: {
+		weapon: "AK-47",
+		name: "AK-47 Uncharted",
+		skin: "Uncharted",
+		color: "blue",
+		imgDist: "./dist/img/weapons/rifles/ak-47/uncharted.jpg",
+		price: 1.01,
+		id: 59,
+	},
 };
 const countItemsAmount = Object.keys(items).length;
 const lastDropList = document.querySelector(".drop__list");
 const dropBox = document.querySelector(".drop__box");
 let dropListOrder = 0;
+const speedOfCreatingDrop = 2500;
 
 const setDropBoxHeight = () => {
 	dropBox.style.height = lastDropList.offsetHeight + "px";
@@ -466,7 +611,7 @@ const createDropAfterStart = () => {
 
 setInterval(() => {
 	createDropAfterStart();
-}, 4000);
+}, speedOfCreatingDrop);
 
 createDropOnStart();
 setDropBoxHeight();

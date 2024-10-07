@@ -55,13 +55,6 @@
 		}
 	}
 
-	.section {
-		&__title {
-			// padding-left: 6em;
-			// text-align: left;
-		}
-	}
-
 	.deposit {
 		&__btn {
 			width: calc(14%);
@@ -71,6 +64,41 @@
 			&-left,
 			&-right {
 				padding: 0 2em;
+			}
+		}
+	}
+
+	.upgrader {
+		&__top {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: stretch;
+			padding: 0 1em;
+
+			&-middle {
+				height: auto;
+				width: 25%;
+				margin: 0;
+			}
+
+			&-left,
+			&-right {
+				width: 30%;
+				margin: 0;
+			}
+		}
+
+		&__bottom {
+			flex-direction: row;
+			justify-content: space-between;
+
+			&-left,
+			&-right {
+				width: 48%;
+			}
+
+			&-right-mid {
+				// flex-direction: row;
 			}
 		}
 	}

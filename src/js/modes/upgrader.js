@@ -1,4 +1,4 @@
-const items1 = {
+const allItems = {
 	id0: {
 		weapon: "M4A1-S",
 		name: "M4A1-S Black Lotus",
@@ -101,7 +101,7 @@ const items1 = {
 	id11: {
 		weapon: "Desert Eagle",
 		name: "Desert Eagle Printstream",
-		skin: "Tiger Tooth",
+		skin: "Printstream",
 		color: "red",
 		imgDist: "../dist/img/weapons/pistols/desert-eagle/printstream.jpg",
 		price: 85.72,
@@ -395,14 +395,168 @@ const items1 = {
 		price: 1.55,
 		id: 43,
 	},
+	id44: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Hand Cannon",
+		skin: "Hand Cannon",
+		color: "purple",
+		imgDist: "../dist/img/weapons/pistols/desert-eagle/hand-cannon.jpg",
+		price: 427.71,
+		id: 44,
+	},
+	id45: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Fennec Fox",
+		skin: "Fennec Fox",
+		color: "pink",
+		imgDist: "../dist/img/weapons/pistols/desert-eagle/fennec-fox.jpg",
+		price: 353.77,
+		id: 45,
+	},
+	id46: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Midnight Storm",
+		skin: "Midnight Storm",
+		color: "light-blue",
+		imgDist: "../dist/img/weapons/pistols/desert-eagle/midnight-storm.jpg",
+		price: 25.03,
+		id: 46,
+	},
+	id47: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Naga",
+		skin: "Naga",
+		color: "purple",
+		imgDist: "../dist/img/weapons/pistols/desert-eagle/naga.jpg",
+		price: 5.26,
+		id: 47,
+	},
+	id48: {
+		weapon: "Desert Eagle",
+		name: "Desert Eagle Light Rail",
+		skin: "Light Rail",
+		color: "purple",
+		imgDist: "../dist/img/weapons/pistols/desert-eagle/light-rail.jpg",
+		price: 3.23,
+		id: 48,
+	},
+	id49: {
+		weapon: "AK-47",
+		name: "AK-47 Wild Lotus",
+		skin: "Wild Lotus",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/ak-47/wild-lotus.jpg",
+		price: 12420.3,
+		id: 49,
+	},
+	id50: {
+		weapon: "AK-47",
+		name: "AK-47 Gold Arabesque",
+		skin: "Gold Arabesque",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/ak-47/gold-arabesque.jpg",
+		price: 2780.22,
+		id: 50,
+	},
+	id51: {
+		weapon: "AK-47",
+		name: "AK-47 Fire Serpent",
+		skin: "Fire Serpent",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/ak-47/fire-serpent.jpg",
+		price: 2113.72,
+		id: 51,
+	},
+	id52: {
+		weapon: "AK-47",
+		name: "AK-47 X-Ray",
+		skin: "X-Ray",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/ak-47/x-ray.jpg",
+		price: 1770.31,
+		id: 52,
+	},
+	id53: {
+		weapon: "AK-47",
+		name: "AK-47 Vulcan",
+		skin: "Vulcan",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/ak-47/vulcan.jpg",
+		price: 675.39,
+		id: 53,
+	},
+	id54: {
+		weapon: "AK-47",
+		name: "AK-47 Bloodsport",
+		skin: "Bloodsport",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/ak-47/bloodsport.jpg",
+		price: 125.89,
+		id: 54,
+	},
+	id55: {
+		weapon: "AK-47",
+		name: "AK-47 Frontside Misty",
+		skin: "Frontside Misty",
+		color: "pink",
+		imgDist: "../dist/img/weapons/rifles/ak-47/frontside-misty.jpg",
+		price: 73.47,
+		id: 55,
+	},
+	id56: {
+		weapon: "AK-47",
+		name: "AK-47 Legion of Anubis",
+		skin: "Legion of Anubis",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/ak-47/legion-of-anubis.jpg",
+		price: 14.04,
+		id: 56,
+	},
+	id57: {
+		weapon: "AK-47",
+		name: "AK-47 Elite Build",
+		skin: "Elite Build",
+		color: "blue",
+		imgDist: "../dist/img/weapons/rifles/ak-47/elite-build.jpg",
+		price: 4.69,
+		id: 57,
+	},
+	id58: {
+		weapon: "AK-47",
+		name: "AK-47 Steel Delta",
+		skin: "Steel Delta",
+		color: "blue",
+		imgDist: "../dist/img/weapons/rifles/ak-47/steel-delta.jpg",
+		price: 2.12,
+		id: 58,
+	},
+	id59: {
+		weapon: "AK-47",
+		name: "AK-47 Uncharted",
+		skin: "Uncharted",
+		color: "blue",
+		imgDist: "../dist/img/weapons/rifles/ak-47/uncharted.jpg",
+		price: 1.01,
+		id: 59,
+	},
 };
 const itemUserOwnList = document.querySelector(".upgrader__list-playeritems");
 const itemAllList = document.querySelector(".upgrader__list-allitems");
 const selectUserItems = document.querySelector("#price-user");
 const selectAllItems = document.querySelector("#price-all");
 const innerCircle = document.querySelector(".upgrader__base-inner");
-const countItemsAmount = Object.keys(items).length;
+const countItemsAmount = Object.keys(allItems).length;
+const userItemsPagePrevoius = document.querySelector(
+	".upgrader__list-btn--leftuser"
+);
+const userItemsPageNext = document.querySelector(
+	".upgrader__list-btn--rightuser"
+);
+let currentPageUser = 1;
+let currentPageAll = 1;
+const itemsPerPage = 16;
 
+// Funkcja ta dodaje wszystkie itemy gracza ktore znajduja sie w localStorage.
 const addPlayerItems = () => {
 	for (i = 0; i < countItemsAmount; i++) {
 		const itemCount = parseInt(localStorage.getItem(`id${i}`)) || 0;
@@ -414,29 +568,28 @@ const addPlayerItems = () => {
 			const itemPrice = document.createElement("p");
 
 			itemBox.classList.add("upgrader__item");
-			itemBox.classList.add(items1[`id${i}`].color + "-drop");
+			itemBox.classList.add(allItems[`id${i}`].color + "-drop");
 			itemBox.classList.add("upgrader__item-useritems");
 			itemImg.classList.add("upgrader__img");
 			itemName.classList.add("upgrader__name");
 			itemSkin.classList.add("upgrader__skin");
-			itemSkin.classList.add(items1[`id${i}`].color + "-text");
+			itemSkin.classList.add(allItems[`id${i}`].color + "-text");
 			itemPrice.classList.add("upgrader__price");
 
-			itemBox.id = items1[`id${i}`].id;
-			itemImg.setAttribute("src", items1[`id${i}`].imgDist);
-			itemImg.setAttribute("alt", items1[`id${i}`].name);
-			itemName.textContent = items1[`id${i}`].weapon;
-			itemSkin.textContent = items1[`id${i}`].skin;
-			itemPrice.textContent = items1[`id${i}`].price + "$";
+			itemBox.id = allItems[`id${i}`].id;
+			itemImg.setAttribute("src", allItems[`id${i}`].imgDist);
+			itemImg.setAttribute("alt", allItems[`id${i}`].name);
+			itemName.textContent = allItems[`id${i}`].weapon;
+			itemSkin.textContent = allItems[`id${i}`].skin;
+			itemPrice.textContent = allItems[`id${i}`].price + "$";
 
 			itemBox.append(itemImg, itemName, itemSkin, itemPrice);
 			itemUserOwnList.append(itemBox);
 		}
 	}
-
-	setUserItemsOrder();
 };
 
+// Funkcja ta dodaje wszystkie itemy w bazie danych ktora znajduje się w obiekcie allItems.
 const addAllItems = () => {
 	for (i = 0; i < countItemsAmount; i++) {
 		const itemBox = document.createElement("div");
@@ -446,68 +599,90 @@ const addAllItems = () => {
 		const itemPrice = document.createElement("p");
 
 		itemBox.classList.add("upgrader__item");
-		itemBox.classList.add(items1[`id${i}`].color + "-drop");
+		itemBox.classList.add(allItems[`id${i}`].color + "-drop");
 		itemBox.classList.add("upgrader__item-allitems");
 		itemImg.classList.add("upgrader__img");
 		itemName.classList.add("upgrader__name");
 		itemSkin.classList.add("upgrader__skin");
-		itemSkin.classList.add(items1[`id${i}`].color + "-text");
+		itemSkin.classList.add(allItems[`id${i}`].color + "-text");
 		itemPrice.classList.add("upgrader__price");
 
-		itemBox.id = items1[`id${i}`].id;
-		itemImg.setAttribute("src", items1[`id${i}`].imgDist);
-		itemImg.setAttribute("alt", items1[`id${i}`].name);
-		itemName.textContent = items1[`id${i}`].weapon;
-		itemSkin.textContent = items1[`id${i}`].skin;
-		itemPrice.textContent = items1[`id${i}`].price + "$";
+		itemBox.id = allItems[`id${i}`].id;
+		itemImg.setAttribute("src", allItems[`id${i}`].imgDist);
+		itemImg.setAttribute("alt", allItems[`id${i}`].name);
+		itemName.textContent = allItems[`id${i}`].weapon;
+		itemSkin.textContent = allItems[`id${i}`].skin;
+		itemPrice.textContent = allItems[`id${i}`].price + "$";
 
 		itemBox.append(itemImg, itemName, itemSkin, itemPrice);
 		itemAllList.append(itemBox);
 	}
 
+	setUserItemsOrder();
 	setAllItemsOrder();
 };
 
+// Ustawia order w którym są wyświetlane itemy gracza w zależności od opcji w select
 const setUserItemsOrder = () => {
 	const userItems = document.querySelectorAll(".upgrader__item-useritems");
+	const userItemsArray = Array.from(userItems);
 
 	if (selectUserItems.value === "asc") {
-		userItems.forEach((item) => {
-			const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(
-				0
+		userItemsArray.sort((a, b) => {
+			return (
+				parseFloat(a.lastElementChild.textContent) -
+				parseFloat(b.lastElementChild.textContent)
 			);
-			item.style.order = itemPrice;
 		});
 	} else {
-		userItems.forEach((item) => {
-			const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(
-				0
+		userItemsArray.sort((a, b) => {
+			return (
+				parseFloat(b.lastElementChild.textContent) -
+				parseFloat(a.lastElementChild.textContent)
 			);
-			item.style.order = "-" + itemPrice;
 		});
 	}
+
+	userItemsArray.forEach((item) => {
+		itemUserOwnList.appendChild(item);
+	});
+
+	currentPageUser = 1;
+	// hideCheaperItems();
+	renderItems();
 };
 
+// Ustawia order w którym są wyświetlane wszsytkie itemy w zależności od opcji w select
 const setAllItemsOrder = () => {
 	const allItems = document.querySelectorAll(".upgrader__item-allitems");
+	const allItemsArray = Array.from(allItems);
 
 	if (selectAllItems.value === "asc") {
-		allItems.forEach((item) => {
-			const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(
-				0
+		allItemsArray.sort((a, b) => {
+			return (
+				parseFloat(a.lastElementChild.textContent) -
+				parseFloat(b.lastElementChild.textContent)
 			);
-			item.style.order = itemPrice;
 		});
 	} else {
-		allItems.forEach((item) => {
-			const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(
-				0
+		allItemsArray.sort((a, b) => {
+			return (
+				parseFloat(b.lastElementChild.textContent) -
+				parseFloat(a.lastElementChild.textContent)
 			);
-			item.style.order = "-" + itemPrice;
 		});
 	}
+
+	allItemsArray.forEach((item) => {
+		itemAllList.appendChild(item);
+	});
+
+	currentPageAll = 1;
+	// hideCheaperItems();
+	renderItems();
 };
 
+// Dodaje item gracza na który kliknelismy do okienka po lewej stronie
 function addToLeftSide() {
 	const infoBox = document.querySelector(".upgrader__infobox-left");
 	const topLeftBox = document.querySelector(".upgrader__top-left");
@@ -520,9 +695,10 @@ function addToLeftSide() {
 	topLeftBox.id = this.id;
 
 	countPercent();
-	hideCheaperItems();
+	renderItems();
 }
 
+// Dodaje item na który kliknelismy do okienka po prawej stronie
 function addToRightSide() {
 	const infoBox = document.querySelector(".upgrader__infobox-right");
 	const topRightBox = document.querySelector(".upgrader__top-right");
@@ -537,36 +713,56 @@ function addToRightSide() {
 	countPercent();
 }
 
-const hideCheaperItems = () => {
-	const allItems = document.querySelectorAll(".upgrader__item-allitems");
-	const topLeftBox = document.querySelector(".upgrader__top-left");
+// Po dodaniu itemu do lewej strony ukrywa z listy wszyskich itemów tańsze itemy niż item ktory dodalismy
+// const hideCheaperItems = (itemList) => {
+// 	const allItems = document.querySelectorAll(".upgrader__item-allitems");
+// 	const topLeftBox = document.querySelector(".upgrader__top-left");
 
-	const userItemPrice = parseFloat(
-		topLeftBox.firstElementChild.textContent
-	).toFixed(2);
+// 	console.log(itemList[0]);
 
-	allItems.forEach((item) => {
-		const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(2);
+// 	const userItemPrice = parseFloat(
+// 		topLeftBox.firstElementChild.textContent
+// 	).toFixed(2);
 
-		if (parseFloat(itemPrice) <= parseFloat(userItemPrice)) {
-			item.style.display = "none";
-		} else {
-			item.style.display = "flex";
-		}
-	});
+// 	allItems.forEach((item) => {
+// 		const itemPrice = parseFloat(item.lastElementChild.textContent).toFixed(2);
+
+// 		if (parseFloat(itemPrice) <= parseFloat(userItemPrice)) {
+// 			item.style.display = "none";
+// 		} else {
+// 			item.style.display = "flex";
+// 		}
+// 	});
+// };
+
+const clearBothSide = () => {
+	clearLeftSide();
+	clearRightSide();
 };
 
 const clearLeftSide = () => {
-	const infoBox = document.querySelector(".upgrader__infobox-left");
+	const infoBoxLeft = document.querySelector(".upgrader__infobox-left");
 	const topLeftBox = document.querySelector(".upgrader__top-left");
 
-	infoBox.firstElementChild.textContent = "0.00$";
+	infoBoxLeft.firstElementChild.textContent = "0.00$";
 	topLeftBox.lastElementChild.setAttribute("src", "../dist/img/blank.png");
 	topLeftBox.id = "";
 
 	countPercent();
 };
 
+const clearRightSide = () => {
+	const infoBoxRight = document.querySelector(".upgrader__infobox-right");
+	const topRightBox = document.querySelector(".upgrader__top-right");
+
+	infoBoxRight.firstElementChild.textContent = "0.00$";
+	topRightBox.lastElementChild.setAttribute("src", "../dist/img/blank.png");
+	topRightBox.id = "";
+
+	countPercent();
+};
+
+// Liczy szanse na wygrana
 const countPercent = () => {
 	const infoBoxLeft = document.querySelector(".upgrader__infobox-left");
 	const infoBoxRight = document.querySelector(".upgrader__infobox-right");
@@ -617,36 +813,37 @@ const spinCircle = () => {
 		document.querySelector(".upgrader__percent").textContent
 	);
 
-	// Losowanie wygranej
-	const isWin = determineWin(percentForWin);
+	if (percentForWin <= 99.5 && percentForWin >= 0.5) {
+		const isWin = determineWin(percentForWin);
 
-	// Losowanie liczby pełnych obrotów (np. 3-6 obrotów)
-	const randomSpins = Math.floor(Math.random() * 3) + 2;
+		// Losowanie liczby pełnych obrotów (np. 3-6 obrotów)
+		const randomSpins = Math.floor(Math.random() * 3) + 2;
 
-	// Kąt docelowy zależny od wygranej lub przegranej
-	let targetAngle;
+		// Kąt docelowy zależny od wygranej lub przegranej
+		let targetAngle;
 
-	if (isWin) {
-		// Wygrana - koło ma zatrzymać się na kolorze (obszar procentowy wygranej)
-		const winningAngleThreshold = (percentForWin / 100) * 360;
-		const fromWhatAngle = 360 - winningAngleThreshold;
-		targetAngle = Math.random() * winningAngleThreshold + fromWhatAngle;
-	} else {
-		// Przegrana - koło ma zatrzymać się na czarnym obszarze
-		const losingAngleThreshold = (percentForWin / 100) * 360;
-		targetAngle = Math.random() * (360 - losingAngleThreshold);
+		if (isWin) {
+			// Wygrana - koło ma zatrzymać się na kolorze (obszar procentowy wygranej)
+			const winningAngleThreshold = (percentForWin / 100) * 360;
+			const fromWhatAngle = 360 - winningAngleThreshold;
+			targetAngle = Math.random() * winningAngleThreshold + fromWhatAngle;
+		} else {
+			// Przegrana - koło ma zatrzymać się na czarnym obszarze
+			const losingAngleThreshold = (percentForWin / 100) * 360;
+			targetAngle = Math.random() * (360 - losingAngleThreshold);
+		}
+
+		// Całkowity obrót: pełne obroty + losowy kąt docelowy (na odpowiedni obszar)
+		const totalRotation = randomSpins * 360 + targetAngle;
+
+		// Obracamy koło
+		circle.style.transform = `rotate(${totalRotation}deg)`;
+
+		// Wyświetl w konsoli wynik
+		setTimeout(() => {
+			addWinningItems(isWin);
+		}, 5000); // Czas trwania animacji (5s)
 	}
-
-	// Całkowity obrót: pełne obroty + losowy kąt docelowy (na odpowiedni obszar)
-	const totalRotation = randomSpins * 360 + targetAngle;
-
-	// Obracamy koło
-	circle.style.transform = `rotate(${totalRotation}deg)`;
-
-	// Wyświetl w konsoli wynik
-	setTimeout(() => {
-		addWinningItems(isWin);
-	}, 5000); // Czas trwania animacji (5s)
 };
 
 const addWinningItems = (didWin) => {
@@ -670,7 +867,7 @@ const addWinningItems = (didWin) => {
 		}
 	}
 
-	clearLeftSide();
+	clearBothSide();
 	itemUserOwnList.innerHTML = "";
 	itemAllList.innerHTML = "";
 
@@ -689,18 +886,110 @@ const addWinningItems = (didWin) => {
 	});
 };
 
-countPercent();
+const renderItems = () => {
+	// Renderuj przedmioty użytkownika
+	let userItems = document.querySelectorAll(".upgrader__item-useritems");
+	let userItemsArray = Array.from(userItems);
+	const userItemsCount = userItemsArray.length;
 
+	// Oblicz indeksy dla aktualnej strony
+	const userStartIndex = (currentPageUser - 1) * itemsPerPage;
+	const userEndIndex = userStartIndex + itemsPerPage;
+
+	// Ukryj wszystkie przedmioty użytkownika
+	userItemsArray.forEach((item) => (item.style.display = "none"));
+
+	// Pokaż tylko przedmioty użytkownika z aktualnej strony
+	userItemsArray.slice(userStartIndex, userEndIndex).forEach((item) => {
+		item.style.display = "flex";
+	});
+
+	// Renderuj przedmioty ogólne
+	let allItems = document.querySelectorAll(".upgrader__item-allitems");
+	let allItemsArray = Array.from(allItems);
+	const topLeftBox = document.querySelector(".upgrader__top-left");
+
+	// Pobierz cenę przedmiotu po lewej stronie upgradera
+	const userItemPrice = parseFloat(
+		topLeftBox.firstElementChild.textContent
+	).toFixed(2);
+
+	// Filtrowanie przedmiotów, aby wyświetlać tylko te droższe niż przedmiot użytkownika
+	const filteredItemsArray = allItemsArray.filter((item) => {
+		const currentItemPrice = parseFloat(item.lastElementChild.textContent).toFixed(2);
+		return parseFloat(currentItemPrice) > parseFloat(userItemPrice); // Zachowaj tylko przedmioty droższe
+	});
+
+	// Oblicz liczbę stron na podstawie przefiltrowanych przedmiotów
+	const filteredItemsCount = filteredItemsArray.length;
+	const totalAllPages = Math.ceil(filteredItemsCount / itemsPerPage);
+
+	// **Sprawdź, czy bieżąca strona nie wykracza poza dostępne strony**
+	if (currentPageAll > totalAllPages) {
+		currentPageAll = totalAllPages; // Zresetuj numer strony do ostatniej dostępnej strony
+	}
+
+	// Oblicz indeksy dla przefiltrowanych przedmiotów na aktualnej stronie
+	const allStartIndex = (currentPageAll - 1) * itemsPerPage;
+	const allEndIndex = allStartIndex + itemsPerPage;
+
+	// Ukryj wszystkie przedmioty
+	allItemsArray.forEach((item) => (item.style.display = "none"));
+
+	// Pokaż tylko przefiltrowane przedmioty z aktualnej strony
+	filteredItemsArray.slice(allStartIndex, allEndIndex).forEach((item) => {
+		item.style.display = "flex";
+	});
+
+	// **Jeśli nie ma przedmiotów na aktualnej stronie, ukryj element paginacji**
+	if (filteredItemsArray.length === 0) {
+		// Ukryj paginację lub zablokuj przyciski nawigacji
+		// Możesz też wyświetlić informację "Brak przedmiotów"
+		console.log("Brak przedmiotów do wyświetlenia");
+	}
+
+	// Zaktualizuj stronę przedmiotów ogólnych (możesz wyświetlić numer strony, jeśli chcesz)
+	// document.getElementById("currentPage").textContent = `User Page: ${currentPageUser} | All Page: ${currentPageAll} / ${totalAllPages}`;
+};
+
+
+const changePage = (direction) => {
+	const userItemsCount = document.querySelectorAll(
+		".upgrader__item-useritems"
+	).length;
+	const totalUserPages = Math.ceil(userItemsCount / itemsPerPage);
+
+	const allItemsCount = document.querySelectorAll(".upgrader__item-allitems").length;
+	const totalAllPages = Math.ceil(allItemsCount / itemsPerPage);
+
+	// Zmiana strony użytkownika
+	if (direction === -1 && currentPageUser > 1) {
+		currentPageUser--;
+	} else if (direction === 1 && currentPageUser < totalUserPages) {
+		currentPageUser++;
+	}
+
+	// Zmiana strony wszystkich przedmiotów
+	if (direction === -2 && currentPageAll > 1) {
+	currentPageAll--;
+	} else if (direction === 2 && currentPageAll < totalAllPages) {
+	currentPageAll++;
+	}
+
+	// Przekaż do renderowania
+	renderItems();
+};
+
+countPercent();
 addPlayerItems();
 addAllItems();
+renderItems();
 
-selectAllItems.addEventListener("change", setAllItemsOrder);
-selectUserItems.addEventListener("change", setUserItemsOrder);
-innerCircle.addEventListener("click", spinCircle);
-
-const addListenersToItems = () => {
+const addListeners = () => {
 	const userItems = document.querySelectorAll(".upgrader__item-useritems");
 	const allItems = document.querySelectorAll(".upgrader__item-allitems");
+	const clearBtnLeft = document.querySelector(".upgrader__remove-btn-left");
+	const clearBtnRight = document.querySelector(".upgrader__remove-btn-right");
 
 	userItems.forEach((item) => {
 		item.addEventListener("click", addToLeftSide);
@@ -709,6 +998,12 @@ const addListenersToItems = () => {
 	allItems.forEach((item) => {
 		item.addEventListener("click", addToRightSide);
 	});
+
+	selectAllItems.addEventListener("change", setAllItemsOrder);
+	selectUserItems.addEventListener("change", setUserItemsOrder);
+	innerCircle.addEventListener("click", spinCircle);
+	clearBtnLeft.addEventListener("click", clearLeftSide);
+	clearBtnRight.addEventListener("click", clearRightSide);
 };
 
-addListenersToItems();
+addListeners();

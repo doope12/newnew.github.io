@@ -6,23 +6,21 @@
 		flex-direction: column;
 		align-items: center;
 		margin-top: 2em;
+		padding: 0 1em;
 		color: $text-color;
 	}
 
 	&__top {
 		display: flex;
-		justify-content: space-between;
-		padding: 0 1em;
+		flex-direction: column;
+		align-items: center;
 
 		&-middle {
 			position: relative;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 25%;
-			border-radius: 20px;
-			box-shadow: $normal-boxshadow;
-			background-color: $main2-color;
+			height: 250px;
 		}
 
 		&-left,
@@ -31,7 +29,13 @@
 			flex-direction: column;
 			align-items: center;
 			padding: 1em;
-			width: 30%;
+		}
+
+		&-left,
+		&-right,
+		&-middle {
+			margin: 1em;
+			width: 100%;
 			border-radius: 20px;
 			box-shadow: $normal-boxshadow;
 			background-color: $main2-color;
@@ -52,8 +56,8 @@
 		position: relative;
 		width: 200px;
 		height: 200px;
-		background: conic-gradient(#cfa0ff 0 0%, #292a2d 0 100%);
 		border-radius: 50%;
+		background: conic-gradient(#cfa0ff 0 0%, #292a2d 0 100%);
 		transform: rotate(0deg);
 		transition: 5s ease-out;
 
@@ -139,10 +143,33 @@
 	}
 
 	&__list {
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		flex-wrap: wrap;
+
+		&-btn {
+			&--left {
+				left: 0;
+			}
+
+			&--right {
+				right: 0;
+			}
+
+			&--right, &--left {
+				position: absolute;
+				top: 50%;
+				transform: translate(0 , -50%);
+				padding: 0 0.25em;
+				border: 1px solid $secondary-color;
+				border-radius: 10px;
+				background-color: transparent;
+				color: $text-color;
+				cursor: pointer;
+			}
+		}
 	}
 
 	&__item {
@@ -169,13 +196,20 @@
 
 	&__bottom {
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
 		padding: 0 1em;
+
+		&-title {
+			font-size: 2rem;
+			font-weight: bold;
+			letter-spacing: 1px;
+		}
 
 		&-left,
 		&-right {
+			position: relative;
 			margin: 2em 0;
-			width: 48%;
+			width: 100%;
 			padding: 1em;
 			border-radius: 20px;
 			box-shadow: $normal-boxshadow;
@@ -190,6 +224,7 @@
 
 		&-right-mid {
 			display: flex;
+			flex-direction: column;
 		}
 	}
 }

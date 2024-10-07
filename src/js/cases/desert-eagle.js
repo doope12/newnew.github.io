@@ -96,7 +96,6 @@ const balanceAmountMobile = document.querySelector(
 );
 const backBtn = document.querySelector(".case__btn--back");
 const muteBtn = document.querySelector(".case__btn--mute");
-const caseOpeningSound = new Audio("../dist/audio/open.mp3");
 const casePrice = 25.0;
 let currentWinningItem;
 
@@ -219,6 +218,7 @@ const spinCase = () => {
 		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice &&
 		spinBtn.textContent !== "spining"
 	) {
+		const caseOpeningSound = new Audio("../dist/audio/open.mp3");
 		// Losowe przesunięcie między -2000 a -1000 px
 		const howStrongSpin = Math.floor(Math.random() * 1000 - 2000);
 

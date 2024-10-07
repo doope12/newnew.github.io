@@ -57,7 +57,7 @@
 		width: 200px;
 		height: 200px;
 		border-radius: 50%;
-		background: conic-gradient(#cfa0ff 0 0%, #292a2d 0 100%);
+		background: conic-gradient(#cfa0ff 0 0%, rgb(40, 40, 40) 0 100%);
 		transform: rotate(0deg);
 		transition: 5s ease-out;
 
@@ -74,6 +74,7 @@
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
+			border: 3px solid transparent;
 			cursor: pointer;
 		}
 	}
@@ -142,32 +143,67 @@
 		color: $text-color;
 	}
 
+	&__select {
+		padding: 0.5em;
+		border: 1px solid $secondary-color;
+		border-radius: 10px;
+		font-size: 1.2rem;
+		text-transform: uppercase;
+		font-weight: bold;
+		letter-spacing: 1px;
+		background: $secondary-color-alpha;
+		color: $text-color;
+		cursor: pointer;
+		transition: background 0.5s;
+
+		&:hover {
+			background: $secondary-color-alpha-hover;
+		}
+
+		option {
+			color: black;
+		}
+	}
+
 	&__list {
 		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		flex-wrap: wrap;
+		padding-bottom: 1.5em;
 
 		&-btn {
 			&--left {
 				left: 0;
+
+				&:hover {
+					transform: translate(-2px, -50%);
+				}
 			}
 
 			&--right {
 				right: 0;
+				
+				&:hover {
+					transform: translate(2px, -50%);
+				}
 			}
 
-			&--right, &--left {
+			&--right,
+			&--left {
 				position: absolute;
 				top: 50%;
-				transform: translate(0 , -50%);
-				padding: 0 0.25em;
-				border: 1px solid $secondary-color;
-				border-radius: 10px;
+				transform: translate(0, -50%);
+				padding: 0.25em;
+				font-size: 2rem;
+				border-radius: 5px;
+				border: none;
 				background-color: transparent;
-				color: $text-color;
+				color: $secondary-color;
 				cursor: pointer;
+				z-index: 15;
+				transition: transform 0.5s;
 			}
 		}
 	}
@@ -182,6 +218,7 @@
 		border-radius: 10px;
 		font-size: 1.2rem;
 		background-color: $main-color;
+		box-shadow: $normal-boxshadow;
 		cursor: pointer;
 		transition: 0.5s;
 
@@ -227,4 +264,26 @@
 			flex-direction: column;
 		}
 	}
+
+	&__dotsbox {
+		display: flex;
+		justify-content: center;
+		position: absolute;
+		bottom: 15px;
+		left: 50%;
+		transform: translate(-50%);
+	}
+
+	&__dot {
+		margin: 0 0.5em;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background-color: rgba(255, 255, 255, 0.4);
+	}
+}
+
+.dot-active {
+	background-color: $secondary-color;
+	box-shadow: $purple-boxshadow;
 }

@@ -546,12 +546,19 @@ const selectUserItems = document.querySelector("#price-user");
 const selectAllItems = document.querySelector("#price-all");
 const innerCircle = document.querySelector(".upgrader__base-inner");
 const countItemsAmount = Object.keys(allItems).length;
-const userItemsPagePrevoius = document.querySelector(
+const userItemsPagePrevious = document.querySelector(
 	".upgrader__list-btn--leftuser"
 );
 const userItemsPageNext = document.querySelector(
 	".upgrader__list-btn--rightuser"
 );
+const allItemsPagePrevious = document.querySelector(
+	".upgrader__list-btn--leftall"
+);
+const allItemsPageNext = document.querySelector(
+	".upgrader__list-btn--rightall"
+);
+let spinning = 0;
 let currentPageUser = 1;
 let currentPageAll = 1;
 const itemsPerPage = 16;
@@ -647,8 +654,6 @@ const setUserItemsOrder = () => {
 		itemUserOwnList.appendChild(item);
 	});
 
-	currentPageUser = 1;
-	// hideCheaperItems();
 	renderItems();
 };
 
@@ -677,8 +682,6 @@ const setAllItemsOrder = () => {
 		itemAllList.appendChild(item);
 	});
 
-	currentPageAll = 1;
-	// hideCheaperItems();
 	renderItems();
 };
 
@@ -784,14 +787,14 @@ const countPercent = () => {
 
 		if (percentForWin >= 100) {
 			percentageText.textContent = "100%";
-			circle.style.background = `conic-gradient(#cfa0ff 0 100%, #292a2d 100% 100%)`;
+			circle.style.background = `conic-gradient(#cfa0ff 0 100%, rgb(40, 40, 40) 100% 100%)`;
 		} else {
 			percentageText.textContent = percentForWin.toFixed(2) + "%";
-			circle.style.background = `conic-gradient(#cfa0ff 0 ${percentForWin}%, #292a2d ${percentForWin}% 100%)`;
+			circle.style.background = `conic-gradient(#cfa0ff 0 ${percentForWin}%, rgb(40, 40, 40) ${percentForWin}% 100%)`;
 		}
 	} else {
 		percentageText.textContent = "0.00%";
-		circle.style.background = `conic-gradient(#cfa0ff 0 0%, #292a2d 0 100%)`;
+		circle.style.background = `conic-gradient(#cfa0ff 0 0%, rgb(40, 40, 40) 0 100%)`;
 	}
 };
 
@@ -805,56 +808,63 @@ const determineWin = (percentForWin) => {
 };
 
 const spinCircle = () => {
-	const circle = document.querySelector(".upgrader__base");
-	circle.style.transition = "5s ease-out";
+	if (spinning === 0) {
+		const circle = document.querySelector(".upgrader__base");
+		circle.style.transition = "5s ease-out";
 
-	// Pobierz procent szansy na wygraną
-	const percentForWin = parseFloat(
-		document.querySelector(".upgrader__percent").textContent
-	);
+		// Pobierz procent szansy na wygraną
+		const percentForWin = parseFloat(
+			document.querySelector(".upgrader__percent").textContent
+		);
 
-	if (percentForWin <= 99.5 && percentForWin >= 0.5) {
-		const isWin = determineWin(percentForWin);
+		if (percentForWin <= 99.5 && percentForWin >= 0.5) {
+			const isWin = determineWin(percentForWin);
+			spinning = 1;
 
-		// Losowanie liczby pełnych obrotów (np. 3-6 obrotów)
-		const randomSpins = Math.floor(Math.random() * 3) + 2;
+			// Losowanie liczby pełnych obrotów (np. 3-6 obrotów)
+			const randomSpins = Math.floor(Math.random() * 3) + 2;
 
-		// Kąt docelowy zależny od wygranej lub przegranej
-		let targetAngle;
+			// Kąt docelowy zależny od wygranej lub przegranej
+			let targetAngle;
 
-		if (isWin) {
-			// Wygrana - koło ma zatrzymać się na kolorze (obszar procentowy wygranej)
-			const winningAngleThreshold = (percentForWin / 100) * 360;
-			const fromWhatAngle = 360 - winningAngleThreshold;
-			targetAngle = Math.random() * winningAngleThreshold + fromWhatAngle;
-		} else {
-			// Przegrana - koło ma zatrzymać się na czarnym obszarze
-			const losingAngleThreshold = (percentForWin / 100) * 360;
-			targetAngle = Math.random() * (360 - losingAngleThreshold);
+			if (isWin) {
+				// Wygrana - koło ma zatrzymać się na kolorze (obszar procentowy wygranej)
+				const winningAngleThreshold = (percentForWin / 100) * 360;
+				const fromWhatAngle = 360 - winningAngleThreshold;
+				targetAngle = Math.random() * winningAngleThreshold + fromWhatAngle;
+			} else {
+				// Przegrana - koło ma zatrzymać się na czarnym obszarze
+				const losingAngleThreshold = (percentForWin / 100) * 360;
+				targetAngle = Math.random() * (360 - losingAngleThreshold);
+			}
+
+			// Całkowity obrót: pełne obroty + losowy kąt docelowy (na odpowiedni obszar)
+			const totalRotation = randomSpins * 360 + targetAngle;
+
+			// Obracamy koło
+			circle.style.transform = `rotate(${totalRotation}deg)`;
+
+			// Wyświetl w konsoli wynik
+			setTimeout(() => {
+				spinning = 0;
+				addWinningItems(isWin);
+			}, 5000); // Czas trwania animacji (5s)
 		}
-
-		// Całkowity obrót: pełne obroty + losowy kąt docelowy (na odpowiedni obszar)
-		const totalRotation = randomSpins * 360 + targetAngle;
-
-		// Obracamy koło
-		circle.style.transform = `rotate(${totalRotation}deg)`;
-
-		// Wyświetl w konsoli wynik
-		setTimeout(() => {
-			addWinningItems(isWin);
-		}, 5000); // Czas trwania animacji (5s)
 	}
 };
 
 const addWinningItems = (didWin) => {
 	const topLeftBox = document.querySelector(".upgrader__top-left");
 	const topRightBox = document.querySelector(".upgrader__top-right");
+	const innerCircle = document.querySelector(".upgrader__base-inner");
 
 	const removeUpgradedItem =
 		parseInt(localStorage.getItem(`id${topLeftBox.id}`)) - 1;
 	localStorage.setItem(`id${topLeftBox.id}`, removeUpgradedItem);
 
 	if (didWin) {
+		innerCircle.style.border = "3px solid green";
+
 		if (
 			localStorage.getItem(`id${topRightBox.id}`) === null ||
 			localStorage.getItem(`id${topRightBox.id}`) === NaN
@@ -865,7 +875,13 @@ const addWinningItems = (didWin) => {
 				parseInt(localStorage.getItem(`id${topRightBox.id}`)) + 1;
 			localStorage.setItem(`id${topRightBox.id}`, itemToAdd);
 		}
+	} else {
+		innerCircle.style.border = "3px solid red";
 	}
+
+	setTimeout(() => {
+		innerCircle.style.border = "3px solid transparent";
+	}, 500);
 
 	clearBothSide();
 	itemUserOwnList.innerHTML = "";
@@ -891,6 +907,8 @@ const renderItems = () => {
 	let userItems = document.querySelectorAll(".upgrader__item-useritems");
 	let userItemsArray = Array.from(userItems);
 	const userItemsCount = userItemsArray.length;
+	const dotsBoxLeft = document.querySelector(".upgrader__dotsbox-left");
+	const dotsBoxRight = document.querySelector(".upgrader__dotsbox-right");
 
 	// Oblicz indeksy dla aktualnej strony
 	const userStartIndex = (currentPageUser - 1) * itemsPerPage;
@@ -904,6 +922,19 @@ const renderItems = () => {
 		item.style.display = "flex";
 	});
 
+	const allUserItemsPages = Math.ceil(userItemsArray.length / 16);
+	dotsBoxLeft.innerHTML = "";
+
+	for (i = 0; i < allUserItemsPages; i++) {
+		const dot = document.createElement("div");
+		dot.classList.add("upgrader__dot");
+		dotsBoxLeft.append(dot);
+
+		if (currentPageUser === i + 1) {
+			dot.classList.add("dot-active");
+		}
+	}
+
 	// Renderuj przedmioty ogólne
 	let allItems = document.querySelectorAll(".upgrader__item-allitems");
 	let allItemsArray = Array.from(allItems);
@@ -916,13 +947,28 @@ const renderItems = () => {
 
 	// Filtrowanie przedmiotów, aby wyświetlać tylko te droższe niż przedmiot użytkownika
 	const filteredItemsArray = allItemsArray.filter((item) => {
-		const currentItemPrice = parseFloat(item.lastElementChild.textContent).toFixed(2);
+		const currentItemPrice = parseFloat(
+			item.lastElementChild.textContent
+		).toFixed(2);
 		return parseFloat(currentItemPrice) > parseFloat(userItemPrice); // Zachowaj tylko przedmioty droższe
 	});
 
 	// Oblicz liczbę stron na podstawie przefiltrowanych przedmiotów
 	const filteredItemsCount = filteredItemsArray.length;
 	const totalAllPages = Math.ceil(filteredItemsCount / itemsPerPage);
+
+	const allItemsPages = Math.ceil(filteredItemsArray.length / 16);
+	dotsBoxRight.innerHTML = "";
+
+	for (i = 0; i < allItemsPages; i++) {
+		const dot = document.createElement("div");
+		dot.classList.add("upgrader__dot");
+		dotsBoxRight.append(dot);
+
+		if (currentPageAll === i + 1) {
+			dot.classList.add("dot-active");
+		}
+	}
 
 	// **Sprawdź, czy bieżąca strona nie wykracza poza dostępne strony**
 	if (currentPageAll > totalAllPages) {
@@ -948,10 +994,33 @@ const renderItems = () => {
 		console.log("Brak przedmiotów do wyświetlenia");
 	}
 
+	if (currentPageUser === 1) {
+		userItemsPagePrevious.style.display = "none";
+	} else {
+		userItemsPagePrevious.style.display = "block";
+	}
+
+	if (currentPageUser === allUserItemsPages) {
+		userItemsPageNext.style.display = "none";
+	} else {
+		userItemsPageNext.style.display = "block";
+	}
+
+	if (currentPageAll === 1) {
+		allItemsPagePrevious.style.display = "none";
+	} else {
+		allItemsPagePrevious.style.display = "block";
+	}
+
+	if (currentPageAll === allItemsPages) {
+		allItemsPageNext.style.display = "none";
+	} else {
+		allItemsPageNext.style.display = "block";
+	}
+
 	// Zaktualizuj stronę przedmiotów ogólnych (możesz wyświetlić numer strony, jeśli chcesz)
 	// document.getElementById("currentPage").textContent = `User Page: ${currentPageUser} | All Page: ${currentPageAll} / ${totalAllPages}`;
 };
-
 
 const changePage = (direction) => {
 	const userItemsCount = document.querySelectorAll(
@@ -959,7 +1028,9 @@ const changePage = (direction) => {
 	).length;
 	const totalUserPages = Math.ceil(userItemsCount / itemsPerPage);
 
-	const allItemsCount = document.querySelectorAll(".upgrader__item-allitems").length;
+	const allItemsCount = document.querySelectorAll(
+		".upgrader__item-allitems"
+	).length;
 	const totalAllPages = Math.ceil(allItemsCount / itemsPerPage);
 
 	// Zmiana strony użytkownika
@@ -971,9 +1042,9 @@ const changePage = (direction) => {
 
 	// Zmiana strony wszystkich przedmiotów
 	if (direction === -2 && currentPageAll > 1) {
-	currentPageAll--;
+		currentPageAll--;
 	} else if (direction === 2 && currentPageAll < totalAllPages) {
-	currentPageAll++;
+		currentPageAll++;
 	}
 
 	// Przekaż do renderowania
@@ -999,8 +1070,16 @@ const addListeners = () => {
 		item.addEventListener("click", addToRightSide);
 	});
 
-	selectAllItems.addEventListener("change", setAllItemsOrder);
-	selectUserItems.addEventListener("change", setUserItemsOrder);
+	selectAllItems.addEventListener("change", () => {
+		currentPageAll = 1;
+
+		setAllItemsOrder();
+	});
+	selectUserItems.addEventListener("change", () => {
+		currentPageUser = 1;
+
+		setUserItemsOrder();
+	});
 	innerCircle.addEventListener("click", spinCircle);
 	clearBtnLeft.addEventListener("click", clearLeftSide);
 	clearBtnRight.addEventListener("click", clearRightSide);

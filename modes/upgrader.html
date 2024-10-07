@@ -195,6 +195,8 @@
                                 class="fa-solid fa-arrow-right upgrader__list-btn-icon"></i></button>
                         <div class="upgrader__list upgrader__list-playeritems">
                         </div>
+                        <div class="upgrader__dotsbox upgrader__dotsbox-left">
+                        </div>
                     </div>
                     <div class="upgrader__bottom-right">
                         <div class="upgrader__bottom-right-top">
@@ -205,17 +207,19 @@
                                 <input type="number" class="upgrader__input" placeholder="99999$">
                             </div> -->
                             <select class="upgrader__select" name="price-all" id="price-all">
-                                <option value="asc">asc</option>
-                                <option value="desc">desc</option>
+                                <option class="upgrader__value" value="asc">asc</option>
+                                <option class="upgrader__value" value="desc">desc</option>
                             </select>
                         </div>
-                        <button class="upgrader__list-btn upgrader__list-btn--left upgrader__list-btn--leftuser"
+                        <button class="upgrader__list-btn upgrader__list-btn--left upgrader__list-btn--leftall"
                             onclick="changePage(-2)"><i
                                 class="fa-solid fa-arrow-left upgrader__list-btn-icon"></i></button>
-                        <button class="upgrader__list-btn upgrader__list-btn--right upgrader__list-btn--rightuser"
+                        <button class="upgrader__list-btn upgrader__list-btn--right upgrader__list-btn--rightall"
                             onclick="changePage(2)"><i
                                 class="fa-solid fa-arrow-right upgrader__list-btn-icon"></i></button>
                         <div class="upgrader__list upgrader__list-allitems">
+                        </div>
+                        <div class="upgrader__dotsbox upgrader__dotsbox-right">
                         </div>
                     </div>
                 </div>

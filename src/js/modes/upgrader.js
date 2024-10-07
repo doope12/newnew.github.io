@@ -752,6 +752,7 @@ const clearLeftSide = () => {
 	topLeftBox.id = "";
 
 	countPercent();
+	renderItems();
 };
 
 const clearRightSide = () => {
@@ -763,6 +764,7 @@ const clearRightSide = () => {
 	topRightBox.id = "";
 
 	countPercent();
+	renderItems();
 };
 
 // Liczy szanse na wygrana
@@ -960,16 +962,6 @@ const renderItems = () => {
 	const allItemsPages = Math.ceil(filteredItemsArray.length / 16);
 	dotsBoxRight.innerHTML = "";
 
-	for (i = 0; i < allItemsPages; i++) {
-		const dot = document.createElement("div");
-		dot.classList.add("upgrader__dot");
-		dotsBoxRight.append(dot);
-
-		if (currentPageAll === i + 1) {
-			dot.classList.add("dot-active");
-		}
-	}
-
 	// **Sprawdź, czy bieżąca strona nie wykracza poza dostępne strony**
 	if (currentPageAll > totalAllPages) {
 		currentPageAll = totalAllPages; // Zresetuj numer strony do ostatniej dostępnej strony
@@ -986,6 +978,16 @@ const renderItems = () => {
 	filteredItemsArray.slice(allStartIndex, allEndIndex).forEach((item) => {
 		item.style.display = "flex";
 	});
+
+	for (i = 0; i < allItemsPages; i++) {
+		const dot = document.createElement("div");
+		dot.classList.add("upgrader__dot");
+		dotsBoxRight.append(dot);
+
+		if (currentPageAll === i + 1) {
+			dot.classList.add("dot-active");
+		}
+	}
 
 	// **Jeśli nie ma przedmiotów na aktualnej stronie, ukryj element paginacji**
 	if (filteredItemsArray.length === 0) {

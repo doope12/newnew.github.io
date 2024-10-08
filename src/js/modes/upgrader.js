@@ -539,6 +539,96 @@ const allItems = {
 		price: 1.01,
 		id: 59,
 	},
+	id60: {
+		weapon: "M4A4",
+		name: "M4A4 Poseidon",
+		skin: "Poseidon",
+		color: "pink",
+		imgDist: "../dist/img/weapons/rifles/m4a4/poseidon.jpg",
+		price: 1066.26,
+		id: 60,
+	},
+	id61: {
+		weapon: "M4A1-S",
+		name: "M4A1-S Icarus Fell",
+		skin: "Icarus Fell",
+		color: "purple",
+		imgDist: "../dist/img/weapons/rifles/m4a1-s/icarus-fell.jpg",
+		price: 460.01,
+		id: 61,
+	},
+	id62: {
+		weapon: "MAC-10",
+		name: "MAC-10 Light Box",
+		skin: "Light Box",
+		color: "blue",
+		imgDist: "../dist/img/weapons/smgs/mac-10/light-box.jpg",
+		price: 0.59,
+		id: 62,
+	},
+	id63: {
+		weapon: "SSG-08",
+		name: "SSG-08 Death Strike",
+		skin: "Death Strike",
+		color: "pink",
+		imgDist: "../dist/img/weapons/rifles/ssg-08/death-strike.jpg",
+		price: 365.46,
+		id: 63,
+	},
+	id64: {
+		weapon: "FAMAS",
+		name: "FAMAS Waters of Nephthys",
+		skin: "Waters of Nephthys",
+		color: "pink",
+		imgDist: "../dist/img/weapons/rifles/famas/waters-of-nephthys.jpg",
+		price: 73.54,
+		id: 64,
+	},
+	id65: {
+		weapon: "SSG-08",
+		name: "SSG-08 Blood in the Water",
+		skin: "Blood in the Water",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/ssg-08/blood-in-the-water.jpg",
+		price: 56.57,
+		id: 65,
+	},
+	id66: {
+		weapon: "AWP",
+		name: "AWP Sun in Leo",
+		skin: "Sun in Leo",
+		color: "light-blue",
+		imgDist: "../dist/img/weapons/rifles/awp/sun-in-leo.jpg",
+		price: 31.71,
+		id: 66,
+	},
+	id67: {
+		weapon: "G3SG1",
+		name: "G3SG1 Flux",
+		skin: "Flux",
+		color: "pink",
+		imgDist: "../dist/img/weapons/rifles/g3sg1/flux.jpg",
+		price: 17.79,
+		id: 67,
+	},
+	id68: {
+		weapon: "FAMAS",
+		name: "FAMAS Commemoration",
+		skin: "Commemoration",
+		color: "red",
+		imgDist: "../dist/img/weapons/rifles/famas/commemoration.jpg",
+		price: 12.05,
+		id: 68,
+	},
+	id69: {
+		weapon: "MAC-10",
+		name: "MAC-10 Candy Apple",
+		skin: "Candy Apple",
+		color: "light-blue",
+		imgDist: "../dist/img/weapons/smgs/mac-10/candy-apple.jpg",
+		price: 0.13,
+		id: 69,
+	},
 };
 const itemUserOwnList = document.querySelector(".upgrader__list-playeritems");
 const itemAllList = document.querySelector(".upgrader__list-allitems");
@@ -824,7 +914,7 @@ const spinCircle = () => {
 			spinning = 1;
 
 			// Losowanie liczby pełnych obrotów (np. 3-6 obrotów)
-			const randomSpins = Math.floor(Math.random() * 3) + 2;
+			const randomSpins = Math.floor(Math.random() * 3) + 3;
 
 			// Kąt docelowy zależny od wygranej lub przegranej
 			let targetAngle;

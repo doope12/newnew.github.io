@@ -54,7 +54,7 @@ const createInfoAboutItemsInChest = () => {
 
 		dropItem.classList.add("case__drop");
 		dropItem.classList.add(items2[`item${i}`].color + "-drop");
-		dropItem.style.order = "-" + (items2[`item${i}`].price).toFixed(0);
+		dropItem.style.order = "-" + items2[`item${i}`].price.toFixed(0);
 		dropItemPercent.classList.add("case__drop-percent");
 		dropItemImg.classList.add("case__drop-img");
 		dropItemTextBox.classList.add("case__drop-textbox");
@@ -80,7 +80,7 @@ const createInfoAboutItemsInChest = () => {
 };
 
 const createItemsInChest = () => {
-	for (i = 0; i < 30; i++) {
+	for (i = 0; i < 100; i++) {
 		const randomItem = Math.random() < 0.5 ? 0 : 1;
 
 		const item = document.createElement("div");
@@ -123,7 +123,7 @@ const spinCase = () => {
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3");
 		// Losowe przesunięcie między -2000 a -1000 px
-		const howStrongSpin = Math.floor(Math.random() * 1000 - 2000);
+		const howStrongSpin = Math.floor(Math.random() * 5000 - 7000);
 
 		spinBtn.textContent = "spining";
 
@@ -185,7 +185,6 @@ const spinCase = () => {
 const hideWinPopup = () => {
 	winPupup.classList.toggle("hidden");
 	setBtnText();
-	resetBoxAnimation();
 };
 
 const sellWinningItem = () => {
@@ -197,6 +196,7 @@ const sellWinningItem = () => {
 	localStorage.setItem("Balance", howMuchToAddToBalance + "$");
 	hideWinPopup();
 	refreshBalance();
+	resetBoxAnimation();
 };
 
 const takeWinningItem = () => {
@@ -213,6 +213,7 @@ const takeWinningItem = () => {
 		);
 	}
 	hideWinPopup();
+	resetBoxAnimation();
 };
 
 const refreshBalance = () => {
@@ -223,7 +224,7 @@ const refreshBalance = () => {
 const resetBoxAnimation = () => {
 	caseItemsBox.innerHTML = "";
 	caseItemsBox.style.transition = "0.01s";
-	caseItemsBox.style.left = "-3950px";
+	caseItemsBox.style.left = "-10000px";
 	createItemsInChest();
 };
 

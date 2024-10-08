@@ -10,8 +10,10 @@ const setBalance = () => {
 	) {
 		localStorage.setItem("Balance", `00.00$`);
 	} else {
-		balanceAmount.textContent = localStorage.getItem("Balance");
-		balanceAmountMobile.textContent = localStorage.getItem("Balance");
+		balanceAmount.textContent =
+			parseFloat(localStorage.getItem("Balance")).toFixed(2) + "$";
+		balanceAmountMobile.textContent =
+			parseFloat(localStorage.getItem("Balance")).toFixed(2) + "$";
 	}
 };
 

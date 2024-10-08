@@ -158,7 +158,7 @@ const createInfoAboutItemsInChest = () => {
 };
 
 const createItemsInChest = () => {
-	for (i = 0; i < 30; i++) {
+	for (i = 0; i < 100; i++) {
 		const randomNumber = Math.floor(Math.random() * 10000);
 		let randomItem;
 
@@ -220,7 +220,7 @@ const spinCase = () => {
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3");
 		// Losowe przesunięcie między -2000 a -1000 px
-		const howStrongSpin = Math.floor(Math.random() * 1000 - 2000);
+		const howStrongSpin = Math.floor(Math.random() * 5000 - 7000);
 
 		spinBtn.textContent = "spining";
 
@@ -282,7 +282,6 @@ const spinCase = () => {
 const hideWinPopup = () => {
 	winPupup.classList.toggle("hidden");
 	setBtnText();
-	resetBoxAnimation();
 };
 
 const sellWinningItem = () => {
@@ -294,6 +293,7 @@ const sellWinningItem = () => {
 	localStorage.setItem("Balance", howMuchToAddToBalance + "$");
 	hideWinPopup();
 	refreshBalance();
+	resetBoxAnimation();
 };
 
 const takeWinningItem = () => {
@@ -310,6 +310,7 @@ const takeWinningItem = () => {
 		);
 	}
 	hideWinPopup();
+	resetBoxAnimation();
 };
 
 const refreshBalance = () => {
@@ -320,7 +321,7 @@ const refreshBalance = () => {
 const resetBoxAnimation = () => {
 	caseItemsBox.innerHTML = "";
 	caseItemsBox.style.transition = "0.01s";
-	caseItemsBox.style.left = "-3950px";
+	caseItemsBox.style.left = "-10000px";
 	createItemsInChest();
 };
 

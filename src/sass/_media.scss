@@ -102,6 +102,57 @@
 			}
 		}
 	}
+
+	.profile {
+		&__avatar {
+			width: 125px;
+		}
+
+		&__name {
+			font-size: 2.4rem;
+		}
+
+		&__balance {
+			font-size: 1.8rem;
+		}
+
+		&__inputs-box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		&__input-box {
+			padding: 0 1em;
+			width: auto;
+		}
+
+		&__items {
+			&-buttons {
+				padding: 0 1em;
+				flex-direction: row;
+				align-items: center;
+			}
+
+			&-title {
+				padding: 0;
+			}
+
+			&-price {
+				padding: 0;
+				padding-right: 0.5em;
+			}
+
+			&-right {
+				flex-direction: row;
+				align-items: center;
+			}
+
+			&-price {
+				display: block;
+			}
+		}
+	}
 }
 
 @media (min-width: 1200px) {

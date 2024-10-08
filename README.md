@@ -13,4 +13,6 @@ I used icons from:
 
 ***Gambling site with futures like opening cases, roulette, coinflip, upgrader, crash***
 
+Website is fully immersive. Every data is saved on local storage.
+
 Link to [site](https://ludzikk.github.io/CSGO-Gambling-Site/), it was built using [GitHub Pages](https://pages.github.com/).

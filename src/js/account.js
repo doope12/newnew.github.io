@@ -19,6 +19,7 @@ const nickname = document.querySelector(".user__name");
 const avatar = document.querySelector(".user__avatar");
 const nicknameMobile = document.querySelector(".user-mobile__name");
 const avatarMobile = document.querySelector(".user-mobile__avatar");
+const profileMobile = document.querySelector(".user-mobile__top");
 
 const addListeners = () => {
 	loginBtn.addEventListener("click", loginToAccount);
@@ -27,6 +28,7 @@ const addListeners = () => {
 	logoutBtnMobile.addEventListener("click", logoutFromAccount);
 	loginPopupBackBtn.addEventListener("click", loginToAccount);
 	loginPopupSubmitBtn.addEventListener("click", createAccount);
+	profileMobile.addEventListener("click", changeSiteToProfile);
 };
 
 const checkIfUserCreatedAccount = () => {
@@ -82,6 +84,14 @@ const createAccount = () => {
 		localStorage.setItem("nickname", `${loginPopupNickname.value}`);
 		loginToAccount();
 		checkIfUserCreatedAccount();
+	}
+};
+
+const changeSiteToProfile = () => {
+	if (document.body.id === "index") {
+		open("./diff/profile.html", "_self");
+	} else {
+		open("../diff/profile.html", "_self");
 	}
 };
 

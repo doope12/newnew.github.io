@@ -286,6 +286,7 @@
 		background-color: $tiles-color;
 		box-shadow: $normal-boxshadow;
 		overflow: hidden;
+		cursor: pointer;
 	}
 
 	&__avatar {

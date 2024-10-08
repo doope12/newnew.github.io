@@ -8,8 +8,8 @@
 
 I used icons from: 
 
-1. [icon](https://fontawesome.com)
-2. [icon](https://tabler.io/admin-template)
+1. [fontawesome](https://fontawesome.com)
+2. [tabler](https://tabler.io/admin-template)
 
 ***Gambling site with futures like opening cases, roulette, coinflip, upgrader, crash***
 

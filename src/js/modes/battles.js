@@ -1804,8 +1804,11 @@ const caseBoxesContainer = document.querySelector(
 	".battles__battle-containerofall"
 );
 const optionsBox = document.querySelector(".battles__options");
+const casesLeftBox = document.querySelector(".battles__casesleft-itembox");
+const casesLeftDiv = document.querySelector(".battles__casesleft");
 let currentBattleCases = [];
 let currentItemWonByPlayer = [];
+let moveCaseLeft = 54.5;
 
 const toggleAddCasesPopup = () => {
 	casesPopup.classList.toggle("hidden");
@@ -1967,6 +1970,22 @@ function setPlayersAmount() {
 	this.checked = true;
 }
 
+const createLeftCasesList = () => {
+	for (i = 0; i < currentBattleCases.length; i++) {
+		const itemBox = document.createElement("div");
+		const itemImg = document.createElement("img");
+
+		itemBox.classList.add("battles__casesleft-item");
+		itemImg.classList.add("battles__casesleft-img");
+
+		itemImg.setAttribute("src", cases[`${currentBattleCases[i]}`].imgDist);
+		itemImg.setAttribute("alt", cases[`${currentBattleCases[i]}`].imgAlt);
+
+		itemBox.appendChild(itemImg);
+		casesLeftBox.appendChild(itemBox);
+	}
+};
+
 const createCaseBoxesBasedOnPlayers = () => {
 	if (
 		parseFloat(totalCostOfCases.textContent) <=
@@ -1981,6 +2000,7 @@ const createCaseBoxesBasedOnPlayers = () => {
 		});
 
 		if (parseInt(totalCostOfCases.textContent) !== 0) {
+			// !== zmieniles na ===
 			for (i = 0; i < players; i++) {
 				const battleBox = document.createElement("div");
 				const battleImg = document.createElement("img");
@@ -1993,6 +2013,7 @@ const createCaseBoxesBasedOnPlayers = () => {
 				const battleAmount = document.createElement("p");
 
 				battleBox.classList.add("battles__battle");
+				battleBox.id = `player${i}`;
 				battleImg.classList.add("battles__battle-avatar");
 				battleName.classList.add("battles__battle-name");
 				battleContainer.classList.add("battles__battle-container");
@@ -2037,9 +2058,11 @@ const createCaseBoxesBasedOnPlayers = () => {
 			casesBox.classList.add("hidden");
 			optionsBox.classList.add("hidden");
 			caseBoxesContainer.classList.remove("hidden");
+			casesLeftDiv.classList.remove("hidden");
 
 			setBalanceAfterStart();
 			countCasesOnStart();
+			createLeftCasesList();
 		}
 	}
 };
@@ -2644,33 +2667,247 @@ const startBattle = () => {
 				parseFloat(winningPlayer.textContent)
 			) {
 				winningPlayer = allWinAmountArray[i];
-			} else if (
+			}
+		}
+
+		for (i = 0; i < allWinAmountArray.length; i++) {
+			if (
 				parseFloat(allWinAmountArray[i].textContent) ===
-				parseFloat(allWinAmountArray[0].textContent)
+				parseFloat(winningPlayer.textContent)
 			) {
 				sameWinningAmount.push(allWinAmountArray[i]);
 			}
 		}
 
+		console.log(winningPlayer);
+		console.log(sameWinningAmount);
+
+		// ustala wygranego
 		if (
 			winningPlayer === allWinAmountArray[0] &&
 			sameWinningAmount.length === 1
 		) {
 			addWonItemsToInv();
-		} else if (
-			winningPlayer === allWinAmountArray[0] &&
-			sameWinningAmount.length > 1
-		) {
-			let addToAmount = 0.01;
-			const randomNumber = Math.floor(Math.random() * sameWinningAmount.length);
-
-			sameWinningAmount[randomNumber].textContent =
-				(
-					parseFloat(sameWinningAmount[randomNumber].textContent) + addToAmount
-				).toFixed(2) + "$";
-			startBattle();
+			winningAnimationEnd();
+		} else if (sameWinningAmount.length > 1) {
+			winningAnimationJackpot(sameWinningAmount);
+		} else {
+			winningAnimationEnd();
 		}
 	}
+};
+
+const winningAnimationJackpot = (players) => {
+	const jackpotDiv = document.querySelector(".battles__jackpot");
+	const jackpotBox = document.querySelector(".battles__jackpot-box");
+	const playersBoxes = document.querySelectorAll(".battles__battle");
+	const playersBoxesArray = Array.from(playersBoxes);
+	const caseOpeningSound = new Audio("../dist/audio/open.mp3");
+	const allWinAmount = document.querySelectorAll(".battles__battle-amount");
+	const allWinAmountArray = Array.from(allWinAmount);
+
+	jackpotDiv.classList.remove("hidden");
+
+	playersBoxesArray.forEach((item) => {
+		item.children[2].classList.add("hidden");
+	});
+
+	if (players.length === 2) {
+		for (i = 0; i < 100; i++) {
+			const randomItem = Math.random() < 0.5 ? 0 : 1;
+
+			const playerBox = document.createElement("div");
+			const playerAvatar = document.createElement("img");
+
+			playerBox.classList.add("battles__jackpot-player");
+			playerAvatar.classList.add("battles__jackpot-avatar");
+
+			playerBox.id = `player${players[randomItem].parentElement.id.slice(6)}`;
+
+			if (randomItem === 0 && players[0].parentElement.id === "player0") {
+				playerAvatar.setAttribute("src", localStorage.getItem("avatar"));
+			} else {
+				playerAvatar.setAttribute(
+					"src",
+					`../dist/img/avatars/avatar${players[
+						randomItem
+					].parentElement.id.slice(6)}.jpg`
+				);
+			}
+
+			playerAvatar.setAttribute("alt", "Player Avatar");
+
+			playerBox.append(playerAvatar);
+			jackpotBox.append(playerBox);
+		}
+	} else if (players.length === 3) {
+		for (i = 0; i < 100; i++) {
+			const randomNumber = Math.floor(Math.random() * 10000);
+			let randomItem;
+
+			if (randomNumber <= 3333) {
+				randomItem = 0;
+			} else if (randomNumber <= 6666) {
+				randomItem = 1;
+			} else if (randomNumber <= 9999) {
+				randomItem = 2;
+			}
+
+			const playerBox = document.createElement("div");
+			const playerAvatar = document.createElement("img");
+
+			playerBox.classList.add("battles__jackpot-player");
+			playerAvatar.classList.add("battles__jackpot-avatar");
+
+			playerBox.id = `player${players[randomItem].parentElement.id.slice(6)}`;
+
+			if (randomItem === 0 && players[0].parentElement.id === "player0") {
+				playerAvatar.setAttribute("src", localStorage.getItem("avatar"));
+			} else {
+				playerAvatar.setAttribute(
+					"src",
+					`../dist/img/avatars/avatar${players[
+						randomItem
+					].parentElement.id.slice(6)}.jpg`
+				);
+			}
+
+			playerAvatar.setAttribute("alt", "Player Avatar");
+
+			playerBox.append(playerAvatar);
+			jackpotBox.append(playerBox);
+		}
+	} else if (players.length === 4) {
+		for (i = 0; i < 100; i++) {
+			const randomNumber = Math.floor(Math.random() * 10000);
+			let randomItem;
+
+			if (randomNumber <= 2499) {
+				randomItem = 0;
+			} else if (randomNumber <= 4999) {
+				randomItem = 1;
+			} else if (randomNumber <= 7499) {
+				randomItem = 2;
+			} else if (randomNumber <= 9999) {
+				randomItem = 3;
+			}
+
+			const playerBox = document.createElement("div");
+			const playerAvatar = document.createElement("img");
+
+			playerBox.classList.add("battles__jackpot-player");
+			playerAvatar.classList.add("battles__jackpot-avatar");
+
+			playerBox.id = `player${players[randomItem].parentElement.id.slice(6)}`;
+
+			if (randomItem === 0 && players[0].parentElement.id === "player0") {
+				playerAvatar.setAttribute("src", localStorage.getItem("avatar"));
+			} else {
+				playerAvatar.setAttribute(
+					"src",
+					`../dist/img/avatars/avatar${players[
+						randomItem
+					].parentElement.id.slice(6)}.jpg`
+				);
+			}
+
+			playerAvatar.setAttribute("alt", "Player Avatar");
+
+			playerBox.append(playerAvatar);
+			jackpotBox.append(playerBox);
+		}
+	}
+
+	setTimeout(() => {
+		caseOpeningSound.play();
+
+		const howStrongSpin = Math.floor(Math.random() * 5000 - 7000);
+
+		jackpotBox.style.left = howStrongSpin + "px";
+		jackpotBox.style.transition = "left 5s ease";
+
+		setTimeout(() => {
+			const redLineX =
+				jackpotBox.parentElement.children[0].getBoundingClientRect().x;
+
+			function getWinningItem() {
+				const items = document.querySelectorAll(`.battles__jackpot-player`);
+				let closestItem = null;
+				let closestDistance = Infinity;
+
+				items.forEach((item) => {
+					const itemCenterX =
+						item.getBoundingClientRect().x + item.offsetWidth / 2;
+					const distance = Math.abs(itemCenterX - redLineX);
+
+					if (distance < closestDistance) {
+						closestDistance = distance;
+						closestItem = item;
+					}
+				});
+
+				return closestItem;
+			}
+
+			const winningItem = getWinningItem();
+
+			if (winningItem) {
+				allWinAmountArray.forEach((item) => {
+					console.log(
+						"Item parent id: " +
+							item.parentElement.id +
+							" Winning item id: " +
+							winningItem.id
+					);
+					if (item.parentElement.id === winningItem.id) {
+						let addToAmount = 0.01;
+
+						item.textContent =
+							(parseFloat(item.textContent) + addToAmount).toFixed(2) + "$";
+					}
+				});
+			}
+		}, 5000);
+
+		setTimeout(() => {
+			jackpotDiv.classList.add("hidden");
+			startBattle();
+		}, 5500);
+	}, 500);
+};
+
+const winningAnimationEnd = () => {
+	const playersBoxes = document.querySelectorAll(".battles__battle");
+	const playersBoxesArray = Array.from(playersBoxes);
+	const allWinAmount = document.querySelectorAll(".battles__battle-amount");
+	const allWinAmountArray = Array.from(allWinAmount);
+	let winningPlayer = allWinAmountArray[0];
+	let endAmount = 0;
+
+	playersBoxesArray.forEach((item) => {
+		item.children[2].classList.add("hidden");
+	});
+
+	for (i = 0; i < allWinAmountArray.length; i++) {
+		if (
+			parseFloat(allWinAmountArray[i].textContent) >
+			parseFloat(winningPlayer.textContent)
+		) {
+			winningPlayer = allWinAmountArray[i];
+		}
+	}
+
+	allWinAmountArray.forEach((item) => {
+		if (
+			parseFloat(item.textContent) !== parseFloat(winningPlayer.textContent)
+		) {
+			item.parentElement.remove();
+		}
+
+		endAmount = endAmount + parseFloat(item.textContent);
+	});
+
+	winningPlayer.textContent = endAmount.toFixed(2) + "$";
 };
 
 const addWonItemsToInv = () => {
@@ -2690,6 +2927,9 @@ const addWonItemsToInv = () => {
 
 const spinCase = () => {
 	const allCasesBoxes = document.querySelectorAll(".battles__battle-items");
+	const caseOpeningSound = new Audio("../dist/audio/open.mp3");
+
+	caseOpeningSound.play();
 
 	allCasesBoxes.forEach((box) => {
 		const howStrongSpin = Math.floor(Math.random() * 5000 - 7000);
@@ -2744,6 +2984,9 @@ const spinCase = () => {
 			item.style.transition = "0.01s";
 			item.style.left = "-10000px";
 		});
+		casesLeftBox.style.left = "-" + moveCaseLeft + "px";
+		moveCaseLeft = moveCaseLeft + 57.5;
+		casesLeftBox.style.transition = "left 0.5s";
 		currentBattleCases.shift();
 		startBattle();
 	}, 5500);

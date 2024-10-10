@@ -921,6 +921,10 @@ const avatarBtn = document.querySelector(".profile__btn--avatar");
 const nicknameBtn = document.querySelector(".profile__btn--nickname");
 const deleteAccountBtn = document.querySelector(".profile__btn--delete");
 const sellAllSkinsBtn = document.querySelector(".profile__btn--sellall");
+const userItemsPagePrevious = document.querySelector(
+	".upgrader__list-btn--left"
+);
+const userItemsPageNext = document.querySelector(".upgrader__list-btn--right");
 let currentPage = 1;
 const itemsPerPage = 10;
 
@@ -1041,6 +1045,15 @@ function sellItem() {
 
 	this.parentElement.remove();
 
+	const allItemsOfUser = document.querySelectorAll(".profile__item");
+	const totalUserItems = allItemsOfUser.length;
+	const totalUserPages = Math.ceil(totalUserItems / itemsPerPage);
+
+	// If on the last page and the page becomes empty, move to the previous page
+	if (totalUserItems <= (currentPage - 1) * itemsPerPage && currentPage > 1) {
+		currentPage--;
+	}
+
 	countTotalValueOfSkins();
 	getUserInfo();
 	setBalance();
@@ -1071,6 +1084,7 @@ const sellAllItems = () => {
 		countTotalValueOfSkins();
 		getUserInfo();
 		setBalance();
+		renderItems();
 	}
 };
 
@@ -1079,25 +1093,25 @@ const renderItems = () => {
 	const allItemsOfUserArray = Array.from(allItemsOfUser);
 	const dotsBox = document.querySelector(".profile__dotsbox");
 
-		if (allItemsOfUserArray.length % 10 === 0 && allItemsOfUserArray.length > 10) {
-			currentPage = currentPage - 1;
-		}
-	
-
 	const userStartIndex = (currentPage - 1) * itemsPerPage;
 	const userEndIndex = userStartIndex + itemsPerPage;
-
+	
 	allItemsOfUserArray.forEach((item) => (item.style.display = "none"));
-
+	
 	allItemsOfUserArray.slice(userStartIndex, userEndIndex).forEach((item) => {
 		item.style.display = "flex";
 	});
-
+	
 	const allUserItemsPages = Math.ceil(
 		allItemsOfUserArray.length / itemsPerPage
 	);
 	dotsBox.innerHTML = "";
 
+	// if (
+	// 	(allUserItemsPages * 10) === allItemsOfUserArray.length)  {
+	// 	currentPage = currentPage - 1;
+	// }
+	
 	for (i = 0; i < allUserItemsPages; i++) {
 		const dot = document.createElement("div");
 		dot.classList.add("profile__dot");
@@ -1106,6 +1120,18 @@ const renderItems = () => {
 		if (currentPage === i + 1) {
 			dot.classList.add("dot-active");
 		}
+	}
+
+	if (currentPage === 1) {
+		userItemsPagePrevious.style.display = "none";
+	} else {
+		userItemsPagePrevious.style.display = "block";
+	}
+
+	if (currentPage === allUserItemsPages) {
+		userItemsPageNext.style.display = "none";
+	} else {
+		userItemsPageNext.style.display = "block";
 	}
 };
 

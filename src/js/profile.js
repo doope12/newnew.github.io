@@ -1078,10 +1078,11 @@ const renderItems = () => {
 	const allItemsOfUser = document.querySelectorAll(".profile__item");
 	const allItemsOfUserArray = Array.from(allItemsOfUser);
 	const dotsBox = document.querySelector(".profile__dotsbox");
-	
-		if(allItemsOfUserArray.length % 10 === 0) {
+
+		if (allItemsOfUserArray.length % 10 === 0 && allItemsOfUserArray.length > 10) {
 			currentPage = currentPage - 1;
 		}
+	
 
 	const userStartIndex = (currentPage - 1) * itemsPerPage;
 	const userEndIndex = userStartIndex + itemsPerPage;
@@ -1092,7 +1093,9 @@ const renderItems = () => {
 		item.style.display = "flex";
 	});
 
-	const allUserItemsPages = Math.ceil(allItemsOfUserArray.length / itemsPerPage);
+	const allUserItemsPages = Math.ceil(
+		allItemsOfUserArray.length / itemsPerPage
+	);
 	dotsBox.innerHTML = "";
 
 	for (i = 0; i < allUserItemsPages; i++) {
@@ -1107,9 +1110,8 @@ const renderItems = () => {
 };
 
 const changePage = (direction) => {
-	const allItemsOfUserCount = document.querySelectorAll(
-		".profile__item"
-	).length;
+	const allItemsOfUserCount =
+		document.querySelectorAll(".profile__item").length;
 	const totalUserPages = Math.ceil(allItemsOfUserCount / itemsPerPage);
 
 	if (direction === -1 && currentPage > 1) {

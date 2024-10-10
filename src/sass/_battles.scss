@@ -1,0 +1,237 @@
+@use "./colors" as *;
+
+.battles {
+	&__container {
+		display: flex;
+	}
+
+	&__icon {
+		padding: 0.5em;
+		margin-bottom: 0.5em;
+		font-size: 3rem;
+		border-radius: 50%;
+		background-color: $main-color;
+	}
+
+	&__text {
+		text-transform: uppercase;
+	}
+
+	&__cases {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		width: 1060px;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+
+		&-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 0.5em;
+			margin: 0.3em;
+			width: 250px;
+			height: 250px;
+			color: $text-color;
+			letter-spacing: 1px;
+			background-color: $main2-color;
+
+			&--add {
+				cursor: pointer;
+				transition: 0.5s;
+
+				&:hover {
+					background-color: $tiles-color;
+				}
+			}
+		}
+
+		&-img {
+			width: 80%;
+			object-fit: cover;
+		}
+
+		&-price {
+			padding-top: 0.2em;
+			color: $secondary-color;
+		}
+
+		&-btnbox {
+			padding: 0.5em 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			width: 100%;
+		}
+
+		&-btn,
+		&-amount {
+			width: 33%;
+		}
+
+		&-amount {
+			font-size: 2rem;
+		}
+	}
+
+	&__options {
+		color: $text-color;
+
+		&-inputs {
+			display: flex;
+			padding-bottom: 2em;
+		}
+
+		&-checkbox {
+			margin: 0 0.5em;
+		}
+	}
+
+	&__popup {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 1000;
+
+		&-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+			width: 600px;
+			color: $text-color;
+			background-color: $main2-color;
+		}
+
+		&-item {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 200px;
+			cursor: pointer;
+		}
+
+		&-casesbox {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-wrap: wrap;
+			padding-bottom: 1em;
+		}
+	}
+
+	&__battle {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		padding: 1em;
+		width: 100%;
+
+		&-amount {
+			margin: 1em 0;
+			padding: 0.5em 1em;
+			font-size: 1.6rem;
+			border: 2px solid $secondary-color;
+			border-radius: 10px;
+			text-transform: uppercase;
+			font-weight: bold;
+			letter-spacing: 1px;
+			box-shadow: $purple-boxshadow;
+			background: $secondary-color-alpha;
+			color: $text-color;
+		}
+
+		&-avatar {
+			margin-bottom: 1em;
+			width: 150px;
+			height: 150px;
+			object-fit: cover;
+			border-radius: 25px;
+		}
+
+		&-name {
+			font-size: 2rem;
+			font-weight: bold;
+			letter-spacing: 1px;
+			color: $text-color;
+		}
+
+		&-containerofall {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		&-container {
+			position: relative;
+			margin: 1em 1em 0;
+			height: 202px;
+			width: 100%;
+			border-radius: 20px;
+			border: 2px solid $secondary-color;
+			overflow: hidden;
+			box-shadow: $purple-boxshadow;
+		}
+
+		&-point {
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%);
+		}
+
+		&-triangle {
+			position: absolute;
+			left: 50%;
+			transform: translate(-50%);
+			width: 30px;
+			height: 30px;
+			overflow: hidden;
+			z-index: 101;
+
+			&::after {
+				position: absolute;
+				content: "";
+				display: block;
+				top: -25%;
+				left: 50%;
+				transform: translate(-50%) rotate(45deg);
+				width: 20px;
+				height: 20px;
+				border-radius: 0 2px 2px;
+				background-color: $secondary-color;
+			}
+
+			&--bottom {
+				transform: translate(-50%) rotate(180deg);
+				bottom: 0;
+			}
+		}
+
+		&-items {
+			position: absolute;
+			top: 0;
+			left: -10000px;
+			display: flex;
+			align-items: center;
+			color: $text-color;
+			z-index: 100;
+		}
+	}
+}

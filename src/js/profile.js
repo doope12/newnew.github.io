@@ -976,7 +976,7 @@ const addAllUserItems = () => {
 			const itemBtn = document.createElement("button");
 
 			itemBox.classList.add("profile__item");
-			itemBox.classList.add(allItems[`id${i}`].color + "-drop");
+			itemBox.classList.add(allItems[`id${i}`].color + "-drop2");
 			itemImg.classList.add("profile__item-img");
 			itemName.classList.add("profile__item-name");
 			itemSkin.classList.add("uprofile__item--skin");

@@ -16,14 +16,128 @@
     <main class="main">
         <!-- @import "../lastdrops.kit" -->
         <div class="wrapper">
-            <div class="upgrader__container">
-                <div class="upgrader__list">
+            <h2 class="section__title section__title--cases"><span class="section__title-bg">Battles</span></h2>
+            <div class="battles__container">
+                <div class="battles__cases ">
+                    <div class="battles__item-container battles__item-container--add">
+                        <i class="fa-solid fa-plus battles__icon"></i>
+                        <p class="battles__text">add case</p>
+                    </div>
+                    <div class="battles__item-container">
+                    </div>
+                    <div class="battles__item-container">
+                    </div>
+                    <div class="battles__item-container">
+                    </div>
+                    <div class="battles__item-container">
+                    </div>
+                    <div class="battles__item-container">
+                    </div>
+                    <div class="battles__item-container">
+                    </div>
+                    <div class="battles__item-container">
+                    </div>
                 </div>
+                <div class="battles__popup hidden">
+                    <div class="battles__popup-container">
+                        <p class="battles__popup-title">adding cases</p>
+                        <div class="battles__popup-casesbox">
+                            <div class="battles__popup-item" id="case0">
+                                <img src="../dist/img/cases/case1.jpg" alt="Redline Case Image"
+                                    class="battles__item-img">
+                                <p class="battles__item-name">Redline</p>
+                                <p class="battles__item-price">65.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case1">
+                                <img src="../dist/img/cases/case2.jpg" alt="LuckyLore Case Image"
+                                    class="battles__item-img">
+                                <p class="battles__item-name">LuckyLore</p>
+                                <p class="battles__item-price">200.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case2">
+                                <img src="../dist/img/cases/case3.jpg" alt="Blaze Case Image" class="battles__item-img">
+                                <p class="battles__item-name">Blaze</p>
+                                <p class="battles__item-price">300.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case3">
+                                <img src="../dist/img/cases/case4.jpg" alt="TigerTooth Case Image"
+                                    class="battles__item-img">
+                                <p class="battles__item-name">TigerTooth</p>
+                                <p class="battles__item-price">400.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case4">
+                                <img src="../dist/img/cases/case5.jpg" alt="Desert Eagle Case Image"
+                                    class="battles__item-img">
+                                <p class="battles__item-name">Desert Eagle</p>
+                                <p class="battles__item-price">25.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case5">
+                                <img src="../dist/img/cases/case6.jpg" alt="AK-47 Case Image" class="battles__item-img">
+                                <p class="battles__item-name">AK-47</p>
+                                <p class="battles__item-price">42.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case6">
+                                <img src="../dist/img/cases/case8.jpg" alt="M4A4 Case Image" class="battles__item-img">
+                                <p class="battles__item-name">M4A4</p>
+                                <p class="battles__item-price">65.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case7">
+                                <img src="../dist/img/cases/case9.jpg" alt="AWP Case Image" class="battles__item-img">
+                                <p class="battles__item-name">AWP</p>
+                                <p class="battles__item-price">200.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case8">
+                                <img src="../dist/img/cases/case12.jpg" alt="1% Profit Case Image"
+                                    class="battles__item-img">
+                                <p class="battles__item-name">1% Profit</p>
+                                <p class="battles__item-price">30.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case9">
+                                <img src="../dist/img/cases/case7.jpg" alt="Poseidon Case Image"
+                                    class="battles__item-img">
+                                <p class="battles__item-name">Poseidon</p>
+                                <p class="battles__item-price">40.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case10">
+                                <img src="../dist/img/cases/case11.jpg" alt="25% Knife Case Image"
+                                    class="battles__item-img">
+                                <p class="battles__item-name">25% Knife</p>
+                                <p class="battles__item-price">850.00$</p>
+                            </div>
+                            <div class="battles__popup-item" id="case11">
+                                <img src="../dist/img/cases/case10.jpg" alt="10% 10k Case Image"
+                                    class="battles__item-img">
+                                <p class="battles__item-name">10% 10k</p>
+                                <p class="battles__item-price">1200.00$</p>
+                            </div>
+                        </div>
+                        <button class="battles__popup-btn">add cases</button>
+                    </div>
+                </div>
+                <div class="battles__options ">
+                    <h3 class="battles__options-title">Options</h3>
+                    <p class="battles__options-text">Players:</p>
+                    <div class="battles__options-inputs">
+                        <input class="battles__options-checkbox" type="checkbox" id="2players" checked>
+                        <p class="battles__options-text">2</p>
+                        <input class="battles__options-checkbox" type="checkbox" id="3players">
+                        <p class="battles__options-text">3</p>
+                        <input class="battles__options-checkbox" type="checkbox" id="4players">
+                        <p class="battles__options-text">4</p>
+                    </div>
+                    <p class="battles__options-cost">Total cost: <span class="battles__options-costamount">0.00$</span>
+                    </p>
+                    <button class="battles__options-btn">Start</button>
+                </div>
+            </div>
+            <div class="battles__battle-containerofall hidden">
+
             </div>
         </div>
     </main>
     <!-- @import "../footer.kit" -->
     <script src="../dist/js/last-drops.min.js"></script>
+    <script src="../dist/js/modes/battles.min.js"></script>
     <script src="../dist/js/balance.min.js"></script>
     <script src="../dist/js/account.min.js"></script>
     <script src="../dist/js/script.min.js"></script>

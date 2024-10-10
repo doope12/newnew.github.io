@@ -25,3 +25,15 @@ button {
 	// font-family: "Nunito", sans-serif;
 	font-family: "Exo 2", sans-serif;
 }
+
+body::-webkit-scrollbar-track {
+	background-color: $main3-color;
+}
+
+body::-webkit-scrollbar {
+	width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: $secondary-color;
+}

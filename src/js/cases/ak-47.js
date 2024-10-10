@@ -181,7 +181,7 @@ const createInfoAboutItemsInChest = () => {
 		const dropItemPrice = document.createElement("p");
 
 		dropItem.classList.add("case__drop");
-		dropItem.classList.add(items2[`item${i}`].color + "-drop");
+		dropItem.classList.add(items2[`item${i}`].color + "-drop2");
 		dropItem.style.order = "-" + items2[`item${i}`].price.toFixed(0);
 		dropItemPercent.classList.add("case__drop-percent");
 		dropItemImg.classList.add("case__drop-img");

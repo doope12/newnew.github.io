@@ -175,4 +175,18 @@
 			width: 20%;
 		}
 	}
+
+	.login-popup {
+		&__title {
+			font-size: 3rem;
+		}
+
+		&__btn{
+			font-size: 2rem;
+		}
+	}
+
+	.spin {
+		font-size: 1.8rem;
+	}
 }

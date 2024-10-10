@@ -9,6 +9,10 @@
 		background-color: $main2-color;
 	}
 
+	&__items {
+		position: relative;
+	}
+
 	&__user-info {
 		display: flex;
 		flex-direction: column;
@@ -175,5 +179,22 @@
 				background: $secondary-color-alpha-hover;
 			}
 		}
+	}
+
+	&__dotsbox {
+		display: flex;
+		justify-content: center;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%);
+	}
+
+	&__dot {
+		margin: 0 0.5em;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background-color: rgba(255, 255, 255, 0.4);
 	}
 }

@@ -921,6 +921,8 @@ const avatarBtn = document.querySelector(".profile__btn--avatar");
 const nicknameBtn = document.querySelector(".profile__btn--nickname");
 const deleteAccountBtn = document.querySelector(".profile__btn--delete");
 const sellAllSkinsBtn = document.querySelector(".profile__btn--sellall");
+let currentPage = 1;
+const itemsPerPage = 10;
 
 const getUserInfo = () => {
 	userAvatar.setAttribute("src", localStorage.getItem("avatar"));
@@ -1042,6 +1044,7 @@ function sellItem() {
 	countTotalValueOfSkins();
 	getUserInfo();
 	setBalance();
+	renderItems();
 }
 
 const sellAllItems = () => {
@@ -1071,6 +1074,53 @@ const sellAllItems = () => {
 	}
 };
 
+const renderItems = () => {
+	const allItemsOfUser = document.querySelectorAll(".profile__item");
+	const allItemsOfUserArray = Array.from(allItemsOfUser);
+	const dotsBox = document.querySelector(".profile__dotsbox");
+	
+		if(allItemsOfUserArray.length % 10 === 0) {
+			currentPage = currentPage - 1;
+		}
+
+	const userStartIndex = (currentPage - 1) * itemsPerPage;
+	const userEndIndex = userStartIndex + itemsPerPage;
+
+	allItemsOfUserArray.forEach((item) => (item.style.display = "none"));
+
+	allItemsOfUserArray.slice(userStartIndex, userEndIndex).forEach((item) => {
+		item.style.display = "flex";
+	});
+
+	const allUserItemsPages = Math.ceil(allItemsOfUserArray.length / itemsPerPage);
+	dotsBox.innerHTML = "";
+
+	for (i = 0; i < allUserItemsPages; i++) {
+		const dot = document.createElement("div");
+		dot.classList.add("profile__dot");
+		dotsBox.append(dot);
+
+		if (currentPage === i + 1) {
+			dot.classList.add("dot-active");
+		}
+	}
+};
+
+const changePage = (direction) => {
+	const allItemsOfUserCount = document.querySelectorAll(
+		".profile__item"
+	).length;
+	const totalUserPages = Math.ceil(allItemsOfUserCount / itemsPerPage);
+
+	if (direction === -1 && currentPage > 1) {
+		currentPage--;
+	} else if (direction === 1 && currentPage < totalUserPages) {
+		currentPage++;
+	}
+
+	renderItems();
+};
+
 const addEventListeners = () => {
 	avatarBtn.addEventListener("click", changeAvatar);
 	nicknameBtn.addEventListener("click", changeNickname);
@@ -1088,5 +1138,6 @@ getUserInfo();
 addAllUserItems();
 countTotalValueOfSkins();
 setItemsOrder();
+renderItems();
 
 addEventListeners();

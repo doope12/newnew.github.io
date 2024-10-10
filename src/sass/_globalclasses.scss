@@ -209,7 +209,6 @@
 
 .normal-btn {
 	padding: 0.5em 1em;
-	font-size: 1.6rem;
 	border: 2px solid $secondary-color;
 	border-radius: 10px;
 	text-transform: uppercase;
@@ -234,5 +233,10 @@
 }
 
 .active-case-popup {
-	background-color: red;
+	background-color: $tiles-color;
+}
+
+.dot-active {
+	background-color: $secondary-color;
+	box-shadow: $purple-boxshadow;
 }

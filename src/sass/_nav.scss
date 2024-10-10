@@ -113,7 +113,7 @@
 	align-items: center;
 	height: 100%;
 	border-radius: 20px;
-	
+
 	&__btn {
 		margin: 0 2em;
 		padding: 0.5em 2em;
@@ -167,7 +167,7 @@
 		display: block;
 
 		&--deposit {
-				padding: 0.5em 0.75em;
+			padding: 0.5em 0.75em;
 		}
 	}
 
@@ -187,7 +187,7 @@
 		object-fit: cover;
 		box-shadow: $normal-boxshadow;
 	}
-	
+
 	&__profile {
 		display: block;
 		margin: 0 0.7em;
@@ -236,6 +236,18 @@
 	z-index: 554;
 	animation: swipe-from-left 0.5s;
 
+	&::-webkit-scrollbar-track {
+		background-color: $main3-color;
+	}
+	
+	&::-webkit-scrollbar {
+		width: 8px;
+	}
+	
+	&::-webkit-scrollbar-thumb {
+		background-color: $secondary-color;
+	}
+
 	&__list {
 		display: flex;
 		flex-direction: column;
@@ -282,22 +294,32 @@
 	}
 
 	&__top {
-		border-radius: 10px;
-		background-color: $tiles-color;
-		box-shadow: $normal-boxshadow;
-		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: start;
+		text-align: center;
 		cursor: pointer;
 	}
 
 	&__avatar {
-		margin-right: 1em;
-		width: 50px;
-		height: 50px;
+		margin-bottom: 1em;
+		width: 125px;
+		height: 125px;
+		border-radius: 20px;
+		box-shadow: $normal-boxshadow;
 		object-fit: cover;
 	}
 
+	&__name {
+		padding-bottom: 0.5em;
+		font-size: 2.2rem;
+		font-weight: bold;
+		letter-spacing: 1px;
+	}
+
 	&__balance {
-		font-size: 1.6rem;
+		font-size: 1.8rem;
 		color: $text-color-not-active;
 
 		&--amount {
@@ -393,19 +415,24 @@
 
 	&__title {
 		padding-bottom: 0.5em;
-		font-size: 2.2rem;
+		font-size: 2.6rem;
+		letter-spacing: 1.5px;
+		text-shadow: 0px 0px 2px $text-color;
 	}
 
 	&__btn {
 		margin-top: 1em;
+		font-size: 1.8rem;
+		box-shadow: $purple-boxshadow;
 	}
 
 	&__input {
 		margin: 0.5em 0;
 		padding: 0.5em;
 		font-size: 1.6rem;
-		border-radius: 10px;
-		border: none;
+		border-radius: 5px;
+		border: 2px solid $secondary-color;
+		box-shadow: $purple-boxshadow;
 		color: $text-color;
 		background-color: rgba(255, 255, 255, 0.2);
 

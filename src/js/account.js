@@ -50,6 +50,53 @@ const checkIfUserCreatedAccount = () => {
 		avatarMobile.setAttribute("src", localStorage.getItem("avatar"));
 		nicknameMobile.textContent = localStorage.getItem("nickname");
 	}
+
+	if (localStorage.getItem("createdAccount") == 1) {
+		if (
+			localStorage.getItem("battlesWon") === null ||
+			localStorage.getItem("battlesWon") === NaN
+		) {
+			{
+				localStorage.setItem("battlesWon", 0);
+			}
+		}
+
+		if (
+			localStorage.getItem("casesOpened") === null ||
+			localStorage.getItem("casesOpened") === NaN
+		) {
+			{
+				localStorage.setItem("casesOpened", 0);
+			}
+		}
+
+		if (
+			localStorage.getItem("upgradesDone") === null ||
+			localStorage.getItem("upgradesDone") === NaN
+		) {
+			{
+				localStorage.setItem("upgradesDone", 0);
+			}
+		}
+
+		if (
+			localStorage.getItem("rouletteWon") === null ||
+			localStorage.getItem("rouletteWon") === NaN
+		) {
+			{
+				localStorage.setItem("rouletteWon", 0);
+			}
+		}
+
+		if (
+			localStorage.getItem("crashWon") === null ||
+			localStorage.getItem("crashWon") === NaN
+		) {
+			{
+				localStorage.setItem("crashWon", 0);
+			}
+		}
+	}
 };
 
 const loginToAccount = () => {
@@ -82,11 +129,11 @@ const createAccount = () => {
 		localStorage.setItem("createdAccount", 1);
 		localStorage.setItem("avatar", `${loginPopupImg.value}`);
 		localStorage.setItem("nickname", `${loginPopupNickname.value}`);
-		localStorage.setItem("battlesWon", 0)
-		localStorage.setItem("casesOpened", 0)
-		localStorage.setItem("upgradesDone", 0)
-		localStorage.setItem("rouletteWon", 0)
-		localStorage.setItem("crashWon", 0)
+		localStorage.setItem("battlesWon", 0);
+		localStorage.setItem("casesOpened", 0);
+		localStorage.setItem("upgradesDone", 0);
+		localStorage.setItem("rouletteWon", 0);
+		localStorage.setItem("crashWon", 0);
 		loginToAccount();
 		checkIfUserCreatedAccount();
 	}

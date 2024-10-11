@@ -88,15 +88,60 @@
 	}
 
 	&__options {
+		padding: 1em;
+		height: 250px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border-radius: 10px;
+		box-shadow: $normal-boxshadow;
+		background-color: $main2-color;
 		color: $text-color;
+
+		&-title {
+			padding: 0 0 0.5em;
+			font-size: 2rem;
+			letter-spacing: 1px;
+		}
 
 		&-inputs {
 			display: flex;
+			align-items: center;
 			padding-bottom: 2em;
 		}
 
-		&-checkbox {
+		&-text {
 			margin: 0 0.5em;
+
+			&--nomargin {
+				padding-bottom: 0.25em;
+				margin: 0;
+			}
+		}
+
+		&-cost {
+			padding-bottom: 0.5em;
+		}
+
+		&-btn {
+			width: 100%;
+		}
+
+		&-checkbox {
+			appearance: none;
+			position: relative;
+			width: 15px;
+			height: 15px;
+			border: 1px solid $secondary-color;
+			border-radius: 50%;
+			background-color: transparent;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&:checked {
+				background-color: $secondary-color;
+			}
 		}
 	}
 

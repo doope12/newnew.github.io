@@ -82,6 +82,11 @@ const createAccount = () => {
 		localStorage.setItem("createdAccount", 1);
 		localStorage.setItem("avatar", `${loginPopupImg.value}`);
 		localStorage.setItem("nickname", `${loginPopupNickname.value}`);
+		localStorage.setItem("battlesWon", 0)
+		localStorage.setItem("casesOpened", 0)
+		localStorage.setItem("upgradesDone", 0)
+		localStorage.setItem("rouletteWon", 0)
+		localStorage.setItem("crashWon", 0)
 		loginToAccount();
 		checkIfUserCreatedAccount();
 	}

@@ -7,7 +7,7 @@
     <meta name="author" content="Ludzik">
     <meta name="description" content="CSGO Gambling website.">
     <meta name="keywords" content="CSGO, Cases, Upgrader, Roulette, Crash.">
-    <title>EzSkins</title>
+    <title>EzSkins - Battles</title>
     <link rel="shortcut icon" href="../dist/img/favicon.jpg" type="image/x-icon">
     <!-- @import "../link.kit" -->
 </head>
@@ -125,20 +125,24 @@
                         </div>
                     </div>
                     <div class="battles__options ">
-                        <h3 class="battles__options-title">Options</h3>
-                        <p class="battles__options-text">Players:</p>
-                        <div class="battles__options-inputs">
-                            <input class="battles__options-checkbox" type="checkbox" id="2players" checked>
-                            <p class="battles__options-text">2</p>
-                            <input class="battles__options-checkbox" type="checkbox" id="3players">
-                            <p class="battles__options-text">3</p>
-                            <input class="battles__options-checkbox" type="checkbox" id="4players">
-                            <p class="battles__options-text">4</p>
+                        <div class="battles__options-top">
+                            <h3 class="battles__options-title">Options</h3>
+                            <p class="battles__options-text battles__options-text--nomargin">Players</p>
+                            <div class="battles__options-inputs">
+                                <input class="battles__options-checkbox" type="radio" id="2players" checked>
+                                <p class="battles__options-text">2</p>
+                                <input class="battles__options-checkbox" type="radio" id="3players">
+                                <p class="battles__options-text">3</p>
+                                <input class="battles__options-checkbox" type="radio" id="4players">
+                                <p class="battles__options-text">4</p>
+                            </div>
                         </div>
-                        <p class="battles__options-cost">Total cost: <span
-                                class="battles__options-costamount">0.00$</span>
-                        </p>
-                        <button class="battles__options-btn">Start</button>
+                        <div class="battles__options-bottom">
+                            <p class="battles__options-cost">Total cost: <span
+                                    class="battles__options-costamount">0.00$</span>
+                            </p>
+                            <button class="battles__options-btn normal-btn">Start</button>
+                        </div>
                     </div>
                 </div>
                 <div class="battles__jackpot hidden">
@@ -146,7 +150,7 @@
                     <div class="case__middle-triangle"></div>
                     <div class="case__middle-triangle case__middle-triangle--bottom"></div>
                     <div class="battles__jackpot-box">
-                      
+
                     </div>
                 </div>
                 <div class="battles__battle-containerofall hidden">

@@ -169,9 +169,10 @@
 		position: relative;
 		display: flex;
 		justify-content: center;
-		align-items: center;
+		// align-items: flex-start;
 		flex-wrap: wrap;
 		padding-bottom: 1.5em;
+		// min-height: 631px;
 
 		&-btn {
 			&--left {

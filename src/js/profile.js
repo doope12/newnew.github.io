@@ -925,6 +925,11 @@ const userItemsPagePrevious = document.querySelector(
 	".upgrader__list-btn--left"
 );
 const userItemsPageNext = document.querySelector(".upgrader__list-btn--right");
+const statsCases = document.querySelector(".profile__stats-amount--cases")
+const statsBattles = document.querySelector(".profile__stats-amount--battles")
+const statsUpgrader = document.querySelector(".profile__stats-amount--upgrader")
+const statsRoulette = document.querySelector(".profile__stats-amount--roulette")
+const statsCrash = document.querySelector(".profile__stats-amount--crash")
 let currentPage = 1;
 const itemsPerPage = 10;
 
@@ -933,6 +938,11 @@ const getUserInfo = () => {
 	userNickname.textContent = localStorage.getItem("nickname");
 	userBalance.textContent =
 		parseFloat(localStorage.getItem("Balance")).toFixed(2) + "$";
+	statsCases.textContent = localStorage.getItem("casesOpened")
+	statsBattles.textContent = localStorage.getItem("battlesWon")
+	statsUpgrader.textContent = localStorage.getItem("upgradesDone")
+	statsRoulette.textContent = localStorage.getItem("rouletteWon")
+	statsCrash.textContent = localStorage.getItem("crashWon")
 };
 
 const changeAvatar = () => {
@@ -985,7 +995,7 @@ const addAllUserItems = () => {
 			itemBox.classList.add(allItems[`id${i}`].color + "-drop2");
 			itemImg.classList.add("profile__item-img");
 			itemName.classList.add("profile__item-name");
-			itemSkin.classList.add("uprofile__item--skin");
+			itemSkin.classList.add("profile__item-skin");
 			itemSkin.classList.add(allItems[`id${i}`].color + "-text");
 			itemPrice.classList.add("profile__item-price");
 			itemBtn.classList.add("profile__item-btn");

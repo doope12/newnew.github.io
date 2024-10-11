@@ -312,6 +312,9 @@ const spinCase = () => {
 			caseOpeningSound.play();
 		}
 
+		const casesOpenedToAdd = parseInt(localStorage.getItem("casesOpened")) + 1;
+		localStorage.setItem("casesOpened", casesOpenedToAdd);
+
 		const balanceAfterOpening = (
 			parseFloat(localStorage.getItem("Balance").slice(0, -1)) - casePrice
 		).toFixed(2);

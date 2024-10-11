@@ -2923,6 +2923,9 @@ const addWonItemsToInv = () => {
 			localStorage.setItem(`id${currentItemWonByPlayer[i]}`, itemToAdd);
 		}
 	}
+
+	const battlesWonToAdd = parseInt(localStorage.getItem("battlesWon")) + 1;
+	localStorage.setItem("battlesWon", battlesWonToAdd);
 };
 
 const spinCase = () => {

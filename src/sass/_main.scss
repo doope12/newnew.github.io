@@ -2,6 +2,7 @@
 
 .main {
 	margin-top: 100px;
+	font-weight: bold;
 
 	&__container {
 		padding: 1.5em;
@@ -19,6 +20,7 @@
 		padding: 0.5em 0;
 		text-align: center;
 		text-transform: uppercase;
+		font-weight: bold;
 		color: $text-color;
 
 		&::before {

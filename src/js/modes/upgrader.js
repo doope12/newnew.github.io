@@ -930,7 +930,7 @@ const allItemsPageNext = document.querySelector(
 let spinning = 0;
 let currentPageUser = 1;
 let currentPageAll = 1;
-const itemsPerPage = 16;
+const itemsPerPage = 12;
 
 // Funkcja ta dodaje wszystkie itemy gracza ktore znajduja sie w localStorage.
 const addPlayerItems = () => {
@@ -1246,6 +1246,9 @@ const addWinningItems = (didWin) => {
 				parseInt(localStorage.getItem(`id${topRightBox.id}`)) + 1;
 			localStorage.setItem(`id${topRightBox.id}`, itemToAdd);
 		}
+
+		const upgradesWonToAdd = parseInt(localStorage.getItem("upgradesDone")) + 1;
+		localStorage.setItem("upgradesDone", upgradesWonToAdd);
 	} else {
 		innerCircle.style.border = "3px solid red";
 	}
@@ -1293,7 +1296,7 @@ const renderItems = () => {
 		item.style.display = "flex";
 	});
 
-	const allUserItemsPages = Math.ceil(userItemsArray.length / 16);
+	const allUserItemsPages = Math.ceil(userItemsArray.length / itemsPerPage);
 	dotsBoxLeft.innerHTML = "";
 
 	for (i = 0; i < allUserItemsPages; i++) {
@@ -1328,7 +1331,7 @@ const renderItems = () => {
 	const filteredItemsCount = filteredItemsArray.length;
 	const totalAllPages = Math.ceil(filteredItemsCount / itemsPerPage);
 
-	const allItemsPages = Math.ceil(filteredItemsArray.length / 16);
+	const allItemsPages = Math.ceil(filteredItemsArray.length / itemsPerPage);
 	dotsBoxRight.innerHTML = "";
 
 	// **Sprawdź, czy bieżąca strona nie wykracza poza dostępne strony**

@@ -6,6 +6,7 @@
 	left: 0;
 	right: 0;
 	box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.5);
+	font-weight: bold;
 	background-color: $main-color;
 	z-index: 555;
 
@@ -198,13 +199,20 @@
 	&__name {
 		font-size: 1.8rem;
 		color: $text-color;
+		transition: color 0.5s;
+
+		&:hover {
+			color: $text-color-not-active;
+		}
 	}
 
 	&__balance {
 		font-size: 1.6rem;
 		color: $text-color-not-active;
-
+		
 		&--amount {
+			font-weight: bold;
+			letter-spacing: 1px;
 			color: $secondary-color;
 		}
 	}
@@ -239,11 +247,11 @@
 	&::-webkit-scrollbar-track {
 		background-color: $main3-color;
 	}
-	
+
 	&::-webkit-scrollbar {
 		width: 8px;
 	}
-	
+
 	&::-webkit-scrollbar-thumb {
 		background-color: $secondary-color;
 	}

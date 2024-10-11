@@ -129,7 +129,7 @@
 
 		&__items {
 			&-buttons {
-				padding: 0 1em;
+				padding: 1em;
 				flex-direction: row;
 				align-items: center;
 			}
@@ -188,5 +188,11 @@
 
 	.spin {
 		font-size: 1.8rem;
+	}
+
+	.profile {
+		&__stats {
+			flex-direction: row;
+		}
 	}
 }

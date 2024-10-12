@@ -20,9 +20,11 @@
 	}
 
 	&__avatar {
-		margin-top: 0.5em;
+		margin-top: 1em;
+		height: 100px;
 		width: 100px;
 		object-fit: cover;
+		border-radius: 10px;
 	}
 
 	&__name {

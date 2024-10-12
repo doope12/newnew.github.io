@@ -1059,6 +1059,7 @@ function addToLeftSide() {
 	const infoBox = document.querySelector(".upgrader__infobox-left");
 	const topLeftBox = document.querySelector(".upgrader__top-left");
 
+	topLeftBox.lastElementChild.classList.remove("animate-upgrader-item");
 	infoBox.firstElementChild.textContent = this.lastElementChild.textContent;
 	topLeftBox.classList.value = "";
 	topLeftBox.classList.add(
@@ -1071,6 +1072,10 @@ function addToLeftSide() {
 	);
 	topLeftBox.id = this.id;
 
+	setTimeout(() => {
+		topLeftBox.lastElementChild.classList.add("animate-upgrader-item");
+	}, 50);
+
 	countPercent();
 	renderItems();
 }
@@ -1080,6 +1085,7 @@ function addToRightSide() {
 	const infoBox = document.querySelector(".upgrader__infobox-right");
 	const topRightBox = document.querySelector(".upgrader__top-right");
 
+	topRightBox.lastElementChild.classList.remove("animate-upgrader-item");
 	infoBox.firstElementChild.textContent = this.lastElementChild.textContent;
 	topRightBox.classList.value = "";
 	topRightBox.classList.add(
@@ -1091,6 +1097,10 @@ function addToRightSide() {
 		this.firstElementChild.getAttribute("src")
 	);
 	topRightBox.id = this.id;
+
+	setTimeout(() => {
+		topRightBox.lastElementChild.classList.add("animate-upgrader-item");
+	}, 50);
 
 	countPercent();
 }
@@ -1330,9 +1340,9 @@ const renderItems = () => {
 	const topLeftBox = document.querySelector(".upgrader__top-left");
 
 	// Pobierz cenę przedmiotu po lewej stronie upgradera
-	const userItemPrice = parseFloat(
-		topLeftBox.children[1].textContent
-	).toFixed(2);
+	const userItemPrice = parseFloat(topLeftBox.children[1].textContent).toFixed(
+		2
+	);
 
 	// Filtrowanie przedmiotów, aby wyświetlać tylko te droższe niż przedmiot użytkownika
 	const filteredItemsArray = allItemsArray.filter((item) => {

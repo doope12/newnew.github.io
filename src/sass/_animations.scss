@@ -59,3 +59,16 @@
 		opacity: 0;
 	}
 }
+
+@keyframes addToUpgrader {
+	from {
+		scale: 0.5;
+	} 
+	to {
+		scale: 1;
+	}
+}
+
+.animate-upgrader-item {
+	animation: addToUpgrader 1s ease forwards;
+}

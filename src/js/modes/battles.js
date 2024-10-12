@@ -1808,7 +1808,7 @@ const casesLeftBox = document.querySelector(".battles__casesleft-itembox");
 const casesLeftDiv = document.querySelector(".battles__casesleft");
 let currentBattleCases = [];
 let currentItemWonByPlayer = [];
-let moveCaseLeft = 54.5;
+let moveCaseLeft = 50;
 
 const toggleAddCasesPopup = () => {
 	casesPopup.classList.toggle("hidden");
@@ -2988,7 +2988,7 @@ const spinCase = () => {
 			item.style.left = "-10000px";
 		});
 		casesLeftBox.style.left = "-" + moveCaseLeft + "px";
-		moveCaseLeft = moveCaseLeft + 57.5;
+		moveCaseLeft = moveCaseLeft + 50;
 		casesLeftBox.style.transition = "left 0.5s";
 		currentBattleCases.shift();
 		startBattle();

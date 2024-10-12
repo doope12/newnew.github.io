@@ -100,7 +100,6 @@
 
 	&__img {
 		padding: 0.2em;
-		// height: 75%;
 		width: 75%;
 		object-fit: cover;
 		z-index: 15;
@@ -126,11 +125,11 @@
 		width: 100%;
 		top: 0;
 		left: 50%;
-		transform: translate(-50%);
+		transform: translate(-50%) scale(0.1);
 		object-fit: cover;
 		opacity: 0;
-		// scale: 0.8;
-		transition: 0.5s;
+		filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+		transition: all 0.5s;
 	}
 
 	&__item {
@@ -140,8 +139,8 @@
 		transition: all 0.5s;
 
 		&:hover .cases__img {
-			transform: scale(0.9);
-			opacity: 0.7;
+			transform: scale(0.8);
+			opacity: 0.5;
 		}
 
 		&:hover .cases__price {
@@ -155,7 +154,7 @@
 
 		&:hover .cases__bg {
 			opacity: 1;
-			scale: 1;
+			transform: translate(-50%) scale(0.9);
 		}
 
 		&-container {
@@ -177,8 +176,6 @@
 			padding: 0.1em 0;
 			text-align: center;
 			text-shadow: 0 0 2px $secondary-color;
-			border-top: 2px solid $secondary-color;
-			border-bottom: 2px solid $secondary-color;
 			color: $secondary-color;
 			cursor: pointer;
 			transition: 0.32s ease-out;
@@ -187,7 +184,6 @@
 
 	&__price {
 		position: relative;
-		text-shadow: 0px 0px 2px $secondary-color;
 		color: $secondary-color;
 		transition: opacity 0.3s;
 	}
@@ -302,4 +298,3 @@
 .second-color-main {
 	background-color: $main2-color;
 }
-

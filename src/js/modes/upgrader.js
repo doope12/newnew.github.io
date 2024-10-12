@@ -1060,6 +1060,11 @@ function addToLeftSide() {
 	const topLeftBox = document.querySelector(".upgrader__top-left");
 
 	infoBox.firstElementChild.textContent = this.lastElementChild.textContent;
+	topLeftBox.classList.value = "";
+	topLeftBox.classList.add(
+		"upgrader__top-left",
+		allItems[`id${this.id}`].color + "-upgrader"
+	);
 	topLeftBox.lastElementChild.setAttribute(
 		"src",
 		this.firstElementChild.getAttribute("src")
@@ -1076,6 +1081,11 @@ function addToRightSide() {
 	const topRightBox = document.querySelector(".upgrader__top-right");
 
 	infoBox.firstElementChild.textContent = this.lastElementChild.textContent;
+	topRightBox.classList.value = "";
+	topRightBox.classList.add(
+		"upgrader__top-right",
+		allItems[`id${this.id}`].color + "-upgrader"
+	);
 	topRightBox.lastElementChild.setAttribute(
 		"src",
 		this.firstElementChild.getAttribute("src")
@@ -1119,6 +1129,8 @@ const clearLeftSide = () => {
 	infoBoxLeft.firstElementChild.textContent = "0.00$";
 	topLeftBox.lastElementChild.setAttribute("src", "../dist/img/blank.png");
 	topLeftBox.id = "";
+	topLeftBox.classList.value = "";
+	topLeftBox.classList.add("upgrader__top-left");
 
 	countPercent();
 	renderItems();
@@ -1131,6 +1143,8 @@ const clearRightSide = () => {
 	infoBoxRight.firstElementChild.textContent = "0.00$";
 	topRightBox.lastElementChild.setAttribute("src", "../dist/img/blank.png");
 	topRightBox.id = "";
+	topRightBox.classList.value = "";
+	topRightBox.classList.add("upgrader__top-right");
 
 	countPercent();
 	renderItems();
@@ -1234,7 +1248,7 @@ const addWinningItems = (didWin) => {
 	localStorage.setItem(`id${topLeftBox.id}`, removeUpgradedItem);
 
 	if (didWin) {
-		innerCircle.style.border = "3px solid green";
+		innerCircle.classList.add("upgrader-won");
 
 		if (
 			localStorage.getItem(`id${topRightBox.id}`) === null ||
@@ -1250,11 +1264,12 @@ const addWinningItems = (didWin) => {
 		const upgradesWonToAdd = parseInt(localStorage.getItem("upgradesDone")) + 1;
 		localStorage.setItem("upgradesDone", upgradesWonToAdd);
 	} else {
-		innerCircle.style.border = "3px solid red";
+		innerCircle.classList.add("upgrader-lost");
 	}
 
 	setTimeout(() => {
-		innerCircle.style.border = "3px solid transparent";
+		innerCircle.classList.value = "";
+		innerCircle.classList.add("upgrader__base-inner");
 	}, 500);
 
 	clearBothSide();

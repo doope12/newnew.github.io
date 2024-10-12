@@ -30,6 +30,7 @@ const takeBtn = document.querySelector(".win-popup__btn--take");
 const winningItemImg = document.querySelector(".win-popup__img");
 const winningItemName = document.querySelector(".win-popup__item-name");
 const winningItemPrice = document.querySelector(".win-popup__item-price");
+const winningItemBox = document.querySelector(".win-popup__container");
 const balanceAmount = document.querySelector(".user__balance--amount");
 const balanceAmountMobile = document.querySelector(
 	".user-mobile__balance--amount"
@@ -198,6 +199,11 @@ const spinCase = () => {
 			const winningItem = getWinningItem();
 			if (winningItem) {
 				currentWinningItem = winningItem;
+				winningItemBox.classList.value = "";
+				winningItemBox.classList.add(
+					"win-popup__container",
+					`${items2[`${winningItem.id}`].color + "-win"}`
+				);
 				winningItemImg.setAttribute("src", items2[`${winningItem.id}`].imgDist);
 				winningItemImg.setAttribute("alt", items2[`${winningItem.id}`].name);
 				winningItemName.textContent = items2[`${winningItem.id}`].name;

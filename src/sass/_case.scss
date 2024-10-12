@@ -216,6 +216,11 @@
 		letter-spacing: 2px;
 	}
 
+	&-bg {
+		border-radius: 20px;
+		background-color: $main2-color;
+	}
+
 	&__item {
 		&-name {
 			padding-bottom: 0.5em;

@@ -16,7 +16,14 @@ html {
 body {
 	font-size: 1.6rem;
 	overflow-x: hidden;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 	background-color: $main-color;
+}
+
+main {
+	flex: 1;
 }
 
 body,

@@ -2034,13 +2034,13 @@ const createCaseBoxesBasedOnPlayers = () => {
 					battleBox.style.order = "-1";
 				} else if (i === 1) {
 					battleImg.setAttribute("src", "../dist/img/avatars/avatar1.jpg");
-					battleName.textContent = "Pikolek";
+					battleName.textContent = "Cat";
 				} else if (i === 2) {
 					battleImg.setAttribute("src", "../dist/img/avatars/avatar2.jpg");
-					battleName.textContent = "Mariuszek";
+					battleName.textContent = "Hamster";
 				} else if (i === 3) {
 					battleImg.setAttribute("src", "../dist/img/avatars/avatar3.jpg");
-					battleName.textContent = "Dziwak";
+					battleName.textContent = "Rat";
 				}
 				battleImg.setAttribute("alt", "Avatar Image");
 				battleAmount.textContent = "0.00$";

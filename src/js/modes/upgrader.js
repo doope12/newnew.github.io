@@ -1331,7 +1331,7 @@ const renderItems = () => {
 
 	// Pobierz cenę przedmiotu po lewej stronie upgradera
 	const userItemPrice = parseFloat(
-		topLeftBox.firstElementChild.textContent
+		topLeftBox.children[1].textContent
 	).toFixed(2);
 
 	// Filtrowanie przedmiotów, aby wyświetlać tylko te droższe niż przedmiot użytkownika

@@ -184,16 +184,40 @@
 	}
 
 	&__avatar {
-		height: 60px;
+		position: relative;
+		height: 90%;
+		width: 90%;
 		object-fit: cover;
+		border-radius: 10px;
 		box-shadow: $normal-boxshadow;
+		z-index: 2;
+		transition: 0.5s;
+
+		&:hover {
+			scale: (1.05);
+		}
 	}
 
 	&__profile {
-		display: block;
-		margin: 0 0.7em;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		height: 60px;
-		width: 51.95px;
+		overflow: hidden;
+
+		&::after {
+			content: "";
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border-radius: 10px;
+			background: $avatar-bg;
+			z-index: 1;
+		}
 	}
 
 	&__name {
@@ -209,7 +233,7 @@
 	&__balance {
 		font-size: 1.6rem;
 		color: $text-color-not-active;
-		
+
 		&--amount {
 			font-weight: bold;
 			letter-spacing: 1px;
@@ -239,6 +263,7 @@
 	height: calc(100vh - 100px);
 	display: flex;
 	flex-direction: column;
+	padding-bottom: 5em;
 	box-shadow: none;
 	overflow-y: scroll;
 	z-index: 554;

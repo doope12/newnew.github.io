@@ -160,8 +160,14 @@
 			transform: translateY(-5px);
 		}
 
+		&:hover img {
+			scale: 0.9;
+		}
+
 		&-img {
+			padding: 1em;
 			width: 100%;
+			transition: scale 0.5s;
 		}
 
 		&-skin {

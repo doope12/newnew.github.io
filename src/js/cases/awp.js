@@ -297,15 +297,14 @@ const setBtnText = () => {
 	}
 };
 
-// Funkcja odpowiedzialna za losowe przesunięcie
 const spinCase = () => {
 	if (
 		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice &&
 		spinBtn.textContent !== "spining"
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3");
-		// Losowe przesunięcie między -2000 a -1000 px
-		const howStrongSpin = Math.floor(Math.random() * 5000 - 7000);
+		// Losowe przesunięcie między -2000 a -7000 px
+		const howStrongSpin = Math.floor(Math.random() * 5000 - 10000);
 
 		spinBtn.textContent = "spining";
 
@@ -326,8 +325,47 @@ const spinCase = () => {
 		caseItemsBox.style.left = howStrongSpin + "px";
 		caseItemsBox.style.transition = "left 5s ease";
 
-		// Po zakończeniu animacji po 5 sekundach, znajdź zwycięski element
+		// Dynamiczne skalowanie najbliższego elementu w trakcie animacji
+		const intervalId = setInterval(() => {
+			const redLineX = document
+				.querySelector(".case__middle-point")
+				.getBoundingClientRect().x;
+
+			function updateClosestItemScale() {
+				const items = document.querySelectorAll(".case__item");
+				let closestItem = null;
+				let closestDistance = Infinity;
+
+				// Resetuj skalowanie dla wszystkich elementów
+				items.forEach((item) => {
+					item.firstElementChild.style.scale = "1";
+				});
+
+				// Znajdź najbliższy element do linii środkowej
+				items.forEach((item) => {
+					const itemCenterX =
+						item.getBoundingClientRect().x + item.offsetWidth / 2;
+					const distance = Math.abs(itemCenterX - redLineX);
+
+					if (distance < closestDistance) {
+						closestDistance = distance;
+						closestItem = item;
+					}
+				});
+
+				// Zmniejsz skalę najbliższego elementu
+				if (closestItem) {
+					closestItem.firstElementChild.style.scale = "0.9";
+				}
+			}
+
+			updateClosestItemScale();
+		}, 100); // Aktualizuj co 100ms
+
+		// Po zakończeniu animacji po 5 sekundach, znajdź zwycięski element i zatrzymaj skalowanie
 		setTimeout(() => {
+			clearInterval(intervalId); // Zatrzymaj dynamiczne skalowanie po zakończeniu animacji
+
 			const redLineX = document
 				.querySelector(".case__middle-point")
 				.getBoundingClientRect().x;
@@ -372,6 +410,7 @@ const spinCase = () => {
 	}
 };
 
+
 const hideWinPopup = () => {
 	winPupup.classList.toggle("hidden");
 	setBtnText();
@@ -414,7 +453,7 @@ const refreshBalance = () => {
 const resetBoxAnimation = () => {
 	caseItemsBox.innerHTML = "";
 	caseItemsBox.style.transition = "0.01s";
-	caseItemsBox.style.left = "-10000px";
+	caseItemsBox.style.left = "0";
 	createItemsInChest();
 };
 

@@ -2679,9 +2679,6 @@ const startBattle = () => {
 			}
 		}
 
-		console.log(winningPlayer);
-		console.log(sameWinningAmount);
-
 		// ustala wygranego
 		if (
 			winningPlayer === allWinAmountArray[0] &&
@@ -2821,7 +2818,7 @@ const winningAnimationJackpot = (players) => {
 	setTimeout(() => {
 		caseOpeningSound.play();
 
-		const howStrongSpin = Math.floor(Math.random() * 5000 - 7000);
+		const howStrongSpin = Math.floor(Math.random() * 5000 - 10000);
 
 		jackpotBox.style.left = howStrongSpin + "px";
 		jackpotBox.style.transition = "left 5s ease";
@@ -2853,12 +2850,6 @@ const winningAnimationJackpot = (players) => {
 
 			if (winningItem) {
 				allWinAmountArray.forEach((item) => {
-					console.log(
-						"Item parent id: " +
-							item.parentElement.id +
-							" Winning item id: " +
-							winningItem.id
-					);
 					if (item.parentElement.id === winningItem.id) {
 						let addToAmount = 0.01;
 
@@ -2940,7 +2931,44 @@ const spinCase = () => {
 		box.style.left = howStrongSpin + "px";
 		box.style.transition = "left 5s ease";
 
+		// Dynamiczne skalowanie najbliższego elementu w trakcie animacji
+		const intervalId = setInterval(() => {
+			const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
+
+			function updateClosestItemScale() {
+				const items = document.querySelectorAll(`.case__item${box.id}`);
+				let closestItem = null;
+				let closestDistance = Infinity;
+
+				// Resetuj skalowanie dla wszystkich elementów
+				items.forEach((item) => {
+					item.firstElementChild.style.scale = "1";
+				});
+
+				// Znajdź najbliższy element do linii środkowej
+				items.forEach((item) => {
+					const itemCenterX =
+						item.getBoundingClientRect().x + item.offsetWidth / 2;
+					const distance = Math.abs(itemCenterX - redLineX);
+
+					if (distance < closestDistance) {
+						closestDistance = distance;
+						closestItem = item;
+					}
+				});
+
+				// Zmniejsz skalę najbliższego elementu
+				if (closestItem) {
+					closestItem.firstElementChild.style.scale = "0.9";
+				}
+			}
+
+			updateClosestItemScale();
+		}, 100); // Aktualizuj co 100ms
+
 		setTimeout(() => {
+			clearInterval(intervalId);
+
 			const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
 
 			function getWinningItem() {
@@ -2985,7 +3013,7 @@ const spinCase = () => {
 		allCasesBoxes.forEach((item) => {
 			item.innerHTML = "";
 			item.style.transition = "0.01s";
-			item.style.left = "-10000px";
+			item.style.left = "0";
 		});
 		casesLeftBox.style.left = "-" + moveCaseLeft + "px";
 		moveCaseLeft = moveCaseLeft + 50;

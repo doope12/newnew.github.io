@@ -1812,6 +1812,7 @@ let moveCaseLeft = 50;
 
 const toggleAddCasesPopup = () => {
 	casesPopup.classList.toggle("hidden");
+	document.body.classList.toggle("body-scroll")
 };
 
 function selectCaseToAdd() {

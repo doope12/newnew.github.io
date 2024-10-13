@@ -89,7 +89,6 @@
 			left: 50%;
 			transform: translate(-50%, -50%);
 			background: #292a2d;
-			cursor: pointer;
 
 			&::after {
 				content: "";
@@ -99,6 +98,19 @@
 				border-radius: 50%;
 				background-color: #292a2d;
 			}
+		}
+
+		&-click {
+			position: relative;
+			width: 175px;
+			height: 175px;
+			border-radius: 50%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background: transparent;
+			cursor: pointer;
 		}
 	}
 
@@ -294,6 +306,7 @@
 			border-radius: 20px;
 			box-shadow: $normal-boxshadow;
 			background-color: $main2-color;
+			overflow-x: hidden;
 
 			&-top {
 				display: flex;

@@ -30,6 +30,15 @@
 			width: 100%;
 		}
 	}
+
+	.battles {
+		&__popup {
+			&-container {
+				height: 800px;
+				border-radius: 20px;
+			}
+		}
+	}
 }
 
 @media (min-width: 768px) {
@@ -154,6 +163,14 @@
 			}
 		}
 	}
+
+	.battles {
+		&__battle {
+			&-containerofall {
+				flex-direction: row;
+			}
+		}
+	}
 }
 
 @media (min-width: 1200px) {
@@ -194,6 +211,19 @@
 	.profile {
 		&__stats {
 			flex-direction: row;
+		}
+	}
+
+	.battles {
+		&__container {
+			flex-direction: row;
+			align-items: start;
+		}
+
+		&__options {
+			width: auto;
+			margin-bottom: 0;
+			order: 0;
 		}
 	}
 }

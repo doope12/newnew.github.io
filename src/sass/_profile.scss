@@ -98,9 +98,9 @@
 			}
 		}
 
-        &--nomargin {
-            margin: 0;
-        }
+		&--nomargin {
+			margin: 0;
+		}
 	}
 
 	&__items {
@@ -114,25 +114,25 @@
 
 		&-right {
 			display: flex;
-            flex-direction: column;
+			flex-direction: column;
 			align-items: center;
 		}
 
 		&-title {
-            padding-bottom: 1em;
+			padding-bottom: 1em;
 			font-size: 2.4rem;
 			font-weight: bold;
 			letter-spacing: 1px;
 		}
 
-        &-price {
-            padding-bottom: 0.5em;
-            letter-spacing: 0.2px;
-        }
+		&-price {
+			padding-bottom: 0.5em;
+			letter-spacing: 0.2px;
+		}
 
-        &-value {
-            color: $secondary-color;
-        }
+		&-value {
+			color: $secondary-color;
+		}
 
 		&-box {
 			padding-bottom: 2em;
@@ -140,7 +140,7 @@
 			justify-content: center;
 			align-items: flex-start;
 			flex-wrap: wrap;
-			min-height: 586px;
+			min-height: 600px;
 		}
 	}
 
@@ -189,7 +189,7 @@
 			color: $text-color;
 			cursor: pointer;
 			transition: background 0.5s;
-	
+
 			&:hover {
 				background: $secondary-color-alpha-hover;
 			}

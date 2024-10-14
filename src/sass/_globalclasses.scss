@@ -515,3 +515,15 @@
 	background-color: $secondary-color;
 	box-shadow: $purple-boxshadow;
 }
+
+.show-nav-menu {
+	animation: showLoginpopup 0.5s ease;
+}
+
+.hide-nav-menu {
+	animation: hideLoginpopup 0.49s ease forwards;
+}
+
+.roulette-timer {
+	animation: roulette-timer 15s linear;
+}

@@ -2,6 +2,8 @@ const navItem = document.querySelectorAll(".nav__item");
 const mobileNavBtn = document.querySelector(".nav__hamb");
 const mobileNav = document.querySelector(".nav-mobile");
 const loginPopup = document.querySelector(".login-popup");
+const navMenu = document.querySelector(".nav__menu");
+const navMenuBtn = document.querySelector(".nav__item--menu");
 
 const setActiveSite = () => {
 	// skrypt dodaje style do itemu nawigacji w zaleznosci od strony na ktorej jestesmy
@@ -61,6 +63,7 @@ const setActiveSite = () => {
 
 const addListeners = () => {
 	mobileNavBtn.addEventListener("click", toggleMobileNav);
+	navMenuBtn.addEventListener("click", toggleNavMenu);
 };
 
 const toggleMobileNav = () => {
@@ -77,6 +80,19 @@ const toggleMobileNav = () => {
 		mobileNav.classList.toggle("hidden");
 		document.body.classList.toggle("body-scroll");
 		mobileNav.classList.remove("hide-nav");
+	}
+};
+
+const toggleNavMenu = () => {
+	if (!navMenu.classList.contains("hidden")) {
+		navMenu.classList.add("hide-nav-menu");
+		setTimeout(() => {
+			navMenu.classList.remove("hide-nav-menu");
+			navMenu.classList.toggle("hidden");
+		}, 500);
+	} else {
+		navMenu.classList.toggle("hidden");
+		navMenu.classList.add("show-nav-menu");
 	}
 };
 

@@ -22,6 +22,11 @@ let howMuchBetBlack = 0;
 let howMuchBetGreen = 0;
 let spinning = false;
 let timerInterval;
+let playerInterval;
+let totalRedValue = 0;
+let totalBlackValue = 0;
+let totalGreenValue = 0;
+let previousItem = null;
 
 const startTimer = () => {
 	let seconds = Math.floor(timer / 1000);
@@ -47,10 +52,12 @@ const addLineAnim = () => {
 
 const startRoulette = () => {
 	const howStrongSpin = Math.floor(Math.random() * 7400 - 14800);
+	const spinAudio = new Audio("../dist/audio/roulette.mp3");
 	rouletteBox.style.transition = "left 5s cubic-bezier(0,0,0,.99)";
 	rouletteBox.style.left = `${howStrongSpin}px`;
 	timerLine.classList.remove("roulette-timer");
 	spinning = true;
+	clearInterval(playerInterval);
 
 	const intervalId = setInterval(() => {
 		const redLineX = document
@@ -80,10 +87,15 @@ const startRoulette = () => {
 			if (closestItem) {
 				closestItem.style.fontSize = "2.4rem";
 			}
+
+			if (previousItem !== closestItem) {
+				spinAudio.play();
+				previousItem = closestItem;
+			}
 		}
 
 		updateClosestItemScale();
-	}, 100);
+	}, 30);
 
 	setTimeout(() => {
 		clearInterval(intervalId); // Zatrzymaj dynamiczne skalowanie po zakończeniu animacji
@@ -126,9 +138,9 @@ const startRoulette = () => {
 			startCountingToNewStart();
 			addLineAnim();
 
-			setTimeout(() => {
+			playerInterval = setInterval(() => {
 				createRandomPlayers();
-			}, 5000);
+			}, 1000);
 
 			clearInterval(timerInterval);
 			timer = 15000;
@@ -158,14 +170,15 @@ const resetVariables = () => {
 	betsBlack.innerHTML = "";
 	betsGreen.innerHTML = "";
 	betsRed.innerHTML = "";
+	totalRedValue = 0;
+	totalBlackValue = 0;
+	totalGreenValue = 0;
+	setTotal();
 };
 
 const resetRoulette = () => {
 	rouletteBox.style.transition = "0.1s";
 	rouletteBox.style.left = "0px";
-	betsBlack.innerHTML = "";
-	betsGreen.innerHTML = "";
-	betsRed.innerHTML = "";
 };
 
 const createItemToLastDrops = (winningItem) => {
@@ -219,6 +232,9 @@ function useInputBtn() {
 }
 
 const checkIfPlayerWon = (winningItem) => {
+	const winAudio = new Audio("../dist/audio/upgrader-win.wav");
+	const lostAudio = new Audio("../dist/audio/upgrader-lost.wav");
+
 	if (
 		didBetBlack === true &&
 		winningItem.classList.contains("roulette__item--black")
@@ -230,6 +246,8 @@ const checkIfPlayerWon = (winningItem) => {
 		const rouletteWonToAddBlack =
 			parseInt(localStorage.getItem("rouletteWon")) + 1;
 		localStorage.setItem("rouletteWon", rouletteWonToAddBlack);
+
+		winAudio.play();
 
 		setBalance();
 	}
@@ -246,6 +264,8 @@ const checkIfPlayerWon = (winningItem) => {
 			parseInt(localStorage.getItem("rouletteWon")) + 1;
 		localStorage.setItem("rouletteWon", rouletteWonToAddRed);
 
+		winAudio.play();
+
 		setBalance();
 	}
 
@@ -260,6 +280,8 @@ const checkIfPlayerWon = (winningItem) => {
 		const rouletteWonToAddGreen =
 			parseInt(localStorage.getItem("rouletteWon")) + 1;
 		localStorage.setItem("rouletteWon", rouletteWonToAddGreen);
+
+		winAudio.play();
 
 		setBalance();
 	}
@@ -371,105 +393,110 @@ function addBet() {
 				sortBetsByAmount();
 				break;
 		}
+		setTotal();
 	}
 }
 
 const createRandomPlayers = () => {
-	const howManyBotsRed = Math.floor(Math.random() * 4);
-	const howManyBotsBlack = Math.floor(Math.random() * 4);
-	const howManyBotsGreen = Math.floor(Math.random() * 4);
+	const doOrNot = Math.floor(Math.random() * 4);
 
-	for (i = 0; i < howManyBotsRed; i++) {
-		const itemBox = document.createElement("div");
-		const itemImg = document.createElement("img");
-		const itemName = document.createElement("p");
-		const itemAmount = document.createElement("p");
+	if (doOrNot === 0) {
+		const howManyBotsRed = Math.floor(Math.random() * 4);
+		const howManyBotsBlack = Math.floor(Math.random() * 4);
+		const howManyBotsGreen = Math.floor(Math.random() * 4);
 
-		const randomAmount = Math.floor(Math.random() * 2500);
+		for (i = 0; i < howManyBotsRed; i++) {
+			const itemBox = document.createElement("div");
+			const itemImg = document.createElement("img");
+			const itemName = document.createElement("p");
+			const itemAmount = document.createElement("p");
 
-		itemBox.classList.add("roulette__bet-item");
-		itemBox.classList.add("roulette__bet-item--red");
-		itemImg.classList.add("roulette__bet-avatar");
-		itemName.classList.add("roulette__bet-nickname");
-		itemAmount.classList.add("roulette__bet-amount");
+			const randomAmount = Math.floor(Math.random() * 2000);
 
-		itemImg.setAttribute("alt", "Player Avatar");
-		itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
-		itemAmount.textContent = randomAmount.toFixed(2) + "$";
+			itemBox.classList.add("roulette__bet-item");
+			itemBox.classList.add("roulette__bet-item--red");
+			itemImg.classList.add("roulette__bet-avatar");
+			itemName.classList.add("roulette__bet-nickname");
+			itemAmount.classList.add("roulette__bet-amount");
 
-		if (i === 0) {
-			itemName.textContent = "Cat";
-		} else if (i === 1) {
-			itemName.textContent = "Haster";
-		} else {
-			itemName.textContent = "Rat";
+			itemImg.setAttribute("alt", "Player Avatar");
+			itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
+			itemAmount.textContent = randomAmount.toFixed(2) + "$";
+
+			if (i === 0) {
+				itemName.textContent = "Cat";
+			} else if (i === 1) {
+				itemName.textContent = "Haster";
+			} else {
+				itemName.textContent = "Rat";
+			}
+
+			itemBox.append(itemImg, itemName, itemAmount);
+			betsRed.append(itemBox);
 		}
 
-		itemBox.append(itemImg, itemName, itemAmount);
-		betsRed.append(itemBox);
-	}
+		for (i = 0; i < howManyBotsBlack; i++) {
+			const itemBox = document.createElement("div");
+			const itemImg = document.createElement("img");
+			const itemName = document.createElement("p");
+			const itemAmount = document.createElement("p");
 
-	for (i = 0; i < howManyBotsBlack; i++) {
-		const itemBox = document.createElement("div");
-		const itemImg = document.createElement("img");
-		const itemName = document.createElement("p");
-		const itemAmount = document.createElement("p");
+			const randomAmount = Math.floor(Math.random() * 2000);
 
-		const randomAmount = Math.floor(Math.random() * 2500);
+			itemBox.classList.add("roulette__bet-item");
+			itemBox.classList.add("roulette__bet-item--black");
+			itemImg.classList.add("roulette__bet-avatar");
+			itemName.classList.add("roulette__bet-nickname");
+			itemAmount.classList.add("roulette__bet-amount");
 
-		itemBox.classList.add("roulette__bet-item");
-		itemBox.classList.add("roulette__bet-item--black");
-		itemImg.classList.add("roulette__bet-avatar");
-		itemName.classList.add("roulette__bet-nickname");
-		itemAmount.classList.add("roulette__bet-amount");
+			itemImg.setAttribute("alt", "Player Avatar");
+			itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
+			itemAmount.textContent = randomAmount.toFixed(2) + "$";
 
-		itemImg.setAttribute("alt", "Player Avatar");
-		itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
-		itemAmount.textContent = randomAmount.toFixed(2) + "$";
+			if (i === 0) {
+				itemName.textContent = "Cat";
+			} else if (i === 1) {
+				itemName.textContent = "Haster";
+			} else {
+				itemName.textContent = "Rat";
+			}
 
-		if (i === 0) {
-			itemName.textContent = "Cat";
-		} else if (i === 1) {
-			itemName.textContent = "Haster";
-		} else {
-			itemName.textContent = "Rat";
+			itemBox.append(itemImg, itemName, itemAmount);
+			betsBlack.append(itemBox);
 		}
 
-		itemBox.append(itemImg, itemName, itemAmount);
-		betsBlack.append(itemBox);
-	}
+		for (i = 0; i < howManyBotsGreen; i++) {
+			const itemBox = document.createElement("div");
+			const itemImg = document.createElement("img");
+			const itemName = document.createElement("p");
+			const itemAmount = document.createElement("p");
 
-	for (i = 0; i < howManyBotsGreen; i++) {
-		const itemBox = document.createElement("div");
-		const itemImg = document.createElement("img");
-		const itemName = document.createElement("p");
-		const itemAmount = document.createElement("p");
+			const randomAmount = Math.floor(Math.random() * 600);
 
-		const randomAmount = Math.floor(Math.random() * 2500);
+			itemBox.classList.add("roulette__bet-item");
+			itemBox.classList.add("roulette__bet-item--green");
+			itemImg.classList.add("roulette__bet-avatar");
+			itemName.classList.add("roulette__bet-nickname");
+			itemAmount.classList.add("roulette__bet-amount");
 
-		itemBox.classList.add("roulette__bet-item");
-		itemBox.classList.add("roulette__bet-item--green");
-		itemImg.classList.add("roulette__bet-avatar");
-		itemName.classList.add("roulette__bet-nickname");
-		itemAmount.classList.add("roulette__bet-amount");
+			itemImg.setAttribute("alt", "Player Avatar");
+			itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
+			itemAmount.textContent = randomAmount.toFixed(2) + "$";
 
-		itemImg.setAttribute("alt", "Player Avatar");
-		itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
-		itemAmount.textContent = randomAmount.toFixed(2) + "$";
+			if (i === 0) {
+				itemName.textContent = "Cat";
+			} else if (i === 1) {
+				itemName.textContent = "Haster";
+			} else {
+				itemName.textContent = "Rat";
+			}
 
-		if (i === 0) {
-			itemName.textContent = "Cat";
-		} else if (i === 1) {
-			itemName.textContent = "Haster";
-		} else {
-			itemName.textContent = "Rat";
+			itemBox.append(itemImg, itemName, itemAmount);
+			betsGreen.append(itemBox);
 		}
 
-		itemBox.append(itemImg, itemName, itemAmount);
-		betsGreen.append(itemBox);
+		sortBetsByAmount();
 	}
-
-	sortBetsByAmount();
 };
 
 const sortBetsByAmount = () => {
@@ -514,7 +541,50 @@ const sortBetsByAmount = () => {
 	allBetsGreenArray.forEach((item) => {
 		betsGreen.appendChild(item);
 	});
+
+	setTotal();
 };
+
+const setTotal = () => {
+	const totalRed = document.querySelector(".roulette__bet-total--red");
+	const totalBlack = document.querySelector(".roulette__bet-total--black");
+	const totalGreen = document.querySelector(".roulette__bet-total--green");
+	const betsRed = document.querySelectorAll(".roulette__bet-item--red");
+	const betsBlack = document.querySelectorAll(".roulette__bet-item--black");
+	const betsGreen = document.querySelectorAll(".roulette__bet-item--green");
+
+	if (betsRed.length > 0) {
+		betsRed.forEach((item) => {
+			totalRedValue += parseFloat(item.lastElementChild.textContent);
+		});
+		totalRed.lastElementChild.textContent = totalRedValue.toFixed(2) + "$";
+	} else {
+		totalRed.lastElementChild.textContent = "00.00$";
+	}
+
+	if (betsBlack.length > 0) {
+		betsBlack.forEach((item) => {
+			totalBlackValue += parseFloat(item.lastElementChild.textContent);
+		});
+		totalBlack.lastElementChild.textContent = totalBlackValue.toFixed(2) + "$";
+	} else {
+		totalBlack.lastElementChild.textContent = "00.00$";
+	}
+
+	if (betsGreen.length > 0) {
+		betsGreen.forEach((item) => {
+			totalGreenValue += parseFloat(item.lastElementChild.textContent);
+		});
+		totalGreen.lastElementChild.textContent = totalGreenValue.toFixed(2) + "$";
+	} else {
+		totalGreen.lastElementChild.textContent = "00.00$";
+	}
+
+	totalRedValue = 0;
+	totalBlackValue = 0;
+	totalGreenValue = 0;
+};
+setTotal();
 
 setTimeout(() => {
 	startRoulette();
@@ -533,6 +603,6 @@ const addEventListeners = () => {
 addLineAnim();
 addEventListeners();
 
-setTimeout(() => {
+playerInterval = setInterval(() => {
 	createRandomPlayers();
-}, 5000);
+}, 1000);

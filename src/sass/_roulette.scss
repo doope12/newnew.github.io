@@ -124,14 +124,17 @@
 
 	&__bets {
 		display: flex;
-		align-items: center;
 		justify-content: space-around;
 	}
 
 	&__bet {
 		margin: 2em 0;
 		width: 25%;
+		min-height: 400px;
 		box-shadow: $normal-boxshadow;
+		background: $tiles-color;
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
 
 		&-top {
 			position: relative;
@@ -158,6 +161,7 @@
 				position: absolute;
 				width: 100%;
 				height: 100%;
+				border: none;			
 				background: transparent;
 				cursor: pointer;
 				z-index: 1;
@@ -171,13 +175,10 @@
 
 		&-bottom {
 			padding: 1em 0.5em;
-			min-height: 400px;
+			height: calc(100% - 55px);
 			border-left: 2px solid $border-color;
 			border-right: 2px solid $border-color;
 			border-bottom: 2px solid $border-color;
-			border-bottom-left-radius: 5px;
-			border-bottom-right-radius: 5px;
-			background: $tiles-color;
 		}
 
 		&-item {

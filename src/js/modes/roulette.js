@@ -2,10 +2,26 @@ const rouletteBox = document.querySelector(".roulette__items");
 const lastDropsBox = document.querySelector(".roulette__lastdrops-box");
 const timerLine = document.querySelector(".roulette__timerbox-line");
 const timerText = document.querySelector(".roulette__timerbox-time");
+const inputBtn = document.querySelectorAll(".roulette__btn");
+const input = document.querySelector(".roulette__input");
+const betBtn = document.querySelectorAll(".roulette__bet-top-btn");
+const betsRed = document.querySelector(".roulette__bet-bottom--red");
+const betsBlack = document.querySelector(".roulette__bet-bottom--black");
+const betsGreen = document.querySelector(".roulette__bet-bottom--green");
 const timeForStart = 15000;
 const timeForRestart = 14950;
 let dropOrder = -1;
 let timer = 15000;
+let lastBetAmount = 0;
+let maxBetAmount = 0;
+let didBetRed = false;
+let didBetBlack = false;
+let didBetGreen = false;
+let howMuchBetRed = 0;
+let howMuchBetBlack = 0;
+let howMuchBetGreen = 0;
+let spinning = false;
+let timerInterval;
 
 const startTimer = () => {
 	let seconds = Math.floor(timer / 1000);
@@ -23,7 +39,7 @@ const startTimer = () => {
 	}
 };
 
-const timerInterval = setInterval(startTimer, 10);
+timerInterval = setInterval(startTimer, 10);
 
 const addLineAnim = () => {
 	timerLine.classList.add("roulette-timer");
@@ -34,6 +50,7 @@ const startRoulette = () => {
 	rouletteBox.style.transition = "left 5s cubic-bezier(0,0,0,.99)";
 	rouletteBox.style.left = `${howStrongSpin}px`;
 	timerLine.classList.remove("roulette-timer");
+	spinning = true;
 
 	const intervalId = setInterval(() => {
 		const redLineX = document
@@ -96,25 +113,33 @@ const startRoulette = () => {
 
 		const winningItem = getWinningItem();
 		if (winningItem) {
-			if (winningItem.classList.contains("roulette__item--green")) {
-				console.log("Green Drop");
-			} else if (winningItem.classList.contains("roulette__item--red")) {
-				console.log("Red Drop");
-			} else if (winningItem.classList.contains("roulette__item--black")) {
-				console.log("Black Drop");
+			if (
+				didBetBlack !== false ||
+				didBetRed !== false ||
+				didBetGreen !== false
+			) {
+				checkIfPlayerWon(winningItem);
 			}
+
+			resetVariables();
 			createItemToLastDrops(winningItem);
 			startCountingToNewStart();
 			addLineAnim();
+
+			setTimeout(() => {
+				createRandomPlayers();
+			}, 5000);
+
+			clearInterval(timerInterval);
 			timer = 15000;
-			const timerInterval = setInterval(startTimer, 10);
+			timerInterval = setInterval(startTimer, 10);
 		}
 	}, 5000);
 };
 
 const startCountingToNewStart = () => {
 	setTimeout(() => {
-		resetAnimation();
+		resetRoulette();
 	}, timeForRestart);
 
 	setTimeout(() => {
@@ -122,9 +147,25 @@ const startCountingToNewStart = () => {
 	}, timeForStart);
 };
 
-const resetAnimation = () => {
+const resetVariables = () => {
+	spinning = false;
+	howMuchBetRed = 0;
+	howMuchBetBlack = 0;
+	howMuchBetGreen = 0;
+	didBetRed = false;
+	didBetBlack = false;
+	didBetGreen = false;
+	betsBlack.innerHTML = "";
+	betsGreen.innerHTML = "";
+	betsRed.innerHTML = "";
+};
+
+const resetRoulette = () => {
 	rouletteBox.style.transition = "0.1s";
 	rouletteBox.style.left = "0px";
+	betsBlack.innerHTML = "";
+	betsGreen.innerHTML = "";
+	betsRed.innerHTML = "";
 };
 
 const createItemToLastDrops = (winningItem) => {
@@ -145,8 +186,353 @@ const createItemToLastDrops = (winningItem) => {
 	lastDropsBox.append(dropItem);
 };
 
+function useInputBtn() {
+	switch (this.id) {
+		case "clear":
+			input.value = "0";
+			break;
+		case "last":
+			input.value = lastBetAmount;
+			break;
+		case "+1":
+			input.value = parseFloat(input.value) + 1;
+			break;
+		case "+10":
+			input.value = parseFloat(input.value) + 10;
+			break;
+		case "+100":
+			input.value = parseFloat(input.value) + 100;
+			break;
+		case "+1000":
+			input.value = parseFloat(input.value) + 1000;
+			break;
+		case "1/2":
+			input.value = parseFloat(input.value) / 2;
+			break;
+		case "x2":
+			input.value = parseFloat(input.value) * 2;
+			break;
+		case "max":
+			input.value = maxBetAmount;
+			break;
+	}
+}
+
+const checkIfPlayerWon = (winningItem) => {
+	if (
+		didBetBlack === true &&
+		winningItem.classList.contains("roulette__item--black")
+	) {
+		const howMuchToAddBlack =
+			parseFloat(localStorage.getItem("Balance")) + howMuchBetBlack * 2;
+		localStorage.setItem("Balance", howMuchToAddBlack.toFixed(2) + "$");
+
+		const rouletteWonToAddBlack =
+			parseInt(localStorage.getItem("rouletteWon")) + 1;
+		localStorage.setItem("rouletteWon", rouletteWonToAddBlack);
+
+		setBalance();
+	}
+
+	if (
+		didBetRed === true &&
+		winningItem.classList.contains("roulette__item--red")
+	) {
+		const howMuchToAddRed =
+			parseFloat(localStorage.getItem("Balance")) + howMuchBetRed * 2;
+		localStorage.setItem("Balance", howMuchToAddRed.toFixed(2) + "$");
+
+		const rouletteWonToAddRed =
+			parseInt(localStorage.getItem("rouletteWon")) + 1;
+		localStorage.setItem("rouletteWon", rouletteWonToAddRed);
+
+		setBalance();
+	}
+
+	if (
+		didBetGreen === true &&
+		winningItem.classList.contains("roulette__item--green")
+	) {
+		const howMuchToAddGreen =
+			parseFloat(localStorage.getItem("Balance")) + howMuchBetGreen * 14;
+		localStorage.setItem("Balance", howMuchToAddGreen.toFixed(2) + "$");
+
+		const rouletteWonToAddGreen =
+			parseInt(localStorage.getItem("rouletteWon")) + 1;
+		localStorage.setItem("rouletteWon", rouletteWonToAddGreen);
+
+		setBalance();
+	}
+};
+
+function addBet() {
+	if (input.value > 0 && spinning === false) {
+		switch (this.id) {
+			case "redBtn":
+				didBetRed = true;
+				howMuchBetRed += parseFloat(input.value);
+
+				if (parseFloat(input.value) > maxBetAmount) {
+					maxBetAmount = parseFloat(input.value);
+				}
+				lastBetAmount = parseFloat(input.value);
+
+				const itemBoxRed = document.createElement("div");
+				const itemImgRed = document.createElement("img");
+				const itemNameRed = document.createElement("p");
+				const itemAmountRed = document.createElement("p");
+
+				itemBoxRed.classList.add("roulette__bet-item");
+				itemBoxRed.classList.add("roulette__bet-item--red");
+				itemImgRed.classList.add("roulette__bet-avatar");
+				itemNameRed.classList.add("roulette__bet-nickname");
+				itemAmountRed.classList.add("roulette__bet-amount");
+
+				itemImgRed.setAttribute("alt", "Player Avatar");
+				itemImgRed.setAttribute("src", localStorage.getItem("avatar"));
+				itemNameRed.textContent = localStorage.getItem("nickname");
+				itemAmountRed.textContent = parseFloat(input.value).toFixed(2) + "$";
+
+				itemBoxRed.append(itemImgRed, itemNameRed, itemAmountRed);
+				betsRed.append(itemBoxRed);
+
+				const howMuchToTakeRed =
+					parseFloat(localStorage.getItem("Balance")) - parseFloat(input.value);
+				localStorage.setItem("Balance", howMuchToTakeRed.toFixed(2) + "$");
+				setBalance();
+				sortBetsByAmount();
+				break;
+			case "blackBtn":
+				didBetBlack = true;
+				howMuchBetBlack += parseFloat(input.value);
+
+				if (parseFloat(input.value) > maxBetAmount) {
+					maxBetAmount = parseFloat(input.value);
+				}
+				lastBetAmount = parseFloat(input.value);
+
+				const itemBoxBlack = document.createElement("div");
+				const itemImgBlack = document.createElement("img");
+				const itemNameBlack = document.createElement("p");
+				const itemAmountBlack = document.createElement("p");
+
+				itemBoxBlack.classList.add("roulette__bet-item");
+				itemBoxBlack.classList.add("roulette__bet-item--black");
+				itemImgBlack.classList.add("roulette__bet-avatar");
+				itemNameBlack.classList.add("roulette__bet-nickname");
+				itemAmountBlack.classList.add("roulette__bet-amount");
+
+				itemImgBlack.setAttribute("alt", "Player Avatar");
+				itemImgBlack.setAttribute("src", localStorage.getItem("avatar"));
+				itemNameBlack.textContent = localStorage.getItem("nickname");
+				itemAmountBlack.textContent = parseFloat(input.value).toFixed(2) + "$";
+
+				itemBoxBlack.append(itemImgBlack, itemNameBlack, itemAmountBlack);
+				betsBlack.append(itemBoxBlack);
+
+				const howMuchToTakeBlack =
+					parseFloat(localStorage.getItem("Balance")) - parseFloat(input.value);
+				localStorage.setItem("Balance", howMuchToTakeBlack.toFixed(2) + "$");
+				setBalance();
+				sortBetsByAmount();
+				break;
+			case "greenBtn":
+				didBetGreen = true;
+				howMuchBetGreen += parseFloat(input.value);
+
+				if (parseFloat(input.value) > maxBetAmount) {
+					maxBetAmount = parseFloat(input.value);
+				}
+				lastBetAmount = parseFloat(input.value);
+
+				const itemBoxGreen = document.createElement("div");
+				const itemImgGreen = document.createElement("img");
+				const itemNameGreen = document.createElement("p");
+				const itemAmountGreen = document.createElement("p");
+
+				itemBoxGreen.classList.add("roulette__bet-item");
+				itemBoxGreen.classList.add("roulette__bet-item--green");
+				itemImgGreen.classList.add("roulette__bet-avatar");
+				itemNameGreen.classList.add("roulette__bet-nickname");
+				itemAmountGreen.classList.add("roulette__bet-amount");
+
+				itemImgGreen.setAttribute("alt", "Player Avatar");
+				itemImgGreen.setAttribute("src", localStorage.getItem("avatar"));
+				itemNameGreen.textContent = localStorage.getItem("nickname");
+				itemAmountGreen.textContent = parseFloat(input.value).toFixed(2) + "$";
+
+				itemBoxGreen.append(itemImgGreen, itemNameGreen, itemAmountGreen);
+				betsGreen.append(itemBoxGreen);
+
+				const howMuchToTakeGreen =
+					parseFloat(localStorage.getItem("Balance")) - parseFloat(input.value);
+				localStorage.setItem("Balance", howMuchToTakeGreen.toFixed(2) + "$");
+				setBalance();
+				sortBetsByAmount();
+				break;
+		}
+	}
+}
+
+const createRandomPlayers = () => {
+	const howManyBotsRed = Math.floor(Math.random() * 4);
+	const howManyBotsBlack = Math.floor(Math.random() * 4);
+	const howManyBotsGreen = Math.floor(Math.random() * 4);
+
+	for (i = 0; i < howManyBotsRed; i++) {
+		const itemBox = document.createElement("div");
+		const itemImg = document.createElement("img");
+		const itemName = document.createElement("p");
+		const itemAmount = document.createElement("p");
+
+		const randomAmount = Math.floor(Math.random() * 2500);
+
+		itemBox.classList.add("roulette__bet-item");
+		itemBox.classList.add("roulette__bet-item--red");
+		itemImg.classList.add("roulette__bet-avatar");
+		itemName.classList.add("roulette__bet-nickname");
+		itemAmount.classList.add("roulette__bet-amount");
+
+		itemImg.setAttribute("alt", "Player Avatar");
+		itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
+		itemAmount.textContent = randomAmount.toFixed(2) + "$";
+
+		if (i === 0) {
+			itemName.textContent = "Cat";
+		} else if (i === 1) {
+			itemName.textContent = "Haster";
+		} else {
+			itemName.textContent = "Rat";
+		}
+
+		itemBox.append(itemImg, itemName, itemAmount);
+		betsRed.append(itemBox);
+	}
+
+	for (i = 0; i < howManyBotsBlack; i++) {
+		const itemBox = document.createElement("div");
+		const itemImg = document.createElement("img");
+		const itemName = document.createElement("p");
+		const itemAmount = document.createElement("p");
+
+		const randomAmount = Math.floor(Math.random() * 2500);
+
+		itemBox.classList.add("roulette__bet-item");
+		itemBox.classList.add("roulette__bet-item--black");
+		itemImg.classList.add("roulette__bet-avatar");
+		itemName.classList.add("roulette__bet-nickname");
+		itemAmount.classList.add("roulette__bet-amount");
+
+		itemImg.setAttribute("alt", "Player Avatar");
+		itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
+		itemAmount.textContent = randomAmount.toFixed(2) + "$";
+
+		if (i === 0) {
+			itemName.textContent = "Cat";
+		} else if (i === 1) {
+			itemName.textContent = "Haster";
+		} else {
+			itemName.textContent = "Rat";
+		}
+
+		itemBox.append(itemImg, itemName, itemAmount);
+		betsBlack.append(itemBox);
+	}
+
+	for (i = 0; i < howManyBotsGreen; i++) {
+		const itemBox = document.createElement("div");
+		const itemImg = document.createElement("img");
+		const itemName = document.createElement("p");
+		const itemAmount = document.createElement("p");
+
+		const randomAmount = Math.floor(Math.random() * 2500);
+
+		itemBox.classList.add("roulette__bet-item");
+		itemBox.classList.add("roulette__bet-item--green");
+		itemImg.classList.add("roulette__bet-avatar");
+		itemName.classList.add("roulette__bet-nickname");
+		itemAmount.classList.add("roulette__bet-amount");
+
+		itemImg.setAttribute("alt", "Player Avatar");
+		itemImg.setAttribute("src", `../dist/img/avatars/avatar${i + 1}.jpg`);
+		itemAmount.textContent = randomAmount.toFixed(2) + "$";
+
+		if (i === 0) {
+			itemName.textContent = "Cat";
+		} else if (i === 1) {
+			itemName.textContent = "Haster";
+		} else {
+			itemName.textContent = "Rat";
+		}
+
+		itemBox.append(itemImg, itemName, itemAmount);
+		betsGreen.append(itemBox);
+	}
+
+	sortBetsByAmount();
+};
+
+const sortBetsByAmount = () => {
+	const allBetsRed = document.querySelectorAll(".roulette__bet-item--red");
+	const allBetsRedArray = Array.from(allBetsRed);
+
+	allBetsRedArray.sort((a, b) => {
+		return (
+			parseFloat(b.lastElementChild.textContent) -
+			parseFloat(a.lastElementChild.textContent)
+		);
+	});
+
+	allBetsRedArray.forEach((item) => {
+		betsRed.appendChild(item);
+	});
+
+	const allBetsBlack = document.querySelectorAll(".roulette__bet-item--black");
+	const allBetsBlackArray = Array.from(allBetsBlack);
+
+	allBetsBlackArray.sort((a, b) => {
+		return (
+			parseFloat(b.lastElementChild.textContent) -
+			parseFloat(a.lastElementChild.textContent)
+		);
+	});
+
+	allBetsBlackArray.forEach((item) => {
+		betsBlack.appendChild(item);
+	});
+
+	const allBetsGreen = document.querySelectorAll(".roulette__bet-item--green");
+	const allBetsGreenArray = Array.from(allBetsGreen);
+
+	allBetsGreenArray.sort((a, b) => {
+		return (
+			parseFloat(b.lastElementChild.textContent) -
+			parseFloat(a.lastElementChild.textContent)
+		);
+	});
+
+	allBetsGreenArray.forEach((item) => {
+		betsGreen.appendChild(item);
+	});
+};
+
 setTimeout(() => {
 	startRoulette();
 }, timeForStart);
 
+const addEventListeners = () => {
+	inputBtn.forEach((btn) => {
+		btn.addEventListener("click", useInputBtn);
+	});
+
+	betBtn.forEach((btn) => {
+		btn.addEventListener("click", addBet);
+	});
+};
+
 addLineAnim();
+addEventListeners();
+
+setTimeout(() => {
+	createRandomPlayers();
+}, 5000);

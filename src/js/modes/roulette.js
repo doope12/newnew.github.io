@@ -13,7 +13,7 @@ const timeForRestart = 14950;
 let dropOrder = -1;
 let timer = 15000;
 let lastBetAmount = 0;
-let maxBetAmount = 0;
+let maxBetAmount = parseFloat(localStorage.getItem("Balance")).toFixed(2);
 let didBetRed = false;
 let didBetBlack = false;
 let didBetGreen = false;
@@ -293,10 +293,6 @@ function addBet() {
 			case "redBtn":
 				didBetRed = true;
 				howMuchBetRed += parseFloat(input.value);
-
-				if (parseFloat(input.value) > maxBetAmount) {
-					maxBetAmount = parseFloat(input.value);
-				}
 				lastBetAmount = parseFloat(input.value);
 
 				const itemBoxRed = document.createElement("div");
@@ -323,14 +319,11 @@ function addBet() {
 				localStorage.setItem("Balance", howMuchToTakeRed.toFixed(2) + "$");
 				setBalance();
 				sortBetsByAmount();
+				maxBetAmount = parseFloat(localStorage.getItem("Balance")).toFixed(2);
 				break;
 			case "blackBtn":
 				didBetBlack = true;
 				howMuchBetBlack += parseFloat(input.value);
-
-				if (parseFloat(input.value) > maxBetAmount) {
-					maxBetAmount = parseFloat(input.value);
-				}
 				lastBetAmount = parseFloat(input.value);
 
 				const itemBoxBlack = document.createElement("div");
@@ -357,14 +350,11 @@ function addBet() {
 				localStorage.setItem("Balance", howMuchToTakeBlack.toFixed(2) + "$");
 				setBalance();
 				sortBetsByAmount();
+				maxBetAmount = parseFloat(localStorage.getItem("Balance")).toFixed(2);
 				break;
 			case "greenBtn":
 				didBetGreen = true;
 				howMuchBetGreen += parseFloat(input.value);
-
-				if (parseFloat(input.value) > maxBetAmount) {
-					maxBetAmount = parseFloat(input.value);
-				}
 				lastBetAmount = parseFloat(input.value);
 
 				const itemBoxGreen = document.createElement("div");
@@ -391,6 +381,7 @@ function addBet() {
 				localStorage.setItem("Balance", howMuchToTakeGreen.toFixed(2) + "$");
 				setBalance();
 				sortBetsByAmount();
+				maxBetAmount = parseFloat(localStorage.getItem("Balance")).toFixed(2);
 				break;
 		}
 		setTotal();

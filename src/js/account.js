@@ -96,6 +96,15 @@ const checkIfUserCreatedAccount = () => {
 				localStorage.setItem("crashWon", 0);
 			}
 		}
+
+		if (
+			localStorage.getItem("jackpotWon") === null ||
+			localStorage.getItem("jackpotWon") === NaN
+		) {
+			{
+				localStorage.setItem("jackpotWon", 0);
+			}
+		}
 	}
 };
 
@@ -134,6 +143,7 @@ const createAccount = () => {
 		localStorage.setItem("upgradesDone", 0);
 		localStorage.setItem("rouletteWon", 0);
 		localStorage.setItem("crashWon", 0);
+		localStorage.setItem("jackpotWon", 0);
 		loginToAccount();
 		checkIfUserCreatedAccount();
 	}

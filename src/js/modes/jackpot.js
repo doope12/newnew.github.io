@@ -1377,16 +1377,19 @@ const allItems = {
 		id: 151,
 	},
 };
+let mediumItems = {};
+let easyItems = {};
 const playersDiv = document.querySelector(".jackpot__players");
 const jackpotColors = document.querySelector(".jackpot__items");
-const jackpotLine = document.querySelector(".jackpot-timer");
+const jackpotLine = document.querySelector(".jackpot__timerbox-line");
 const timerText = document.querySelector(".jackpot__timerbox-time");
 const playerItemBox = document.querySelector(".jackpot__playeritems-box");
 const playerValueOfItems = document.querySelector(
 	".jackpot__playeritems-amount"
 );
+const optionBtns = document.querySelectorAll(".jackpot__options-btn");
+const optionsBox = document.querySelector(".jackpot__options");
 const joinBtn = document.querySelector("#join");
-const countItemsAmount = Object.keys(allItems).length;
 const timeForStart = 30000;
 const timeForRestart = 29950;
 let itemsToWin = [];
@@ -1400,6 +1403,42 @@ let playerCol;
 let userItems = [];
 let userDidJoin = false;
 let spinning = false;
+let hard = false;
+let medium = false;
+let easy = false;
+
+const getMediumItems = () => {
+	function filterItemsByPrice(items, maxPrice) {
+		let index = 0;
+
+		Object.values(items).forEach((item) => {
+			if (item.price < maxPrice) {
+				mediumItems[`id${index}`] = { ...item, id: index };
+				index++;
+			}
+		});
+	}
+
+	filterItemsByPrice(allItems, 500);
+};
+
+const getEasyItems = () => {
+	function filterItemsByPrice(items, maxPrice) {
+		let index = 0;
+
+		Object.values(items).forEach((item) => {
+			if (item.price < maxPrice) {
+				easyItems[`id${index}`] = { ...item, id: index };
+				index++;
+			}
+		});
+	}
+
+	filterItemsByPrice(allItems, 10);
+};
+
+getMediumItems();
+getEasyItems();
 
 const startTimer = () => {
 	let seconds = Math.floor(timer / 1000);
@@ -1416,8 +1455,6 @@ const startTimer = () => {
 		return;
 	}
 };
-
-timerInterval = setInterval(startTimer, 10);
 
 const addPlayer = () => {
 	botPlayer++;
@@ -1478,30 +1515,81 @@ const addPlayer = () => {
 };
 
 const addRandomItems = (currentPlayerItems) => {
+	const countItemsAmount = Object.keys(allItems).length;
+	const countMediumItemsAmount = Object.keys(mediumItems).length;
+	const countEasyItemsAmount = Object.keys(easyItems).length;
 	const randomAmountOfItems = Math.floor(Math.random() * 10) + 5;
 	let playerItemsValue = 0;
 
-	for (i = 0; i < randomAmountOfItems; i++) {
-		const randomItem = Math.floor(Math.random() * countItemsAmount);
+	if (hard === true) {
+		for (i = 0; i < randomAmountOfItems; i++) {
+			const randomItem = Math.floor(Math.random() * countItemsAmount);
 
-		const item = document.createElement("div");
-		const itemImg = document.createElement("img");
+			const item = document.createElement("div");
+			const itemImg = document.createElement("img");
 
-		item.classList.add(
-			"jackpot__players-player-item",
-			allItems[`id${randomItem}`].color + "-item-jackpot"
-		);
-		item.id = allItems[`id${randomItem}`].id;
-		itemImg.classList.add("jackpot__players-player-item-img");
+			item.classList.add(
+				"jackpot__players-player-item",
+				allItems[`id${randomItem}`].color + "-item-jackpot"
+			);
+			item.id = allItems[`id${randomItem}`].id;
+			itemImg.classList.add("jackpot__players-player-item-img");
 
-		itemImg.setAttribute("src", allItems[`id${randomItem}`].imgDist);
-		itemImg.setAttribute("alt", allItems[`id${randomItem}`].name);
+			itemImg.setAttribute("src", allItems[`id${randomItem}`].imgDist);
+			itemImg.setAttribute("alt", allItems[`id${randomItem}`].name);
 
-		item.append(itemImg);
-		currentPlayerItems.append(item);
+			item.append(itemImg);
+			currentPlayerItems.append(item);
 
-		playerItemsValue += allItems[`id${randomItem}`].price;
-		itemsToWin.push(allItems[`id${randomItem}`].id);
+			playerItemsValue += allItems[`id${randomItem}`].price;
+			itemsToWin.push(allItems[`id${randomItem}`].id);
+		}
+	} else if (medium === true) {
+		for (i = 0; i < randomAmountOfItems; i++) {
+			const randomItem = Math.floor(Math.random() * countMediumItemsAmount);
+
+			const item = document.createElement("div");
+			const itemImg = document.createElement("img");
+
+			item.classList.add(
+				"jackpot__players-player-item",
+				mediumItems[`id${randomItem}`].color + "-item-jackpot"
+			);
+			item.id = mediumItems[`id${randomItem}`].id;
+			itemImg.classList.add("jackpot__players-player-item-img");
+
+			itemImg.setAttribute("src", mediumItems[`id${randomItem}`].imgDist);
+			itemImg.setAttribute("alt", mediumItems[`id${randomItem}`].name);
+
+			item.append(itemImg);
+			currentPlayerItems.append(item);
+
+			playerItemsValue += mediumItems[`id${randomItem}`].price;
+			itemsToWin.push(mediumItems[`id${randomItem}`].id);
+		}
+	} else if (easy === true) {
+		for (i = 0; i < randomAmountOfItems; i++) {
+			const randomItem = Math.floor(Math.random() * countEasyItemsAmount);
+
+			const item = document.createElement("div");
+			const itemImg = document.createElement("img");
+
+			item.classList.add(
+				"jackpot__players-player-item",
+				easyItems[`id${randomItem}`].color + "-item-jackpot"
+			);
+			item.id = easyItems[`id${randomItem}`].id;
+			itemImg.classList.add("jackpot__players-player-item-img");
+
+			itemImg.setAttribute("src", easyItems[`id${randomItem}`].imgDist);
+			itemImg.setAttribute("alt", easyItems[`id${randomItem}`].name);
+
+			item.append(itemImg);
+			currentPlayerItems.append(item);
+
+			playerItemsValue += easyItems[`id${randomItem}`].price;
+			itemsToWin.push(easyItems[`id${randomItem}`].id);
+		}
 	}
 
 	totalValueOfJackpot += playerItemsValue;
@@ -1818,7 +1906,6 @@ const addPlayerToJackpot = () => {
 
 const checkIfPlayerWon = (winningItem) => {
 	if (winningItem.id === playerCol) {
-		// console.log("User won", playerCol, winningItem.id);
 		for (i = 0; i < itemsToWin.length; i++) {
 			if (
 				localStorage.getItem(`id${itemsToWin[i]}`) === null ||
@@ -1837,22 +1924,43 @@ const checkIfPlayerWon = (winningItem) => {
 
 		addUserItems();
 		setListeners();
-	} else {
-		// console.log("User lost", playerCol, winningItem.id);
 	}
 };
 
-addBotsInterval = setInterval(() => {
-	addPlayer();
-}, 6000);
+function setDiff() {
+	switch (this.id) {
+		case "easy":
+			easy = true;
+			break;
+		case "medium":
+			medium = true;
+			break;
+		case "hard":
+			hard = true;
+			break;
+	}
 
-setTimeout(() => {
-	clearInterval(addBotsInterval);
-}, 18500);
+	optionsBox.classList.add("hidden");
+	startMachine();
+}
 
-setTimeout(() => {
-	spinJackpot();
-}, 30000);
+const startMachine = () => {
+	jackpotLine.classList.add("jackpot-timer");
+
+	addBotsInterval = setInterval(() => {
+		addPlayer();
+	}, 6000);
+
+	setTimeout(() => {
+		clearInterval(addBotsInterval);
+	}, 18500);
+
+	setTimeout(() => {
+		spinJackpot();
+	}, 30000);
+
+	timerInterval = setInterval(startTimer, 10);
+};
 
 const setListeners = () => {
 	const allItemsOfPlayer = document.querySelectorAll(
@@ -1861,6 +1969,10 @@ const setListeners = () => {
 
 	allItemsOfPlayer.forEach((item) => {
 		item.addEventListener("click", addUserItemsToJackpot);
+	});
+
+	optionBtns.forEach((btn) => {
+		btn.addEventListener("click", setDiff);
 	});
 };
 

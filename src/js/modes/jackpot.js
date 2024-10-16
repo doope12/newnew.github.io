@@ -1710,7 +1710,7 @@ const setJackpotChances = () => {
 const spinJackpot = () => {
 	jackpotLine.classList.remove("jackpot-timer");
 	const howStrongSpin = Math.floor(Math.random() * 7000 - 14800);
-	jackpotColors.style.transition = "left 5s cubic-bezier(0,0,0,.99)";
+	jackpotColors.style.transition = "left 10s cubic-bezier(0,1,0.5,1)";
 	jackpotColors.style.left = `${howStrongSpin}px`;
 	spinning = true;
 
@@ -1741,14 +1741,14 @@ const spinJackpot = () => {
 		if (winningItem) {
 			checkIfPlayerWon(winningItem);
 		}
-	}, 5000);
+	}, 10000);
 
 	setTimeout(() => {
 		clearInterval(timerInterval);
 		timer = 30000;
 		timerInterval = setInterval(startTimer, 10);
 		startCountingToNewStart();
-	}, 7000);
+	}, 12000);
 };
 
 const restartJackpot = () => {
@@ -1764,13 +1764,15 @@ const restartJackpot = () => {
 	playerCol = "";
 	jackpotLine.classList.add("jackpot-timer");
 
-	addBotsInterval = setInterval(() => {
-		addPlayer();
-	}, 6000);
+	const howManyBots = Math.floor(Math.random() * 3) + 1;
+	let delay = 6000;
 
-	setTimeout(() => {
-		clearInterval(addBotsInterval);
-	}, 18500);
+	for (i = 0; i < howManyBots; i++) {
+		setTimeout(() => {
+			addPlayer();
+		}, delay);
+		delay += delay;
+	}
 };
 
 const startCountingToNewStart = () => {
@@ -2018,14 +2020,15 @@ function setDiff() {
 
 const startMachine = () => {
 	jackpotLine.classList.add("jackpot-timer");
+	const howManyBots = Math.floor(Math.random() * 3) + 1;
+	let delay = 6000;
 
-	addBotsInterval = setInterval(() => {
-		addPlayer();
-	}, 6000);
-
-	setTimeout(() => {
-		clearInterval(addBotsInterval);
-	}, 18500);
+	for (i = 0; i < howManyBots; i++) {
+		setTimeout(() => {
+			addPlayer();
+		}, delay);
+		delay += delay;
+	}
 
 	setTimeout(() => {
 		spinJackpot();

@@ -1390,6 +1390,7 @@ const playerValueOfItems = document.querySelector(
 const optionBtns = document.querySelectorAll(".jackpot__options-btn");
 const optionsBox = document.querySelector(".jackpot__options");
 const joinBtn = document.querySelector("#join");
+const totalSkins = document.querySelector("#itemAmount");
 const userItemsPagePrevious = document.querySelector(
 	".upgrader__list-btn--left"
 );
@@ -1414,6 +1415,7 @@ let easy = false;
 let choosedDiff = false;
 let currentPage = 1;
 const itemsPerPage = 10;
+const maxItems = 10;
 
 const getMediumItems = () => {
 	function filterItemsByPrice(items, maxPrice) {
@@ -1785,6 +1787,8 @@ function addUserItemsToJackpot() {
 		}
 	});
 
+	totalSkins.textContent = userItems.length;
+
 	getTotalValueOfPlayerItems();
 }
 
@@ -1805,7 +1809,7 @@ const getTotalValueOfPlayerItems = () => {
 };
 
 const addPlayerToJackpot = () => {
-	if (choosedDiff === true) {
+	if (choosedDiff === true && userItems.length <= 10) {
 		const allItemsOfPlayer = document.querySelectorAll(
 			".jackpot__playeritems-item"
 		);
@@ -1911,6 +1915,10 @@ const addPlayerToJackpot = () => {
 
 		userDidJoin = true;
 		getTotalValueOfPlayerItems();
+		userItems = [];
+		totalSkins.textContent = userItems.length;
+		currentPage = 1;
+		renderItems();
 	}
 };
 
@@ -1932,7 +1940,10 @@ const checkIfPlayerWon = (winningItem) => {
 		const jackpotToAdd = parseInt(localStorage.getItem("jackpotWon")) + 1;
 		localStorage.setItem("jackpotWon", jackpotToAdd);
 
+		currentPage = 1;
 		addUserItems();
+		sortPlayerItems();
+		renderItems();
 		setListeners();
 	}
 };

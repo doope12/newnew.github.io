@@ -350,9 +350,9 @@ const hideWinPopup = () => {
 	} else {
 		setTimeout(() => {
 			takeWinningItem();
-		}, 2000);
+			setBtnText();
+		}, 250);
 	}
-	setBtnText();
 };
 
 const sellWinningItem = () => {

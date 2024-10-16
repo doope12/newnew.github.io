@@ -2902,6 +2902,10 @@ const winningAnimationEnd = () => {
 	});
 
 	winningPlayer.textContent = endAmount.toFixed(2) + "$";
+
+	setTimeout(() => {
+		location.reload();
+	}, 2500);
 };
 
 const addWonItemsToInv = () => {

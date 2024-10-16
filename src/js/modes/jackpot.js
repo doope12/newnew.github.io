@@ -2089,6 +2089,10 @@ const renderItems = () => {
 	} else if (filteredItems.length > 0) {
 		userItemsPageNext.style.display = "block";
 	}
+
+	if (filteredItems.length === 0) {
+		userItemsPageNext.style.display = "none";
+	}
 };
 
 const changePage = (direction) => {

@@ -550,7 +550,7 @@
 	position: relative;
 	border-bottom: 3px solid $red-drop;
 	overflow: hidden;
-	 
+
 	&::after {
 		content: "";
 		position: absolute;
@@ -662,6 +662,10 @@
 }
 
 .active-item-jackpot {
-	border: 1px solid gold;
+	border: 2px solid gold;
 	transform: translateY(-5px);
+
+	img {
+		scale: 0.9;
+	}
 }

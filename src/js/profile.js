@@ -923,7 +923,7 @@ const allItems = {
 		skin: "Printstream",
 		color: "red",
 		imgDist: "../dist/img/weapons/rifles/m4a1-s/printstream.jpg",
-		price: 408.70,
+		price: 408.7,
 		id: 102,
 	},
 	id103: {
@@ -977,7 +977,7 @@ const allItems = {
 		skin: "Master Piece",
 		color: "pink",
 		imgDist: "../dist/img/weapons/rifles/m4a1-s/master-piece.jpg",
-		price: 365.40,
+		price: 365.4,
 		id: 108,
 	},
 	id109: {
@@ -1004,7 +1004,7 @@ const allItems = {
 		skin: "Hot Rod",
 		color: "pink",
 		imgDist: "../dist/img/weapons/rifles/m4a1-s/hot-rod.jpg",
-		price: 883.80,
+		price: 883.8,
 		id: 111,
 	},
 	id112: {
@@ -1085,7 +1085,7 @@ const allItems = {
 		skin: "Green Laminate",
 		color: "blue",
 		imgDist: "../dist/img/weapons/rifles/ak-47/green-laminate.jpg",
-		price: 17.90,
+		price: 17.9,
 		id: 120,
 	},
 	id121: {
@@ -1193,7 +1193,7 @@ const allItems = {
 		skin: "Akihabara Accept",
 		color: "red",
 		imgDist: "../dist/img/weapons/rifles/aug/akihabara-accept.jpg",
-		price: 3437.20,
+		price: 3437.2,
 		id: 132,
 	},
 	id133: {
@@ -1247,7 +1247,7 @@ const allItems = {
 		skin: "Doppler Black Pearl",
 		color: "gold",
 		imgDist: "../dist/img/weapons/knives/talon/black-pearl.jpg",
-		price: 3099.50,
+		price: 3099.5,
 		id: 138,
 	},
 	id138: {
@@ -1256,7 +1256,7 @@ const allItems = {
 		skin: "Doppler Black Pearl",
 		color: "gold",
 		imgDist: "../dist/img/weapons/knives/talon/black-pearl.jpg",
-		price: 3099.50,
+		price: 3099.5,
 		id: 138,
 	},
 	id139: {
@@ -1265,7 +1265,7 @@ const allItems = {
 		skin: "Gamma Doppler Emerald",
 		color: "gold",
 		imgDist: "../dist/img/weapons/knives/butterfly/emerald.jpg",
-		price: 16374.90,
+		price: 16374.9,
 		id: 139,
 	},
 	id140: {
@@ -1274,7 +1274,7 @@ const allItems = {
 		skin: "Doppler Ruby",
 		color: "gold",
 		imgDist: "../dist/img/weapons/knives/butterfly/ruby.jpg",
-		price: 12535.90,
+		price: 12535.9,
 		id: 140,
 	},
 	id141: {
@@ -1283,7 +1283,7 @@ const allItems = {
 		skin: "Doppler Sapphire",
 		color: "gold",
 		imgDist: "../dist/img/weapons/knives/butterfly/sapphire.jpg",
-		price: 13789.10,
+		price: 13789.1,
 		id: 141,
 	},
 	id142: {
@@ -1402,6 +1402,11 @@ const statsRoulette = document.querySelector(
 	".profile__stats-amount--roulette"
 );
 const statsCrash = document.querySelector(".profile__stats-amount--crash");
+const statsJackpot = document.querySelector(".profile__stats-amount--jackpot");
+const statsCoinflip = document.querySelector(
+	".profile__stats-amount--coinflip"
+);
+const statsSaper = document.querySelector(".profile__stats-amount--saper");
 let currentPage = 1;
 const itemsPerPage = 10;
 
@@ -1415,6 +1420,9 @@ const getUserInfo = () => {
 	statsUpgrader.textContent = localStorage.getItem("upgradesDone");
 	statsRoulette.textContent = localStorage.getItem("rouletteWon");
 	statsCrash.textContent = localStorage.getItem("crashWon");
+	statsJackpot.textContent = localStorage.getItem("jackpotWon");
+	statsCoinflip.textContent = localStorage.getItem("coinflipWon");
+	statsSaper.textContent = localStorage.getItem("saperWon");
 };
 
 const changeAvatar = () => {

@@ -105,6 +105,24 @@ const checkIfUserCreatedAccount = () => {
 				localStorage.setItem("jackpotWon", 0);
 			}
 		}
+
+		if (
+			localStorage.getItem("coinflipWon") === null ||
+			localStorage.getItem("coinflipWon") === NaN
+		) {
+			{
+				localStorage.setItem("coinflipWon", 0);
+			}
+		}
+		
+		if (
+			localStorage.getItem("saperWon") === null ||
+			localStorage.getItem("saperWon") === NaN
+		) {
+			{
+				localStorage.setItem("saperWon", 0);
+			}
+		}
 	}
 };
 
@@ -144,6 +162,8 @@ const createAccount = () => {
 		localStorage.setItem("rouletteWon", 0);
 		localStorage.setItem("crashWon", 0);
 		localStorage.setItem("jackpotWon", 0);
+		localStorage.setItem("coinflipWon", 0);
+		localStorage.setItem("saperWon", 0);
 		loginToAccount();
 		checkIfUserCreatedAccount();
 	}

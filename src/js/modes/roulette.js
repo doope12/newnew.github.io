@@ -288,7 +288,11 @@ const checkIfPlayerWon = (winningItem) => {
 };
 
 function addBet() {
-	if (input.value > 0 && spinning === false) {
+	if (
+		input.value > 0 &&
+		spinning === false &&
+		input.value <= parseFloat(localStorage.getItem("Balance"))
+	) {
 		switch (this.id) {
 			case "redBtn":
 				didBetRed = true;
@@ -417,7 +421,7 @@ const createRandomPlayers = () => {
 			if (i === 0) {
 				itemName.textContent = "Cat";
 			} else if (i === 1) {
-				itemName.textContent = "Haster";
+				itemName.textContent = "Hamster";
 			} else {
 				itemName.textContent = "Rat";
 			}

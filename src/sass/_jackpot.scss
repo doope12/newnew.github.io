@@ -177,8 +177,10 @@
 	}
 
 	&__playeritems {
+		position: relative;
 		display: flex;
 		flex-direction: column;
+		padding: 1em;
 		margin: 2em 0;
 		border-radius: 20px;
 		box-shadow: $normal-boxshadow;
@@ -227,6 +229,10 @@
 			&-skin {
 				padding: 0.25em 0;
 			}
+
+			&-price {
+				padding-bottom: 0.25em;
+			}
 		}
 
 		&-box {
@@ -235,7 +241,7 @@
 			justify-content: center;
 			align-items: flex-start;
 			flex-wrap: wrap;
-			min-height: 600px;
+			min-height: 509px;
 		}
 
 		&-btn {

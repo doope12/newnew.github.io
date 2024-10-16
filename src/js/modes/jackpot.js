@@ -1390,9 +1390,15 @@ const playerValueOfItems = document.querySelector(
 const optionBtns = document.querySelectorAll(".jackpot__options-btn");
 const optionsBox = document.querySelector(".jackpot__options");
 const joinBtn = document.querySelector("#join");
+const userItemsPagePrevious = document.querySelector(
+	".upgrader__list-btn--left"
+);
+const userItemsPageNext = document.querySelector(".upgrader__list-btn--right");
 const timeForStart = 30000;
 const timeForRestart = 29950;
 let itemsToWin = [];
+let itemsOfUserToWin = [];
+let userItems = [];
 let currentPlayer = 0;
 let botPlayer = 0;
 let totalValueOfJackpot = 0;
@@ -1400,12 +1406,14 @@ let addBotsInterval;
 let timerInterval;
 let timer = 30000;
 let playerCol;
-let userItems = [];
 let userDidJoin = false;
 let spinning = false;
 let hard = false;
 let medium = false;
 let easy = false;
+let choosedDiff = false;
+let currentPage = 1;
+const itemsPerPage = 10;
 
 const getMediumItems = () => {
 	function filterItemsByPrice(items, maxPrice) {
@@ -1413,7 +1421,7 @@ const getMediumItems = () => {
 
 		Object.values(items).forEach((item) => {
 			if (item.price < maxPrice) {
-				mediumItems[`id${index}`] = { ...item, id: index };
+				mediumItems[`id${index}`] = item;
 				index++;
 			}
 		});
@@ -1428,7 +1436,7 @@ const getEasyItems = () => {
 
 		Object.values(items).forEach((item) => {
 			if (item.price < maxPrice) {
-				easyItems[`id${index}`] = { ...item, id: index };
+				easyItems[`id${index}`] = item;
 				index++;
 			}
 		});
@@ -1797,111 +1805,113 @@ const getTotalValueOfPlayerItems = () => {
 };
 
 const addPlayerToJackpot = () => {
-	const allItemsOfPlayer = document.querySelectorAll(
-		".jackpot__playeritems-item"
-	);
-	const allItemsOfPlayerArray = Array.from(allItemsOfPlayer);
-	let playerItemsValue = 0;
-
-	if (
-		parseFloat(playerValueOfItems.textContent) > 0 &&
-		userDidJoin === false &&
-		spinning === false
-	) {
-		currentPlayer++;
-
-		allItemsOfPlayerArray.forEach((item) => {
-			if (item.classList.contains("active-item-jackpot")) {
-				item.remove();
-			}
-		});
-
-		for (i = 0; i < userItems.length; i++) {
-			const itemToRemove =
-				parseInt(localStorage.getItem(`id${userItems[i]}`)) - 1;
-			localStorage.setItem(`id${userItems[i]}`, itemToRemove);
-		}
-		const playerItem = document.createElement("div");
-		const playerInfoBox = document.createElement("div");
-		const playerAvatar = document.createElement("img");
-		const playerColor = document.createElement("div");
-		const playerPercent = document.createElement("p");
-		const playerItemsContainer = document.createElement("div");
-		const playerItems = document.createElement("div");
-		const playerTotal = document.createElement("p");
-
-		playerItem.classList.add("jackpot__players-player");
-		playerInfoBox.classList.add("jackpot__players-player-info");
-		playerAvatar.classList.add("jackpot__players-player-avatar");
-		playerColor.classList.add("jackpot__players-player-color");
-		playerPercent.classList.add("jackpot__players-player-percent");
-		playerItemsContainer.classList.add(
-			"jackpot__players-player-items-container"
+	if (choosedDiff === true) {
+		const allItemsOfPlayer = document.querySelectorAll(
+			".jackpot__playeritems-item"
 		);
-		playerItems.classList.add("jackpot__players-player-items");
-		playerTotal.classList.add("jackpot__players-player-total");
+		const allItemsOfPlayerArray = Array.from(allItemsOfPlayer);
+		let playerItemsValue = 0;
 
-		switch (currentPlayer) {
-			case 1:
-				playerColor.classList.add("jackpot-red");
-				playerColor.id = "jackpotRed";
-				playerCol = "redWin";
-				break;
-			case 2:
-				playerColor.classList.add("jackpot-blue");
-				playerColor.id = "jackpotBlue";
-				playerCol = "blueWin";
-				break;
-			case 3:
-				playerColor.classList.add("jackpot-green");
-				playerColor.id = "jackpotGreen";
-				playerCol = "greenWin";
-				break;
-			case 4:
-				playerColor.classList.add("jackpot-yellow");
-				playerColor.id = "jackpotYellow";
-				playerCol = "yellowWin";
-				break;
-		}
+		if (
+			parseFloat(playerValueOfItems.textContent) > 0 &&
+			userDidJoin === false &&
+			spinning === false
+		) {
+			currentPlayer++;
 
-		playerAvatar.setAttribute("alt", "Player Avatar");
-		playerAvatar.setAttribute("src", localStorage.getItem("avatar"));
-		playerPercent.textContent = "0.00%";
-		playerTotal.textContent = "0.00$";
-		playerColor.append(playerPercent);
-		playerInfoBox.append(playerAvatar, playerColor);
-		playerItemsContainer.append(playerItems);
-		playerItem.append(playerInfoBox, playerItemsContainer, playerTotal);
-		playersDiv.append(playerItem);
+			allItemsOfPlayerArray.forEach((item) => {
+				if (item.classList.contains("active-item-jackpot")) {
+					item.remove();
+				}
+			});
 
-		for (j = 0; j < userItems.length; j++) {
-			itemsToWin.push(userItems[j]);
-			const item = document.createElement("div");
-			const itemImg = document.createElement("img");
+			for (i = 0; i < userItems.length; i++) {
+				const itemToRemove =
+					parseInt(localStorage.getItem(`id${userItems[i]}`)) - 1;
+				localStorage.setItem(`id${userItems[i]}`, itemToRemove);
+			}
+			const playerItem = document.createElement("div");
+			const playerInfoBox = document.createElement("div");
+			const playerAvatar = document.createElement("img");
+			const playerColor = document.createElement("div");
+			const playerPercent = document.createElement("p");
+			const playerItemsContainer = document.createElement("div");
+			const playerItems = document.createElement("div");
+			const playerTotal = document.createElement("p");
 
-			item.classList.add(
-				"jackpot__players-player-item",
-				allItems[`id${userItems[j]}`].color + "-item-jackpot"
+			playerItem.classList.add("jackpot__players-player");
+			playerInfoBox.classList.add("jackpot__players-player-info");
+			playerAvatar.classList.add("jackpot__players-player-avatar");
+			playerColor.classList.add("jackpot__players-player-color");
+			playerPercent.classList.add("jackpot__players-player-percent");
+			playerItemsContainer.classList.add(
+				"jackpot__players-player-items-container"
 			);
-			item.id = allItems[`id${userItems[j]}`].id;
-			itemImg.classList.add("jackpot__players-player-item-img");
+			playerItems.classList.add("jackpot__players-player-items");
+			playerTotal.classList.add("jackpot__players-player-total");
 
-			itemImg.setAttribute("src", allItems[`id${userItems[j]}`].imgDist);
-			itemImg.setAttribute("alt", allItems[`id${userItems[j]}`].name);
+			switch (currentPlayer) {
+				case 1:
+					playerColor.classList.add("jackpot-red");
+					playerColor.id = "jackpotRed";
+					playerCol = "redWin";
+					break;
+				case 2:
+					playerColor.classList.add("jackpot-blue");
+					playerColor.id = "jackpotBlue";
+					playerCol = "blueWin";
+					break;
+				case 3:
+					playerColor.classList.add("jackpot-green");
+					playerColor.id = "jackpotGreen";
+					playerCol = "greenWin";
+					break;
+				case 4:
+					playerColor.classList.add("jackpot-yellow");
+					playerColor.id = "jackpotYellow";
+					playerCol = "yellowWin";
+					break;
+			}
 
-			item.append(itemImg);
-			playerItems.append(item);
-			playerItemsValue += allItems[`id${userItems[j]}`].price;
+			playerAvatar.setAttribute("alt", "Player Avatar");
+			playerAvatar.setAttribute("src", localStorage.getItem("avatar"));
+			playerPercent.textContent = "0.00%";
+			playerTotal.textContent = "0.00$";
+			playerColor.append(playerPercent);
+			playerInfoBox.append(playerAvatar, playerColor);
+			playerItemsContainer.append(playerItems);
+			playerItem.append(playerInfoBox, playerItemsContainer, playerTotal);
+			playersDiv.append(playerItem);
+
+			for (j = 0; j < userItems.length; j++) {
+				itemsToWin.push(userItems[j]);
+				const item = document.createElement("div");
+				const itemImg = document.createElement("img");
+
+				item.classList.add(
+					"jackpot__players-player-item",
+					allItems[`id${userItems[j]}`].color + "-item-jackpot"
+				);
+				item.id = allItems[`id${userItems[j]}`].id;
+				itemImg.classList.add("jackpot__players-player-item-img");
+
+				itemImg.setAttribute("src", allItems[`id${userItems[j]}`].imgDist);
+				itemImg.setAttribute("alt", allItems[`id${userItems[j]}`].name);
+
+				item.append(itemImg);
+				playerItems.append(item);
+				playerItemsValue += allItems[`id${userItems[j]}`].price;
+			}
+
+			totalValueOfJackpot += playerItemsValue;
+			playerItems.parentElement.nextSibling.textContent =
+				playerItemsValue.toFixed(2) + "$";
+			setChanceToWin();
 		}
 
-		totalValueOfJackpot += playerItemsValue;
-		playerItems.parentElement.nextSibling.textContent =
-			playerItemsValue.toFixed(2) + "$";
-		setChanceToWin();
+		userDidJoin = true;
+		getTotalValueOfPlayerItems();
 	}
-
-	userDidJoin = true;
-	getTotalValueOfPlayerItems();
 };
 
 const checkIfPlayerWon = (winningItem) => {
@@ -1940,8 +1950,10 @@ function setDiff() {
 			break;
 	}
 
+	choosedDiff = true;
 	optionsBox.classList.add("hidden");
 	startMachine();
+	sortPlayerItems();
 }
 
 const startMachine = () => {
@@ -1962,6 +1974,33 @@ const startMachine = () => {
 	timerInterval = setInterval(startTimer, 10);
 };
 
+const sortPlayerItems = () => {
+	const userItems = document.querySelectorAll(".jackpot__playeritems-item");
+	const userItemsArray = Array.from(userItems);
+
+	userItemsArray.sort((a, b) => {
+		return (
+			parseFloat(a.children[3].textContent) -
+			parseFloat(b.children[3].textContent)
+		);
+	});
+
+	userItemsArray.forEach((item) => {
+		playerItemBox.appendChild(item);
+	});
+
+	userItemsArray.forEach((item) => {
+		if (parseFloat(item.lastElementChild.textContent) > 10.0 && easy === true) {
+			item.style.display = "none";
+		} else if (
+			parseFloat(item.lastElementChild.textContent) > 500.0 &&
+			medium === true
+		) {
+			item.style.display = "none";
+		}
+	});
+};
+
 const setListeners = () => {
 	const allItemsOfPlayer = document.querySelectorAll(
 		".jackpot__playeritems-item"
@@ -1976,6 +2015,87 @@ const setListeners = () => {
 	});
 };
 
+const renderItems = () => {
+	const allItemsOfUser = document.querySelectorAll(
+		".jackpot__playeritems-item"
+	);
+	const allItemsOfUserArray = Array.from(allItemsOfUser);
+	const dotsBox = document.querySelector(".profile__dotsbox");
+
+	// Filtruj przedmioty w zależności od poziomu trudności
+	let filteredItems = allItemsOfUserArray;
+
+	if (easy) {
+		// Filtruj tylko te przedmioty, które są do 10 (zakładam, że mają jakiś atrybut np. data-value)
+		filteredItems = filteredItems.filter((item) => {
+			const value = parseInt(item.lastElementChild.textContent);
+			return value <= 10;
+		});
+	} else if (medium) {
+		// Filtruj tylko te przedmioty, które są do 500
+		filteredItems = filteredItems.filter((item) => {
+			const value = parseInt(item.lastElementChild.textContent);
+			return value <= 500;
+		});
+	}
+	// Unlimited wyświetla wszystkie, więc nie trzeba nic zmieniać
+
+	const userStartIndex = (currentPage - 1) * itemsPerPage;
+	const userEndIndex = userStartIndex + itemsPerPage;
+
+	// Ukryj wszystkie przedmioty
+	allItemsOfUserArray.forEach((item) => (item.style.display = "none"));
+
+	// Wyświetlaj tylko przefiltrowane przedmioty na danej stronie
+	filteredItems.slice(userStartIndex, userEndIndex).forEach((item) => {
+		item.style.display = "flex";
+	});
+
+	const allUserItemsPages = Math.ceil(filteredItems.length / itemsPerPage);
+	dotsBox.innerHTML = "";
+
+	for (i = 0; i < allUserItemsPages; i++) {
+		const dot = document.createElement("div");
+		dot.classList.add("profile__dot");
+		dotsBox.append(dot);
+
+		if (currentPage === i + 1) {
+			dot.classList.add("dot-active");
+		}
+	}
+
+	// Przełączaj widoczność przycisków "previous" i "next" w zależności od strony
+	if (currentPage === 1) {
+		userItemsPagePrevious.style.display = "none";
+	} else {
+		userItemsPagePrevious.style.display = "block";
+	}
+
+	if (currentPage === allUserItemsPages) {
+		userItemsPageNext.style.display = "none";
+	} else if (filteredItems.length > 0) {
+		userItemsPageNext.style.display = "block";
+	}
+};
+
+const changePage = (direction) => {
+	const allItemsOfUserCount = document.querySelectorAll(
+		".jackpot__playeritems-item"
+	).length;
+	const totalUserPages = Math.ceil(allItemsOfUserCount / itemsPerPage);
+
+	if (direction === -1 && currentPage > 1) {
+		currentPage--;
+	} else if (direction === 1 && currentPage < totalUserPages) {
+		currentPage++;
+	}
+
+	// sortPlayerItems();
+	renderItems();
+};
+
 joinBtn.addEventListener("click", addPlayerToJackpot);
 addUserItems();
+sortPlayerItems();
+renderItems();
 setListeners();

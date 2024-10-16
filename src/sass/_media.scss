@@ -211,6 +211,8 @@
 	.profile {
 		&__stats {
 			flex-direction: row;
+			flex-wrap: wrap;
+			width: 60%;
 		}
 	}
 

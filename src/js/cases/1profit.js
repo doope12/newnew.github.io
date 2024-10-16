@@ -22,7 +22,7 @@ const items2 = {
 };
 
 const spinBtn = document.querySelector(".spin");
-const caseItemsBox = document.querySelector(".case__items");
+const caseItemsBox = document.querySelectorAll(".case__items");
 const countItemsAmount = Object.keys(items2).length;
 const winPupup = document.querySelector(".win-popup");
 const sellBtn = document.querySelector(".win-popup__btn--sell");
@@ -35,28 +35,15 @@ const balanceAmount = document.querySelector(".user__balance--amount");
 const balanceAmountMobile = document.querySelector(
 	".user-mobile__balance--amount"
 );
+const caseAmountBtns = document.querySelectorAll(".case__button-amount");
 const backBtn = document.querySelector(".case__btn--back");
 const muteBtn = document.querySelector(".case__btn--mute");
+const allCases = document.querySelector(".case__allcases");
 const casePrice = 30.0;
 let currentWinningItem;
-
-// const howMuchShouldChestCost = () => {
-// 	let chestValue = 0;
-// 	let totalPercent = 0;
-
-// 	for (i = 0; i < countItemsAmount; i++) {
-// 		const itemEV =
-// 			items2[`item${i}`].price * (items2[`item${i}`].dropPercent / 100);
-// 		chestValue = chestValue + itemEV;
-// 	}
-// 	console.log(chestValue);
-
-// 	for (i = 0; i < countItemsAmount; i++) {
-// 		totalPercent = totalPercent + items2[`item${i}`].dropPercent;
-// 	}
-// 	console.log(totalPercent);
-// };
-// howMuchShouldChestCost();
+let casesAmount = 1;
+let intervalId;
+let winningItems = [];
 
 const createInfoAboutItemsInChest = () => {
 	const dropBox = document.querySelector(".case__drop-box");
@@ -99,164 +86,181 @@ const createInfoAboutItemsInChest = () => {
 };
 
 const createItemsInChest = () => {
-	for (i = 0; i < 100; i++) {
-		const randomNumber = Math.floor(Math.random() * 10000);
-		let randomItem;
+	const caseItemsBox = document.querySelectorAll(".case__items");
 
-		if (randomNumber <= 99) {
-			randomItem = 0;
-		} else {
-			randomItem = 1;
+	caseItemsBox.forEach((box) => {
+		for (i = 0; i < 100; i++) {
+			const randomNumber = Math.floor(Math.random() * 10000);
+			let randomItem;
+
+			if (randomNumber <= 99) {
+				randomItem = 0;
+			} else {
+				randomItem = 1;
+			}
+
+			const item = document.createElement("div");
+			const itemImg = document.createElement("img");
+			const itemItemName = document.createElement("p");
+			const itemSkinName = document.createElement("p");
+			item.classList.add("case__item");
+			item.classList.add(items2[`item${randomItem}`].color + "-drop");
+			item.style.border = "none";
+			itemImg.classList.add("case__img");
+			itemItemName.classList.add("case__item-name");
+			itemSkinName.classList.add("case__skin-name");
+			itemSkinName.classList.add(items2[`item${randomItem}`].color + "-text");
+
+			itemImg.setAttribute("src", items2[`item${randomItem}`].imgDist);
+			itemImg.setAttribute("alt", items2[`item${randomItem}`].name);
+			itemItemName.textContent = items2[`item${randomItem}`].weapon;
+			itemSkinName.textContent = items2[`item${randomItem}`].skin;
+
+			item.id = `item${randomItem}`;
+			item.append(itemImg, itemItemName, itemSkinName);
+			box.append(item);
 		}
-
-		const item = document.createElement("div");
-		const itemImg = document.createElement("img");
-		const itemItemName = document.createElement("p");
-		const itemSkinName = document.createElement("p");
-		item.classList.add("case__item");
-		item.classList.add(items2[`item${randomItem}`].color + "-drop");
-		item.style.border = "none";
-		itemImg.classList.add("case__img");
-		itemItemName.classList.add("case__item-name");
-		itemSkinName.classList.add("case__skin-name");
-		itemSkinName.classList.add(items2[`item${randomItem}`].color + "-text");
-
-		itemImg.setAttribute("src", items2[`item${randomItem}`].imgDist);
-		itemImg.setAttribute("alt", items2[`item${randomItem}`].name);
-		itemItemName.textContent = items2[`item${randomItem}`].weapon;
-		itemSkinName.textContent = items2[`item${randomItem}`].skin;
-
-		// item.id = `id${items2[`item${randomItem}`].id}`;
-		item.id = `item${randomItem}`;
-		item.append(itemImg, itemItemName, itemSkinName);
-		caseItemsBox.append(item);
-	}
+	});
 };
 
 const setBtnText = () => {
 	if (parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice) {
-		spinBtn.textContent = `open ${casePrice}.00$`;
+		spinBtn.textContent = `open ${casePrice * casesAmount}.00$`;
 	} else {
 		spinBtn.textContent = "add balance";
 	}
 };
 
 const spinCase = () => {
+	const caseItemsBox = document.querySelectorAll(".case__items");
+
 	if (
 		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice &&
 		spinBtn.textContent !== "spining"
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3");
-		// Losowe przesunięcie między -2000 a -7000 px
-		const howStrongSpin = Math.floor(Math.random() * 5000 - 10000);
-
-		spinBtn.textContent = "spining";
-
 		if (muteBtn.classList.contains("not-muted")) {
 			caseOpeningSound.play();
 		}
+		caseItemsBox.forEach((box) => {
+			// Losowe przesunięcie między -2000 a -7000 px
+			const howStrongSpin = Math.floor(Math.random() * 5000 - 10000);
 
-		const casesOpenedToAdd = parseInt(localStorage.getItem("casesOpened")) + 1;
-		localStorage.setItem("casesOpened", casesOpenedToAdd);
+			spinBtn.textContent = "spining";
 
-		const balanceAfterOpening = (
-			parseFloat(localStorage.getItem("Balance").slice(0, -1)) - casePrice
-		).toFixed(2);
-		localStorage.setItem("Balance", balanceAfterOpening + "$");
-		setBalance();
 
-		// Ustawienie przesunięcia elementów z animacją
-		caseItemsBox.style.left = howStrongSpin + "px";
-		caseItemsBox.style.transition = "left 5s ease";
+			const casesOpenedToAdd =
+				parseInt(localStorage.getItem("casesOpened")) + 1;
+			localStorage.setItem("casesOpened", casesOpenedToAdd);
 
-		// Dynamiczne skalowanie najbliższego elementu w trakcie animacji
-		const intervalId = setInterval(() => {
-			const redLineX = document
-				.querySelector(".case__middle-point")
-				.getBoundingClientRect().x;
+			const balanceAfterOpening = (
+				parseFloat(localStorage.getItem("Balance").slice(0, -1)) - casePrice
+			).toFixed(2);
+			localStorage.setItem("Balance", balanceAfterOpening + "$");
+			setBalance();
 
-			function updateClosestItemScale() {
-				const items = document.querySelectorAll(".case__item");
-				let closestItem = null;
-				let closestDistance = Infinity;
+			// Ustawienie przesunięcia elementów z animacją
+			box.style.left = howStrongSpin + "px";
+			box.style.transition = "left 5s ease";
 
-				// Resetuj skalowanie dla wszystkich elementów
-				items.forEach((item) => {
-					item.firstElementChild.style.scale = "1";
-				});
+			if (casesAmount === 1) {
+				// Dynamiczne skalowanie najbliższego elementu w trakcie animacji
+				intervalId = setInterval(() => {
+					const redLineX = document
+						.querySelector(".case__middle-point")
+						.getBoundingClientRect().x;
 
-				// Znajdź najbliższy element do linii środkowej
-				items.forEach((item) => {
-					const itemCenterX =
-						item.getBoundingClientRect().x + item.offsetWidth / 2;
-					const distance = Math.abs(itemCenterX - redLineX);
+					function updateClosestItemScale() {
+						const items = document.querySelectorAll(".case__item");
+						let closestItem = null;
+						let closestDistance = Infinity;
 
-					if (distance < closestDistance) {
-						closestDistance = distance;
-						closestItem = item;
+						// Resetuj skalowanie dla wszystkich elementów
+						items.forEach((item) => {
+							item.firstElementChild.style.scale = "1";
+						});
+
+						// Znajdź najbliższy element do linii środkowej
+						items.forEach((item) => {
+							const itemCenterX =
+								item.getBoundingClientRect().x + item.offsetWidth / 2;
+							const distance = Math.abs(itemCenterX - redLineX);
+
+							if (distance < closestDistance) {
+								closestDistance = distance;
+								closestItem = item;
+							}
+						});
+
+						// Zmniejsz skalę najbliższego elementu
+						if (closestItem) {
+							closestItem.firstElementChild.style.scale = "0.9";
+						}
 					}
-				});
 
-				// Zmniejsz skalę najbliższego elementu
-				if (closestItem) {
-					closestItem.firstElementChild.style.scale = "0.9";
+					updateClosestItemScale();
+				}, 100); // Aktualizuj co 100ms
+			}
+
+			// Po zakończeniu animacji po 5 sekundach, znajdź zwycięski element i zatrzymaj skalowanie
+			setTimeout(() => {
+				clearInterval(intervalId); // Zatrzymaj dynamiczne skalowanie po zakończeniu animacji
+
+				const redLineX = document
+					.querySelector(".case__middle-point")
+					.getBoundingClientRect().x;
+
+				function getWinningItem() {
+					const items = document.querySelectorAll(".case__item");
+					let closestItem = null;
+					let closestDistance = Infinity;
+
+					items.forEach((item) => {
+						const itemCenterX =
+							item.getBoundingClientRect().x + item.offsetWidth / 2;
+						const distance = Math.abs(itemCenterX - redLineX);
+
+						if (distance < closestDistance) {
+							closestDistance = distance;
+							closestItem = item;
+						}
+					});
+
+					return closestItem;
 				}
-			}
 
-			updateClosestItemScale();
-		}, 100); // Aktualizuj co 100ms
-
-		// Po zakończeniu animacji po 5 sekundach, znajdź zwycięski element i zatrzymaj skalowanie
-		setTimeout(() => {
-			clearInterval(intervalId); // Zatrzymaj dynamiczne skalowanie po zakończeniu animacji
-
-			const redLineX = document
-				.querySelector(".case__middle-point")
-				.getBoundingClientRect().x;
-
-			function getWinningItem() {
-				const items = document.querySelectorAll(".case__item");
-				let closestItem = null;
-				let closestDistance = Infinity;
-
-				items.forEach((item) => {
-					const itemCenterX =
-						item.getBoundingClientRect().x + item.offsetWidth / 2;
-					const distance = Math.abs(itemCenterX - redLineX);
-
-					if (distance < closestDistance) {
-						closestDistance = distance;
-						closestItem = item;
-					}
-				});
-
-				return closestItem;
-			}
-
-			// Znajdź wygrywający element i zmień jego kolor
-			const winningItem = getWinningItem();
-			if (winningItem) {
-				currentWinningItem = winningItem;
-				winningItemBox.classList.value = "";
-				winningItemBox.classList.add(
-					"win-popup__container",
-					`${items2[`${winningItem.id}`].color + "-win"}`
-				);
-				winningItemImg.setAttribute("src", items2[`${winningItem.id}`].imgDist);
-				winningItemImg.setAttribute("alt", items2[`${winningItem.id}`].name);
-				winningItemName.textContent = items2[`${winningItem.id}`].name;
-				winningItemPrice.textContent = items2[`${winningItem.id}`].price + "$";
-				hideWinPopup();
-			}
-		}, 5000); // Uruchom po zakończeniu animacji
+				// Znajdź wygrywający element i zmień jego kolor
+				const winningItem = getWinningItem();
+				if (winningItem) {
+					winningItems.push(winningItem);
+					winningItemBox.classList.value = "";
+					winningItemBox.classList.add(
+						"win-popup__container",
+						`${items2[`${winningItem.id}`].color + "-win"}`
+					);
+					winningItemImg.setAttribute(
+						"src",
+						items2[`${winningItem.id}`].imgDist
+					);
+					winningItemImg.setAttribute("alt", items2[`${winningItem.id}`].name);
+					winningItemName.textContent = items2[`${winningItem.id}`].name;
+					winningItemPrice.textContent =
+						items2[`${winningItem.id}`].price + "$";
+					hideWinPopup();
+				}
+			}, 5000); // Uruchom po zakończeniu animacji
+		});
 	} else if (spinBtn.textContent !== "spining") {
 		window.open("../diff/deposit.html", "_self");
 	}
 };
 
-
 const hideWinPopup = () => {
-	winPupup.classList.toggle("hidden");
+	if (casesAmount === 1) {
+		winPupup.classList.toggle("hidden");
+	} else {
+		takeWinningItem();
+	}
 	setBtnText();
 };
 
@@ -273,19 +277,26 @@ const sellWinningItem = () => {
 };
 
 const takeWinningItem = () => {
-	const idNumber = "id" + items2[`${currentWinningItem.id}`].id;
-	if (
-		localStorage.getItem(idNumber) === null ||
-		localStorage.getItem(idNumber) === NaN
-	) {
-		localStorage.setItem(idNumber, 1);
-	} else {
-		localStorage.setItem(
-			idNumber,
-			parseInt(localStorage.getItem(idNumber)) + 1
-		);
+	for (i = 0; i < winningItems.length; i++) {
+		if (
+			localStorage.getItem("id" + items2[`${winningItems[i].id}`].id) ===
+				null ||
+			localStorage.getItem("id" + items2[`${winningItems[i].id}`].id) === NaN
+		) {
+			localStorage.setItem("id" + items2[`${winningItems[i].id}`].id, 1);
+		} else {
+			localStorage.setItem(
+				"id" + items2[`${winningItems[i].id}`].id,
+				parseInt(
+					localStorage.getItem("id" + items2[`${winningItems[i].id}`].id)
+				) + 1
+			);
+		}
 	}
-	hideWinPopup();
+
+	if (casesAmount === 1) {
+		hideWinPopup();
+	}
 	resetBoxAnimation();
 };
 
@@ -295,9 +306,14 @@ const refreshBalance = () => {
 };
 
 const resetBoxAnimation = () => {
-	caseItemsBox.innerHTML = "";
-	caseItemsBox.style.transition = "0.01s";
-	caseItemsBox.style.left = "0";
+	const caseItemsBox = document.querySelectorAll(".case__items");
+	caseItemsBox.forEach((box) => {
+		box.innerHTML = "";
+		box.style.transition = "0.01s";
+		box.style.left = "0";
+	});
+
+	winningItems = [];
 	createItemsInChest();
 };
 
@@ -317,11 +333,77 @@ const muteSound = () => {
 	}
 };
 
+const createBoxes = () => {
+	const caseItem = document.createElement("div");
+	const casePoint = document.createElement("div");
+	const caseTriangle = document.createElement("div");
+	const caseTriangleBtm = document.createElement("div");
+	const caseItems = document.createElement("div");
+
+	caseItem.classList.add("case__container");
+	casePoint.classList.add("case__middle-point");
+	caseTriangle.classList.add("case__middle-triangle");
+	caseTriangleBtm.classList.add(
+		"case__middle-triangle",
+		"case__middle-triangle--bottom"
+	);
+	caseItems.classList.add("case__items");
+
+	caseItem.append(casePoint, caseTriangle, caseTriangleBtm, caseItems);
+	allCases.append(caseItem);
+	createItemsInChest();
+};
+
+function setCasesAmount() {
+	if (spinBtn.textContent !== "spining") {
+		allCases.innerHTML = "";
+
+		switch (this.id) {
+			case "1Case":
+				casesAmount = 1;
+				createBoxes();
+				break;
+			case "2Case":
+				casesAmount = 2;
+				createBoxes();
+				createBoxes();
+				break;
+			case "3Case":
+				casesAmount = 3;
+				createBoxes();
+				createBoxes();
+				createBoxes();
+				break;
+			case "4Case":
+				casesAmount = 4;
+				createBoxes();
+				createBoxes();
+				createBoxes();
+				createBoxes();
+				break;
+			case "5Case":
+				casesAmount = 5;
+				createBoxes();
+				createBoxes();
+				createBoxes();
+				createBoxes();
+				createBoxes();
+				break;
+		}
+
+		setBtnText();
+	}
+}
+
 spinBtn.addEventListener("click", spinCase);
 takeBtn.addEventListener("click", takeWinningItem);
 sellBtn.addEventListener("click", sellWinningItem);
 backBtn.addEventListener("click", goBackToMainSite);
 muteBtn.addEventListener("click", muteSound);
+
+caseAmountBtns.forEach((btn) => {
+	btn.addEventListener("click", setCasesAmount);
+});
 
 createItemsInChest();
 setBtnText();

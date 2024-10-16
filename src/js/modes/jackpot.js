@@ -1377,6 +1377,7 @@ const allItems = {
 		id: 151,
 	},
 };
+let hardItems = {};
 let mediumItems = {};
 let easyItems = {};
 const playersDiv = document.querySelector(".jackpot__players");
@@ -1409,6 +1410,7 @@ let timer = 30000;
 let playerCol;
 let userDidJoin = false;
 let spinning = false;
+let unlimited = false;
 let hard = false;
 let medium = false;
 let easy = false;
@@ -1416,6 +1418,21 @@ let choosedDiff = false;
 let currentPage = 1;
 const itemsPerPage = 10;
 const maxItems = 10;
+
+const getHardItems = () => {
+	function filterItemsByPrice(items, maxPrice) {
+		let index = 0;
+
+		Object.values(items).forEach((item) => {
+			if (item.price < maxPrice) {
+				hardItems[`id${index}`] = item;
+				index++;
+			}
+		});
+	}
+
+	filterItemsByPrice(allItems, 2000);
+};
 
 const getMediumItems = () => {
 	function filterItemsByPrice(items, maxPrice) {
@@ -1429,7 +1446,7 @@ const getMediumItems = () => {
 		});
 	}
 
-	filterItemsByPrice(allItems, 500);
+	filterItemsByPrice(allItems, 250);
 };
 
 const getEasyItems = () => {
@@ -1447,6 +1464,7 @@ const getEasyItems = () => {
 	filterItemsByPrice(allItems, 10);
 };
 
+getHardItems();
 getMediumItems();
 getEasyItems();
 
@@ -1526,12 +1544,13 @@ const addPlayer = () => {
 
 const addRandomItems = (currentPlayerItems) => {
 	const countItemsAmount = Object.keys(allItems).length;
+	const countHardItemsAmount = Object.keys(hardItems).length;
 	const countMediumItemsAmount = Object.keys(mediumItems).length;
 	const countEasyItemsAmount = Object.keys(easyItems).length;
 	const randomAmountOfItems = Math.floor(Math.random() * 10) + 5;
 	let playerItemsValue = 0;
 
-	if (hard === true) {
+	if (unlimited === true) {
 		for (i = 0; i < randomAmountOfItems; i++) {
 			const randomItem = Math.floor(Math.random() * countItemsAmount);
 
@@ -1553,6 +1572,29 @@ const addRandomItems = (currentPlayerItems) => {
 
 			playerItemsValue += allItems[`id${randomItem}`].price;
 			itemsToWin.push(allItems[`id${randomItem}`].id);
+		}
+	} else if (hard === true) {
+		for (i = 0; i < randomAmountOfItems; i++) {
+			const randomItem = Math.floor(Math.random() * countHardItemsAmount);
+
+			const item = document.createElement("div");
+			const itemImg = document.createElement("img");
+
+			item.classList.add(
+				"jackpot__players-player-item",
+				hardItems[`id${randomItem}`].color + "-item-jackpot"
+			);
+			item.id = hardItems[`id${randomItem}`].id;
+			itemImg.classList.add("jackpot__players-player-item-img");
+
+			itemImg.setAttribute("src", hardItems[`id${randomItem}`].imgDist);
+			itemImg.setAttribute("alt", hardItems[`id${randomItem}`].name);
+
+			item.append(itemImg);
+			currentPlayerItems.append(item);
+
+			playerItemsValue += hardItems[`id${randomItem}`].price;
+			itemsToWin.push(hardItems[`id${randomItem}`].id);
 		}
 	} else if (medium === true) {
 		for (i = 0; i < randomAmountOfItems; i++) {
@@ -1773,23 +1815,25 @@ const addUserItems = () => {
 };
 
 function addUserItemsToJackpot() {
-	userItems = [];
-	this.classList.toggle("active-item-jackpot");
+	if (choosedDiff === true) {
+		userItems = [];
+		this.classList.toggle("active-item-jackpot");
 
-	const allItemsOfPlayer = document.querySelectorAll(
-		".jackpot__playeritems-item"
-	);
-	const allItemsOfPlayerArray = Array.from(allItemsOfPlayer);
+		const allItemsOfPlayer = document.querySelectorAll(
+			".jackpot__playeritems-item"
+		);
+		const allItemsOfPlayerArray = Array.from(allItemsOfPlayer);
 
-	allItemsOfPlayerArray.forEach((item) => {
-		if (item.classList.contains("active-item-jackpot")) {
-			userItems.push(item.id);
-		}
-	});
+		allItemsOfPlayerArray.forEach((item) => {
+			if (item.classList.contains("active-item-jackpot")) {
+				userItems.push(item.id);
+			}
+		});
 
-	totalSkins.textContent = userItems.length;
+		totalSkins.textContent = userItems.length;
 
-	getTotalValueOfPlayerItems();
+		getTotalValueOfPlayerItems();
+	}
 }
 
 const getTotalValueOfPlayerItems = () => {
@@ -1959,6 +2003,9 @@ function setDiff() {
 		case "hard":
 			hard = true;
 			break;
+		case "unlimited":
+			unlimited = true;
+			break;
 	}
 
 	choosedDiff = true;
@@ -2048,7 +2095,12 @@ const renderItems = () => {
 		// Filtruj tylko te przedmioty, które są do 500
 		filteredItems = filteredItems.filter((item) => {
 			const value = parseFloat(item.lastElementChild.textContent);
-			return value <= 500;
+			return value <= 250;
+		});
+	} else if (hard) {
+		filteredItems = filteredItems.filter((item) => {
+			const value = parseFloat(item.lastElementChild.textContent);
+			return value <= 2000;
 		});
 	}
 	// Unlimited wyświetla wszystkie, więc nie trzeba nic zmieniać

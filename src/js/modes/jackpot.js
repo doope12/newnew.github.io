@@ -2041,13 +2041,13 @@ const renderItems = () => {
 	if (easy) {
 		// Filtruj tylko te przedmioty, które są do 10 (zakładam, że mają jakiś atrybut np. data-value)
 		filteredItems = filteredItems.filter((item) => {
-			const value = parseInt(item.lastElementChild.textContent);
+			const value = parseFloat(item.lastElementChild.textContent);
 			return value <= 10;
 		});
 	} else if (medium) {
 		// Filtruj tylko te przedmioty, które są do 500
 		filteredItems = filteredItems.filter((item) => {
-			const value = parseInt(item.lastElementChild.textContent);
+			const value = parseFloat(item.lastElementChild.textContent);
 			return value <= 500;
 		});
 	}

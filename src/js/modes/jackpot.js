@@ -1962,9 +1962,11 @@ function setDiff() {
 	}
 
 	choosedDiff = true;
+	currentPage = 1;
 	optionsBox.classList.add("hidden");
 	startMachine();
 	sortPlayerItems();
+	renderItems();
 }
 
 const startMachine = () => {

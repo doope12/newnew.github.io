@@ -84,7 +84,6 @@ const toggleMobileNav = () => {
 };
 
 const toggleNavMenu = () => {
-	console.log("click");
 	if (!navMenu.classList.contains("hidden")) {
 		navMenu.classList.add("hide-nav-menu");
 		setTimeout(() => {

@@ -39,7 +39,7 @@ const caseAmountBtns = document.querySelectorAll(".case__button-amount");
 const backBtn = document.querySelector(".case__btn--back");
 const muteBtn = document.querySelector(".case__btn--mute");
 const allCases = document.querySelector(".case__allcases");
-const casePrice = 40.0; // price of case
+const casePrice = 400.0; // price of case
 let currentWinningItem; // current item that won
 let casesAmount = 1; // how many cases user will open
 let intervalId; // interval for animation

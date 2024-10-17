@@ -1407,15 +1407,16 @@ const statsCoinflip = document.querySelector(
 	".profile__stats-amount--coinflip"
 );
 const statsSaper = document.querySelector(".profile__stats-amount--saper");
-let currentPage = 1;
-const itemsPerPage = 10;
+let currentPage = 1; // current page of user items
+const itemsPerPage = 10; // max items per page
 
 const getUserInfo = () => {
-	userAvatar.setAttribute("src", localStorage.getItem("avatar"));
-	userNickname.textContent = localStorage.getItem("nickname");
+	// this function add all info
+	userAvatar.setAttribute("src", localStorage.getItem("avatar")); // add avatar
+	userNickname.textContent = localStorage.getItem("nickname"); // add nickname
 	userBalance.textContent =
-		parseFloat(localStorage.getItem("Balance")).toFixed(2) + "$";
-	statsCases.textContent = localStorage.getItem("casesOpened");
+		parseFloat(localStorage.getItem("Balance")).toFixed(2) + "$"; // add balance
+	statsCases.textContent = localStorage.getItem("casesOpened"); // add stats
 	statsBattles.textContent = localStorage.getItem("battlesWon");
 	statsUpgrader.textContent = localStorage.getItem("upgradesDone");
 	statsRoulette.textContent = localStorage.getItem("rouletteWon");
@@ -1426,52 +1427,58 @@ const getUserInfo = () => {
 };
 
 const changeAvatar = () => {
+	// on button click if input is not empty change avatar
 	if (avatarInput.value !== "") {
-		localStorage.setItem("avatar", avatarInput.value);
+		localStorage.setItem("avatar", avatarInput.value); // set it to localStorage
 	}
 
-	avatarInput.value = "";
+	avatarInput.value = ""; // clear input
 
 	getUserInfo();
-	checkIfUserCreatedAccount();
+	checkIfUserCreatedAccount(); // function from account.js file
 };
 
 const changeNickname = () => {
+	// on button click if input is not empty change nickname
 	if (nicknameInput.value !== "") {
-		localStorage.setItem("nickname", nicknameInput.value);
+		localStorage.setItem("nickname", nicknameInput.value); // set it to localStorage
 	}
 
-	nicknameInput.value = "";
+	nicknameInput.value = ""; // clear input
 
 	getUserInfo();
-	checkIfUserCreatedAccount();
+	checkIfUserCreatedAccount(); // function from account.js file
 };
 
 const deleteAccount = () => {
+	// function that deletes whole profile
 	if (
-		confirm("Are you sure? It is not possible to get your account back") ===
+		confirm("Are you sure? It is not possible to get your account back") === // if player confirm his action continue
 		true
 	) {
-		localStorage.clear();
-		open("../index.html", "_self");
+		localStorage.clear(); // clear all data
+		open("../index.html", "_self"); // open main page
 	}
 
 	getUserInfo();
-	checkIfUserCreatedAccount();
+	checkIfUserCreatedAccount(); // function from account.js file
 };
 
 const addAllUserItems = () => {
+	// function that adds all player items
 	for (i = 0; i < countItemsAmount; i++) {
-		const itemCount = parseInt(localStorage.getItem(`id${i}`)) || 0;
+		// looping this for every item in data base
+		const itemCount = parseInt(localStorage.getItem(`id${i}`)) || 0; // if player have that item save its value (amount of items)
 		for (j = 0; j < itemCount; j++) {
-			const itemBox = document.createElement("div");
+			// create items based on how many player does have
+			const itemBox = document.createElement("div"); // item elements
 			const itemImg = document.createElement("img");
 			const itemName = document.createElement("p");
 			const itemSkin = document.createElement("p");
 			const itemPrice = document.createElement("p");
 			const itemBtn = document.createElement("button");
 
-			itemBox.classList.add("profile__item");
+			itemBox.classList.add("profile__item"); // item classes
 			itemBox.classList.add(allItems[`id${i}`].color + "-drop2");
 			itemImg.classList.add("profile__item-img");
 			itemName.classList.add("profile__item-name");
@@ -1480,7 +1487,7 @@ const addAllUserItems = () => {
 			itemPrice.classList.add("profile__item-price");
 			itemBtn.classList.add("profile__item-btn");
 
-			itemBox.id = allItems[`id${i}`].id;
+			itemBox.id = allItems[`id${i}`].id; // item attributes, textContents
 			itemImg.setAttribute("src", allItems[`id${i}`].imgDist);
 			itemImg.setAttribute("alt", allItems[`id${i}`].name);
 			itemName.textContent = allItems[`id${i}`].weapon;
@@ -1488,17 +1495,19 @@ const addAllUserItems = () => {
 			itemPrice.textContent = allItems[`id${i}`].price + "$";
 			itemBtn.textContent = "sell";
 
-			itemBox.append(itemImg, itemName, itemSkin, itemPrice, itemBtn);
-			itemsBox.append(itemBox);
+			itemBox.append(itemImg, itemName, itemSkin, itemPrice, itemBtn); // append everything to item
+			itemsBox.append(itemBox); // apeend item to items container
 		}
 	}
 };
 
 const setItemsOrder = () => {
-	const userItems = document.querySelectorAll(".profile__item");
-	const userItemsArray = Array.from(userItems);
+	// function to set items order
+	const userItems = document.querySelectorAll(".profile__item"); // take all player items
+	const userItemsArray = Array.from(userItems); // do array from it
 
 	userItemsArray.sort((a, b) => {
+		// sort items from cheapest to most expensive
 		return (
 			parseFloat(a.children[3].textContent) -
 			parseFloat(b.children[3].textContent)
@@ -1506,66 +1515,71 @@ const setItemsOrder = () => {
 	});
 
 	userItemsArray.forEach((item) => {
+		// append sorted items
 		itemsBox.appendChild(item);
 	});
 };
 
 const countTotalValueOfSkins = () => {
-	const allItemsPrices = document.querySelectorAll(".profile__item-price");
-	let totalValue = 0;
+	// function for getting total value of skins
+	const allItemsPrices = document.querySelectorAll(".profile__item-price"); // get all items prices
+	let totalValue = 0; // total value of all skins player have
 
 	allItemsPrices.forEach((item) => {
-		totalValue = totalValue + parseFloat(item.textContent);
+		totalValue = totalValue + parseFloat(item.textContent); // for each item add its value to total value
 	});
 
-	totalValueOfSkins.textContent = totalValue.toFixed(2) + "$";
+	totalValueOfSkins.textContent = totalValue.toFixed(2) + "$"; // put value from all skins to text
 };
 
 function sellItem() {
-	const currentBalance = localStorage.getItem("Balance");
-	const itemToSellPrice = this.parentElement.children[3].textContent;
-	const newBalance = parseFloat(currentBalance) + parseFloat(itemToSellPrice);
+	// function to sell individual items
+	const currentBalance = localStorage.getItem("Balance"); // check current balance
+	const itemToSellPrice = this.parentElement.children[3].textContent; // price of item we want to sell
+	const newBalance = parseFloat(currentBalance) + parseFloat(itemToSellPrice); // balance of player, after selling that item
 
-	localStorage.setItem("Balance", newBalance + "$");
+	localStorage.setItem("Balance", newBalance + "$"); // set balance after selling item to localStorage
 
-	const idOfCurrentItem = this.parentElement.id;
+	const idOfCurrentItem = this.parentElement.id; // check id of item we sold
 
-	const itemToSell = parseInt(localStorage.getItem(`id${idOfCurrentItem}`)) - 1;
-	localStorage.setItem(`id${idOfCurrentItem}`, itemToSell);
+	const itemToSell = parseInt(localStorage.getItem(`id${idOfCurrentItem}`)) - 1; // set new amount of that item in player inventory
+	localStorage.setItem(`id${idOfCurrentItem}`, itemToSell); // set new amount of item to localStorage
 
-	this.parentElement.remove();
+	this.parentElement.remove(); // remove sold item
 
-	const allItemsOfUser = document.querySelectorAll(".profile__item");
-	const totalUserItems = allItemsOfUser.length;
-	const totalUserPages = Math.ceil(totalUserItems / itemsPerPage);
+	const allItemsOfUser = document.querySelectorAll(".profile__item"); // get all items of player
+	const totalUserItems = allItemsOfUser.length; // get total amount of player items
 
-	// If on the last page and the page becomes empty, move to the previous page
+	// if we on the last page and the page becomes empty, move to the previous page
 	if (totalUserItems <= (currentPage - 1) * itemsPerPage && currentPage > 1) {
 		currentPage--;
 	}
 
 	countTotalValueOfSkins();
 	getUserInfo();
-	setBalance();
+	setBalance(); // function from balance.js file
 	renderItems();
 }
 
 const sellAllItems = () => {
-	const allSkins = document.querySelectorAll(".profile__item");
-	const currentBalance = localStorage.getItem("Balance");
-	const itemToSellPrice = totalValueOfSkins.textContent;
-	const newBalance = parseFloat(currentBalance) + parseFloat(itemToSellPrice);
-	const idOfItems = [];
+	// function to sell all items
+	const allSkins = document.querySelectorAll(".profile__item"); // get all player items
+	const currentBalance = localStorage.getItem("Balance"); // get balance of player
+	const itemToSellPrice = totalValueOfSkins.textContent; // get total value of skins
+	const newBalance = parseFloat(currentBalance) + parseFloat(itemToSellPrice); // get new balance after selling everything
+	const idOfItems = []; // empty array for items ids
 
 	if (confirm("Are you sure?") === true) {
-		localStorage.setItem("Balance", newBalance + "$");
-		itemsBox.innerHTML = "";
+		// if user is sure
+		localStorage.setItem("Balance", newBalance + "$"); // set balance after selling everything
+		itemsBox.innerHTML = ""; // clear player inventory
 
 		allSkins.forEach((skin) => {
-			idOfItems.push(skin.id);
+			idOfItems.push(skin.id); // push every item to array
 		});
 
 		for (i = 0; i < idOfItems.length; i++) {
+			// clear amount of items player had
 			const itemToSell =
 				parseInt(localStorage.getItem(`id${idOfItems[i]}`)) - 1;
 			localStorage.setItem(`id${idOfItems[i]}`, itemToSell);
@@ -1573,64 +1587,62 @@ const sellAllItems = () => {
 
 		countTotalValueOfSkins();
 		getUserInfo();
-		setBalance();
+		setBalance(); // function from balance.js file
 		renderItems();
 	}
 };
 
-const renderItems = () => {
-	const allItemsOfUser = document.querySelectorAll(".profile__item");
-	const allItemsOfUserArray = Array.from(allItemsOfUser);
-	const dotsBox = document.querySelector(".profile__dotsbox");
+const renderItems = () => { // set items on pages
+	const allItemsOfUser = document.querySelectorAll(".profile__item"); // get all items of user
+	const allItemsOfUserArray = Array.from(allItemsOfUser); // make array from all items
+	const dotsBox = document.querySelector(".profile__dotsbox"); // get page dots container
 
-	const userStartIndex = (currentPage - 1) * itemsPerPage;
-	const userEndIndex = userStartIndex + itemsPerPage;
+	const userStartIndex = (currentPage - 1) * itemsPerPage; // get index of array to start from based on current page
+	const userEndIndex = userStartIndex + itemsPerPage; // get end index of array
 
-	allItemsOfUserArray.forEach((item) => (item.style.display = "none"));
+	allItemsOfUserArray.forEach((item) => (item.style.display = "none")); // hide all items
 
 	allItemsOfUserArray.slice(userStartIndex, userEndIndex).forEach((item) => {
+		// for items from range of current page, make them visible
 		item.style.display = "flex";
 	});
 
 	const allUserItemsPages = Math.ceil(
 		allItemsOfUserArray.length / itemsPerPage
-	);
-	dotsBox.innerHTML = "";
+	); // get total amount of pages
+	dotsBox.innerHTML = ""; // clear dots container
 
-	// if (
-	// 	(allUserItemsPages * 10) === allItemsOfUserArray.length)  {
-	// 	currentPage = currentPage - 1;
-	// }
-
-	for (i = 0; i < allUserItemsPages; i++) {
-		const dot = document.createElement("div");
-		dot.classList.add("profile__dot");
-		dotsBox.append(dot);
+	for (i = 0; i < allUserItemsPages; i++) { // created dots based of pages amount
+		const dot = document.createElement("div"); // dot element
+		dot.classList.add("profile__dot"); // add classes
+		dotsBox.append(dot); // append dot to dots container
 
 		if (currentPage === i + 1) {
-			dot.classList.add("dot-active");
+			dot.classList.add("dot-active"); // if current dot is same as current page set it to active
 		}
 	}
 
 	if (currentPage === 1) {
-		userItemsPagePrevious.style.display = "none";
+		userItemsPagePrevious.style.display = "none"; // if current page is page one hide previous page button
 	} else {
-		userItemsPagePrevious.style.display = "block";
+		userItemsPagePrevious.style.display = "block"; // if its not page one show it
 	}
 
 	if (currentPage === allUserItemsPages) {
-		userItemsPageNext.style.display = "none";
+		userItemsPageNext.style.display = "none"; // if current page is last page hide next page button
 	} else if (allItemsOfUserArray.length > 0) {
-		userItemsPageNext.style.display = "block";
+		userItemsPageNext.style.display = "block"; // if we have at least one page show next page button
 	}
 };
 
 const changePage = (direction) => {
+	// function to change page
 	const allItemsOfUserCount =
-		document.querySelectorAll(".profile__item").length;
-	const totalUserPages = Math.ceil(allItemsOfUserCount / itemsPerPage);
+		document.querySelectorAll(".profile__item").length; // get amount of user items
+	const totalUserPages = Math.ceil(allItemsOfUserCount / itemsPerPage); // get total pages
 
 	if (direction === -1 && currentPage > 1) {
+		// change page based on button clicked
 		currentPage--;
 	} else if (direction === 1 && currentPage < totalUserPages) {
 		currentPage++;

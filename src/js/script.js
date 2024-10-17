@@ -6,16 +6,16 @@ const navMenu = document.querySelector(".nav__menu");
 const navMenuBtn = document.querySelector(".nav__item--menu");
 
 const setActiveSite = () => {
-	// skrypt dodaje style do itemu nawigacji w zaleznosci od strony na ktorej jestesmy
+	// checks at which site we are and add style to nav 
 	if (document.body.id === "upgrader") {
-		// sprawdzamy jaka jest nazwa pliku z ktorego wczytujemy strone
+		// check file name
 		navItem.forEach((item) => {
-			item.classList.remove("active-site"); // usuwa stan active site
-			item.firstElementChild.classList.add("hidden"); // ukrywa gradientowe tło itemu
+			item.classList.remove("active-site"); // remove acitve-site
+			item.firstElementChild.classList.add("hidden"); // hiding gradient background
 
 			if (item.id.includes("upgrader")) {
-				item.classList.add("active-site"); // dodaje stan active site po sprawdzeniu id
-				item.firstElementChild.classList.remove("hidden"); // odkrywa gradientowe tło itemu
+				item.classList.add("active-site"); // add active-site class after checking name site
+				item.firstElementChild.classList.remove("hidden"); // showing gradient background
 			}
 		});
 	} else if (document.body.id === "battles") {
@@ -67,15 +67,15 @@ const addListeners = () => {
 };
 
 const toggleMobileNav = () => {
-	if (!mobileNav.classList.contains("hidden")) {
-		mobileNav.classList.add("hide-nav");
-		mobileNavBtn.classList.toggle("is-active");
-		document.body.classList.toggle("body-scroll");
-		setTimeout(() => {
+	if (!mobileNav.classList.contains("hidden")) { // after clicking on hamburger button check if mobileNav is not hidden
+		mobileNav.classList.add("hide-nav"); // add hide animation
+		mobileNavBtn.classList.toggle("is-active"); // toggle button animation
+		document.body.classList.toggle("body-scroll"); // toggle body scroll
+		setTimeout(() => { // after 0.5s remove animation from nav and add display hidden to it
 			mobileNav.classList.remove("hide-nav");
 			mobileNav.classList.toggle("hidden");
 		}, 500);
-	} else {
+	} else { // if mobileNav is hidden, make sure that hide nav animation is no added and show mobileNav
 		mobileNavBtn.classList.toggle("is-active");
 		mobileNav.classList.toggle("hidden");
 		document.body.classList.toggle("body-scroll");
@@ -84,18 +84,17 @@ const toggleMobileNav = () => {
 };
 
 const toggleNavMenu = () => {
-	if (!navMenu.classList.contains("hidden")) {
-		navMenu.classList.add("hide-nav-menu");
-		setTimeout(() => {
+	if (!navMenu.classList.contains("hidden")) { // if menu with links is not hidden
+		navMenu.classList.add("hide-nav-menu"); //  add hide animation to it
+		setTimeout(() => { // after 0.5s hide it for good
 			navMenu.classList.remove("hide-nav-menu");
 			navMenu.classList.toggle("hidden");
 		}, 500);
-	} else {
+	} else { // if its hidden then show it and add show anim to it
 		navMenu.classList.toggle("hidden");
 		navMenu.classList.add("show-nav-menu");
 	}
 };
 
 addListeners();
-
 setActiveSite();

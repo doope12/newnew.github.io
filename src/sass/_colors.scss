@@ -1,3 +1,8 @@
+// $secondary-color-value: 207, 160, 255;
+$test: rgb(235, 222, 146);
+$secondary-color-value-r: 235;
+$secondary-color-value-g: 222;
+$secondary-color-value-b: 146;
 $main2-color: rgb(45, 45, 45);
 $main3-color: rgba(40, 40, 40, 0.6);
 $tiles-color: rgba(60, 60, 60, 0.5);
@@ -11,8 +16,20 @@ $user-color: linear-gradient(
 $title-gradient-line: linear-gradient(
 	90deg,
 	rgba(255, 255, 255, 0) 0%,
-	rgba(207, 160, 255, 0.5) 10%,
-	rgba(207, 160, 255, 0.5) 90%,
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0.5
+		)
+		10%,
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0.5
+		)
+		90%,
 	rgba(255, 255, 255, 0) 100%
 );
 $last-drop-bg: linear-gradient(
@@ -22,10 +39,30 @@ $last-drop-bg: linear-gradient(
 	rgba(119, 119, 119, 0) 90%,
 	rgba(0, 0, 0, 0.5) 100%
 );
-$secondary-color: rgb(207, 160, 255);
-$secondary-color-text-hover: rgba(207, 160, 255, 0.7);
-$secondary-color-alpha: rgba(207, 160, 255, 0.3);
-$secondary-color-alpha-hover: rgba(207, 160, 255, 0.5);
+
+$secondary-color: rgb(
+	$secondary-color-value-r,
+	$secondary-color-value-g,
+	$secondary-color-value-b
+);
+$secondary-color-text-hover: rgba(
+	$secondary-color-value-r,
+	$secondary-color-value-g,
+	$secondary-color-value-b,
+	0.7
+);
+$secondary-color-alpha: rgba(
+	$secondary-color-value-r,
+	$secondary-color-value-g,
+	$secondary-color-value-b,
+	0.3
+);
+$secondary-color-alpha-hover: rgba(
+	$secondary-color-value-r,
+	$secondary-color-value-g,
+	$secondary-color-value-b,
+	0.5
+);
 $nav-item-bg: radial-gradient(
 	circle,
 	rgba(169, 93, 245, 0.2) 0%,
@@ -103,8 +140,20 @@ $white-drop-gradient: linear-gradient(
 $white-drop: rgb(176, 195, 217);
 $normal-boxshadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
 	rgba(0, 0, 0, 0.23) 0px 3px 6px;
-$purple-boxshadow: rgba(207, 160, 255, 0.16) 0px 3px 6px,
-	rgba(207, 160, 255, 0.23) 0px 3px 6px;
+$purple-boxshadow: rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0.16
+		)
+		0px 3px 6px,
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0.23
+		)
+		0px 3px 6px;
 $purple-drop-cases-gradient: linear-gradient(
 	0deg,
 	rgba(136, 71, 255, 0.1) 0%,
@@ -350,9 +399,26 @@ $green-upgrader: linear-gradient(
 );
 $avatar-bg: linear-gradient(
 	180deg,
-	rgba(207, 160, 255, 0.3) 0%,
-	rgba(207, 160, 255, 0.5) 50%,
-	rgb(207, 160, 255) 100%
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0.3
+		)
+		0%,
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0.5
+		)
+		50%,
+	rgb(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b
+		)
+		100%
 );
 $green-roulette: linear-gradient(
 	0deg,

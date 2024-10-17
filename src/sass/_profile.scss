@@ -67,7 +67,6 @@
 		width: 100%;
 		border: 1px solid $secondary-color;
 		border-radius: 5px;
-		box-shadow: $purple-boxshadow;
 		color: $text-color;
 		background: transparent;
 	}
@@ -80,6 +79,7 @@
 		border-radius: 10px;
 		text-transform: uppercase;
 		font-weight: bold;
+		box-shadow: $purple-boxshadow;
 		letter-spacing: 1px;
 		background: $secondary-color-alpha;
 		color: $text-color;
@@ -93,6 +93,8 @@
 		&--red {
 			border: 2px solid rgb(223, 68, 68);
 			background-color: rgba(223, 68, 68, 0.4);
+			box-shadow: rgba(223, 68, 68, 0.16) 0px 3px 6px,
+			rgba(223, 68, 68, 0.23) 0px 3px 6px;;
 
 			&:hover {
 				background-color: rgba(223, 68, 68, 0.7);

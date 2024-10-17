@@ -52,8 +52,7 @@ const addLineAnim = () => {
 
 const startRoulette = () => {
 	const howStrongSpin = Math.floor(Math.random() * 7400 - 14800);
-	const spinAudio = new Audio("../dist/audio/roulette.mp3");
-	rouletteBox.style.transition = "left 5s cubic-bezier(0,0,0,.99)";
+	rouletteBox.style.transition = "left 5s cubic-bezier(0,1,0.5,1)";
 	rouletteBox.style.left = `${howStrongSpin}px`;
 	timerLine.classList.remove("roulette-timer");
 	spinning = true;
@@ -89,7 +88,6 @@ const startRoulette = () => {
 			}
 
 			if (previousItem !== closestItem) {
-				spinAudio.play();
 				previousItem = closestItem;
 			}
 		}

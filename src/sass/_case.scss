@@ -1,13 +1,18 @@
 @use "./colors" as *;
 
 .case {
+	&__allcases {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
 	&__container {
 		position: relative;
-		// margin: 15em auto 2em;
-		// max-width: 1200px;
-		// width: 100%;
 		margin: 1em 1em 0;
+		// height: calc(13vh + 2px);
 		height: 202px;
+		width: 100%;
 		border-radius: 20px;
 		border: 2px solid $secondary-color;
 		overflow: hidden;
@@ -57,8 +62,10 @@
 
 	&__item {
 		padding: 0.5em;
-		width: 200px;
+		// width: 13vh;
+		// height: 13vh;
 		height: 200px;
+		width: 200px;
 		text-align: center;
 	}
 
@@ -142,6 +149,9 @@
 
 		&-item {
 			padding-bottom: 0.5em;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
 		}
 
 		&-price {

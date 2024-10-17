@@ -26,35 +26,44 @@
             <div class="case__buttons">
                 <button class="case__btn case__btn--back"><i
                         class="fa-solid fa-arrow-left case__icon--arrow"></i>Back</button>
+                <div class="case__buttons-amount">
+                    <button class="case__button-amount normal-btn" id="1Case">1</button>
+                    <button class="case__button-amount normal-btn" id="2Case">2</button>
+                    <button class="case__button-amount normal-btn" id="3Case">3</button>
+                    <button class="case__button-amount normal-btn" id="4Case">4</button>
+                    <button class="case__button-amount normal-btn" id="5Case">5</button>
+                </div>
                 <button class="case__btn case__btn--mute not-muted"><i class="fa-solid fa-volume-high case__icon"></i><i
                         class="fa-solid fa-volume-xmark case__icon" style="display: none;"></i></button>
             </div>
-            <div class="case__container">
-                <div class="case__middle-point"></div>
-                <div class="case__middle-triangle"></div>
-                <div class="case__middle-triangle case__middle-triangle--bottom"></div>
-                <div class="case__items">
-                </div>
+            <div class="case__allcases">
+                <div class="case__container">
+                    <div class="case__middle-point"></div>
+                    <div class="case__middle-triangle"></div>
+                    <div class="case__middle-triangle case__middle-triangle--bottom"></div>
+                    <div class="case__items">
+                    </div>
 
+                </div>
             </div>
             <button class="spin normal-btn">SPIN</button>
             <div class="case__drop-box">
             </div>
-        </div>
-        <div class="win-popup  hidden">
-            <div class="win-popup-bg">
-                <div class="win-popup__container">
-                    <p class="win-popup__title">Your drop</p>
-                    <img src="" alt="" class="win-popup__img">
-                    <p class="win-popup__item-name"></p>
-                    <p class="win-popup__item-price"></p>
-                    <div class="win-popup__buttons">
-                        <button class="win-popup__btn win-popup__btn--sell normal-btn">Sell</button>
-                        <button class="win-popup__btn win-popup__btn--take normal-btn">Take</button>
+
+            <div class="win-popup  hidden">
+                <div class="win-popup-bg">
+                    <div class="win-popup__container">
+                        <p class="win-popup__title">Your drop</p>
+                        <img src="" alt="" class="win-popup__img">
+                        <p class="win-popup__item-name"></p>
+                        <p class="win-popup__item-price"></p>
+                        <div class="win-popup__buttons">
+                            <button class="win-popup__btn win-popup__btn--sell normal-btn">Sell</button>
+                            <button class="win-popup__btn win-popup__btn--take normal-btn">Take</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </main>
     <!-- @import "../footer.kit" -->
     <script src="../dist/js/balance.min.js"></script>

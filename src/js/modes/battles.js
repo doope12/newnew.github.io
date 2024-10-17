@@ -776,56 +776,116 @@ const casesItems = {
 	},
 	case10: {
 		item0: {
-			weapon: "Butterly",
+			weapon: "Butterly Knife",
 			name: "Butterly Crimson Web",
 			skin: "Crimson Web",
 			color: "gold",
 			imgDist: "../dist/img/weapons/knives/butterfly/crimson-web.jpg",
 			price: 4339,
 			id: 96,
-			dropPercent: 5,
+			dropPercent: 0.2,
 		},
 		item1: {
-			weapon: "Butterly",
+			weapon: "Butterly Knife",
 			name: "Butterly Lore",
 			skin: "Lore",
 			color: "gold",
 			imgDist: "../dist/img/weapons/knives/butterfly/lore.jpg",
 			price: 3680.01,
 			id: 98,
-			dropPercent: 5,
+			dropPercent: 0.2,
 		},
 		item2: {
-			weapon: "Butterly",
+			weapon: "Butterly Knife",
 			name: "Butterly Fade",
 			skin: "Fade",
 			color: "gold",
 			imgDist: "../dist/img/weapons/knives/butterfly/fade.jpg",
 			price: 3239.54,
 			id: 94,
-			dropPercent: 5,
+			dropPercent: 0.2,
 		},
 		item3: {
-			weapon: "Butterly",
+			weapon: "Butterly Knife",
 			name: "Butterly Gamma Doppler",
 			skin: "Gamma Doppler",
 			color: "gold",
 			imgDist: "../dist/img/weapons/knives/butterfly/gamma-doppler.jpg",
 			price: 2635.84,
 			id: 95,
-			dropPercent: 5,
+			dropPercent: 0.2,
 		},
 		item4: {
-			weapon: "Butterly",
+			weapon: "Butterly Knife",
 			name: "Butterly Doppler",
 			skin: "Doppler",
 			color: "gold",
 			imgDist: "../dist/img/weapons/knives/butterfly/doppler.jpg",
 			price: 2357.96,
 			id: 100,
-			dropPercent: 5,
+			dropPercent: 0.2,
 		},
 		item5: {
+			weapon: "Karambit Knife",
+			name: "Karambit Knife Doppler",
+			skin: "Doppler",
+			color: "gold",
+			imgDist: "../dist/img/weapons/knives/karambit/doppler.jpg",
+			price: 1450,
+			id: 147,
+			dropPercent: 0.4,
+		},
+		item6: {
+			weapon: "Talon Knife",
+			name: "Talon Knife Fade",
+			skin: "Fade",
+			color: "gold",
+			imgDist: "../dist/img/weapons/knives/talon/fade.jpg",
+			price: 1130.66,
+			id: 134,
+			dropPercent: 0.5,
+		},
+		item7: {
+			weapon: "Talon Knife",
+			name: "Talon Knife Doppler",
+			skin: "Doppler",
+			color: "gold",
+			imgDist: "../dist/img/weapons/knives/talon/doppler.jpg",
+			price: 952.77,
+			id: 133,
+			dropPercent: 2,
+		},
+		item8: {
+			weapon: "Bayonet Knife",
+			name: "Bayonet Knife Doppler",
+			skin: "Doppler",
+			color: "gold",
+			imgDist: "../dist/img/weapons/knives/bayonet/doppler.jpg",
+			price: 572.92,
+			id: 25,
+			dropPercent: 2.5,
+		},
+		item9: {
+			weapon: "Huntsman Knife",
+			name: "Huntsman Knife Black Laminate",
+			skin: "Black Laminate",
+			color: "gold",
+			imgDist: "../dist/img/weapons/knives/huntsman/black-laminate.jpg",
+			price: 181.67,
+			id: 24,
+			dropPercent: 5,
+		},
+		item10: {
+			weapon: "Shadow Daggers",
+			name: "Shadow Daggers Bright Water",
+			skin: "Bright Water",
+			color: "gold",
+			imgDist: "../dist/img/weapons/knives/shadow-daggers/bright-water.jpg",
+			price: 92.1,
+			id: 23,
+			dropPercent: 13.6,
+		},
+		item11: {
 			weapon: "M4A4",
 			name: "M4A4 Mainframe",
 			skin: "Mainframe",
@@ -834,48 +894,6 @@ const casesItems = {
 			price: 0.07,
 			id: 80,
 			dropPercent: 75,
-		},
-	},
-	case11: {
-		item0: {
-			weapon: "AK-47",
-			name: "AK-47 Wild Lotus",
-			skin: "Wild Lotus",
-			color: "red",
-			imgDist: "../dist/img/weapons/rifles/ak-47/wild-lotus.jpg",
-			price: 12420.3,
-			id: 49,
-			dropPercent: 3.34,
-		},
-		item1: {
-			weapon: "AWP",
-			name: "AWP Gungnir",
-			skin: "Gungnir",
-			color: "red",
-			imgDist: "../dist/img/weapons/rifles/awp/gungnir.jpg",
-			price: 11709.26,
-			id: 27,
-			dropPercent: 3.33,
-		},
-		item2: {
-			weapon: "AWP",
-			name: "AWP Dragon Lore",
-			skin: "Dragon Lore",
-			color: "red",
-			imgDist: "../dist/img/weapons/rifles/awp/dragon-lore.jpg",
-			price: 11025.82,
-			id: 28,
-			dropPercent: 3.33,
-		},
-		item3: {
-			weapon: "AWP",
-			name: "AWP Safari Mesh",
-			skin: "Safari Mesh",
-			color: "light-blue",
-			imgDist: "../dist/img/weapons/rifles/awp/safari-mesh.jpg",
-			price: 2.09,
-			id: 5,
-			dropPercent: 90,
 		},
 	},
 };
@@ -2543,18 +2561,30 @@ const startBattle = () => {
 					const randomNumber = Math.floor(Math.random() * 10000);
 					let randomItem;
 
-					if (randomNumber <= 499) {
+					if (randomNumber <= 19) {
 						randomItem = 0;
-					} else if (randomNumber <= 999) {
+					} else if (randomNumber <= 39) {
 						randomItem = 1;
-					} else if (randomNumber <= 1499) {
+					} else if (randomNumber <= 59) {
 						randomItem = 2;
-					} else if (randomNumber <= 1999) {
+					} else if (randomNumber <= 79) {
 						randomItem = 3;
-					} else if (randomNumber <= 2499) {
+					} else if (randomNumber <= 99) {
 						randomItem = 4;
-					} else {
+					} else if (randomNumber <= 139) {
 						randomItem = 5;
+					} else if (randomNumber <= 189) {
+						randomItem = 6;
+					} else if (randomNumber <= 389) {
+						randomItem = 7;
+					} else if (randomNumber <= 639) {
+						randomItem = 8;
+					} else if (randomNumber <= 1139) {
+						randomItem = 9;
+					} else if (randomNumber <= 2499) {
+						randomItem = 10;
+					} else {
+						randomItem = 11;
 					}
 
 					const caseItemsBox = document.querySelector(

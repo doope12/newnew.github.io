@@ -215,12 +215,14 @@
 
 .deposit {
 	&__container {
+		margin: 0 auto;
 		padding: 1em;
+		max-width: 900px;
 		width: 100%;
 		font-size: 1.6rem;
 		border-radius: 20px;
 		box-shadow: $normal-boxshadow;
-		background-color: $main-color;
+		background: $battles-blank-item
 	}
 
 	&__label {
@@ -266,8 +268,6 @@
 		&:focus {
 			outline: none;
 		}
-
-
 	}
 
 	&__icon {

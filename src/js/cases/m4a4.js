@@ -142,7 +142,6 @@ const allCases = document.querySelector(".case__allcases");
 const casePrice = 65.0; // price of case
 let currentWinningItem; // current item that won
 let casesAmount = 1; // how many cases user will open
-let intervalId; // interval for animation
 let winningItems = []; // all winning items of current spin
 
 const createInfoAboutItemsInChest = () => {
@@ -251,7 +250,7 @@ const createItemsInChest = () => {
 
 const setBtnText = () => {
 	// function to set button text content
-	if (parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice) {
+	if (parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount) {
 		spinBtn.textContent = `open ${casePrice * casesAmount}.00$`; // if user have enought balance set button to show how much it cost
 	} else {
 		spinBtn.textContent = "add balance"; // if not set it to "add balance"
@@ -265,7 +264,7 @@ const spinCase = () => {
 
 	if (
 		// if balance of player is higher than case cost and case is not spinning then continue
-		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice &&
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount &&
 		spinBtn.textContent !== "spining"
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3"); // set open audio
@@ -296,45 +295,8 @@ const spinCase = () => {
 			box.style.left = howStrongSpin + "px"; // set how strong spin is
 			box.style.transition = "left 5s cubic-bezier(0,1,0.5,1)"; // set its animation
 
-			if (casesAmount === 1) {
-				// dynamic scaling closest item
-				intervalId = setInterval(() => {
-					function updateClosestItemScale() {
-						const items = document.querySelectorAll(".case__item"); // get all items
-						let closestItem = null;
-						let closestDistance = Infinity;
-
-						// reset scaling for all items
-						items.forEach((item) => {
-							item.firstElementChild.style.scale = "1";
-						});
-
-						// get closest item to middle point
-						items.forEach((item) => {
-							const itemCenterX =
-								item.getBoundingClientRect().x + item.offsetWidth / 2;
-							const distance = Math.abs(itemCenterX - redLineX);
-
-							if (distance < closestDistance) {
-								closestDistance = distance;
-								closestItem = item;
-							}
-						});
-
-						// make closest item scale smaller
-						if (closestItem) {
-							closestItem.firstElementChild.style.scale = "0.9";
-						}
-					}
-
-					updateClosestItemScale();
-				}, 100); // do it every 100ms
-			}
-
-			// after animation end, find winning item and stop dynamic scaling
+			// after animation end, find winning item 
 			setTimeout(() => {
-				clearInterval(intervalId); // stop dynamic scaling
-
 				function getWinningItem() {
 					// get position of middle point
 					const redLineX = box.parentElement.children[0].getBoundingClientRect().x;

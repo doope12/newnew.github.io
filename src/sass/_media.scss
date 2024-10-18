@@ -39,6 +39,12 @@
 			}
 		}
 	}
+
+	.user-mobile {
+		&__btn {
+			width: 25%;
+		}
+	}
 }
 
 @media (min-width: 768px) {
@@ -69,11 +75,12 @@
 			width: calc(14%);
 		}
 
-		&__top {
-			&-left,
-			&-right {
-				padding: 0 2em;
-			}
+		&__container {
+			padding: 2em;
+		}
+
+		&__submit-btn {
+			width: 25%;
 		}
 	}
 

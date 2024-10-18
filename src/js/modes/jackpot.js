@@ -1817,14 +1817,14 @@ const addUserItems = () => {
 };
 
 function addUserItemsToJackpot() {
-	if (choosedDiff === true) {
+	const allItemsOfPlayer = document.querySelectorAll(
+		".jackpot__playeritems-item"
+	);
+	const allItemsOfPlayerArray = Array.from(allItemsOfPlayer);
+
+	if (choosedDiff === true && userItems.length < 10) {
 		userItems = [];
 		this.classList.toggle("active-item-jackpot");
-
-		const allItemsOfPlayer = document.querySelectorAll(
-			".jackpot__playeritems-item"
-		);
-		const allItemsOfPlayerArray = Array.from(allItemsOfPlayer);
 
 		allItemsOfPlayerArray.forEach((item) => {
 			if (item.classList.contains("active-item-jackpot")) {
@@ -1835,6 +1835,17 @@ function addUserItemsToJackpot() {
 		totalSkins.textContent = userItems.length;
 
 		getTotalValueOfPlayerItems();
+	} else if (choosedDiff === true && userItems.length === 10 && this.classList.contains("active-item-jackpot")) {
+		userItems = [];
+		this.classList.toggle("active-item-jackpot");
+
+		allItemsOfPlayerArray.forEach((item) => {
+			if (item.classList.contains("active-item-jackpot")) {
+				userItems.push(item.id);
+			}
+		});
+
+		totalSkins.textContent = userItems.length;
 	}
 }
 

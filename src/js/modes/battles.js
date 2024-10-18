@@ -63,7 +63,7 @@ const cases = {
 		imgDist: "../dist/img/cases/case11.jpg",
 		imgAlt: "25% Knife Case Image",
 		name: "25% Knife",
-		price: "850.00$",
+		price: "100.00$",
 	},
 	case11: {
 		imgDist: "../dist/img/cases/case10.jpg",

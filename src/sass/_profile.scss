@@ -20,10 +20,12 @@
 	}
 
 	&__avatar {
+		position: relative;
 		margin-top: 1em;
 		height: 100px;
 		width: 100px;
 		object-fit: cover;
+		border: 2px solid $secondary-color;
 		border-radius: 10px;
 		box-shadow: $normal-boxshadow;
 	}
@@ -65,10 +67,16 @@
 	&__input {
 		padding: 0.5em;
 		width: 100%;
-		border: 1px solid $secondary-color;
+		font-size: 1.6rem;
+		border: 2px solid $border-color;
 		border-radius: 5px;
+		box-shadow: $normal-boxshadow;
 		color: $text-color;
-		background: transparent;
+		background: $tiles-color;
+		 
+		&:focus {
+			outline: 1px solid $secondary-color;
+		}
 	}
 
 	&__btn {
@@ -189,6 +197,7 @@
 			font-weight: bold;
 			letter-spacing: 1px;
 			background: $secondary-color-alpha;
+			box-shadow: $purple-boxshadow;
 			color: $text-color;
 			cursor: pointer;
 			transition: background 0.5s;
@@ -218,9 +227,9 @@
 
 	&__stats {
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		flex-wrap: wrap;
 		padding-bottom: 1em;
 
 		&-item {

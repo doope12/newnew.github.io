@@ -3,7 +3,7 @@ const mobileNavBtn = document.querySelector(".nav__hamb");
 const mobileNav = document.querySelector(".nav-mobile");
 const loginPopup = document.querySelector(".login-popup");
 const navMenu = document.querySelector(".nav__menu");
-const navMenuBtn = document.querySelector(".nav__item--menu");
+const navMenuBtn = document.querySelector(".nav__link--btn");
 
 const setActiveSite = () => {
 	// checks at which site we are and add style to nav 

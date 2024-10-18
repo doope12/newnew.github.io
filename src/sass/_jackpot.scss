@@ -78,7 +78,7 @@
 			margin: 0.5em 0;
 			border-radius: 10px;
 			box-shadow: $normal-boxshadow;
-			background-color: $main2-color;
+			background: $jackpot-player-color;
 			color: $text-color;
 
 			&-info {
@@ -184,14 +184,12 @@
 		margin: 2em 0;
 		border-radius: 20px;
 		box-shadow: $normal-boxshadow;
-		background-color: $main2-color;
+		background: $dropbox-bg;
 		color: $text-color;
 
-		&-amount {
-			color: $secondary-color;
-		}
-
+		&-amount,
 		&-items-amount {
+			padding-left: 0.25em;
 			color: $secondary-color;
 		}
 
@@ -200,6 +198,14 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+		}
+
+		&-value,
+		&-right {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 33%;
 		}
 
 		&-item {

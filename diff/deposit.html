@@ -49,7 +49,8 @@
                     </li>
                     <li class="nav__item nav__item--menu">
                         <div class="nav__link-bg hidden"></div>
-                        <p class="nav__link">Other<i class="fa-solid fa-arrow-down nav__icon"></i></p>
+                        <button class="nav__link nav__link--btn">Other<i
+                                class="fa-solid fa-arrow-down nav__icon"></i></button>
                         <div class="nav__menu hidden">
                             <div class="nav__menu-item">
                                 <a href="../modes/crash.html" class="nav__link"><i
@@ -164,7 +165,7 @@
         <h3 class="login-pop__title">Sing in</h3>
         <input id="login-img" class="login-popup__input" type="text" placeholder="Avatar URL">
         <input id="login-nickname" class="login-popup__input" type="text" placeholder="Nickname">
-        <button class="login-popup__btn">Create Account</button>
+        <button class="login-popup__btn normal-btn">Create Account</button>
         <i class="fa-solid fa-xmark login-popup__icon"></i>
     </div>
 </div>
@@ -187,7 +188,7 @@
                                 <label for="" class="deposit__label">How much you want to deposit
                                 </label>
                                 <div class="deposit__label-container">
-                                    <input id="deposit-amount" type="number" class="deposit__input"
+                                    <input id="deposit-amount" type="text" oninput="formatCurrency(this)" class="deposit__input"
                                         placeholder="00.00$">
                                     <button class="deposit__clear-btn"><i
                                             class="fa-solid fa-xmark deposit__icon"></i></button>

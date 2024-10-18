@@ -30,7 +30,7 @@
 			top: 50%;
 			height: 1px;
 			width: 100%;
-			background: $title-gradient-line;
+			background: $title-gradient-line-before;
 		}
 
 		&-span--color {
@@ -40,11 +40,11 @@
 		&-bg {
 			position: relative;
 			padding: 0 1em;
-			background-color: $main-color;
+			// background-color: $main-color;
 			z-index: 10;
 
 			&--2 {
-				background-color: $main2-color;
+				// background-color: $main2-color;
 			}
 		}
 	}
@@ -226,10 +226,15 @@
 	&__label {
 		&-container {
 			display: flex;
+			justify-content: center;
 			align-items: center;
 			margin-bottom: 1em;
 			margin-top: 0.5em;
+			border: 2px solid $border-color;
+			border-radius: 10px;
 			box-shadow: $normal-boxshadow;
+			background: $tiles-color;
+			overflow: hidden;
 		}
 	}
 
@@ -240,8 +245,12 @@
 		border-top-left-radius: 10px;
 		border-bottom-left-radius: 10px;
 		border: none;
-		background: $main2-color;
+		background: $tiles-color;
 		color: $text-color;
+
+		&:focus {
+			outline: none;
+		}
 	}
 
 	&__clear-btn {
@@ -251,8 +260,14 @@
 		border: none;
 		border-top-right-radius: 10px;
 		border-bottom-right-radius: 10px;
-		background: $main2-color;
+		background: $tiles-color;
 		cursor: pointer;
+
+		&:focus {
+			outline: none;
+		}
+
+
 	}
 
 	&__icon {
@@ -289,7 +304,7 @@
 		display: block;
 		margin: 0 auto;
 		margin-top: 1em;
-		max-width: 600px;
+		max-width: 300px;
 		width: 100%;
 		box-shadow: $purple-boxshadow;
 	}

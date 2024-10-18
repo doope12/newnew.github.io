@@ -19,7 +19,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
-	background-color: $main-color;
+	background: $main-color;
 }
 
 main {
@@ -32,6 +32,7 @@ button {
 	// font-family: "Nunito", sans-serif;
 	font-family: "Exo 2", sans-serif;
 	letter-spacing: 1px;
+	font-weight: bold;
 }
 
 body::-webkit-scrollbar-track {

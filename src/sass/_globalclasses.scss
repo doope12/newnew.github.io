@@ -489,6 +489,7 @@
 	text-transform: uppercase;
 	font-weight: bold;
 	letter-spacing: 1px;
+	box-shadow: $purple-boxshadow;
 	background: $secondary-color-alpha;
 	color: $text-color;
 	cursor: pointer;
@@ -508,7 +509,13 @@
 }
 
 .active-case-popup {
-	background-color: $tiles-color;
+	border: 1px solid $secondary-color;
+	background: $tiles-color;
+	transform: translateY(-5px);
+
+	img {
+		scale: 0.9;
+	}
 }
 
 .dot-active {
@@ -534,6 +541,7 @@
 
 .jackpot-red {
 	background: $jackpot-red;
+	// background-image: url("../svg/lines.svg");
 }
 
 .jackpot-blue {
@@ -662,7 +670,7 @@
 }
 
 .active-item-jackpot {
-	border: 2px solid gold;
+	border: 2px solid $secondary-color;
 	transform: translateY(-5px);
 
 	img {

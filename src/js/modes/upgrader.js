@@ -1629,14 +1629,14 @@ const countPercent = () => {
 
 		if (percentForWin >= 100) {
 			percentageText.textContent = "100%";
-			circle.style.background = `conic-gradient(#cfa0ff 0 100%, rgb(40, 40, 40) 100% 100%)`;
+			circle.style.background = `conic-gradient(#ebde92 0 100%, rgba(0, 0, 0, 0.1) 100% 100%)`;
 		} else {
 			percentageText.textContent = percentForWin.toFixed(2) + "%";
-			circle.style.background = `conic-gradient(#cfa0ff 0 ${percentForWin}%, rgb(40, 40, 40) ${percentForWin}% 100%)`;
+			circle.style.background = `conic-gradient(#ebde92 0 ${percentForWin}%, rgba(0, 0, 0, 0.1) ${percentForWin}% 100%)`;
 		}
 	} else {
 		percentageText.textContent = "0.00%";
-		circle.style.background = `conic-gradient(#cfa0ff 0 0%, rgb(40, 40, 40) 0 100%)`;
+		circle.style.background = `conic-gradient(#ebde92 0 0%, rgba(0, 0, 0, 0.1) 0 100%)`;
 	}
 };
 

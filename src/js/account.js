@@ -32,6 +32,9 @@ const addListeners = () => {
 };
 
 const checkIfUserCreatedAccount = () => {
+	// check if user created account
+	// if didnt then show up "sign up" box
+	// if did create account then add values to profile
 	if (
 		localStorage.getItem("createdAccount") === null ||
 		localStorage.getItem("createdAccount") === NaN
@@ -51,6 +54,7 @@ const checkIfUserCreatedAccount = () => {
 		nicknameMobile.textContent = localStorage.getItem("nickname");
 	}
 
+	// if stats are not added but account is created then create them (fixes error that if someone crated account before stats were added it add him stats)
 	if (localStorage.getItem("createdAccount") == 1) {
 		if (
 			localStorage.getItem("battlesWon") === null ||
@@ -127,6 +131,7 @@ const checkIfUserCreatedAccount = () => {
 };
 
 const loginToAccount = () => {
+	// login to account
 	if (localStorage.getItem("createdAccount") === "1") {
 		loginPopup.classList.add("hidden");
 		logoutFromAccount();
@@ -145,13 +150,15 @@ const loginToAccount = () => {
 };
 
 const logoutFromAccount = () => {
+	// log user out
 	loggedIn.classList.toggle("hidden");
 	loggedOut.classList.toggle("hidden");
 	loggedInMobile.classList.toggle("hidden");
 	loggedOutMobile.classList.toggle("hidden");
 };
 
-const createAccount = () => {
+const createAccount = () => { 
+	// creates account and stats
 	if (loginPopupImg.value !== "" && loginPopupNickname.value !== "") {
 		localStorage.setItem("createdAccount", 1);
 		localStorage.setItem("avatar", `${loginPopupImg.value}`);
@@ -169,7 +176,7 @@ const createAccount = () => {
 	}
 };
 
-const changeSiteToProfile = () => {
+const changeSiteToProfile = () => { // depending on where we are change link
 	if (document.body.id === "index") {
 		open("./diff/profile.html", "_self");
 	} else {

@@ -1378,7 +1378,7 @@ const setDropBoxHeight = () => {
 	dropBox.style.height = lastDropList.offsetHeight + "px";
 };
 
-const createDropOnStart = () => {
+const createDropOnStart = () => { // add 24 random drops on page load
 	for (i = 0; i < 24; i++) {
 		dropListOrder++;
 		const item = document.createElement("li");
@@ -1406,7 +1406,7 @@ const createDropOnStart = () => {
 	}
 };
 
-const createDropAfterStart = () => {
+const createDropAfterStart = () => { // creates random drop from all items in data base every 2.5s
 	dropListOrder++;
 	const lastDropListFirstChild = lastDropList.firstElementChild;
 	const item = document.createElement("li");

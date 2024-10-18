@@ -1855,7 +1855,7 @@ const getTotalValueOfPlayerItems = () => {
 };
 
 const addPlayerToJackpot = () => {
-	if (choosedDiff === true && userItems.length <= 10) {
+	if (choosedDiff === true && userItems.length <= 10 && userDidJoin === false) {
 		const allItemsOfPlayer = document.querySelectorAll(
 			".jackpot__playeritems-item"
 		);

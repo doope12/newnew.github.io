@@ -34,8 +34,9 @@
 	.battles {
 		&__popup {
 			&-container {
-				height: 800px;
-				border-radius: 20px;
+				min-height: 300px;
+				max-height: 800px;
+				border-radius: 5px;
 			}
 		}
 	}

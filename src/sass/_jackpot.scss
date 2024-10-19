@@ -208,6 +208,14 @@
 			width: 33%;
 		}
 
+		&-value--left {
+			justify-content: flex-start;
+		}
+
+		&-right {
+			justify-content: flex-end;
+		}
+
 		&-item {
 			background-color: red;
 			width: 200px;

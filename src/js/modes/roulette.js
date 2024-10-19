@@ -171,6 +171,7 @@ const resetVariables = () => {
 	totalRedValue = 0;
 	totalBlackValue = 0;
 	totalGreenValue = 0;
+	maxBetAmount = parseFloat(localStorage.getItem("Balance")).toFixed(2);
 	setTotal();
 };
 

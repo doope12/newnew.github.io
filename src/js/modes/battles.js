@@ -896,6 +896,48 @@ const casesItems = {
 			dropPercent: 75,
 		},
 	},
+	case11: {
+		item0: {
+			weapon: "AK-47",
+			name: "AK-47 Wild Lotus",
+			skin: "Wild Lotus",
+			color: "red",
+			imgDist: "../dist/img/weapons/rifles/ak-47/wild-lotus.jpg",
+			price: 12420.3,
+			id: 49,
+			dropPercent: 3.34,
+		},
+		item1: {
+			weapon: "AWP",
+			name: "AWP Gungnir",
+			skin: "Gungnir",
+			color: "red",
+			imgDist: "../dist/img/weapons/rifles/awp/gungnir.jpg",
+			price: 11709.26,
+			id: 27,
+			dropPercent: 3.33,
+		},
+		item2: {
+			weapon: "AWP",
+			name: "AWP Dragon Lore",
+			skin: "Dragon Lore",
+			color: "red",
+			imgDist: "../dist/img/weapons/rifles/awp/dragon-lore.jpg",
+			price: 11025.82,
+			id: 28,
+			dropPercent: 3.33,
+		},
+		item3: {
+			weapon: "AWP",
+			name: "AWP Safari Mesh",
+			skin: "Safari Mesh",
+			color: "light-blue",
+			imgDist: "../dist/img/weapons/rifles/awp/safari-mesh.jpg",
+			price: 2.09,
+			id: 5,
+			dropPercent: 90,
+		},
+	},
 };
 
 const allItems = {

@@ -2109,6 +2109,7 @@ const createCaseBoxesBasedOnPlayers = () => {
 		parseFloat(totalCostOfCases.textContent) <=
 		parseFloat(localStorage.getItem("Balance"))
 	) {
+		incrementBattles();
 		let players = 2;
 
 		allCheckboxes.forEach((item) => {
@@ -3192,7 +3193,6 @@ const addListeners = () => {
 	});
 
 	startBtn.addEventListener("click", createCaseBoxesBasedOnPlayers);
-	startBtn.addEventListener("click", incrementBattles);
 	closePopupBtn.addEventListener("click", toggleAddCasesPopup);
 };
 

@@ -1875,6 +1875,7 @@ let currentItemWonByPlayer = [];
 let droppedItems = [];
 let moveCaseLeft = 50;
 let currentRound = 1;
+let battleCost = 0;
 
 const casesOpenedText = document.querySelector("#casesopened");
 const battlesCreatedText = document.querySelector("#battlescreated");
@@ -2115,6 +2116,7 @@ const createCaseBoxesBasedOnPlayers = () => {
 		parseFloat(localStorage.getItem("Balance"))
 	) {
 		incrementBattles();
+		battleCost = parseFloat(totalCostOfCases.textContent);
 		let players = 2;
 
 		allCheckboxes.forEach((item) => {
@@ -3079,7 +3081,18 @@ const winningAnimationEnd = () => {
 		endAmount = endAmount + parseFloat(item.textContent);
 	});
 
-	winningPlayer.textContent = endAmount.toFixed(2) + "$";
+	const profitOrNot = endAmount - battleCost;
+
+	if (profitOrNot > 0) {
+		winningPlayer.textContent = `+${profitOrNot.toFixed(2)}$`;
+		winningPlayer.classList.remove("not-profit")
+		winningPlayer.classList.add("profit")
+	} else {
+		winningPlayer.textContent = `${profitOrNot.toFixed(2)}$`;
+		winningPlayer.classList.add("not-profit")
+		winningPlayer.classList.remove("profit")
+	}
+
 	backBtn.classList.remove("hidden");
 };
 

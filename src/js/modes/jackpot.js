@@ -1396,6 +1396,8 @@ const userItemsPagePrevious = document.querySelector(
 	".upgrader__list-btn--left"
 );
 const userItemsPageNext = document.querySelector(".upgrader__list-btn--right");
+const currentPageText = document.querySelector("#page-current")
+const totalPageText = document.querySelector("#page-total")
 const timeForStart = 30000;
 const timeForRestart = 29950;
 let itemsToWin = [];
@@ -2213,17 +2215,9 @@ const renderItems = () => {
 	});
 
 	const allUserItemsPages = Math.ceil(filteredItems.length / itemsPerPage);
-	dotsBox.innerHTML = "";
-
-	for (i = 0; i < allUserItemsPages; i++) {
-		const dot = document.createElement("div");
-		dot.classList.add("profile__dot");
-		dotsBox.append(dot);
-
-		if (currentPage === i + 1) {
-			dot.classList.add("dot-active");
-		}
-	}
+	
+	currentPageText.textContent = currentPage
+	totalPageText.textContent = allUserItemsPages;
 
 	if (currentPage === 1) {
 		userItemsPagePrevious.style.display = "none";

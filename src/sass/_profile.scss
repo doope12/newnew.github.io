@@ -208,21 +208,15 @@
 		}
 	}
 
-	&__dotsbox {
+	&__pages {
 		display: flex;
 		justify-content: center;
 		position: absolute;
 		bottom: 10px;
 		left: 50%;
 		transform: translate(-50%);
-	}
-
-	&__dot {
-		margin: 0 0.5em;
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		background-color: rgba(255, 255, 255, 0.4);
+		color: $secondary-color;
+		letter-spacing: 3px;
 	}
 
 	&__stats {

@@ -1396,6 +1396,10 @@ const allItemsPagePrevious = document.querySelector(
 const allItemsPageNext = document.querySelector(
 	".upgrader__list-btn--rightall"
 );
+const currentUserPageText = document.querySelector("#page-current-left")
+const totalUserPageText = document.querySelector("#page-total-left")
+const currentAllPageText = document.querySelector("#page-current-right")
+const totalAllPageText = document.querySelector("#page-total-right")
 let spinning = 0;
 let currentPageUser = 1;
 let currentPageAll = 1;
@@ -1840,17 +1844,7 @@ const renderItems = () => {
 	});
 
 	const allUserItemsPages = Math.ceil(userItemsArray.length / itemsPerPage);
-	dotsBoxLeft.innerHTML = "";
-
-	for (i = 0; i < allUserItemsPages; i++) {
-		const dot = document.createElement("div");
-		dot.classList.add("upgrader__dot");
-		dotsBoxLeft.append(dot);
-
-		if (currentPageUser === i + 1) {
-			dot.classList.add("dot-active");
-		}
-	}
+	
 
 	// Render all items
 	let allItems = document.querySelectorAll(".upgrader__item-allitems");
@@ -1875,7 +1869,6 @@ const renderItems = () => {
 	const totalAllPages = Math.ceil(filteredItemsCount / itemsPerPage);
 
 	const allItemsPages = Math.ceil(filteredItemsArray.length / itemsPerPage);
-	dotsBoxRight.innerHTML = "";
 
 	// Check if current page is not out of available pages
 	if (currentPageAll > totalAllPages) {
@@ -1893,16 +1886,6 @@ const renderItems = () => {
 	filteredItemsArray.slice(allStartIndex, allEndIndex).forEach((item) => {
 		item.style.display = "flex";
 	});
-
-	for (i = 0; i < allItemsPages; i++) {
-		const dot = document.createElement("div");
-		dot.classList.add("upgrader__dot");
-		dotsBoxRight.append(dot);
-
-		if (currentPageAll === i + 1) {
-			dot.classList.add("dot-active");
-		}
-	}
 
 	if (currentPageUser === 1) {
 		userItemsPagePrevious.style.display = "none";
@@ -1927,6 +1910,11 @@ const renderItems = () => {
 	} else {
 		allItemsPageNext.style.display = "block";
 	}
+
+	currentUserPageText.textContent = currentPageUser
+	totalUserPageText.textContent = allUserItemsPages;
+	currentAllPageText.textContent = currentPageAll
+	totalAllPageText.textContent = totalAllPages;
 };
 
 // This function changed current page

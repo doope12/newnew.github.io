@@ -1407,6 +1407,8 @@ const statsCoinflip = document.querySelector(
 	".profile__stats-amount--coinflip"
 );
 const statsSaper = document.querySelector(".profile__stats-amount--saper");
+const currentPageText = document.querySelector("#page-current")
+const totalPageText = document.querySelector("#page-total")
 let currentPage = 1; // current page of user items
 const itemsPerPage = 10; // max items per page
 
@@ -1610,17 +1612,9 @@ const renderItems = () => { // set items on pages
 	const allUserItemsPages = Math.ceil(
 		allItemsOfUserArray.length / itemsPerPage
 	); // get total amount of pages
-	dotsBox.innerHTML = ""; // clear dots container
 
-	for (i = 0; i < allUserItemsPages; i++) { // created dots based of pages amount
-		const dot = document.createElement("div"); // dot element
-		dot.classList.add("profile__dot"); // add classes
-		dotsBox.append(dot); // append dot to dots container
-
-		if (currentPage === i + 1) {
-			dot.classList.add("dot-active"); // if current dot is same as current page set it to active
-		}
-	}
+	currentPageText.textContent = currentPage
+	totalPageText.textContent = allUserItemsPages;
 
 	if (currentPage === 1) {
 		userItemsPagePrevious.style.display = "none"; // if current page is page one hide previous page button

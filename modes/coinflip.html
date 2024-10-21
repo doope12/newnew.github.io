@@ -7,7 +7,7 @@
     <meta name="author" content="Ludzik">
     <meta name="description" content="CSGO Gambling website.">
     <meta name="keywords" content="CSGO, Cases, Upgrader, Roulette, Crash.">
-    <title>EzSkins - Redline Case</title>
+    <title>EzSkins - Coinflip</title>
     <link rel="shortcut icon" href="../dist/img/favicon.jpg" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
 <script src="https://kit.fontawesome.com/bdb2f8ae99.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body id="battles">
     <nav class="nav">
     <div class="wrapper">
         <div class="nav__container">
@@ -178,50 +178,19 @@
     </div>
 </section>
         <div class="wrapper">
-            <div class="case__buttons">
-                <div class="case__button-container case__button-container--left">
-                    <button class="case__btn case__btn--back"><i
-                            class="fa-solid fa-arrow-left case__icon--arrow"></i>Back</button>
-                </div>
-                <div class="case__buttons-amount">
-                    <button class="case__button-amount normal-btn" id="1Case">1</button>
-                    <button class="case__button-amount normal-btn" id="2Case">2</button>
-                    <button class="case__button-amount normal-btn" id="3Case">3</button>
-                    <button class="case__button-amount normal-btn" id="4Case">4</button>
-                    <button class="case__button-amount normal-btn" id="5Case">5</button>
-                </div>
-                <div class="case__button-container">
-                    <button class="case__btn case__btn--mute not-muted"><i
-                            class="fa-solid fa-volume-high case__icon"></i><i
-                            class="fa-solid fa-volume-xmark case__icon" style="display: none;"></i></button>
-                </div>
-            </div>
-            <div class="case__allcases">
-                <div class="case__container">
-                    <div class="case__middle-point"></div>
-                    <div class="case__middle-triangle"></div>
-                    <div class="case__middle-triangle case__middle-triangle--bottom"></div>
-                    <div class="case__items">
-                    </div>
-
-                </div>
-            </div>
-            <button class="spin normal-btn">SPIN</button>
-            <div class="case__drop-box">
-            </div>
-        </div>
-        </div>
-        <div class="win-popup hidden">
-            <div class="win-popup-bg">
-                <div class="win-popup__container">
-                    <p class="win-popup__title">Your drop</p>
-                    <img src="" alt="" class="win-popup__img">
-                    <p class="win-popup__item-name"></p>
-                    <p class="win-popup__item-price"></p>
-                    <div class="win-popup__buttons">
-                        <button class="win-popup__btn win-popup__btn--sell normal-btn">Sell</button>
-                        <button class="win-popup__btn win-popup__btn--take normal-btn">Take</button>
-                    </div>
+            <div class="main__container">
+                <h2 class="section__title section__title--cases"><span class="section__title-bg">Coinflip</span></h2>
+                <div class="gamemode__inputs">
+                    <input type="text" class="gamemode__input" value="0">
+                    <button class="gamemode__btn" id="clear">clear</button>
+                    <button class="gamemode__btn" id="last">last</button>
+                    <button class="gamemode__btn" id="+1">+1</button>
+                    <button class="gamemode__btn" id="+10">+10</button>
+                    <button class="gamemode__btn" id="+100">+100</button>
+                    <button class="gamemode__btn" id="+1000">+1000</button>
+                    <button class="gamemode__btn" id="1/2">1/2</button>
+                    <button class="gamemode__btn" id="x2">x2</button>
+                    <button class="gamemode__btn" id="max">max</button>
                 </div>
             </div>
         </div>
@@ -231,14 +200,7 @@
     <p>
         <a href="https://github.com/Ludzikk" class="footer__link"><i class="fa-brands fa-github footer__icon"></i></a>
 </footer>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <script type="module" src="./dist/js/firebase.min.js"></script>
-    <script src="../dist/js/balance.min.js"></script>
-    <script src="../dist/js/cases/redline.min.js"></script>
     <script src="../dist/js/last-drops.min.js"></script>
+    <script src="../dist/js/balance.min.js"></script>
     <script src="../dist/js/account.min.js"></script>
     <script src="../dist/js/script.min.js"></script>
-</body>
-
-</html>

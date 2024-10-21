@@ -2,16 +2,16 @@ const rouletteBox = document.querySelector(".roulette__items");
 const lastDropsBox = document.querySelector(".roulette__lastdrops-box");
 const timerLine = document.querySelector(".roulette__timerbox-line");
 const timerText = document.querySelector(".roulette__timerbox-time");
-const inputBtn = document.querySelectorAll(".roulette__btn");
-const input = document.querySelector(".roulette__input");
+const inputBtn = document.querySelectorAll(".gamemode__btn");
+const input = document.querySelector(".gamemode__input");
 const betBtn = document.querySelectorAll(".roulette__bet-top-btn");
 const betsRed = document.querySelector(".roulette__bet-bottom--red");
 const betsBlack = document.querySelector(".roulette__bet-bottom--black");
 const betsGreen = document.querySelector(".roulette__bet-bottom--green");
-const timeForStart = 15000;
-const timeForRestart = 14950;
-let dropOrder = -1;
-let timer = 15000;
+const timeForStart = 15000; // after how much time roulette start spinning
+const timeForRestart = 14950; // restarting roulette
+let dropOrder = -1; // order for last drop
+let timer = 15000; // timer to count time down from
 let lastBetAmount = 0;
 let maxBetAmount = parseFloat(localStorage.getItem("Balance")).toFixed(2);
 let didBetRed = false;
@@ -28,6 +28,7 @@ let totalBlackValue = 0;
 let totalGreenValue = 0;
 let previousItem = null;
 
+// This function is for timer to count down
 const startTimer = () => {
 	let seconds = Math.floor(timer / 1000);
 	let milliseconds = (timer % 1000) / 10;
@@ -39,25 +40,36 @@ const startTimer = () => {
 		timer -= 10;
 	} else {
 		clearInterval(timerInterval);
-		timerText.textContent = "0:00s"; // Wyzerowanie licznika po zakończeniu
+		timerText.textContent = "0:00s"; // Reset text after counting
 		return;
 	}
 };
 
-timerInterval = setInterval(startTimer, 10);
+timerInterval = setInterval(startTimer, 10); // start clock
 
+// adds anim to timer line
 const addLineAnim = () => {
 	timerLine.classList.add("roulette-timer");
 };
 
+// This function start roulette and get winning item
 const startRoulette = () => {
+	// Random strength of spin
 	const howStrongSpin = Math.floor(Math.random() * 7400 - 14800);
+
+	// Sets spin strength and animation
 	rouletteBox.style.transition = "left 5s cubic-bezier(0,1,0.5,1)";
 	rouletteBox.style.left = `${howStrongSpin}px`;
+
 	timerLine.classList.remove("roulette-timer");
+
+	// Set spinning to true
 	spinning = true;
+
+	// Stop creaing new random players
 	clearInterval(playerInterval);
 
+	// Set closest item number to be bigger. Its visual clue whats winning item
 	const intervalId = setInterval(() => {
 		const redLineX = document
 			.querySelector(".roulette__middle-point")
@@ -96,8 +108,7 @@ const startRoulette = () => {
 	}, 30);
 
 	setTimeout(() => {
-		clearInterval(intervalId); // Zatrzymaj dynamiczne skalowanie po zakończeniu animacji
-
+		clearInterval(intervalId); // Stops dynamic scaling after animation end
 		const redLineX = document
 			.querySelector(".roulette__middle-point")
 			.getBoundingClientRect().x;
@@ -123,6 +134,7 @@ const startRoulette = () => {
 
 		const winningItem = getWinningItem();
 		if (winningItem) {
+			// If player did bet on anything then call next function
 			if (
 				didBetBlack !== false ||
 				didBetRed !== false ||
@@ -147,6 +159,7 @@ const startRoulette = () => {
 	}, 5000);
 };
 
+// Counting to reset and start
 const startCountingToNewStart = () => {
 	setTimeout(() => {
 		resetRoulette();
@@ -157,6 +170,7 @@ const startCountingToNewStart = () => {
 	}, timeForStart);
 };
 
+// reset everything
 const resetVariables = () => {
 	spinning = false;
 	howMuchBetRed = 0;
@@ -175,11 +189,13 @@ const resetVariables = () => {
 	setTotal();
 };
 
+// reset "anim"
 const resetRoulette = () => {
 	rouletteBox.style.transition = "0.1s";
 	rouletteBox.style.left = "0px";
 };
 
+// create item to last drops based on drop
 const createItemToLastDrops = (winningItem) => {
 	const dropItem = document.createElement("p");
 	dropItem.classList.add("roulette__lastdrops-item");
@@ -198,6 +214,7 @@ const createItemToLastDrops = (winningItem) => {
 	lastDropsBox.append(dropItem);
 };
 
+// get btns value and put it to input
 function useInputBtn() {
 	switch (this.id) {
 		case "clear":
@@ -230,9 +247,10 @@ function useInputBtn() {
 	}
 }
 
+// if player won add amount to balance
 const checkIfPlayerWon = (winningItem) => {
 	const winAudio = new Audio("../dist/audio/upgrader-win.wav");
-	const lostAudio = new Audio("../dist/audio/upgrader-lost.wav");
+	// const lostAudio = new Audio("../dist/audio/upgrader-lost.wav");
 
 	if (
 		didBetBlack === true &&
@@ -286,7 +304,9 @@ const checkIfPlayerWon = (winningItem) => {
 	}
 };
 
+// adds player bet
 function addBet() {
+	// if value of bet is not 0 and roulette is spinning and if user actually have money that he wants to bet
 	if (
 		input.value > 0 &&
 		spinning === false &&
@@ -391,6 +411,7 @@ function addBet() {
 	}
 }
 
+// create random players
 const createRandomPlayers = () => {
 	const doOrNot = Math.floor(Math.random() * 4);
 
@@ -493,6 +514,7 @@ const createRandomPlayers = () => {
 	}
 };
 
+// sorting bets from highest to lowest
 const sortBetsByAmount = () => {
 	const allBetsRed = document.querySelectorAll(".roulette__bet-item--red");
 	const allBetsRedArray = Array.from(allBetsRed);
@@ -539,6 +561,7 @@ const sortBetsByAmount = () => {
 	setTotal();
 };
 
+// set total value of bets of each colors
 const setTotal = () => {
 	const totalRed = document.querySelector(".roulette__bet-total--red");
 	const totalBlack = document.querySelector(".roulette__bet-total--black");

@@ -170,6 +170,7 @@
 		z-index: 1000;
 
 		&-container {
+			position: relative;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -215,6 +216,23 @@
 
 			&:hover img {
 				scale: 0.9;
+			}
+		}
+
+		&-closebtn {
+			position: absolute;
+			right: 10px;
+			top: 10px;
+			padding: 0.25em;
+			font-size: 2.2rem;
+			border: none;
+			background: none;
+			color: $text-color;
+			cursor: pointer;
+			transition: color 0.5s;
+	
+			&:hover {
+				color: $secondary-color;
 			}
 		}
 

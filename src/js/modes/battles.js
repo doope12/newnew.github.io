@@ -1866,19 +1866,23 @@ const caseBoxesContainer = document.querySelector(
 const optionsBox = document.querySelector(".battles__options");
 const casesLeftBox = document.querySelector(".battles__casesleft-itembox");
 const casesLeftDiv = document.querySelector(".battles__casesleft");
+const closePopupBtn = document.querySelector(".battles__popup-closebtn");
 let currentBattleCases = [];
 let currentItemWonByPlayer = [];
 let moveCaseLeft = 50;
 
+// toggle cases popup (window to add cases to battle)
 const toggleAddCasesPopup = () => {
 	casesPopup.classList.toggle("hidden");
 	document.body.classList.toggle("body-scroll");
 };
 
+// sets selected case to active
 function selectCaseToAdd() {
 	this.classList.toggle("active-case-popup");
 }
 
+// adds selected cases for battle to array
 const addSelectedCases = () => {
 	const allCasesToAddArray = Array.from(allCasesToAdd);
 	const allCheckedCases = [];
@@ -1992,6 +1996,7 @@ const addSelectedCases = () => {
 	toggleAddCasesPopup();
 };
 
+// counts total cost of cases in battle
 const countTotalCost = () => {
 	const allAddedCases = document.querySelectorAll(".battles__item");
 	let cost = 0;
@@ -2006,6 +2011,7 @@ const countTotalCost = () => {
 	totalCostOfCases.textContent = cost.toFixed(2) + "$";
 };
 
+// user can change amount case
 function changeCasesAmount() {
 	let amount = parseInt(this.parentElement.children[1].textContent);
 
@@ -2023,6 +2029,7 @@ function changeCasesAmount() {
 	countTotalCost();
 }
 
+// check only one option and all other are not checked
 function setPlayersAmount() {
 	allCheckboxes.forEach((item) => {
 		item.checked = false;
@@ -2031,6 +2038,7 @@ function setPlayersAmount() {
 	this.checked = true;
 }
 
+// creates cases left box and add all cases in battle to it
 const createLeftCasesList = () => {
 	for (i = 0; i < currentBattleCases.length; i++) {
 		const itemBox = document.createElement("div");
@@ -2047,6 +2055,7 @@ const createLeftCasesList = () => {
 	}
 };
 
+// create player boxes depending on how much players user choosed to be in battle
 const createCaseBoxesBasedOnPlayers = () => {
 	if (
 		parseFloat(totalCostOfCases.textContent) <=
@@ -2128,6 +2137,7 @@ const createCaseBoxesBasedOnPlayers = () => {
 	}
 };
 
+// set balance of user after creating battle
 const setBalanceAfterStart = () => {
 	const balanceToRemove =
 		parseFloat(localStorage.getItem("Balance")) -
@@ -2136,6 +2146,7 @@ const setBalanceAfterStart = () => {
 
 	setBalance();
 };
+
 
 const countCasesOnStart = () => {
 	const allAddedCases = document.querySelectorAll(".battles__item");
@@ -2154,6 +2165,7 @@ const countCasesOnStart = () => {
 	startBattle();
 };
 
+// start battle
 const startBattle = () => {
 	const allCasesBoxes = document.querySelectorAll(".battles__battle-items");
 
@@ -2769,6 +2781,7 @@ const startBattle = () => {
 	}
 };
 
+// if we have draw after battle then choose winner by jackpot
 const winningAnimationJackpot = (players) => {
 	const jackpotDiv = document.querySelector(".battles__jackpot");
 	const jackpotBox = document.querySelector(".battles__jackpot-box");
@@ -2942,6 +2955,7 @@ const winningAnimationJackpot = (players) => {
 	}, 500);
 };
 
+// if we clearly got winner 
 const winningAnimationEnd = () => {
 	const playersBoxes = document.querySelectorAll(".battles__battle");
 	const playersBoxesArray = Array.from(playersBoxes);
@@ -2980,6 +2994,7 @@ const winningAnimationEnd = () => {
 	}, 2500);
 };
 
+// adds won items to inv
 const addWonItemsToInv = () => {
 	for (i = 0; i < currentItemWonByPlayer.length; i++) {
 		if (
@@ -2998,6 +3013,7 @@ const addWonItemsToInv = () => {
 	localStorage.setItem("battlesWon", battlesWonToAdd);
 };
 
+// spin each case
 const spinCase = () => {
 	const allCasesBoxes = document.querySelectorAll(".battles__battle-items");
 	const caseOpeningSound = new Audio("../dist/audio/open.mp3");
@@ -3115,6 +3131,7 @@ const addListeners = () => {
 	});
 
 	startBtn.addEventListener("click", createCaseBoxesBasedOnPlayers);
+	closePopupBtn.addEventListener("click", toggleAddCasesPopup);
 };
 
 addListeners();

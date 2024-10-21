@@ -6,7 +6,7 @@ const navMenu = document.querySelector(".nav__menu");
 const navMenuBtn = document.querySelector(".nav__link--btn");
 
 const setActiveSite = () => {
-	// checks at which site we are and add style to nav 
+	// checks at which site we are and add style to nav
 	if (document.body.id === "upgrader") {
 		// check file name
 		navItem.forEach((item) => {
@@ -67,15 +67,18 @@ const addListeners = () => {
 };
 
 const toggleMobileNav = () => {
-	if (!mobileNav.classList.contains("hidden")) { // after clicking on hamburger button check if mobileNav is not hidden
+	if (!mobileNav.classList.contains("hidden")) {
+		// after clicking on hamburger button check if mobileNav is not hidden
 		mobileNav.classList.add("hide-nav"); // add hide animation
 		mobileNavBtn.classList.toggle("is-active"); // toggle button animation
 		document.body.classList.toggle("body-scroll"); // toggle body scroll
-		setTimeout(() => { // after 0.5s remove animation from nav and add display hidden to it
+		setTimeout(() => {
+			// after 0.5s remove animation from nav and add display hidden to it
 			mobileNav.classList.remove("hide-nav");
 			mobileNav.classList.toggle("hidden");
 		}, 500);
-	} else { // if mobileNav is hidden, make sure that hide nav animation is no added and show mobileNav
+	} else {
+		// if mobileNav is hidden, make sure that hide nav animation is no added and show mobileNav
 		mobileNavBtn.classList.toggle("is-active");
 		mobileNav.classList.toggle("hidden");
 		document.body.classList.toggle("body-scroll");
@@ -84,17 +87,21 @@ const toggleMobileNav = () => {
 };
 
 const toggleNavMenu = () => {
-	if (!navMenu.classList.contains("hidden")) { // if menu with links is not hidden
+	if (!navMenu.classList.contains("hidden")) {
+		// if menu with links is not hidden
 		navMenu.classList.add("hide-nav-menu"); //  add hide animation to it
-		setTimeout(() => { // after 0.5s hide it for good
+		setTimeout(() => {
+			// after 0.5s hide it for good
 			navMenu.classList.remove("hide-nav-menu");
 			navMenu.classList.toggle("hidden");
 		}, 500);
-	} else { // if its hidden then show it and add show anim to it
+	} else {
+		// if its hidden then show it and add show anim to it
 		navMenu.classList.toggle("hidden");
 		navMenu.classList.add("show-nav-menu");
 	}
 };
+
 
 addListeners();
 setActiveSite();

@@ -1401,10 +1401,10 @@ let currentPageUser = 1;
 let currentPageAll = 1;
 const itemsPerPage = 12;
 
-// Funkcja ta dodaje wszystkie itemy gracza ktore znajduja sie w localStorage.
+// This function adds every user item from his inventory(localStorage)
 const addPlayerItems = () => {
 	for (i = 0; i < countItemsAmount; i++) {
-		const itemCount = parseInt(localStorage.getItem(`id${i}`)) || 0;
+		const itemCount = parseInt(localStorage.getItem(`id${i}`)) || 0; // if user do not have item that we are checking right now. Then set this item count to 0 so loop doesnt add it
 		for (j = 0; j < itemCount; j++) {
 			const itemBox = document.createElement("div");
 			const itemImg = document.createElement("img");
@@ -1434,7 +1434,7 @@ const addPlayerItems = () => {
 	}
 };
 
-// Funkcja ta dodaje wszystkie itemy w bazie danych ktora znajduje się w obiekcie allItems.
+// This function adds all item in data base
 const addAllItems = () => {
 	for (i = 0; i < countItemsAmount; i++) {
 		const itemBox = document.createElement("div");
@@ -1467,19 +1467,19 @@ const addAllItems = () => {
 	setAllItemsOrder();
 };
 
-// Ustawia order w którym są wyświetlane itemy gracza w zależności od opcji w select
+// Sets order which items of user are shown depening of selected option(asc, desc)
 const setUserItemsOrder = () => {
 	const userItems = document.querySelectorAll(".upgrader__item-useritems");
 	const userItemsArray = Array.from(userItems);
 
-	if (selectUserItems.value === "asc") {
+	if (selectUserItems.value === "asc") { // sets items from lowest price to highest
 		userItemsArray.sort((a, b) => {
 			return (
 				parseFloat(a.lastElementChild.textContent) -
 				parseFloat(b.lastElementChild.textContent)
 			);
 		});
-	} else {
+	} else { // sets items from highest price to lowest
 		userItemsArray.sort((a, b) => {
 			return (
 				parseFloat(b.lastElementChild.textContent) -
@@ -1488,14 +1488,14 @@ const setUserItemsOrder = () => {
 		});
 	}
 
-	userItemsArray.forEach((item) => {
+	userItemsArray.forEach((item) => { // appeding sorted items
 		itemUserOwnList.appendChild(item);
 	});
 
 	renderItems();
 };
 
-// Ustawia order w którym są wyświetlane wszsytkie itemy w zależności od opcji w select
+// Sets order which all items are shown depening of selected option(asc, desc)
 const setAllItemsOrder = () => {
 	const allItems = document.querySelectorAll(".upgrader__item-allitems");
 	const allItemsArray = Array.from(allItems);
@@ -1523,7 +1523,7 @@ const setAllItemsOrder = () => {
 	renderItems();
 };
 
-// Dodaje item gracza na który kliknelismy do okienka po lewej stronie
+// Adds item of user that he clicked on to left side of upgrader
 function addToLeftSide() {
 	const infoBox = document.querySelector(".upgrader__infobox-left");
 	const topLeftBox = document.querySelector(".upgrader__top-left");
@@ -1549,7 +1549,7 @@ function addToLeftSide() {
 	renderItems();
 }
 
-// Dodaje item na który kliknelismy do okienka po prawej stronie
+// Adds item to upgrade that user clicked on to right side of upgrader
 function addToRightSide() {
 	const infoBox = document.querySelector(".upgrader__infobox-right");
 	const topRightBox = document.querySelector(".upgrader__top-right");
@@ -1574,11 +1574,13 @@ function addToRightSide() {
 	countPercent();
 }
 
-const clearBothSide = () => {
+// Clear both sides to start point
+const clearBothSide = () => { 
 	clearLeftSide();
 	clearRightSide();
 };
 
+// Clear just left side of upgrader (user selected items side)
 const clearLeftSide = () => {
 	const infoBoxLeft = document.querySelector(".upgrader__infobox-left");
 	const topLeftBox = document.querySelector(".upgrader__top-left");
@@ -1593,6 +1595,7 @@ const clearLeftSide = () => {
 	renderItems();
 };
 
+// Clear just right side of upgrader (item to upgrade)
 const clearRightSide = () => {
 	const infoBoxRight = document.querySelector(".upgrader__infobox-right");
 	const topRightBox = document.querySelector(".upgrader__top-right");
@@ -1607,7 +1610,7 @@ const clearRightSide = () => {
 	renderItems();
 };
 
-// Liczy szanse na wygrana
+// This function count chance for upgrade(win)
 const countPercent = () => {
 	const infoBoxLeft = document.querySelector(".upgrader__infobox-left");
 	const infoBoxRight = document.querySelector(".upgrader__infobox-right");
@@ -1620,81 +1623,84 @@ const countPercent = () => {
 	const circle = document.querySelector(".upgrader__base");
 	const percentageText = document.querySelector(".upgrader__percent");
 
-	circle.style.transform = "rotate(0deg)";
+	circle.style.transform = "rotate(0deg)"; // reset circle
 	circle.style.transition = "0.01s";
 
-	if (priceLeft !== "0.00" && priceRight !== "0.00") {
+	if (priceLeft !== "0.00" && priceRight !== "0.00") { // if user picked his item and item to upgrade, then get percent to win
 		const percentForWin =
 			(parseFloat(priceLeft) / parseFloat(priceRight)) * 100;
 
-		if (percentForWin >= 100) {
+		if (percentForWin >= 100) { // if percent to win is higher then 100% just set text to 100% and not something like 234% 
 			percentageText.textContent = "100%";
 			circle.style.background = `conic-gradient(#ebde92 0 100%, rgba(0, 0, 0, 0.1) 100% 100%)`;
-		} else {
+		} else { // if its not higher than 100% then set it besed on calculations 
 			percentageText.textContent = percentForWin.toFixed(2) + "%";
 			circle.style.background = `conic-gradient(#ebde92 0 ${percentForWin}%, rgba(0, 0, 0, 0.1) ${percentForWin}% 100%)`;
 		}
-	} else {
+	} else { // if user didn't picked both items then set percent to 0%
 		percentageText.textContent = "0.00%";
 		circle.style.background = `conic-gradient(#ebde92 0 0%, rgba(0, 0, 0, 0.1) 0 100%)`;
 	}
 };
 
-// Funkcja losująca liczbę i określająca wynik (wygrana/przegrana)
+// This function get random number and determine win
 const determineWin = (percentForWin) => {
-	// Losujemy liczbę z zakresu 0 - 9999
+	// Get random number from range 0 to 9999
 	const randomNumber = Math.floor(Math.random() * 10000);
 
-	// Jeśli wylosowana liczba jest mniejsza niż szansa na wygraną * 100 (bo procenty są w zakresie 0 - 100)
-	return randomNumber < percentForWin * 100; // True = wygrana, False = przegrana
+	// If number we got is smaller than percent to win, than set if player won or not 
+	// (percent for win * 100) becouse let's say we have 98% to win which is numbers from 0 to 9800 
+	return randomNumber < percentForWin * 100; // True = win, False = lost
 };
 
+// This function is for spinning circle
 const spinCircle = () => {
 	if (spinning === 0) {
 		const circle = document.querySelector(".upgrader__base");
 		circle.style.transition = "5s ease-out";
 
-		// Pobierz procent szansy na wygraną
+		// Get percent for win
 		const percentForWin = parseFloat(
 			document.querySelector(".upgrader__percent").textContent
 		);
 
+		// Allow spin of circle if player do not have too low chance or too high
 		if (percentForWin <= 99.5 && percentForWin >= 0.5) {
 			const isWin = determineWin(percentForWin);
 			spinning = 1;
 
-			// Losowanie liczby pełnych obrotów (np. 3-6 obrotów)
+			// Random number of full spins of circle (from 3 to 6 spins)
 			const randomSpins = Math.floor(Math.random() * 3) + 3;
 
-			// Kąt docelowy zależny od wygranej lub przegranej
+			// Targer angle that depends of winning or loosing
 			let targetAngle;
 
 			if (isWin) {
-				// Wygrana - koło ma zatrzymać się na kolorze (obszar procentowy wygranej)
+				// Win - circle have to stop on color (color is visual hint of how much % we have to win)
 				const winningAngleThreshold = (percentForWin / 100) * 360;
 				const fromWhatAngle = 360 - winningAngleThreshold;
 				targetAngle = Math.random() * winningAngleThreshold + fromWhatAngle;
 			} else {
-				// Przegrana - koło ma zatrzymać się na czarnym obszarze
+				// Lost - circle have to stop on black color
 				const losingAngleThreshold = (percentForWin / 100) * 360;
 				targetAngle = Math.random() * (360 - losingAngleThreshold);
 			}
 
-			// Całkowity obrót: pełne obroty + losowy kąt docelowy (na odpowiedni obszar)
+			// Total rotation = full spins + random target angle
 			const totalRotation = randomSpins * 360 + targetAngle;
 
-			// Obracamy koło
+			// Spin circle
 			circle.style.transform = `rotate(${totalRotation}deg)`;
 
-			// Wyświetl w konsoli wynik
 			setTimeout(() => {
 				spinning = 0;
 				addWinningItems(isWin);
-			}, 5000); // Czas trwania animacji (5s)
+			}, 5000); // Animation is 5s
 		}
 	}
 };
 
+// This function adds items to inventory
 const addWinningItems = (didWin) => {
 	const topLeftBox = document.querySelector(".upgrader__top-left");
 	const topRightBox = document.querySelector(".upgrader__top-right");
@@ -1702,14 +1708,17 @@ const addWinningItems = (didWin) => {
 	const lostSound = new Audio("../dist/audio/upgrader-lost.wav");
 	const winSound = new Audio("../dist/audio/upgrader-win.wav");
 
+	// Remove item that we wanted to upgrader from inventory.
 	const removeUpgradedItem =
 		parseInt(localStorage.getItem(`id${topLeftBox.id}`)) - 1;
 	localStorage.setItem(`id${topLeftBox.id}`, removeUpgradedItem);
 
+	// If user won 
 	if (didWin) {
-		innerCircle.classList.add("upgrader-won");
-		winSound.play();
+		innerCircle.classList.add("upgrader-won"); // Add green color to circle
+		winSound.play(); // Play win sound
 
+		// Add upgrader item to inventory
 		if (
 			localStorage.getItem(`id${topRightBox.id}`) === null ||
 			localStorage.getItem(`id${topRightBox.id}`) === NaN
@@ -1722,8 +1731,8 @@ const addWinningItems = (didWin) => {
 		}
 
 		const upgradesWonToAdd = parseInt(localStorage.getItem("upgradesDone")) + 1;
-		localStorage.setItem("upgradesDone", upgradesWonToAdd);
-	} else {
+		localStorage.setItem("upgradesDone", upgradesWonToAdd); // Update stats
+	} else { // If lost do this
 		innerCircle.classList.add("upgrader-lost");
 		lostSound.play();
 	}
@@ -1731,7 +1740,7 @@ const addWinningItems = (didWin) => {
 	setTimeout(() => {
 		innerCircle.classList.value = "";
 		innerCircle.classList.add("upgrader__base-inner");
-	}, 500);
+	}, 500); // after 0.5s restart upgrader
 
 	clearBothSide();
 	itemUserOwnList.innerHTML = "";
@@ -1752,22 +1761,23 @@ const addWinningItems = (didWin) => {
 	});
 };
 
+// This is function for pagination
 const renderItems = () => {
-	// Renderuj przedmioty użytkownika
+	// Get user items
 	let userItems = document.querySelectorAll(".upgrader__item-useritems");
 	let userItemsArray = Array.from(userItems);
 	const userItemsCount = userItemsArray.length;
 	const dotsBoxLeft = document.querySelector(".upgrader__dotsbox-left");
 	const dotsBoxRight = document.querySelector(".upgrader__dotsbox-right");
 
-	// Oblicz indeksy dla aktualnej strony
+	// Get index for current page
 	const userStartIndex = (currentPageUser - 1) * itemsPerPage;
 	const userEndIndex = userStartIndex + itemsPerPage;
 
-	// Ukryj wszystkie przedmioty użytkownika
+	// Hide all items uf user
 	userItemsArray.forEach((item) => (item.style.display = "none"));
 
-	// Pokaż tylko przedmioty użytkownika z aktualnej strony
+	// Show only user items from current page
 	userItemsArray.slice(userStartIndex, userEndIndex).forEach((item) => {
 		item.style.display = "flex";
 	});
@@ -1785,44 +1795,44 @@ const renderItems = () => {
 		}
 	}
 
-	// Renderuj przedmioty ogólne
+	// Render all items
 	let allItems = document.querySelectorAll(".upgrader__item-allitems");
 	let allItemsArray = Array.from(allItems);
 	const topLeftBox = document.querySelector(".upgrader__top-left");
 
-	// Pobierz cenę przedmiotu po lewej stronie upgradera
+	// Get price of item added to left side
 	const userItemPrice = parseFloat(topLeftBox.children[1].textContent).toFixed(
 		2
 	);
 
-	// Filtrowanie przedmiotów, aby wyświetlać tylko te droższe niż przedmiot użytkownika
+	// Filter items based on user selected item price. So all showned items are always more expensive
 	const filteredItemsArray = allItemsArray.filter((item) => {
 		const currentItemPrice = parseFloat(
 			item.lastElementChild.textContent
 		).toFixed(2);
-		return parseFloat(currentItemPrice) > parseFloat(userItemPrice); // Zachowaj tylko przedmioty droższe
+		return parseFloat(currentItemPrice) > parseFloat(userItemPrice); // Save only more expensive items
 	});
 
-	// Oblicz liczbę stron na podstawie przefiltrowanych przedmiotów
+	// Count amount of pages based if filtered items
 	const filteredItemsCount = filteredItemsArray.length;
 	const totalAllPages = Math.ceil(filteredItemsCount / itemsPerPage);
 
 	const allItemsPages = Math.ceil(filteredItemsArray.length / itemsPerPage);
 	dotsBoxRight.innerHTML = "";
 
-	// **Sprawdź, czy bieżąca strona nie wykracza poza dostępne strony**
+	// Check if current page is not out of available pages
 	if (currentPageAll > totalAllPages) {
-		currentPageAll = totalAllPages; // Zresetuj numer strony do ostatniej dostępnej strony
+		currentPageAll = totalAllPages; // Reset page number to last available page
 	}
 
-	// Oblicz indeksy dla przefiltrowanych przedmiotów na aktualnej stronie
+	// Count indexes for filtered items on current page
 	const allStartIndex = (currentPageAll - 1) * itemsPerPage;
 	const allEndIndex = allStartIndex + itemsPerPage;
 
-	// Ukryj wszystkie przedmioty
+	// Hide all items
 	allItemsArray.forEach((item) => (item.style.display = "none"));
 
-	// Pokaż tylko przefiltrowane przedmioty z aktualnej strony
+	// Show only filtered items from current page
 	filteredItemsArray.slice(allStartIndex, allEndIndex).forEach((item) => {
 		item.style.display = "flex";
 	});
@@ -1860,11 +1870,9 @@ const renderItems = () => {
 	} else {
 		allItemsPageNext.style.display = "block";
 	}
-
-	// Zaktualizuj stronę przedmiotów ogólnych (możesz wyświetlić numer strony, jeśli chcesz)
-	// document.getElementById("currentPage").textContent = `User Page: ${currentPageUser} | All Page: ${currentPageAll} / ${totalAllPages}`;
 };
 
+// This function changed current page
 const changePage = (direction) => {
 	const userItemsCount = document.querySelectorAll(
 		".upgrader__item-useritems"
@@ -1876,51 +1884,45 @@ const changePage = (direction) => {
 	).length;
 	const totalAllPages = Math.ceil(allItemsCount / itemsPerPage);
 
-	// Zmiana strony użytkownika
+	// Change user page
 	if (direction === -1 && currentPageUser > 1) {
 		currentPageUser--;
 	} else if (direction === 1 && currentPageUser < totalUserPages) {
 		currentPageUser++;
 	}
 
-	// Zmiana strony wszystkich przedmiotów
+	// Change all items page
 	if (direction === -2 && currentPageAll > 1) {
 		currentPageAll--;
 	} else if (direction === 2 && currentPageAll < totalAllPages) {
 		currentPageAll++;
 	}
 
-	// Przekaż do renderowania
 	renderItems();
 };
-
-countPercent();
-addPlayerItems();
-addAllItems();
-renderItems();
 
 const addListeners = () => {
 	const userItems = document.querySelectorAll(".upgrader__item-useritems");
 	const allItems = document.querySelectorAll(".upgrader__item-allitems");
 	const clearBtnLeft = document.querySelector(".upgrader__remove-btn-left");
 	const clearBtnRight = document.querySelector(".upgrader__remove-btn-right");
-
+	
 	userItems.forEach((item) => {
 		item.addEventListener("click", addToLeftSide);
 	});
-
+	
 	allItems.forEach((item) => {
 		item.addEventListener("click", addToRightSide);
 	});
-
+	
 	selectAllItems.addEventListener("change", () => {
 		currentPageAll = 1;
-
+		
 		setAllItemsOrder();
 	});
 	selectUserItems.addEventListener("change", () => {
 		currentPageUser = 1;
-
+		
 		setUserItemsOrder();
 	});
 	upgraderBtn.addEventListener("click", spinCircle);
@@ -1928,4 +1930,8 @@ const addListeners = () => {
 	clearBtnRight.addEventListener("click", clearRightSide);
 };
 
+countPercent();
+addPlayerItems();
+addAllItems();
+renderItems();
 addListeners();

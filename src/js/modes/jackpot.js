@@ -1400,8 +1400,8 @@ const timeForStart = 30000;
 const timeForRestart = 29950;
 let itemsToWin = [];
 let itemsOfUserToWin = [];
-let userItems = [];
-let currentPlayer = 0;
+let userItems = []; // current items user want to add
+let currentPlayer = 0; 
 let botPlayer = 0;
 let totalValueOfJackpot = 0;
 let addBotsInterval;
@@ -1419,6 +1419,7 @@ let currentPage = 1;
 const itemsPerPage = 10;
 const maxItems = 10;
 
+// create object with items above some price
 const getHardItems = () => {
 	function filterItemsByPrice(items, maxPrice) {
 		let index = 0;
@@ -1434,6 +1435,7 @@ const getHardItems = () => {
 	filterItemsByPrice(allItems, 2000);
 };
 
+// create object with items above some price
 const getMediumItems = () => {
 	function filterItemsByPrice(items, maxPrice) {
 		let index = 0;
@@ -1449,6 +1451,7 @@ const getMediumItems = () => {
 	filterItemsByPrice(allItems, 250);
 };
 
+// create object with items above some price
 const getEasyItems = () => {
 	function filterItemsByPrice(items, maxPrice) {
 		let index = 0;
@@ -1468,6 +1471,7 @@ getHardItems();
 getMediumItems();
 getEasyItems();
 
+// start visual timer
 const startTimer = () => {
 	let seconds = Math.floor(timer / 1000);
 	let milliseconds = (timer % 1000) / 10;
@@ -1484,6 +1488,7 @@ const startTimer = () => {
 	}
 };
 
+// add bot player
 const addPlayer = () => {
 	botPlayer++;
 	currentPlayer++;
@@ -1506,6 +1511,7 @@ const addPlayer = () => {
 	playerItems.classList.add("jackpot__players-player-items");
 	playerTotal.classList.add("jackpot__players-player-total");
 
+	// depending on current player amount, set player color
 	switch (currentPlayer) {
 		case 1:
 			playerColor.classList.add("jackpot-red");
@@ -1539,9 +1545,12 @@ const addPlayer = () => {
 	playerItem.append(playerInfoBox, playerItemsContainer, playerTotal);
 	playersDiv.append(playerItem);
 
+	playersDiv.firstElementChild.remove();
+
 	addRandomItems(playerItems);
 };
 
+// add random items to player
 const addRandomItems = (currentPlayerItems) => {
 	const countItemsAmount = Object.keys(allItems).length;
 	const countHardItemsAmount = Object.keys(hardItems).length;
@@ -1550,6 +1559,7 @@ const addRandomItems = (currentPlayerItems) => {
 	const randomAmountOfItems = Math.floor(Math.random() * 10) + 5;
 	let playerItemsValue = 0;
 
+	// select items from data base based on choosed diff
 	if (unlimited === true) {
 		for (i = 0; i < randomAmountOfItems; i++) {
 			const randomItem = Math.floor(Math.random() * countItemsAmount);
@@ -1650,6 +1660,7 @@ const addRandomItems = (currentPlayerItems) => {
 	setChanceToWin();
 };
 
+// set chance of win of all players
 const setChanceToWin = () => {
 	const allChances = document.querySelectorAll(
 		".jackpot__players-player-percent"
@@ -1657,6 +1668,7 @@ const setChanceToWin = () => {
 	const allChancesArray = Array.from(allChances);
 
 	allChancesArray.forEach((item) => {
+		// chance is based of how much player bet and how much is in total 
 		const chancesToWin =
 			(parseFloat(
 				item.parentElement.parentElement.parentElement.lastElementChild
@@ -1670,6 +1682,7 @@ const setChanceToWin = () => {
 	setJackpotChances();
 };
 
+// set jackpot visual colors of players 
 const setJackpotChances = () => {
 	const allChances = document.querySelectorAll(
 		".jackpot__players-player-percent"
@@ -1707,6 +1720,7 @@ const setJackpotChances = () => {
 	}
 };
 
+// spin jackpot and get winner
 const spinJackpot = () => {
 	jackpotLine.classList.remove("jackpot-timer");
 	const howStrongSpin = Math.floor(Math.random() * 7000 - 14800);
@@ -1751,6 +1765,7 @@ const spinJackpot = () => {
 	}, 12000);
 };
 
+// restart everything in jackpot
 const restartJackpot = () => {
 	jackpotColors.innerHTML = "";
 	jackpotColors.style.left = "0px";
@@ -1764,6 +1779,14 @@ const restartJackpot = () => {
 	playerCol = "";
 	jackpotLine.classList.add("jackpot-timer");
 
+	for(i = 0; i < 4; i++) {
+		const blankItem = document.createElement("div");
+		blankItem.classList.add("jackpot__players-player")
+		blankItem.style.order = "1"
+		blankItem.style.height = "100px"
+		playersDiv.append(blankItem)
+	}
+
 	const howManyBots = Math.floor(Math.random() * 3) + 1;
 	let delay = 6000;
 
@@ -1775,6 +1798,7 @@ const restartJackpot = () => {
 	}
 };
 
+// count to new start
 const startCountingToNewStart = () => {
 	restartJackpot();
 
@@ -1783,6 +1807,7 @@ const startCountingToNewStart = () => {
 	}, timeForStart);
 };
 
+// add user items to bottom container
 const addUserItems = () => {
 	playerItemBox.innerHTML = "";
 
@@ -1816,6 +1841,7 @@ const addUserItems = () => {
 	}
 };
 
+// add selected user items to array
 function addUserItemsToJackpot() {
 	const allItemsOfPlayer = document.querySelectorAll(
 		".jackpot__playeritems-item"
@@ -1849,6 +1875,7 @@ function addUserItemsToJackpot() {
 	}
 }
 
+// count total value of player items
 const getTotalValueOfPlayerItems = () => {
 	const allItemsOfPlayer = document.querySelectorAll(
 		".jackpot__playeritems-item"
@@ -1865,6 +1892,7 @@ const getTotalValueOfPlayerItems = () => {
 	playerValueOfItems.textContent = value.toFixed(2) + "$";
 };
 
+// add player to jackpot
 const addPlayerToJackpot = () => {
 	if (choosedDiff === true && userItems.length <= 10 && userDidJoin === false) {
 		const allItemsOfPlayer = document.querySelectorAll(
@@ -1944,6 +1972,8 @@ const addPlayerToJackpot = () => {
 			playerItem.append(playerInfoBox, playerItemsContainer, playerTotal);
 			playersDiv.append(playerItem);
 
+			playersDiv.firstElementChild.remove();
+
 			for (j = 0; j < userItems.length; j++) {
 				itemsToWin.push(userItems[j]);
 				const item = document.createElement("div");
@@ -1979,6 +2009,7 @@ const addPlayerToJackpot = () => {
 	}
 };
 
+// if player won add won items to his inventory
 const checkIfPlayerWon = (winningItem) => {
 	if (winningItem.id === playerCol) {
 		for (i = 0; i < itemsToWin.length; i++) {
@@ -2005,6 +2036,7 @@ const checkIfPlayerWon = (winningItem) => {
 	}
 };
 
+// set diff of jackpot
 function setDiff() {
 	switch (this.id) {
 		case "easy":
@@ -2028,7 +2060,8 @@ function setDiff() {
 	sortPlayerItems();
 	renderItems();
 }
-
+ 
+// start jackpot
 const startMachine = () => {
 	jackpotLine.classList.add("jackpot-timer");
 	const howManyBots = Math.floor(Math.random() * 3) + 1;
@@ -2048,6 +2081,7 @@ const startMachine = () => {
 	timerInterval = setInterval(startTimer, 10);
 };
 
+// sort player items from cheapest to most expensive
 const sortPlayerItems = () => {
 	const userItems = document.querySelectorAll(".jackpot__playeritems-item");
 	const userItemsArray = Array.from(userItems);
@@ -2089,6 +2123,7 @@ const setListeners = () => {
 	});
 };
 
+// This is function for pagination
 const renderItems = () => {
 	const allItemsOfUser = document.querySelectorAll(
 		".jackpot__playeritems-item"
@@ -2096,36 +2131,34 @@ const renderItems = () => {
 	const allItemsOfUserArray = Array.from(allItemsOfUser);
 	const dotsBox = document.querySelector(".profile__dotsbox");
 
-	// Filtruj przedmioty w zależności od poziomu trudności
+	// filter all items
 	let filteredItems = allItemsOfUserArray;
 
 	if (easy) {
-		// Filtruj tylko te przedmioty, które są do 10 (zakładam, że mają jakiś atrybut np. data-value)
+		// filter items that are cheaper or equal to 10
 		filteredItems = filteredItems.filter((item) => {
 			const value = parseFloat(item.lastElementChild.textContent);
 			return value <= 10;
 		});
 	} else if (medium) {
-		// Filtruj tylko te przedmioty, które są do 500
+		// filter items that are cheaper or equal to 250
 		filteredItems = filteredItems.filter((item) => {
 			const value = parseFloat(item.lastElementChild.textContent);
 			return value <= 250;
 		});
 	} else if (hard) {
+		// filter items that are cheaper or equal to 2000
 		filteredItems = filteredItems.filter((item) => {
 			const value = parseFloat(item.lastElementChild.textContent);
 			return value <= 2000;
 		});
 	}
-	// Unlimited wyświetla wszystkie, więc nie trzeba nic zmieniać
 
 	const userStartIndex = (currentPage - 1) * itemsPerPage;
 	const userEndIndex = userStartIndex + itemsPerPage;
 
-	// Ukryj wszystkie przedmioty
 	allItemsOfUserArray.forEach((item) => (item.style.display = "none"));
 
-	// Wyświetlaj tylko przefiltrowane przedmioty na danej stronie
 	filteredItems.slice(userStartIndex, userEndIndex).forEach((item) => {
 		item.style.display = "flex";
 	});
@@ -2143,7 +2176,6 @@ const renderItems = () => {
 		}
 	}
 
-	// Przełączaj widoczność przycisków "previous" i "next" w zależności od strony
 	if (currentPage === 1) {
 		userItemsPagePrevious.style.display = "none";
 	} else {
@@ -2161,6 +2193,7 @@ const renderItems = () => {
 	}
 };
 
+// change current page
 const changePage = (direction) => {
 	const allItemsOfUserCount = document.querySelectorAll(
 		".jackpot__playeritems-item"
@@ -2173,7 +2206,6 @@ const changePage = (direction) => {
 		currentPage++;
 	}
 
-	// sortPlayerItems();
 	renderItems();
 };
 

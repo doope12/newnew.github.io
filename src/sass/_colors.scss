@@ -29,6 +29,37 @@ $jackpot-player-color: linear-gradient(
 	rgba(45, 45, 45, 1) 75%,
 	rgba(40, 40, 40, 1) 100%
 );
+$jackpot-total-bg: linear-gradient(
+	180deg,
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0
+		)
+		0%,
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0
+		)
+		25%,
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0.1
+		)
+		75%,
+	rgba(
+			$secondary-color-value-r,
+			$secondary-color-value-g,
+			$secondary-color-value-b,
+			0.2
+		)
+		100%
+);
 $main-color: linear-gradient(
 	180deg,
 	rgba(20, 20, 20, 1) 0%,
@@ -42,6 +73,13 @@ $main2-color: linear-gradient(
 	rgba(40, 40, 40, 1) 25%,
 	rgba(40, 40, 40, 1) 75%,
 	rgba(30, 30, 30, 1) 100%
+);
+$battles-drop-bg: linear-gradient(
+	180deg,
+	rgba(50, 50, 50, 1) 0%,
+	rgba(47, 47, 47, 1) 25%,
+	rgba(44, 44, 44, 1) 75%,
+	rgba(41, 41, 41, 1) 100%
 );
 $dropbox-bg: linear-gradient(
 	90deg,

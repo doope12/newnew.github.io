@@ -196,9 +196,17 @@
         <div class="wrapper">
             <div class="main__container">
                 <h2 class="section__title section__title--cases"><span class="section__title-bg">Battles</span></h2>
+                <button class="battles__back normal-btn hidden">go back</button>
                 <div class="battles__container">
-                    <div class="battles__casesleft hidden">
-                        <div class="battles__casesleft-itembox">
+                    <div class="battles__casesleft-container hidden">
+                        <div class="battles__casesleft-info">
+                            <p class="battles__casesleft-text battles__casesleft-text--big">Round</p>
+                            <p class="battles__casesleft-text"><span id="current-round">0</span> from <span
+                                    id="total-round">0</span></p>
+                        </div>
+                        <div class="battles__casesleft">
+                            <div class="battles__casesleft-itembox">
+                            </div>
                         </div>
                     </div>
                     <div class="battles__cases ">
@@ -223,7 +231,8 @@
                     </div>
                     <div class="battles__popup hidden">
                         <div class="battles__popup-container">
-                            <button class="battles__popup-closebtn"><i class="fa-solid fa-xmark battles__popup-close"></i></button>
+                            <button class="battles__popup-closebtn"><i
+                                    class="fa-solid fa-xmark battles__popup-close"></i></button>
                             <p class="battles__popup-title">add cases</p>
                             <div class="battles__popup-casesbox">
                                 <div class="battles__popup-item" id="case0">
@@ -323,19 +332,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="battles__jackpot hidden">
-                    <div class="case__middle-point"></div>
-                    <div class="case__middle-triangle"></div>
-                    <div class="case__middle-triangle case__middle-triangle--bottom"></div>
-                    <div class="battles__jackpot-box">
-
-                    </div>
-                </div>
-                <div class="battles__battle-containerofall hidden">
+            </div>
+            <div class="battles__jackpot hidden">
+                <div class="case__middle-point"></div>
+                <div class="case__middle-triangle"></div>
+                <div class="case__middle-triangle case__middle-triangle--bottom"></div>
+                <div class="battles__jackpot-box">
 
                 </div>
             </div>
         </div>
+        <div class="battles__battle-containerofall hidden">
+        </div>
+
+
     </main>
     <footer class="footer">
     <p class="footer__text">Created by: <span class="footer__span">Rafał Klocek</span>

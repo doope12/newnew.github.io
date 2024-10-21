@@ -38,6 +38,7 @@
 			margin: 1em;
 			width: 100%;
 			border-radius: 20px;
+			border: 1px solid $border-color;
 			box-shadow: $normal-boxshadow;
 			background: $battles-blank-item;
 		}
@@ -303,6 +304,7 @@
 			margin: 2em 0;
 			width: 100%;
 			padding: 1em;
+			border: 1px solid $border-color;
 			border-radius: 20px;
 			box-shadow: $normal-boxshadow;
 			background: $dropbox-bg;

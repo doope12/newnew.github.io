@@ -1396,14 +1396,17 @@ const userItemsPagePrevious = document.querySelector(
 	".upgrader__list-btn--left"
 );
 const userItemsPageNext = document.querySelector(".upgrader__list-btn--right");
-const currentPageText = document.querySelector("#page-current")
-const totalPageText = document.querySelector("#page-total")
+const currentPageText = document.querySelector("#page-current");
+const totalPageText = document.querySelector("#page-total");
+const difficultyText = document.querySelector("#diff");
+const playerPercentText = document.querySelector("#playerPercent");
+const totalText = document.querySelector("#totalValue");
 const timeForStart = 30000;
 const timeForRestart = 29950;
 let itemsToWin = [];
 let itemsOfUserToWin = [];
 let userItems = []; // current items user want to add
-let currentPlayer = 0; 
+let currentPlayer = 0;
 let botPlayer = 0;
 let totalValueOfJackpot = 0;
 let addBotsInterval;
@@ -1420,6 +1423,7 @@ let choosedDiff = false;
 let currentPage = 1;
 const itemsPerPage = 10;
 const maxItems = 10;
+let valueOfJackpot = 0;
 
 const casesOpenedText = document.querySelector("#casesopened");
 const battlesCreatedText = document.querySelector("#battlescreated");
@@ -1708,6 +1712,7 @@ const addRandomItems = (currentPlayerItems) => {
 	currentPlayerItems.parentElement.nextSibling.textContent =
 		playerItemsValue.toFixed(2) + "$";
 	setChanceToWin();
+	countTotalValue();
 };
 
 // set chance of win of all players
@@ -1718,7 +1723,7 @@ const setChanceToWin = () => {
 	const allChancesArray = Array.from(allChances);
 
 	allChancesArray.forEach((item) => {
-		// chance is based of how much player bet and how much is in total 
+		// chance is based of how much player bet and how much is in total
 		const chancesToWin =
 			(parseFloat(
 				item.parentElement.parentElement.parentElement.lastElementChild
@@ -1727,12 +1732,16 @@ const setChanceToWin = () => {
 				totalValueOfJackpot) *
 			100;
 		item.textContent = chancesToWin.toFixed(2) + "%";
+
+		if (item.id === "playerChance") {
+			playerPercentText.textContent = chancesToWin.toFixed(2) + "%";
+		}
 	});
 
 	setJackpotChances();
 };
 
-// set jackpot visual colors of players 
+// set jackpot visual colors of players
 const setJackpotChances = () => {
 	const allChances = document.querySelectorAll(
 		".jackpot__players-player-percent"
@@ -1815,6 +1824,16 @@ const spinJackpot = () => {
 	}, 12000);
 };
 
+const countTotalValue = () => {
+	const allValues = document.querySelectorAll(".jackpot__players-player-total");
+
+	allValues.forEach((item) => {
+		valueOfJackpot = valueOfJackpot + parseFloat(item.textContent);
+	});
+
+	totalText.textContent = totalValueOfJackpot.toFixed(2) + "$";
+};
+
 // restart everything in jackpot
 const restartJackpot = () => {
 	jackpotColors.innerHTML = "";
@@ -1826,15 +1845,18 @@ const restartJackpot = () => {
 	totalValueOfJackpot = 0;
 	spinning = false;
 	userDidJoin = false;
+	valueOfJackpot = 0;
+	totalText.textContent = valueOfJackpot.toFixed(2) + "$";
+	playerPercentText.textContent = "0.00%";
 	playerCol = "";
 	jackpotLine.classList.add("jackpot-timer");
 
-	for(i = 0; i < 4; i++) {
+	for (i = 0; i < 4; i++) {
 		const blankItem = document.createElement("div");
-		blankItem.classList.add("jackpot__players-player")
-		blankItem.style.order = "1"
-		blankItem.style.height = "100px"
-		playersDiv.append(blankItem)
+		blankItem.classList.add("jackpot__players-player");
+		blankItem.style.order = "1";
+		blankItem.style.height = "100px";
+		playersDiv.append(blankItem);
 	}
 
 	const howManyBots = Math.floor(Math.random() * 3) + 1;
@@ -1911,7 +1933,11 @@ function addUserItemsToJackpot() {
 		totalSkins.textContent = userItems.length;
 
 		getTotalValueOfPlayerItems();
-	} else if (choosedDiff === true && userItems.length === 10 && this.classList.contains("active-item-jackpot")) {
+	} else if (
+		choosedDiff === true &&
+		userItems.length === 10 &&
+		this.classList.contains("active-item-jackpot")
+	) {
 		userItems = [];
 		this.classList.toggle("active-item-jackpot");
 
@@ -1983,6 +2009,7 @@ const addPlayerToJackpot = () => {
 			playerAvatar.classList.add("jackpot__players-player-avatar");
 			playerColor.classList.add("jackpot__players-player-color");
 			playerPercent.classList.add("jackpot__players-player-percent");
+			playerPercent.id = "playerChance";
 			playerItemsContainer.classList.add(
 				"jackpot__players-player-items-container"
 			);
@@ -2048,6 +2075,7 @@ const addPlayerToJackpot = () => {
 			playerItems.parentElement.nextSibling.textContent =
 				playerItemsValue.toFixed(2) + "$";
 			setChanceToWin();
+			countTotalValue();
 		}
 
 		userDidJoin = true;
@@ -2092,15 +2120,19 @@ function setDiff() {
 	switch (this.id) {
 		case "easy":
 			easy = true;
+			difficultyText.textContent = "0-10$";
 			break;
 		case "medium":
 			medium = true;
+			difficultyText.textContent = "0-250$";
 			break;
 		case "hard":
 			hard = true;
+			difficultyText.textContent = "0-2000$";
 			break;
 		case "unlimited":
 			unlimited = true;
+			difficultyText.textContent = "Unlimited";
 			break;
 	}
 
@@ -2111,7 +2143,7 @@ function setDiff() {
 	sortPlayerItems();
 	renderItems();
 }
- 
+
 // start jackpot
 const startMachine = () => {
 	jackpotLine.classList.add("jackpot-timer");
@@ -2215,8 +2247,8 @@ const renderItems = () => {
 	});
 
 	const allUserItemsPages = Math.ceil(filteredItems.length / itemsPerPage);
-	
-	currentPageText.textContent = currentPage
+
+	currentPageText.textContent = currentPage;
 	totalPageText.textContent = allUserItemsPages;
 
 	if (currentPage === 1) {

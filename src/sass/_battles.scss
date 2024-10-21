@@ -8,6 +8,12 @@
 		padding: 2em 0;
 	}
 
+	&__back {
+		display: block;
+		margin: 0 auto;
+		font-size: 1.8rem;
+	}
+
 	&__icon {
 		padding: 0.5em;
 		margin-bottom: 0.5em;
@@ -46,6 +52,7 @@
 			height: 250px;
 			border-radius: 10px;
 			box-shadow: $normal-boxshadow;
+			border: 1px solid $border-color;
 			letter-spacing: 1px;
 			background: $battles-blank-item;
 			color: $text-color;
@@ -99,6 +106,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		border-radius: 10px;
+		border: 1px solid $border-color;
 		box-shadow: $normal-boxshadow;
 		background: $battles-blank-item;
 		color: $text-color;
@@ -127,6 +135,10 @@
 
 		&-cost {
 			padding-bottom: 0.5em;
+		}
+
+		&-costamount {
+			color: $secondary-color;
 		}
 
 		&-btn {
@@ -230,7 +242,7 @@
 			color: $text-color;
 			cursor: pointer;
 			transition: color 0.5s;
-	
+
 			&:hover {
 				color: $secondary-color;
 			}
@@ -260,7 +272,26 @@
 		align-items: center;
 		text-align: center;
 		padding: 1em;
+		margin-bottom: 2em;
 		width: 100%;
+
+		&-down {
+			width: 100%;
+			border: 2px solid $border-color;
+			border-bottom-left-radius: 20px;
+			border-bottom-right-radius: 20px;
+			box-shadow: $normal-boxshadow;
+			background-color: $tiles-color;
+			min-height: 300px;
+		}
+
+		&-info {
+			padding: 0.5em 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			width: 100%;
+		}
 
 		&-amount {
 			margin: 1em 0;
@@ -277,9 +308,8 @@
 		}
 
 		&-avatar {
-			margin-bottom: 1em;
-			width: 125px;
-			height: 125px;
+			width: 50px;
+			height: 50px;
 			object-fit: cover;
 			border: 2px solid $secondary-color;
 			border-radius: 10px;
@@ -290,6 +320,7 @@
 			font-size: 2rem;
 			font-weight: bold;
 			letter-spacing: 1px;
+			padding-left: 1.5em;
 			color: $text-color;
 		}
 
@@ -305,7 +336,8 @@
 			margin: 1em 1em 0;
 			height: 202px;
 			width: 100%;
-			border-radius: 20px;
+			border-top-left-radius: 20px;
+			border-top-right-radius: 20px;
 			border: 2px solid $secondary-color;
 			box-shadow: $purple-boxshadow;
 			overflow: hidden;
@@ -354,6 +386,45 @@
 			color: $text-color;
 			z-index: 100;
 		}
+
+		&-itemsdown {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			padding-bottom: 1em;
+		}
+
+		&-itemdown {
+			width: 150px;
+			font-size: 1.3rem;
+			margin: 0.5em;
+			border-radius: 10px;
+			border: 1px solid $border-color;
+			box-shadow: $normal-boxshadow;
+			background: $battles-drop-bg;
+			color: $text-color;
+
+			&-img {
+				width: 100%;
+				object-fit: cover;
+				filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+				scale: 0.9;
+			}
+
+			&-name {
+				padding: 0 1em;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+
+			&-price {
+				padding-top: 0.25em;
+				padding-bottom: 0.5em;
+				color: $secondary-color;
+			}
+		}
 	}
 
 	&__casesleft {
@@ -366,6 +437,13 @@
 		box-shadow: $normal-boxshadow;
 		background: $tiles-color;
 		overflow: hidden;
+
+		&-container {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			width: 100%;
+		}
 
 		&-itembox {
 			position: absolute;
@@ -388,6 +466,22 @@
 		&-img {
 			width: 100%;
 			object-fit: cover;
+		}
+
+		&-info {
+			position: relative;
+			padding-bottom: 1em;
+			text-align: center;
+		}
+
+		&-text {
+			font-size: 1.4rem;
+
+			&--big {
+				padding-bottom: 0.25em;
+				font-size: 2rem;
+				color: $secondary-color;
+			}
 		}
 	}
 
@@ -421,8 +515,8 @@
 			height: 100%;
 			object-fit: cover;
 			box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
-			rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
-			rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+				rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+				rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 		}
 	}
 }

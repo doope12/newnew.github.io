@@ -1865,11 +1865,16 @@ const caseBoxesContainer = document.querySelector(
 );
 const optionsBox = document.querySelector(".battles__options");
 const casesLeftBox = document.querySelector(".battles__casesleft-itembox");
-const casesLeftDiv = document.querySelector(".battles__casesleft");
+const casesLeftDiv = document.querySelector(".battles__casesleft-container");
 const closePopupBtn = document.querySelector(".battles__popup-closebtn");
+const currentRoundText = document.querySelector("#current-round");
+const totalRoundText = document.querySelector("#total-round");
+const backBtn = document.querySelector(".battles__back");
 let currentBattleCases = [];
 let currentItemWonByPlayer = [];
+let droppedItems = [];
 let moveCaseLeft = 50;
+let currentRound = 1;
 
 const casesOpenedText = document.querySelector("#casesopened");
 const battlesCreatedText = document.querySelector("#battlescreated");
@@ -2125,6 +2130,9 @@ const createCaseBoxesBasedOnPlayers = () => {
 				const battleImg = document.createElement("img");
 				const battleName = document.createElement("p");
 				const battleContainer = document.createElement("div");
+				const battleDown = document.createElement("div");
+				const battleDropItems = document.createElement("div");
+				const battleInfo = document.createElement("div");
 				const battlePoint = document.createElement("div");
 				const battleTriangle = document.createElement("div");
 				const battleTriangleBtm = document.createElement("div");
@@ -2135,7 +2143,10 @@ const createCaseBoxesBasedOnPlayers = () => {
 				battleBox.id = `player${i}`;
 				battleImg.classList.add("battles__battle-avatar");
 				battleName.classList.add("battles__battle-name");
+				battleDown.classList.add("battles__battle-down");
+				battleDropItems.classList.add("battles__battle-itemsdown");
 				battleContainer.classList.add("battles__battle-container");
+				battleInfo.classList.add("battles__battle-info");
 				battlePoint.classList.add("battles__battle-point");
 				battleTriangle.classList.add("battles__battle-triangle");
 				battleTriangleBtm.classList.add(
@@ -2170,7 +2181,9 @@ const createCaseBoxesBasedOnPlayers = () => {
 					battleTriangleBtm,
 					battleItems
 				);
-				battleBox.append(battleImg, battleName, battleContainer, battleAmount);
+				battleInfo.append(battleImg, battleName, battleAmount);
+				battleDown.append(battleInfo, battleDropItems);
+				battleBox.append(battleContainer, battleDown);
 				caseBoxesContainer.append(battleBox);
 			}
 
@@ -2209,6 +2222,8 @@ const countCasesOnStart = () => {
 	});
 
 	currentBattleCases = casesToAddToBattle;
+	totalRoundText.textContent = currentBattleCases.length;
+	currentRoundText.textContent = currentRound;
 
 	startBattle();
 };
@@ -2216,6 +2231,9 @@ const countCasesOnStart = () => {
 // start battle
 const startBattle = () => {
 	const allCasesBoxes = document.querySelectorAll(".battles__battle-items");
+
+	currentRoundText.textContent = currentRound;
+	currentRound++;
 
 	if (currentBattleCases[0] !== undefined) {
 		allCasesBoxes.forEach((box) => {
@@ -2842,7 +2860,7 @@ const winningAnimationJackpot = (players) => {
 	jackpotDiv.classList.remove("hidden");
 
 	playersBoxesArray.forEach((item) => {
-		item.children[2].classList.add("hidden");
+		item.children[0].classList.add("hidden");
 	});
 
 	if (players.length === 2) {
@@ -2855,16 +2873,21 @@ const winningAnimationJackpot = (players) => {
 			playerBox.classList.add("battles__jackpot-player");
 			playerAvatar.classList.add("battles__jackpot-avatar");
 
-			playerBox.id = `player${players[randomItem].parentElement.id.slice(6)}`;
+			playerBox.id = `player${players[
+				randomItem
+			].parentElement.parentElement.parentElement.id.slice(6)}`;
 
-			if (randomItem === 0 && players[0].parentElement.id === "player0") {
+			if (
+				randomItem === 0 &&
+				players[0].parentElement.parentElement.parentElement.id === "player0"
+			) {
 				playerAvatar.setAttribute("src", localStorage.getItem("avatar"));
 			} else {
 				playerAvatar.setAttribute(
 					"src",
 					`../dist/img/avatars/avatar${players[
 						randomItem
-					].parentElement.id.slice(6)}.jpg`
+					].parentElement.parentElement.parentElement.id.slice(6)}.jpg`
 				);
 			}
 
@@ -2892,16 +2915,21 @@ const winningAnimationJackpot = (players) => {
 			playerBox.classList.add("battles__jackpot-player");
 			playerAvatar.classList.add("battles__jackpot-avatar");
 
-			playerBox.id = `player${players[randomItem].parentElement.id.slice(6)}`;
+			playerBox.id = `player${players[
+				randomItem
+			].parentElement.parentElement.parentElement.id.slice(6)}`;
 
-			if (randomItem === 0 && players[0].parentElement.id === "player0") {
+			if (
+				randomItem === 0 &&
+				players[0].parentElement.parentElement.parentElement.id === "player0"
+			) {
 				playerAvatar.setAttribute("src", localStorage.getItem("avatar"));
 			} else {
 				playerAvatar.setAttribute(
 					"src",
 					`../dist/img/avatars/avatar${players[
 						randomItem
-					].parentElement.id.slice(6)}.jpg`
+					].parentElement.parentElement.parentElement.id.slice(6)}.jpg`
 				);
 			}
 
@@ -2931,16 +2959,21 @@ const winningAnimationJackpot = (players) => {
 			playerBox.classList.add("battles__jackpot-player");
 			playerAvatar.classList.add("battles__jackpot-avatar");
 
-			playerBox.id = `player${players[randomItem].parentElement.id.slice(6)}`;
+			playerBox.id = `player${players[
+				randomItem
+			].parentElement.parentElement.parentElement.id.slice(6)}`;
 
-			if (randomItem === 0 && players[0].parentElement.id === "player0") {
+			if (
+				randomItem === 0 &&
+				players[0].parentElement.parentElement.parentElement.id === "player0"
+			) {
 				playerAvatar.setAttribute("src", localStorage.getItem("avatar"));
 			} else {
 				playerAvatar.setAttribute(
 					"src",
 					`../dist/img/avatars/avatar${players[
 						randomItem
-					].parentElement.id.slice(6)}.jpg`
+					].parentElement.parentElement.parentElement.id.slice(6)}.jpg`
 				);
 			}
 
@@ -2986,7 +3019,9 @@ const winningAnimationJackpot = (players) => {
 
 			if (winningItem) {
 				allWinAmountArray.forEach((item) => {
-					if (item.parentElement.id === winningItem.id) {
+					if (
+						item.parentElement.parentElement.parentElement.id === winningItem.id
+					) {
 						let addToAmount = 0.01;
 
 						item.textContent =
@@ -3013,7 +3048,7 @@ const winningAnimationEnd = () => {
 	let endAmount = 0;
 
 	playersBoxesArray.forEach((item) => {
-		item.children[2].classList.add("hidden");
+		item.children[0].classList.add("hidden");
 	});
 
 	for (i = 0; i < allWinAmountArray.length; i++) {
@@ -3025,21 +3060,27 @@ const winningAnimationEnd = () => {
 		}
 	}
 
+	const dropBox = winningPlayer.parentElement.nextElementSibling;
+
+	dropBox.innerHTML = "";
+
+	droppedItems.forEach((item) => {
+		dropBox.append(item);
+	});
+
 	allWinAmountArray.forEach((item) => {
 		if (
 			parseFloat(item.textContent) !== parseFloat(winningPlayer.textContent)
 		) {
-			item.parentElement.remove();
+			item.parentElement.parentElement.parentElement.remove();
 		}
 
+		item.parentElement.parentElement.parentElement.style.width = "625px";
 		endAmount = endAmount + parseFloat(item.textContent);
 	});
 
 	winningPlayer.textContent = endAmount.toFixed(2) + "$";
-
-	setTimeout(() => {
-		location.reload();
-	}, 2500);
+	backBtn.classList.remove("hidden");
 };
 
 // adds won items to inv
@@ -3139,8 +3180,16 @@ const spinCase = () => {
 					casesItems[currentBattleCases[0]][`${winningItem.id}`].id
 				);
 
+				const dropItems =
+					winningItem.parentElement.parentElement.nextElementSibling
+						.children[1];
+
+				createDrop(dropItems, winningItem);
+
 				const amountValue =
-					winningItem.parentElement.parentElement.nextElementSibling;
+					winningItem.parentElement.parentElement.nextElementSibling
+						.firstElementChild.children[2];
+
 				amountValue.textContent =
 					(
 						parseFloat(amountValue.textContent) +
@@ -3164,6 +3213,41 @@ const spinCase = () => {
 		currentBattleCases.shift();
 		startBattle();
 	}, 5500);
+};
+
+const createDrop = (dropBox, winningItem) => {
+	const itemBox = document.createElement("div");
+	const itemImg = document.createElement("img");
+	const itemName = document.createElement("p");
+	const itemPrice = document.createElement("p");
+
+	itemBox.classList.add("battles__battle-itemdown");
+	itemBox.classList.add(
+		casesItems[currentBattleCases[0]][`${winningItem.id}`].color +
+			"-item-jackpot"
+	);
+	itemImg.classList.add("battles__battle-itemdown-img");
+	itemName.classList.add("battles__battle-itemdown-name");
+	itemPrice.classList.add("battles__battle-itemdown-price");
+
+	itemImg.setAttribute(
+		"src",
+		casesItems[currentBattleCases[0]][`${winningItem.id}`].imgDist
+	);
+	itemImg.setAttribute(
+		"alt",
+		casesItems[currentBattleCases[0]][`${winningItem.id}`].imgAlt
+	);
+
+	itemName.textContent =
+		casesItems[currentBattleCases[0]][`${winningItem.id}`].name;
+	itemPrice.textContent =
+		casesItems[currentBattleCases[0]][`${winningItem.id}`].price + "$";
+
+	itemBox.append(itemImg, itemName, itemPrice);
+	dropBox.append(itemBox);
+
+	droppedItems.push(itemBox);
 };
 
 function incrementBattles() {
@@ -3194,6 +3278,9 @@ const addListeners = () => {
 
 	startBtn.addEventListener("click", createCaseBoxesBasedOnPlayers);
 	closePopupBtn.addEventListener("click", toggleAddCasesPopup);
+	backBtn.addEventListener("click", () => {
+		location.reload();
+	});
 };
 
 addListeners();

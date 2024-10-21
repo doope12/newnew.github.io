@@ -1837,6 +1837,7 @@ const countTotalValue = () => {
 // restart everything in jackpot
 const restartJackpot = () => {
 	jackpotColors.innerHTML = "";
+	jackpotColors.style.transition = "0.1s"
 	jackpotColors.style.left = "0px";
 	itemsToWin = [];
 	playersDiv.innerHTML = "";

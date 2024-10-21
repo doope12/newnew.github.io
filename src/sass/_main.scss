@@ -361,3 +361,36 @@
 		}
 	}
 }
+
+.globalstats {
+	&__list {
+		padding: 2em 1em 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		font-size: 1.6rem;
+		color: $text-color;
+	}
+
+	&__item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0.5em;
+		padding: 0.5em 1em;
+		min-width: 200px;
+		width: 23%;
+		border: 2px solid $border-color;
+		border-radius: 10px;
+		font-weight: bold;
+		box-shadow: $normal-boxshadow;
+		letter-spacing: 1px;
+		background: $tiles-color;
+		color: $text-color;
+
+		& span {
+			color: $secondary-color;
+		}
+	}
+}

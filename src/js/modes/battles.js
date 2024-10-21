@@ -1871,6 +1871,54 @@ let currentBattleCases = [];
 let currentItemWonByPlayer = [];
 let moveCaseLeft = 50;
 
+const casesOpenedText = document.querySelector("#casesopened");
+const battlesCreatedText = document.querySelector("#battlescreated");
+const upgradesText = document.querySelector("#upgrades");
+const jackpotsWonText = document.querySelector("#jackpotswon");
+
+const firebaseConfig = {
+	apiKey: "AIzaSyD3gW_LmVUQcbT2oFKyvpIb2V0q4V7kfRA",
+	authDomain: "ezskins-bcb15.firebaseapp.com",
+	projectId: "ezskins-bcb15",
+	databaseURL:
+		"https://ezskins-bcb15-default-rtdb.europe-west1.firebasedatabase.app",
+	storageBucket: "ezskins-bcb15.appspot.com",
+	messagingSenderId: "523489662504",
+	appId: "1:523489662504:web:6c32e739858d90f66e871d",
+};
+
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+const casesRef = database.ref("caseopened");
+const battlesRef = database.ref("battlecreated");
+const upgraderRef = database.ref("upgrades");
+const jackpotRef = database.ref("jackpotwon");
+
+casesRef.on("value", (snapshot) => {
+	const casesData = snapshot.val();
+
+	casesOpenedText.textContent = casesData;
+});
+
+battlesRef.on("value", (snapshot) => {
+	const battlesData = snapshot.val();
+
+	battlesCreatedText.textContent = battlesData;
+});
+
+upgraderRef.on("value", (snapshot) => {
+	const upgradesData = snapshot.val();
+
+	upgradesText.textContent = upgradesData;
+});
+
+jackpotRef.on("value", (snapshot) => {
+	const jackpotData = snapshot.val();
+
+	jackpotsWonText.textContent = jackpotData;
+});
+
 // toggle cases popup (window to add cases to battle)
 const toggleAddCasesPopup = () => {
 	casesPopup.classList.toggle("hidden");
@@ -2146,7 +2194,6 @@ const setBalanceAfterStart = () => {
 
 	setBalance();
 };
-
 
 const countCasesOnStart = () => {
 	const allAddedCases = document.querySelectorAll(".battles__item");
@@ -2955,7 +3002,7 @@ const winningAnimationJackpot = (players) => {
 	}, 500);
 };
 
-// if we clearly got winner 
+// if we clearly got winner
 const winningAnimationEnd = () => {
 	const playersBoxes = document.querySelectorAll(".battles__battle");
 	const playersBoxesArray = Array.from(playersBoxes);
@@ -3118,6 +3165,20 @@ const spinCase = () => {
 	}, 5500);
 };
 
+function incrementBattles() {
+	battlesRef.once("value", (snapshot) => {
+		const currentValue = snapshot.val();
+
+		// Increment the current value
+		const newValue = currentValue + 1;
+
+		// Update the new value back to the database
+		battlesRef.set(newValue).catch((error) => {
+			console.error("Error updating value:", error);
+		});
+	});
+}
+
 const addListeners = () => {
 	addCasesBtn.addEventListener("click", toggleAddCasesPopup);
 	popupAddCasesBtn.addEventListener("click", addSelectedCases);
@@ -3131,6 +3192,7 @@ const addListeners = () => {
 	});
 
 	startBtn.addEventListener("click", createCaseBoxesBasedOnPlayers);
+	startBtn.addEventListener("click", incrementBattles);
 	closePopupBtn.addEventListener("click", toggleAddCasesPopup);
 };
 

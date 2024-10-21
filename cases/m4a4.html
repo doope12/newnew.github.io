@@ -170,13 +170,29 @@
     </div>
 </div>
     <main class="main">
-        <section class="drop">
-            <div class="drop__box">
-                <div class="drop__box-bg"></div>
-                <ul class="drop__list">
-                </ul>
-            </div>
-        </section>
+      <section class="drop">
+    <div class="drop__box">
+        <div class="drop__box-bg"></div>
+        <ul class="drop__list">
+        </ul>
+    </div>
+</section>
+<div class="wrapper">
+    <ul class="globalstats__list">
+        <li class="globalstats__item">
+            <p class="globalstats__text">Cases Opened: <span id="casesopened">0</span></p>
+        </li>
+        <li class="globalstats__item">
+            <p class="globalstats__text">Battles created: <span id="battlescreated">0</span></p>
+        </li>
+        <li class="globalstats__item">
+            <p class="globalstats__text">Upgrades: <span id="upgrades">0</span></p>
+        </li>
+        <li class="globalstats__item">
+            <p class="globalstats__text">Jackpots won: <span id="jackpotswon">0</span></p>
+        </li>
+    </ul>
+</div>
         <div class="wrapper">
             <div class="case__buttons">
                 <div class="case__button-container case__button-container--left">
@@ -230,6 +246,8 @@
     <p>
         <a href="https://github.com/Ludzikk" class="footer__link"><i class="fa-brands fa-github footer__icon"></i></a>
 </footer>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="../dist/js/balance.min.js"></script>
     <script src="../dist/js/cases/m4a4.min.js"></script>
     <script src="../dist/js/last-drops.min.js"></script>

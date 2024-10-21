@@ -1401,6 +1401,54 @@ let currentPageUser = 1;
 let currentPageAll = 1;
 const itemsPerPage = 12;
 
+const casesOpenedText = document.querySelector("#casesopened");
+const battlesCreatedText = document.querySelector("#battlescreated");
+const upgradesText = document.querySelector("#upgrades");
+const jackpotsWonText = document.querySelector("#jackpotswon");
+
+const firebaseConfig = {
+	apiKey: "AIzaSyD3gW_LmVUQcbT2oFKyvpIb2V0q4V7kfRA",
+	authDomain: "ezskins-bcb15.firebaseapp.com",
+	projectId: "ezskins-bcb15",
+	databaseURL:
+		"https://ezskins-bcb15-default-rtdb.europe-west1.firebasedatabase.app",
+	storageBucket: "ezskins-bcb15.appspot.com",
+	messagingSenderId: "523489662504",
+	appId: "1:523489662504:web:6c32e739858d90f66e871d",
+};
+
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+const casesRef = database.ref("caseopened");
+const battlesRef = database.ref("battlecreated");
+const upgraderRef = database.ref("upgrades");
+const jackpotRef = database.ref("jackpotwon");
+
+casesRef.on("value", (snapshot) => {
+	const casesData = snapshot.val();
+
+	casesOpenedText.textContent = casesData;
+});
+
+battlesRef.on("value", (snapshot) => {
+	const battlesData = snapshot.val();
+
+	battlesCreatedText.textContent = battlesData;
+});
+
+upgraderRef.on("value", (snapshot) => {
+	const upgradesData = snapshot.val();
+
+	upgradesText.textContent = upgradesData;
+});
+
+jackpotRef.on("value", (snapshot) => {
+	const jackpotData = snapshot.val();
+
+	jackpotsWonText.textContent = jackpotData;
+});
+
 // This function adds every user item from his inventory(localStorage)
 const addPlayerItems = () => {
 	for (i = 0; i < countItemsAmount; i++) {
@@ -1472,14 +1520,16 @@ const setUserItemsOrder = () => {
 	const userItems = document.querySelectorAll(".upgrader__item-useritems");
 	const userItemsArray = Array.from(userItems);
 
-	if (selectUserItems.value === "asc") { // sets items from lowest price to highest
+	if (selectUserItems.value === "asc") {
+		// sets items from lowest price to highest
 		userItemsArray.sort((a, b) => {
 			return (
 				parseFloat(a.lastElementChild.textContent) -
 				parseFloat(b.lastElementChild.textContent)
 			);
 		});
-	} else { // sets items from highest price to lowest
+	} else {
+		// sets items from highest price to lowest
 		userItemsArray.sort((a, b) => {
 			return (
 				parseFloat(b.lastElementChild.textContent) -
@@ -1488,7 +1538,8 @@ const setUserItemsOrder = () => {
 		});
 	}
 
-	userItemsArray.forEach((item) => { // appeding sorted items
+	userItemsArray.forEach((item) => {
+		// appeding sorted items
 		itemUserOwnList.appendChild(item);
 	});
 
@@ -1575,7 +1626,7 @@ function addToRightSide() {
 }
 
 // Clear both sides to start point
-const clearBothSide = () => { 
+const clearBothSide = () => {
 	clearLeftSide();
 	clearRightSide();
 };
@@ -1626,18 +1677,22 @@ const countPercent = () => {
 	circle.style.transform = "rotate(0deg)"; // reset circle
 	circle.style.transition = "0.01s";
 
-	if (priceLeft !== "0.00" && priceRight !== "0.00") { // if user picked his item and item to upgrade, then get percent to win
+	if (priceLeft !== "0.00" && priceRight !== "0.00") {
+		// if user picked his item and item to upgrade, then get percent to win
 		const percentForWin =
 			(parseFloat(priceLeft) / parseFloat(priceRight)) * 100;
 
-		if (percentForWin >= 100) { // if percent to win is higher then 100% just set text to 100% and not something like 234% 
+		if (percentForWin >= 100) {
+			// if percent to win is higher then 100% just set text to 100% and not something like 234%
 			percentageText.textContent = "100%";
 			circle.style.background = `conic-gradient(#ebde92 0 100%, rgba(0, 0, 0, 0.1) 100% 100%)`;
-		} else { // if its not higher than 100% then set it besed on calculations 
+		} else {
+			// if its not higher than 100% then set it besed on calculations
 			percentageText.textContent = percentForWin.toFixed(2) + "%";
 			circle.style.background = `conic-gradient(#ebde92 0 ${percentForWin}%, rgba(0, 0, 0, 0.1) ${percentForWin}% 100%)`;
 		}
-	} else { // if user didn't picked both items then set percent to 0%
+	} else {
+		// if user didn't picked both items then set percent to 0%
 		percentageText.textContent = "0.00%";
 		circle.style.background = `conic-gradient(#ebde92 0 0%, rgba(0, 0, 0, 0.1) 0 100%)`;
 	}
@@ -1648,8 +1703,8 @@ const determineWin = (percentForWin) => {
 	// Get random number from range 0 to 9999
 	const randomNumber = Math.floor(Math.random() * 10000);
 
-	// If number we got is smaller than percent to win, than set if player won or not 
-	// (percent for win * 100) becouse let's say we have 98% to win which is numbers from 0 to 9800 
+	// If number we got is smaller than percent to win, than set if player won or not
+	// (percent for win * 100) becouse let's say we have 98% to win which is numbers from 0 to 9800
 	return randomNumber < percentForWin * 100; // True = win, False = lost
 };
 
@@ -1713,10 +1768,11 @@ const addWinningItems = (didWin) => {
 		parseInt(localStorage.getItem(`id${topLeftBox.id}`)) - 1;
 	localStorage.setItem(`id${topLeftBox.id}`, removeUpgradedItem);
 
-	// If user won 
+	// If user won
 	if (didWin) {
 		innerCircle.classList.add("upgrader-won"); // Add green color to circle
 		winSound.play(); // Play win sound
+		incrementUpgrades();
 
 		// Add upgrader item to inventory
 		if (
@@ -1732,7 +1788,8 @@ const addWinningItems = (didWin) => {
 
 		const upgradesWonToAdd = parseInt(localStorage.getItem("upgradesDone")) + 1;
 		localStorage.setItem("upgradesDone", upgradesWonToAdd); // Update stats
-	} else { // If lost do this
+	} else {
+		// If lost do this
 		innerCircle.classList.add("upgrader-lost");
 		lostSound.play();
 	}
@@ -1901,28 +1958,42 @@ const changePage = (direction) => {
 	renderItems();
 };
 
+function incrementUpgrades() {
+	upgraderRef.once("value", (snapshot) => {
+		const currentValue = snapshot.val();
+
+		// Increment the current value
+		const newValue = currentValue + 1;
+
+		// Update the new value back to the database
+		upgraderRef.set(newValue).catch((error) => {
+			console.error("Error updating value:", error);
+		});
+	});
+}
+
 const addListeners = () => {
 	const userItems = document.querySelectorAll(".upgrader__item-useritems");
 	const allItems = document.querySelectorAll(".upgrader__item-allitems");
 	const clearBtnLeft = document.querySelector(".upgrader__remove-btn-left");
 	const clearBtnRight = document.querySelector(".upgrader__remove-btn-right");
-	
+
 	userItems.forEach((item) => {
 		item.addEventListener("click", addToLeftSide);
 	});
-	
+
 	allItems.forEach((item) => {
 		item.addEventListener("click", addToRightSide);
 	});
-	
+
 	selectAllItems.addEventListener("change", () => {
 		currentPageAll = 1;
-		
+
 		setAllItemsOrder();
 	});
 	selectUserItems.addEventListener("change", () => {
 		currentPageUser = 1;
-		
+
 		setUserItemsOrder();
 	});
 	upgraderBtn.addEventListener("click", spinCircle);

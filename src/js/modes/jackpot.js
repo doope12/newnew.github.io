@@ -1419,6 +1419,54 @@ let currentPage = 1;
 const itemsPerPage = 10;
 const maxItems = 10;
 
+const casesOpenedText = document.querySelector("#casesopened");
+const battlesCreatedText = document.querySelector("#battlescreated");
+const upgradesText = document.querySelector("#upgrades");
+const jackpotsWonText = document.querySelector("#jackpotswon");
+
+const firebaseConfig = {
+	apiKey: "AIzaSyD3gW_LmVUQcbT2oFKyvpIb2V0q4V7kfRA",
+	authDomain: "ezskins-bcb15.firebaseapp.com",
+	projectId: "ezskins-bcb15",
+	databaseURL:
+		"https://ezskins-bcb15-default-rtdb.europe-west1.firebasedatabase.app",
+	storageBucket: "ezskins-bcb15.appspot.com",
+	messagingSenderId: "523489662504",
+	appId: "1:523489662504:web:6c32e739858d90f66e871d",
+};
+
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+const casesRef = database.ref("caseopened");
+const battlesRef = database.ref("battlecreated");
+const upgraderRef = database.ref("upgrades");
+const jackpotRef = database.ref("jackpotwon");
+
+casesRef.on("value", (snapshot) => {
+	const casesData = snapshot.val();
+
+	casesOpenedText.textContent = casesData;
+});
+
+battlesRef.on("value", (snapshot) => {
+	const battlesData = snapshot.val();
+
+	battlesCreatedText.textContent = battlesData;
+});
+
+upgraderRef.on("value", (snapshot) => {
+	const upgradesData = snapshot.val();
+
+	upgradesText.textContent = upgradesData;
+});
+
+jackpotRef.on("value", (snapshot) => {
+	const jackpotData = snapshot.val();
+
+	jackpotsWonText.textContent = jackpotData;
+});
+
 // create object with items above some price
 const getHardItems = () => {
 	function filterItemsByPrice(items, maxPrice) {
@@ -2012,6 +2060,7 @@ const addPlayerToJackpot = () => {
 // if player won add won items to his inventory
 const checkIfPlayerWon = (winningItem) => {
 	if (winningItem.id === playerCol) {
+		incrementJackpot();
 		for (i = 0; i < itemsToWin.length; i++) {
 			if (
 				localStorage.getItem(`id${itemsToWin[i]}`) === null ||
@@ -2208,6 +2257,20 @@ const changePage = (direction) => {
 
 	renderItems();
 };
+
+function incrementJackpot() {
+	jackpotRef.once("value", (snapshot) => {
+		const currentValue = snapshot.val();
+
+		// Increment the current value
+		const newValue = currentValue + 1;
+
+		// Update the new value back to the database
+		jackpotRef.set(newValue).catch((error) => {
+			console.error("Error updating value:", error);
+		});
+	});
+}
 
 joinBtn.addEventListener("click", addPlayerToJackpot);
 addUserItems();

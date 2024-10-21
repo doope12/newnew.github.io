@@ -104,6 +104,68 @@ let currentWinningItem; // current item that won
 let casesAmount = 1; // how many cases user will open
 let winningItems = []; // all winning items of current spin
 
+const casesOpenedText = document.querySelector("#casesopened");
+const battlesCreatedText = document.querySelector("#battlescreated");
+const upgradesText = document.querySelector("#upgrades");
+const jackpotsWonText = document.querySelector("#jackpotswon");
+
+const firebaseConfig = {
+	apiKey: "AIzaSyD3gW_LmVUQcbT2oFKyvpIb2V0q4V7kfRA",
+	authDomain: "ezskins-bcb15.firebaseapp.com",
+	projectId: "ezskins-bcb15",
+	databaseURL:
+		"https://ezskins-bcb15-default-rtdb.europe-west1.firebasedatabase.app",
+	storageBucket: "ezskins-bcb15.appspot.com",
+	messagingSenderId: "523489662504",
+	appId: "1:523489662504:web:6c32e739858d90f66e871d",
+};
+
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+const casesRef = database.ref("caseopened");
+const battlesRef = database.ref("battlecreated");
+const upgraderRef = database.ref("upgrades");
+const jackpotRef = database.ref("jackpotwon");
+
+casesRef.on("value", (snapshot) => {
+	const casesData = snapshot.val();
+
+	casesOpenedText.textContent = casesData;
+});
+
+battlesRef.on("value", (snapshot) => {
+	const battlesData = snapshot.val();
+
+	battlesCreatedText.textContent = battlesData;
+});
+
+upgraderRef.on("value", (snapshot) => {
+	const upgradesData = snapshot.val();
+
+	upgradesText.textContent = upgradesData;
+});
+
+jackpotRef.on("value", (snapshot) => {
+	const jackpotData = snapshot.val();
+
+	jackpotsWonText.textContent = jackpotData;
+});
+
+function incrementCases() {
+	casesRef.once("value", (snapshot) => {
+		const currentValue = snapshot.val();
+
+		// Increment the current value
+		const newValue = currentValue + casesAmount;
+
+		// Update the new value back to the database
+		casesRef.set(newValue).catch((error) => {
+			console.error("Error updating value:", error);
+		});
+	});
+}
+
 const createInfoAboutItemsInChest = () => {
 	// function to create info about all items in case
 	const dropBox = document.querySelector(".case__drop-box"); // container for info about all items in case
@@ -202,7 +264,10 @@ const createItemsInChest = () => {
 
 const setBtnText = () => {
 	// function to set button text content
-	if (parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount) {
+	if (
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >=
+		casePrice * casesAmount
+	) {
 		spinBtn.textContent = `open ${casePrice * casesAmount}.00$`; // if user have enought balance set button to show how much it cost
 	} else {
 		spinBtn.textContent = "add balance"; // if not set it to "add balance"
@@ -215,7 +280,8 @@ const spinCase = () => {
 
 	if (
 		// if balance of player is higher than case cost and case is not spinning then continue
-		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount &&
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >=
+			casePrice * casesAmount &&
 		spinBtn.textContent !== "spining"
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3"); // set open audio
@@ -246,11 +312,12 @@ const spinCase = () => {
 			box.style.left = howStrongSpin + "px"; // set how strong spin is
 			box.style.transition = "left 5s cubic-bezier(0,1,0.5,1)"; // set its animation
 
-			// after animation end, find winning item 
+			// after animation end, find winning item
 			setTimeout(() => {
 				function getWinningItem() {
 					// get position of middle point
-					const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
+					const redLineX =
+						box.parentElement.children[0].getBoundingClientRect().x;
 
 					const items = box.querySelectorAll(".case__item"); // get all items of current case box
 					let closestItem = null;
@@ -457,6 +524,7 @@ function setCasesAmount() {
 
 const addEventListeners = () => {
 	spinBtn.addEventListener("click", spinCase);
+	spinBtn.addEventListener("click", incrementCases);
 	takeBtn.addEventListener("click", takeWinningItem);
 	sellBtn.addEventListener("click", sellWinningItem);
 	backBtn.addEventListener("click", goBackToMainSite);

@@ -557,6 +557,24 @@
 	background-size: 50px 50px;
 }
 
+.jackpot-red-small {
+	background: $jackpot-red;
+	background-size: 15px 15px;
+}
+
+.jackpot-blue-small {
+	background: $jackpot-blue;
+	background-size: 15px 15px;
+}
+.jackpot-green-small {
+	background: $jackpot-green;
+	background-size: 15px 15px;
+}
+.jackpot-yellow-small {
+	background: $jackpot-yellow;
+	background-size: 15px 15px;
+}
+
 .red-item-jackpot {
 	position: relative;
 	border-bottom: 3px solid $red-drop;
@@ -698,3 +716,4 @@
 .pb0 {
 	padding-bottom: 0em;
 }
+

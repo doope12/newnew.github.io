@@ -35,7 +35,8 @@
 				height: 100%;
 				border: 2px solid $border-color;
 				box-shadow: $normal-boxshadow;
-				background-color: $tiles-color;
+				background: $tiles-jackpot;
+				// background: $tiles-color;
 				z-index: -1;
 			}
 		}
@@ -93,6 +94,11 @@
 			height: 20px;
 			border-radius: 0 2px 2px;
 			background-color: $secondary-color;
+		}
+
+		&--bottom {
+			transform: translate(-50%) rotate(180deg);
+			bottom: 0;
 		}
 	}
 

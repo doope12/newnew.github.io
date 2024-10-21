@@ -1568,19 +1568,19 @@ const addPlayer = () => {
 	// depending on current player amount, set player color
 	switch (currentPlayer) {
 		case 1:
-			playerColor.classList.add("jackpot-red");
+			playerColor.classList.add("jackpot-red-small");
 			playerColor.id = "jackpotRed";
 			break;
 		case 2:
-			playerColor.classList.add("jackpot-blue");
+			playerColor.classList.add("jackpot-blue-small");
 			playerColor.id = "jackpotBlue";
 			break;
 		case 3:
-			playerColor.classList.add("jackpot-green");
+			playerColor.classList.add("jackpot-green-small");
 			playerColor.id = "jackpotGreen";
 			break;
 		case 4:
-			playerColor.classList.add("jackpot-yellow");
+			playerColor.classList.add("jackpot-yellow-small");
 			playerColor.id = "jackpotYellow";
 			break;
 	}
@@ -2019,22 +2019,22 @@ const addPlayerToJackpot = () => {
 
 			switch (currentPlayer) {
 				case 1:
-					playerColor.classList.add("jackpot-red");
+					playerColor.classList.add("jackpot-red-small");
 					playerColor.id = "jackpotRed";
 					playerCol = "redWin";
 					break;
 				case 2:
-					playerColor.classList.add("jackpot-blue");
+					playerColor.classList.add("jackpot-blue-small");
 					playerColor.id = "jackpotBlue";
 					playerCol = "blueWin";
 					break;
 				case 3:
-					playerColor.classList.add("jackpot-green");
+					playerColor.classList.add("jackpot-green-small");
 					playerColor.id = "jackpotGreen";
 					playerCol = "greenWin";
 					break;
 				case 4:
-					playerColor.classList.add("jackpot-yellow");
+					playerColor.classList.add("jackpot-yellow-small");
 					playerColor.id = "jackpotYellow";
 					playerCol = "yellowWin";
 					break;

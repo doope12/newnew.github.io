@@ -60,6 +60,13 @@ $jackpot-total-bg: linear-gradient(
 		)
 		100%
 );
+$tiles-jackpot: linear-gradient(
+	180deg,
+	rgba(45, 45, 45, 1) 0%,
+	rgba(50, 50, 50) 25%,
+	rgba(55, 55, 55) 75%,
+	rgba(60, 60, 60, 1) 100%
+);
 $main-color: linear-gradient(
 	180deg,
 	rgba(20, 20, 20, 1) 0%,

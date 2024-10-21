@@ -75,6 +75,11 @@
 			border-radius: 0 2px 2px;
 			background-color: $secondary-color;
 		}
+
+		&--bottom {
+			transform: translate(-50%) rotate(180deg);
+			bottom: 0;
+		}
 	}
 
 	&__lastdrops {

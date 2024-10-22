@@ -27,7 +27,7 @@ Link to [website](https://ludzikk.github.io/CSGO-Gambling-Site/), it was built u
 ![](https://s4.ezgif.com/tmp/ezgif-4-24473aab55.gif)
 
 - #### Multiple cases
-![](https://s4.ezgif.com/tmp/ezgif####4-c36d16e3c5.gif)
+![](https://s4.ezgif.com/tmp/ezgif-4-c36d16e3c5.gif)
 
 - #### Case battles
 ![](https://s4.ezgif.com/tmp/ezgif-4-985d02b4bf.gif)

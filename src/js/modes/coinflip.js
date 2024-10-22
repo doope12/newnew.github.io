@@ -73,6 +73,7 @@ const takeFromBalance = () => {
 
 	lastBetAmount = betAmount;
 
+	maxBetAmount = parseFloat(localStorage.getItem("Balance")).toFixed(2);
 	setBalance();
 };
 

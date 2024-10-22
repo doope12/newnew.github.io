@@ -5,7 +5,7 @@
 Website is fully immersive. Every data is saved on local storage except global stats that are saved on data base.
 It was mainly done for bigger devices but you can still us it on phones it's just not as comfortable.
 
-Link to [website](ludzikk.github.io/CS-Gambling/), it was built using [GitHub Pages](https://pages.github.com/).
+Link to [website](https://ludzikk.github.io/CS-Gambling/), it was built using [GitHub Pages](https://pages.github.com/).
 
 **What i used in this project:**
 

@@ -3192,42 +3192,42 @@ const spinCase = () => {
 		box.style.transition = "left 5s ease";
 
 		// Dynamiczne skalowanie najbliższego elementu w trakcie animacji
-		const intervalId = setInterval(() => {
-			const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
+		// const intervalId = setInterval(() => {
+		// 	const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
 
-			function updateClosestItemScale() {
-				const items = document.querySelectorAll(`.case__item${box.id}`);
-				let closestItem = null;
-				let closestDistance = Infinity;
+		// 	function updateClosestItemScale() {
+		// 		const items = document.querySelectorAll(`.case__item${box.id}`);
+		// 		let closestItem = null;
+		// 		let closestDistance = Infinity;
 
-				// Resetuj skalowanie dla wszystkich elementów
-				items.forEach((item) => {
-					item.firstElementChild.style.scale = "1";
-				});
+		// 		// Resetuj skalowanie dla wszystkich elementów
+		// 		items.forEach((item) => {
+		// 			item.firstElementChild.style.scale = "1";
+		// 		});
 
-				// Znajdź najbliższy element do linii środkowej
-				items.forEach((item) => {
-					const itemCenterX =
-						item.getBoundingClientRect().x + item.offsetWidth / 2;
-					const distance = Math.abs(itemCenterX - redLineX);
+		// 		// Znajdź najbliższy element do linii środkowej
+		// 		items.forEach((item) => {
+		// 			const itemCenterX =
+		// 				item.getBoundingClientRect().x + item.offsetWidth / 2;
+		// 			const distance = Math.abs(itemCenterX - redLineX);
 
-					if (distance < closestDistance) {
-						closestDistance = distance;
-						closestItem = item;
-					}
-				});
+		// 			if (distance < closestDistance) {
+		// 				closestDistance = distance;
+		// 				closestItem = item;
+		// 			}
+		// 		});
 
-				// Zmniejsz skalę najbliższego elementu
-				if (closestItem) {
-					closestItem.firstElementChild.style.scale = "0.9";
-				}
-			}
+		// 		// Zmniejsz skalę najbliższego elementu
+		// 		if (closestItem) {
+		// 			closestItem.firstElementChild.style.scale = "0.9";
+		// 		}
+		// 	}
 
-			updateClosestItemScale();
-		}, 100); // Aktualizuj co 100ms
+		// 	updateClosestItemScale();
+		// }, 100); // Aktualizuj co 100ms
 
 		setTimeout(() => {
-			clearInterval(intervalId);
+			// clearInterval(intervalId);
 
 			const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
 

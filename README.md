@@ -1,9 +1,12 @@
-# ezSkins - CS Gambling Site (Fake one)
+# ezSkins - CS Gambling Website (Fake one)
 
-***Gambling site with futures like opening cases, roulette, coinflip, upgrader, crash, jackpot, saper***
+***Gambling website with futures like opening cases, roulette, coinflip, upgrader, crash, jackpot, saper***
 
 Website is fully immersive. Every data is saved on local storage except global stats that are saved on data base.
+<<<<<<< HEAD
 It was mainly done for bigger devices but you can still us it on phones it's just not as comfortable.
+=======
+>>>>>>> f21e634b23ade4cc0a60e6613d558ad7120b3c7e
 
 Link to [website](https://ludzikk.github.io/CSGO-Gambling-Site/), it was built using [GitHub Pages](https://pages.github.com/).
 

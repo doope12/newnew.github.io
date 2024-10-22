@@ -1,6 +1,6 @@
-# ezSkins - CS Gambling Site (Fake one)
+# ezSkins - CS Gambling Website (Fake one)
 
-***Gambling site with futures like opening cases, roulette, coinflip, upgrader, crash, jackpot, saper***
+***Gambling website with futures like opening cases, roulette, coinflip, upgrader, crash, jackpot, saper***
 
 Website is fully immersive. Every data is saved on local storage except global stats that are saved on data base.
 

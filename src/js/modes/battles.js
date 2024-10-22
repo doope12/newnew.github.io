@@ -1873,6 +1873,56 @@ const backBtn = document.querySelector(".battles__back");
 let currentBattleCases = [];
 let currentItemWonByPlayer = [];
 let droppedItems = [];
+let amountOfCases = {
+	case0: {
+		amount: 1,
+		id: "case0",
+	},
+	case1: {
+		amount: 1,
+		id: "case1",
+	},
+	case2: {
+		amount: 1,
+		id: "case2",
+	},
+	case3: {
+		amount: 1,
+		id: "case3",
+	},
+	case4: {
+		amount: 1,
+		id: "case4",
+	},
+	case5: {
+		amount: 1,
+		id: "case5",
+	},
+	case6: {
+		amount: 1,
+		id: "case6",
+	},
+	case7: {
+		amount: 1,
+		id: "case7",
+	},
+	case8: {
+		amount: 1,
+		id: "case8",
+	},
+	case9: {
+		amount: 1,
+		id: "case9",
+	},
+	case10: {
+		amount: 1,
+		id: "case10",
+	},
+	case11: {
+		amount: 1,
+		id: "case11",
+	},
+};
 let moveCaseLeft = 50;
 let currentRound = 1;
 let battleCost = 0;
@@ -2019,7 +2069,14 @@ const addSelectedCases = () => {
 			itemImg.setAttribute("alt", cases[`${item.id}`].imgAlt);
 			itemName.textContent = cases[`${item.id}`].name;
 			itemPrice.textContent = cases[`${item.id}`].price;
-			itemAmount.textContent = 1;
+
+			const amountOfCasesLength = Object.keys(amountOfCases).length;
+
+			for (i = 0; i < amountOfCasesLength; i++) {
+				if (amountOfCases[`case${i}`].id === itemBox.id) {
+					itemAmount.textContent = amountOfCases[`case${i}`].amount;
+				}
+			}
 
 			itemBtnMinus.append(itemMinusIcon);
 			itemBtnPlus.append(itemPlusIcon);
@@ -2075,9 +2132,15 @@ function changeCasesAmount() {
 	) {
 		amount = amount - 1;
 		this.parentElement.children[1].textContent = amount;
+
+		const idOfItem = this.parentElement.parentElement.id;
+		amountOfCases[`${idOfItem}`].amount = amount;
 	} else if (this.classList.contains("battles__item-btn-plus")) {
 		amount = amount + 1;
 		this.parentElement.children[1].textContent = amount;
+
+		const idOfItem = this.parentElement.parentElement.id;
+		amountOfCases[`${idOfItem}`].amount = amount;
 	}
 
 	countTotalCost();
@@ -2207,7 +2270,6 @@ const setBalanceAfterStart = () => {
 		parseFloat(localStorage.getItem("Balance")) -
 		parseFloat(totalCostOfCases.textContent);
 	localStorage.setItem("Balance", balanceToRemove.toFixed(2) + "$");
-
 	setBalance();
 };
 
@@ -3085,12 +3147,12 @@ const winningAnimationEnd = () => {
 
 	if (profitOrNot > 0) {
 		winningPlayer.textContent = `+${profitOrNot.toFixed(2)}$`;
-		winningPlayer.classList.remove("not-profit")
-		winningPlayer.classList.add("profit")
+		winningPlayer.classList.remove("not-profit");
+		winningPlayer.classList.add("profit");
 	} else {
 		winningPlayer.textContent = `${profitOrNot.toFixed(2)}$`;
-		winningPlayer.classList.add("not-profit")
-		winningPlayer.classList.remove("profit")
+		winningPlayer.classList.add("not-profit");
+		winningPlayer.classList.remove("profit");
 	}
 
 	backBtn.classList.remove("hidden");

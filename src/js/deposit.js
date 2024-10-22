@@ -13,36 +13,49 @@ function clearInputOnBtn() {
 }
 
 function formatCurrency(input) {
-    // Zapisanie pozycji kursora
-    let position = input.selectionStart;
+	// Zapisanie pozycji kursora
+	let position = input.selectionStart;
 
-    // Usuń symbol dolara i wszelkie niecyfrowe znaki (oprócz kropki dla dziesiętnej)
-    let value = input.value.replace(/[^0-9.]/g, '');
+	// Usuń symbol dolara i wszelkie niecyfrowe znaki (oprócz kropki dla dziesiętnej)
+	let value = input.value.replace(/[^0-9.]/g, "");
 
-    // Sprawdź, czy wartość jest liczbą i nie ma więcej niż jednej kropki
-    if (value.includes('.')) {
-        let parts = value.split('.');
-        value = parts[0] + '.' + parts[1].slice(0, 2); // Zachowaj tylko dwa miejsca po przecinku
-    }
+	// Sprawdź, czy wartość jest liczbą i nie ma więcej niż jednej kropki
+	if (value.includes(".")) {
+		let parts = value.split(".");
+		value = parts[0] + "." + parts[1].slice(0, 2); // Zachowaj tylko dwa miejsca po przecinku
+	}
 
-    // Dodaj symbol dolara na końcu
-    input.value = value ? parseFloat(value).toFixed(2) + "$" : '';
+	// Dodaj symbol dolara na końcu
+	input.value = value ? parseFloat(value).toFixed(2) + "$" : "";
 
-    // Przywrócenie pozycji kursora (z pominięciem dodanego symbolu dolara)
-    input.setSelectionRange(position, position);
+	// Przywrócenie pozycji kursora (z pominięciem dodanego symbolu dolara)
+	input.setSelectionRange(position, position);
 }
 
-const addValueToBalance = () => { // adds value players want to deposit to balance
+const addValueToBalance = () => {
+	// adds value players want to deposit to balance
 	if (depositInput.value !== "" && emailInput.value !== "") {
 		const currentBalanceOfAcount = parseFloat(
 			localStorage.getItem("Balance").slice(0, -1)
 		);
-		const amountToAddToBalance = (parseFloat(depositInput.value) + currentBalanceOfAcount);
+		const amountToAddToBalance =
+			parseFloat(depositInput.value) + currentBalanceOfAcount;
 
-        localStorage.setItem("Balance", amountToAddToBalance + "$")
-        setBalance();
+		localStorage.setItem("Balance", amountToAddToBalance + "$");
+		setBalance();
+	} else if (depositInput.value === "" && emailInput.value === "") {
+		depositInput.parentElement.classList.add("error-input");
+		emailInput.parentElement.classList.add("error-input");
+	} else if (depositInput.value === "") {
+		depositInput.parentElement.classList.add("error-input");
+	} else if (emailInput.value === "") {
+		emailInput.parentElement.classList.add("error-input");
 	}
 };
+
+function removeError() {
+	this.parentElement.classList.remove("error-input");
+}
 
 const addListeners = () => {
 	valueButtons.forEach((btn) => {
@@ -54,6 +67,8 @@ const addListeners = () => {
 	});
 
 	submitBtn.addEventListener("click", addValueToBalance);
+	depositInput.addEventListener("click", removeError);
+	emailInput.addEventListener("click", removeError);
 };
 
 addListeners();

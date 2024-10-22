@@ -1390,7 +1390,7 @@ const createDropOnStart = () => { // add 24 random drops on page load
 
 		const randomItem = Math.floor(Math.random() * countItemsAmount);
 
-		item.classList.add(items[`id${randomItem}`].color + "-drop");
+		item.classList.add(items[`id${randomItem}`].color + "-drop3");
 
 		if (document.body.id === "index") {
 			itemImg.setAttribute("src", items[`id${randomItem}`].imgDist);
@@ -1418,7 +1418,7 @@ const createDropAfterStart = () => { // creates random drop from all items in da
 
 	const randomItem = Math.floor(Math.random() * countItemsAmount);
 
-	item.classList.add(items[`id${randomItem}`].color + "-drop");
+	item.classList.add(items[`id${randomItem}`].color + "-drop3");
 
 	if (document.body.id === "index") {
 		itemImg.setAttribute("src", items[`id${randomItem}`].imgDist);

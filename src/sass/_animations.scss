@@ -30,6 +30,18 @@
 	}
 }
 
+@keyframes showDropRoulette {
+	from {
+		margin-left: -35px;
+		opacity: 0;
+	}
+
+	to {
+		// margin-left: 0.3em;
+		opacity: 1;
+	}
+}
+
 @keyframes hideCaseLeft {
 	from {
 		margin-left: -140px;

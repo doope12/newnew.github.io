@@ -84,7 +84,7 @@
 
 	&__lastdrops {
 		position: relative;
-		margin: 1em auto 3em;
+		margin: 0.25em auto 3em;
 		width: 50%;
 		height: 50px;
 		border-radius: 5px;
@@ -92,6 +92,13 @@
 		box-shadow: $normal-boxshadow;
 		background: $tiles-color;
 		overflow: hidden;
+
+		&-text {
+			margin-top: 1em;
+			font-size: 1.8rem;
+			text-align: center;
+			color: $secondary-color;
+		}
 
 		&-box {
 			position: absolute;
@@ -112,6 +119,8 @@
 			height: 35px;
 			font-size: 1.4rem;
 			border-radius: 50%;
+			animation: showDropRoulette 0.5s ease forwards;
+			transition: transform 0.5s;
 
 			&--green {
 				background: $green-roulette;

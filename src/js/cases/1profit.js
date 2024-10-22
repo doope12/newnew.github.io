@@ -192,7 +192,10 @@ const createItemsInChest = () => {
 
 const setBtnText = () => {
 	// function to set button text content
-	if (parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount) {
+	if (
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >=
+		casePrice * casesAmount
+	) {
 		spinBtn.textContent = `open ${casePrice * casesAmount}.00$`; // if user have enought balance set button to show how much it cost
 	} else {
 		spinBtn.textContent = "add balance"; // if not set it to "add balance"
@@ -205,7 +208,8 @@ const spinCase = () => {
 
 	if (
 		// if balance of player is higher than case cost and case is not spinning then continue
-		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount &&
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >=
+			casePrice * casesAmount &&
 		spinBtn.textContent !== "spining"
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3"); // set open audio
@@ -236,13 +240,12 @@ const spinCase = () => {
 			box.style.left = howStrongSpin + "px"; // set how strong spin is
 			box.style.transition = "left 5s cubic-bezier(0,1,0.5,1)"; // set its animation
 
-		
 			// after animation end, find winning item
 			setTimeout(() => {
-
 				function getWinningItem() {
 					// get position of middle point
-					const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
+					const redLineX =
+						box.parentElement.children[0].getBoundingClientRect().x;
 
 					const items = box.querySelectorAll(".case__item"); // get all items of current case box
 					let closestItem = null;
@@ -372,14 +375,26 @@ const muteSound = () => {
 	// function to mute case sound
 	muteBtn.classList.toggle("not-muted"); // toggle mute
 
-	if (muteBtn.classList.contains("not-muted")) {
+	if (localStorage.getItem("muted") == 0) {
+		localStorage.setItem("muted", 1);
+	} else {
+		localStorage.setItem("muted", 0);
+	}
+
+	setMuteSound();
+};
+
+const setMuteSound = () => {
+	if (localStorage.getItem("muted") == 0) {
 		// if sound is not mutted, set correct icons
 		muteBtn.lastElementChild.style.display = "none";
 		muteBtn.firstElementChild.style.display = "block";
+		muteBtn.classList.add("not-muted");
 	} else {
 		// if its muted, set correct icons
 		muteBtn.lastElementChild.style.display = "block";
 		muteBtn.firstElementChild.style.display = "none";
+		muteBtn.classList.remove("not-muted");
 	}
 };
 
@@ -397,7 +412,7 @@ const createBoxes = () => {
 			casesAmount % 2 === 0 ||
 			(casesAmount % 2 !== 0 && i < casesAmount - 1)
 		) {
-			caseItem.style.width = "45%";
+			caseItem.style.width = "calc(50% - 32px)";
 		}
 
 		caseItem.classList.add("case__container");
@@ -463,4 +478,5 @@ const addEventListeners = () => {
 createItemsInChest();
 setBtnText();
 createInfoAboutItemsInChest();
+setMuteSound();
 addEventListeners();

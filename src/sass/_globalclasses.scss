@@ -121,6 +121,18 @@
 	}
 }
 
+.pink-drop3 {
+	background: $pink-last-drop-gradient;
+	border-bottom: 4px solid $pink-drop;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+		rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+	img {
+		filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+	}
+}
+
 .pink-drop2 {
 	background: $pink-drop-cases-drop-gradient;
 	border-bottom: 3px solid $pink-drop;
@@ -134,6 +146,19 @@
 
 .red-drop {
 	background: $red-drop-cases-gradient;
+	border-bottom: 4px solid $red-drop;
+
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+		rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+	img {
+		filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+	}
+}
+
+.red-drop3 {
+	background: $red-last-drop-gradient;
 	border-bottom: 4px solid $red-drop;
 
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
@@ -169,6 +194,19 @@
 	}
 }
 
+.gold-drop3 {
+	background: $gold-last-drop-gradient;
+	border-bottom: 4px solid $gold-drop;
+
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+		rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+	img {
+		filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+	}
+}
+
 .gold-drop2 {
 	background: $gold-drop-cases-drop-gradient;
 	border-bottom: 3px solid $gold-drop;
@@ -191,6 +229,17 @@
 	}
 }
 
+.purple-drop3 {
+	background: $purple-last-drop-gradient;
+	border-bottom: 4px solid $purple-drop;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+		rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+	img {
+		filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+	}
+}
+
 .purple-drop2 {
 	background: $purple-drop-cases-drop-gradient;
 	border-bottom: 3px solid $purple-drop;
@@ -204,6 +253,19 @@
 
 .blue-drop {
 	background: $blue-drop-cases-gradient;
+	border-bottom: 4px solid $blue-drop;
+
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+		rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+	img {
+		filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+	}
+}
+
+.blue-drop3 {
+	background: $blue-last-drop-gradient;
 	border-bottom: 4px solid $blue-drop;
 
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
@@ -238,6 +300,18 @@
 	}
 }
 
+.light-blue-drop3 {
+	background: $light-blue-last-drop-gradient;
+	border-bottom: 4px solid $light-blue-drop;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+		rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+	img {
+		filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+	}
+}
+
 .light-blue-drop2 {
 	background: $light-blue-drop-cases-drop-gradient;
 	border-bottom: 3px solid $light-blue-drop;
@@ -251,6 +325,18 @@
 
 .white-drop {
 	background: $white-drop-cases-gradient;
+	border-bottom: 4px solid $white-drop;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+		rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+	img {
+		filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.5));
+	}
+}
+
+.white-drop3 {
+	background: $white-last-drop-gradient;
 	border-bottom: 4px solid $white-drop;
 	box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
 		rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
@@ -717,3 +803,19 @@
 	padding-bottom: 0em;
 }
 
+.noitems-text {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 3rem;
+	color: $secondary-color;
+}
+
+.error-input {
+	border: 2px solid red;
+
+	&:focus {
+		outline: 1px solid red;
+	}
+}

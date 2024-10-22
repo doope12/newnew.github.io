@@ -1401,6 +1401,7 @@ const totalPageText = document.querySelector("#page-total");
 const difficultyText = document.querySelector("#diff");
 const playerPercentText = document.querySelector("#playerPercent");
 const totalText = document.querySelector("#totalValue");
+const noItemsText = document.querySelector(".noitems-text")
 const timeForStart = 30000;
 const timeForRestart = 29950;
 let itemsToWin = [];
@@ -2251,6 +2252,15 @@ const renderItems = () => {
 
 	currentPageText.textContent = currentPage;
 	totalPageText.textContent = allUserItemsPages;
+
+	if (allUserItemsPages < 1) {
+		currentPageText.textContent = 0;
+		currentPageText.parentElement.classList.add("hidden");
+		noItemsText.classList.remove("hidden")
+	} else {
+		currentPageText.parentElement.classList.remove("hidden");
+		noItemsText.classList.add("hidden")
+	}
 
 	if (currentPage === 1) {
 		userItemsPagePrevious.style.display = "none";

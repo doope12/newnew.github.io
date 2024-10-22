@@ -1400,6 +1400,7 @@ const currentUserPageText = document.querySelector("#page-current-left")
 const totalUserPageText = document.querySelector("#page-total-left")
 const currentAllPageText = document.querySelector("#page-current-right")
 const totalAllPageText = document.querySelector("#page-total-right")
+const noItemsText = document.querySelector(".noitems-text")
 let spinning = 0;
 let currentPageUser = 1;
 let currentPageAll = 1;
@@ -1915,6 +1916,15 @@ const renderItems = () => {
 	totalUserPageText.textContent = allUserItemsPages;
 	currentAllPageText.textContent = currentPageAll
 	totalAllPageText.textContent = totalAllPages;
+
+	if (allUserItemsPages < 1) {
+		currentUserPageText.textContent = 0;
+		currentUserPageText.parentElement.classList.add("hidden");
+		noItemsText.classList.remove("hidden")
+	} else {
+		currentUserPageText.parentElement.classList.remove("hidden");
+		noItemsText.classList.add("hidden")
+	}
 };
 
 // This function changed current page

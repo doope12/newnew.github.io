@@ -216,7 +216,10 @@ const createItemsInChest = () => {
 
 const setBtnText = () => {
 	// function to set button text content
-	if (parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount) {
+	if (
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >=
+		casePrice * casesAmount
+	) {
 		spinBtn.textContent = `open ${casePrice * casesAmount}.00$`; // if user have enought balance set button to show how much it cost
 	} else {
 		spinBtn.textContent = "add balance"; // if not set it to "add balance"
@@ -229,7 +232,8 @@ const spinCase = () => {
 
 	if (
 		// if balance of player is higher than case cost and case is not spinning then continue
-		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount &&
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >=
+			casePrice * casesAmount &&
 		spinBtn.textContent !== "spining"
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3"); // set open audio
@@ -260,14 +264,12 @@ const spinCase = () => {
 			box.style.left = howStrongSpin + "px"; // set how strong spin is
 			box.style.transition = "left 5s cubic-bezier(0,1,0.5,1)"; // set its animation
 
-			
-
-			// after animation end, find winning item 
+			// after animation end, find winning item
 			setTimeout(() => {
-	
 				function getWinningItem() {
 					// get position of middle point
-					const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
+					const redLineX =
+						box.parentElement.children[0].getBoundingClientRect().x;
 
 					const items = box.querySelectorAll(".case__item"); // get all items of current case box
 					let closestItem = null;
@@ -314,9 +316,11 @@ const spinCase = () => {
 };
 
 const hideWinPopup = () => {
-	if (casesAmount === 1) { // if user only open one case than show win popup
+	if (casesAmount === 1) {
+		// if user only open one case than show win popup
 		winPupup.classList.toggle("hidden");
-	} else { // if not automatically decide to take items, and not sell them
+	} else {
+		// if not automatically decide to take items, and not sell them
 		setTimeout(() => {
 			takeWinningItem();
 			setBtnText();
@@ -324,21 +328,24 @@ const hideWinPopup = () => {
 	}
 };
 
-const sellWinningItem = () => { // function to sell items (works only if user open one case at once)
+const sellWinningItem = () => {
+	// function to sell items (works only if user open one case at once)
 	const currentBalance = parseFloat(
 		localStorage.getItem("Balance").slice(0, -1)
 	); // get current balance
 	const itemPrice = parseFloat(winningItemPrice.textContent); // get item price
 	const howMuchToAddToBalance = (currentBalance + itemPrice).toFixed(2); // get how much balance player will have after selling item
-	localStorage.setItem("Balance", howMuchToAddToBalance + "$"); // set new balance 
+	localStorage.setItem("Balance", howMuchToAddToBalance + "$"); // set new balance
 
 	hideWinPopup();
 	refreshBalance();
 	resetBoxAnimation();
 };
 
-const takeWinningItem = () => { // funciton to add won items to inventory of user
-	for (i = 0; i < winningItems.length; i++) { // do this for every won item
+const takeWinningItem = () => {
+	// funciton to add won items to inventory of user
+	for (i = 0; i < winningItems.length; i++) {
+		// do this for every won item
 		// if user didnt had this item ever in inventory, then set it to 1
 		// if player had that item then get its localStorage and add 1 to it
 		if (
@@ -363,12 +370,14 @@ const takeWinningItem = () => { // funciton to add won items to inventory of use
 	resetBoxAnimation();
 };
 
-const refreshBalance = () => { // function to refresh balance
+const refreshBalance = () => {
+	// function to refresh balance
 	balanceAmount.textContent = localStorage.getItem("Balance");
 	balanceAmountMobile.textContent = localStorage.getItem("Balance");
 };
 
-const resetBoxAnimation = () => { // function to reset case box animation
+const resetBoxAnimation = () => {
+	// function to reset case box animation
 	const caseItemsBox = document.querySelectorAll(".case__items");
 	caseItemsBox.forEach((box) => {
 		box.innerHTML = "";
@@ -385,19 +394,30 @@ const goBackToMainSite = () => {
 	// function to open main site
 	window.open("../index.html", "_self");
 };
-
 const muteSound = () => {
 	// function to mute case sound
 	muteBtn.classList.toggle("not-muted"); // toggle mute
 
-	if (muteBtn.classList.contains("not-muted")) {
+	if (localStorage.getItem("muted") == 0) {
+		localStorage.setItem("muted", 1);
+	} else {
+		localStorage.setItem("muted", 0);
+	}
+
+	setMuteSound();
+};
+
+const setMuteSound = () => {
+	if (localStorage.getItem("muted") == 0) {
 		// if sound is not mutted, set correct icons
 		muteBtn.lastElementChild.style.display = "none";
 		muteBtn.firstElementChild.style.display = "block";
+		muteBtn.classList.add("not-muted");
 	} else {
 		// if its muted, set correct icons
 		muteBtn.lastElementChild.style.display = "block";
 		muteBtn.firstElementChild.style.display = "none";
+		muteBtn.classList.remove("not-muted");
 	}
 };
 
@@ -482,3 +502,4 @@ createItemsInChest();
 setBtnText();
 createInfoAboutItemsInChest();
 addEventListeners();
+setMuteSound();

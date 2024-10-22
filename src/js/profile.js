@@ -1407,8 +1407,9 @@ const statsCoinflip = document.querySelector(
 	".profile__stats-amount--coinflip"
 );
 const statsSaper = document.querySelector(".profile__stats-amount--saper");
-const currentPageText = document.querySelector("#page-current")
-const totalPageText = document.querySelector("#page-total")
+const currentPageText = document.querySelector("#page-current");
+const totalPageText = document.querySelector("#page-total");
+const noItemsText = document.querySelector(".noitems-text")
 let currentPage = 1; // current page of user items
 const itemsPerPage = 10; // max items per page
 
@@ -1432,6 +1433,8 @@ const changeAvatar = () => {
 	// on button click if input is not empty change avatar
 	if (avatarInput.value !== "") {
 		localStorage.setItem("avatar", avatarInput.value); // set it to localStorage
+	} else {
+		avatarInput.classList.add("error-input")
 	}
 
 	avatarInput.value = ""; // clear input
@@ -1444,6 +1447,8 @@ const changeNickname = () => {
 	// on button click if input is not empty change nickname
 	if (nicknameInput.value !== "") {
 		localStorage.setItem("nickname", nicknameInput.value); // set it to localStorage
+	} else {
+		nicknameInput.classList.add("error-input")
 	}
 
 	nicknameInput.value = ""; // clear input
@@ -1591,13 +1596,16 @@ const sellAllItems = () => {
 		getUserInfo();
 		setBalance(); // function from balance.js file
 		renderItems();
+
+		userItemsPagePrevious.style.display = "none";
+		userItemsPageNext.style.display = "none";
 	}
 };
 
-const renderItems = () => { // set items on pages
+const renderItems = () => {
+	// set items on pages
 	const allItemsOfUser = document.querySelectorAll(".profile__item"); // get all items of user
 	const allItemsOfUserArray = Array.from(allItemsOfUser); // make array from all items
-	const dotsBox = document.querySelector(".profile__dotsbox"); // get page dots container
 
 	const userStartIndex = (currentPage - 1) * itemsPerPage; // get index of array to start from based on current page
 	const userEndIndex = userStartIndex + itemsPerPage; // get end index of array
@@ -1613,8 +1621,17 @@ const renderItems = () => { // set items on pages
 		allItemsOfUserArray.length / itemsPerPage
 	); // get total amount of pages
 
-	currentPageText.textContent = currentPage
+	currentPageText.textContent = currentPage;
 	totalPageText.textContent = allUserItemsPages;
+
+	if (allUserItemsPages < 1) {
+		currentPageText.textContent = 0;
+		currentPageText.parentElement.classList.add("hidden");
+		noItemsText.classList.remove("hidden")
+	} else {
+		currentPageText.parentElement.classList.remove("hidden");
+		noItemsText.classList.add("hidden")
+	}
 
 	if (currentPage === 1) {
 		userItemsPagePrevious.style.display = "none"; // if current page is page one hide previous page button
@@ -1656,6 +1673,9 @@ const addEventListeners = () => {
 	});
 
 	sellAllSkinsBtn.addEventListener("click", sellAllItems);
+
+	avatarInput.addEventListener("click", removeError)
+	nicknameInput.addEventListener("click", removeError)
 };
 
 getUserInfo();

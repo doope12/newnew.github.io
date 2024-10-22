@@ -277,12 +277,13 @@
 
 		&-down {
 			width: 100%;
+			min-height: 300px;
 			border: 2px solid $border-color;
 			border-bottom-left-radius: 20px;
 			border-bottom-right-radius: 20px;
 			box-shadow: $normal-boxshadow;
 			background-color: $tiles-color;
-			min-height: 300px;
+			overflow: hidden;
 		}
 
 		&-info {
@@ -291,6 +292,7 @@
 			align-items: center;
 			justify-content: space-around;
 			width: 100%;
+			box-shadow: 0px 0px 80px rgba(0, 0, 0, 0.3);
 		}
 
 		&-amount {
@@ -393,6 +395,7 @@
 			justify-content: center;
 			align-items: center;
 			padding-bottom: 1em;
+			padding-top: 1em;
 			max-height: 900px;
 			overflow-y: auto;
 

@@ -29,7 +29,13 @@ const addListeners = () => {
 	loginPopupBackBtn.addEventListener("click", loginToAccount);
 	loginPopupSubmitBtn.addEventListener("click", createAccount);
 	profileMobile.addEventListener("click", changeSiteToProfile);
+	loginPopupImg.addEventListener("click", removeError);
+	loginPopupNickname.addEventListener("click", removeError);
 };
+
+function removeError() {
+	this.classList.remove("error-input");
+}
 
 const checkIfUserCreatedAccount = () => {
 	// check if user created account
@@ -118,13 +124,22 @@ const checkIfUserCreatedAccount = () => {
 				localStorage.setItem("coinflipWon", 0);
 			}
 		}
-		
+
 		if (
 			localStorage.getItem("saperWon") === null ||
 			localStorage.getItem("saperWon") === NaN
 		) {
 			{
 				localStorage.setItem("saperWon", 0);
+			}
+		}
+
+		if (
+			localStorage.getItem("muted") === null ||
+			localStorage.getItem("muted") === NaN
+		) {
+			{
+				localStorage.setItem("muted", 0);
 			}
 		}
 	}
@@ -157,7 +172,7 @@ const logoutFromAccount = () => {
 	loggedOutMobile.classList.toggle("hidden");
 };
 
-const createAccount = () => { 
+const createAccount = () => {
 	// creates account and stats
 	if (loginPopupImg.value !== "" && loginPopupNickname.value !== "") {
 		localStorage.setItem("createdAccount", 1);
@@ -171,12 +186,21 @@ const createAccount = () => {
 		localStorage.setItem("jackpotWon", 0);
 		localStorage.setItem("coinflipWon", 0);
 		localStorage.setItem("saperWon", 0);
+		localStorage.setItem("muted", 0);
 		loginToAccount();
 		checkIfUserCreatedAccount();
+	} else if (loginPopupImg.value === "" && loginPopupNickname.value === "") {
+		loginPopupImg.classList.add("error-input");
+		loginPopupNickname.classList.add("error-input");
+	} else if (loginPopupNickname.value === "") {
+		loginPopupNickname.classList.add("error-input");
+	} else if (loginPopupImg.value === "") {
+		loginPopupImg.classList.add("error-input");
 	}
 };
 
-const changeSiteToProfile = () => { // depending on where we are change link
+const changeSiteToProfile = () => {
+	// depending on where we are change link
 	if (document.body.id === "index") {
 		open("./diff/profile.html", "_self");
 	} else {

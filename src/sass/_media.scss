@@ -171,15 +171,6 @@
 			}
 		}
 	}
-
-	.battles {
-		&__battle {
-			&-containerofall {
-				flex-direction: row;
-				align-items: stretch;
-			}
-		}
-	}
 }
 
 @media (min-width: 1200px) {
@@ -190,6 +181,15 @@
 
 		&__hamb {
 			display: none;
+		}
+	}
+
+	.battles {
+		&__battle {
+			&-containerofall {
+				flex-direction: row;
+				align-items: stretch;
+			}
 		}
 	}
 

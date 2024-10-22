@@ -364,14 +364,26 @@ const muteSound = () => {
 	// function to mute case sound
 	muteBtn.classList.toggle("not-muted"); // toggle mute
 
-	if (muteBtn.classList.contains("not-muted")) {
+	if (localStorage.getItem("muted") == 0) {
+		localStorage.setItem("muted", 1);
+	} else {
+		localStorage.setItem("muted", 0);
+	}
+
+	setMuteSound();
+};
+
+const setMuteSound = () => {
+	if (localStorage.getItem("muted") == 0) {
 		// if sound is not mutted, set correct icons
 		muteBtn.lastElementChild.style.display = "none";
 		muteBtn.firstElementChild.style.display = "block";
+		muteBtn.classList.add("not-muted");
 	} else {
 		// if its muted, set correct icons
 		muteBtn.lastElementChild.style.display = "block";
 		muteBtn.firstElementChild.style.display = "none";
+		muteBtn.classList.remove("not-muted");
 	}
 };
 
@@ -456,3 +468,4 @@ createItemsInChest();
 setBtnText();
 createInfoAboutItemsInChest();
 addEventListeners();
+setMuteSound()

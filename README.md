@@ -23,31 +23,31 @@ Link to [website](ludzikk.github.io/CS-Gambling/), it was built using [GitHub Pa
 
 - #### Opening cases
 
-  ![](https://s4.ezgif.com/tmp/ezgif-4-24473aab55.gif)
+  ![](readmegifs/case.gif)
 
 - #### Multiple cases
 
-  ![](https://s4.ezgif.com/tmp/ezgif-4-c36d16e3c5.gif)
+  ![](readmegifs/caseamount.gif)
 
 - #### Case battles
 
-  ![](https://s4.ezgif.com/tmp/ezgif-4-985d02b4bf.gif)
+  ![](readmegifs/battles.gif)
 
 - #### Upgrader
 
-  ![](https://s4.ezgif.com/tmp/ezgif-4-64eada8202.gif)
+  ![](readmegifs/upgrader.gif)
 
 - #### Roulette
 
-  ![](https://s4.ezgif.com/tmp/ezgif-4-3c6844b3f9.gif)
+  ![](readmegifs/roulette.gif)
 
 - #### Jackpot
 
-  ![](https://s4.ezgif.com/tmp/ezgif-4-325f50b8e3.gif)
+  ![](readmegifs/jackpot.gif)
 
 - #### Coinflip
 
-  ![](https://s2.ezgif.com/tmp/ezgif-2-643a47c12b.gif)
+  ![](readmegifs/coinflip.gif)
 
 - #### User inventory
-  ![](https://s2.ezgif.com/tmp/ezgif-2-29844ad799.gif)
+  ![](readmegifs/playerinv.gif)

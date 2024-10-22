@@ -2,7 +2,7 @@
 
 ***Gambling site with futures like opening cases, roulette, coinflip, upgrader, crash, jackpot, saper***
 
-Website is fully immersive. Every data is saved on local storage beside global stats that are saved on data base.
+Website is fully immersive. Every data is saved on local storage except global stats that are saved on data base.
 
 Link to [website](https://ludzikk.github.io/CSGO-Gambling-Site/), it was built using [GitHub Pages](https://pages.github.com/).
 

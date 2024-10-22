@@ -41,3 +41,6 @@ Link to [website](https://ludzikk.github.io/CSGO-Gambling-Site/), it was built u
 
 - #### Jackpot
 ![](https://s4.ezgif.com/tmp/ezgif-4-325f50b8e3.gif)
+
+- #### Coinflip
+![](https://s2.ezgif.com/tmp/ezgif-2-643a47c12b.gif)

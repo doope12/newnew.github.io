@@ -1,12 +1,11 @@
 # ezSkins - CS Gambling Website (Fake one)
 
-***Gambling website with futures like opening cases, roulette, coinflip, upgrader, crash, jackpot, saper***
+**_Gambling website with futures like opening cases, roulette, coinflip, upgrader, crash, jackpot, saper_**
 
 Website is fully immersive. Every data is saved on local storage except global stats that are saved on data base.
 It was mainly done for bigger devices but you can still us it on phones it's just not as comfortable.
 
 Link to [website](https://ludzikk.github.io/CSGO-Gambling-Site/), it was built using [GitHub Pages](https://pages.github.com/).
-
 
 **What i used in this project:**
 
@@ -15,32 +14,40 @@ Link to [website](https://ludzikk.github.io/CSGO-Gambling-Site/), it was built u
 3. JS
 4. Firebase
 
-
-**I used icons from:** 
+**I used icons from:**
 
 1. [fontawesome](https://fontawesome.com)
 2. [tabler](https://tabler.io/admin-template)
 
-
 ## Features
 
 - #### Opening cases
-![](https://s4.ezgif.com/tmp/ezgif-4-24473aab55.gif)
+
+  ![](https://s4.ezgif.com/tmp/ezgif-4-24473aab55.gif)
 
 - #### Multiple cases
-![](https://s4.ezgif.com/tmp/ezgif-4-c36d16e3c5.gif)
+
+  ![](https://s4.ezgif.com/tmp/ezgif-4-c36d16e3c5.gif)
 
 - #### Case battles
-![](https://s4.ezgif.com/tmp/ezgif-4-985d02b4bf.gif)
+
+  ![](https://s4.ezgif.com/tmp/ezgif-4-985d02b4bf.gif)
 
 - #### Upgrader
-![](https://s4.ezgif.com/tmp/ezgif-4-64eada8202.gif)
 
-- #### Roulette 
-![](https://s4.ezgif.com/tmp/ezgif-4-3c6844b3f9.gif)
+  ![](https://s4.ezgif.com/tmp/ezgif-4-64eada8202.gif)
+
+- #### Roulette
+
+  ![](https://s4.ezgif.com/tmp/ezgif-4-3c6844b3f9.gif)
 
 - #### Jackpot
-![](https://s4.ezgif.com/tmp/ezgif-4-325f50b8e3.gif)
+
+  ![](https://s4.ezgif.com/tmp/ezgif-4-325f50b8e3.gif)
 
 - #### Coinflip
-![](https://s2.ezgif.com/tmp/ezgif-2-643a47c12b.gif)
+
+  ![](https://s2.ezgif.com/tmp/ezgif-2-643a47c12b.gif)
+
+- #### User inventory
+  ![](https://s2.ezgif.com/tmp/ezgif-2-29844ad799.gif)

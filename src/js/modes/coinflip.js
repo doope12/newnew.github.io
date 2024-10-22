@@ -81,10 +81,16 @@ const checkIfPlayerWon = (winCoin) => {
 		const winToAdd =
 			betAmount * 2 + parseFloat(localStorage.getItem("Balance"));
 		localStorage.setItem("Balance", winToAdd.toFixed(2) + "$");
+
+		const coinflipWonToAdd = parseInt(localStorage.getItem("coinflipWon")) + 1;
+		localStorage.setItem("coinflipWon", coinflipWonToAdd); // Update stats
 	} else if (winCoin === "tails" && bet === "t") {
 		const winToAdd =
 			betAmount * 2 + parseFloat(localStorage.getItem("Balance"));
 		localStorage.setItem("Balance", winToAdd.toFixed(2) + "$");
+
+		const coinflipWonToAdd = parseInt(localStorage.getItem("coinflipWon")) + 1;
+		localStorage.setItem("coinflipWon", coinflipWonToAdd);
 	}
 
 	setBalance();

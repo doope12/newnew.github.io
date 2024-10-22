@@ -3139,7 +3139,8 @@ const winningAnimationEnd = () => {
 			item.parentElement.parentElement.parentElement.remove();
 		}
 
-		item.parentElement.parentElement.parentElement.style.width = "625px";
+		item.parentElement.parentElement.parentElement.style.width = "100%";
+		item.parentElement.parentElement.parentElement.style.maxWidth = "625px";
 		endAmount = endAmount + parseFloat(item.textContent);
 	});
 

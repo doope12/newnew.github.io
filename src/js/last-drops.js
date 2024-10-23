@@ -923,7 +923,7 @@ const items = {
 		skin: "Printstream",
 		color: "red",
 		imgDist: "./dist/img/weapons/rifles/m4a1-s/printstream.jpg",
-		price: 408.70,
+		price: 408.7,
 		id: 102,
 	},
 	id103: {
@@ -977,7 +977,7 @@ const items = {
 		skin: "Master Piece",
 		color: "pink",
 		imgDist: "./dist/img/weapons/rifles/m4a1-s/master-piece.jpg",
-		price: 365.40,
+		price: 365.4,
 		id: 108,
 	},
 	id109: {
@@ -1004,7 +1004,7 @@ const items = {
 		skin: "Hot Rod",
 		color: "pink",
 		imgDist: "./dist/img/weapons/rifles/m4a1-s/hot-rod.jpg",
-		price: 883.80,
+		price: 883.8,
 		id: 111,
 	},
 	id112: {
@@ -1085,7 +1085,7 @@ const items = {
 		skin: "Green Laminate",
 		color: "blue",
 		imgDist: "./dist/img/weapons/rifles/ak-47/green-laminate.jpg",
-		price: 17.90,
+		price: 17.9,
 		id: 120,
 	},
 	id121: {
@@ -1193,7 +1193,7 @@ const items = {
 		skin: "Akihabara Accept",
 		color: "red",
 		imgDist: "./dist/img/weapons/rifles/aug/akihabara-accept.jpg",
-		price: 3437.20,
+		price: 3437.2,
 		id: 132,
 	},
 	id133: {
@@ -1247,7 +1247,7 @@ const items = {
 		skin: "Doppler Black Pearl",
 		color: "gold",
 		imgDist: "./dist/img/weapons/knives/talon/black-pearl.jpg",
-		price: 3099.50,
+		price: 3099.5,
 		id: 138,
 	},
 	id139: {
@@ -1256,7 +1256,7 @@ const items = {
 		skin: "Gamma Doppler Emerald",
 		color: "gold",
 		imgDist: "./dist/img/weapons/knives/butterfly/emerald.jpg",
-		price: 16374.90,
+		price: 16374.9,
 		id: 139,
 	},
 	id140: {
@@ -1265,7 +1265,7 @@ const items = {
 		skin: "Doppler Ruby",
 		color: "gold",
 		imgDist: "./dist/img/weapons/knives/butterfly/ruby.jpg",
-		price: 12535.90,
+		price: 12535.9,
 		id: 140,
 	},
 	id141: {
@@ -1274,7 +1274,7 @@ const items = {
 		skin: "Doppler Sapphire",
 		color: "gold",
 		imgDist: "./dist/img/weapons/knives/butterfly/sapphire.jpg",
-		price: 13789.10,
+		price: 13789.1,
 		id: 141,
 	},
 	id142: {
@@ -1368,7 +1368,7 @@ const items = {
 		id: 151,
 	},
 };
-const countItemsAmount = Object.keys(items).length;
+const countItemsAmount1 = Object.keys(items).length;
 const lastDropList = document.querySelector(".drop__list");
 const dropBox = document.querySelector(".drop__box");
 let dropListOrder = 0;
@@ -1378,7 +1378,8 @@ const setDropBoxHeight = () => {
 	dropBox.style.height = lastDropList.offsetHeight + "px";
 };
 
-const createDropOnStart = () => { // add 24 random drops on page load
+const createDropOnStart = () => {
+	// add 24 random drops on page load
 	for (i = 0; i < 24; i++) {
 		dropListOrder++;
 		const item = document.createElement("li");
@@ -1388,7 +1389,7 @@ const createDropOnStart = () => { // add 24 random drops on page load
 		itemBg.classList.add("drop__item-bg");
 		itemImg.classList.add("drop__img");
 
-		const randomItem = Math.floor(Math.random() * countItemsAmount);
+		const randomItem = Math.floor(Math.random() * countItemsAmount1);
 
 		item.classList.add(items[`id${randomItem}`].color + "-drop3");
 
@@ -1406,7 +1407,8 @@ const createDropOnStart = () => { // add 24 random drops on page load
 	}
 };
 
-const createDropAfterStart = () => { // creates random drop from all items in data base every 2.5s
+const createDropAfterStart = () => {
+	// creates random drop from all items in data base every 2.5s
 	dropListOrder++;
 	const lastDropListFirstChild = lastDropList.firstElementChild;
 	const item = document.createElement("li");
@@ -1416,7 +1418,7 @@ const createDropAfterStart = () => { // creates random drop from all items in da
 	itemBg.classList.add("drop__item-bg");
 	itemImg.classList.add("drop__img");
 
-	const randomItem = Math.floor(Math.random() * countItemsAmount);
+	const randomItem = Math.floor(Math.random() * countItemsAmount1);
 
 	item.classList.add(items[`id${randomItem}`].color + "-drop3");
 
@@ -1427,6 +1429,67 @@ const createDropAfterStart = () => { // creates random drop from all items in da
 	}
 
 	itemImg.setAttribute("alt", items[`id${randomItem}`].name);
+
+	item.style.order = `-${dropListOrder}`;
+	item.append(itemImg, itemBg);
+	lastDropList.append(item);
+
+	if (lastDropList.childElementCount > 25) {
+		lastDropListFirstChild.remove();
+	}
+};
+
+const createDropFromCases = (itemsWon) => {
+	dropListOrder++;
+	const idOfCurrentItem = items2[`${itemsWon.id}`].id;
+	const lastDropListFirstChild = lastDropList.firstElementChild;
+	const item = document.createElement("li");
+	const itemBg = document.createElement("div");
+	const itemImg = document.createElement("img");
+	item.classList.add("drop__item");
+	itemBg.classList.add("drop__item-bg");
+	itemImg.classList.add("drop__img");
+
+	item.classList.add(items[`id${idOfCurrentItem}`].color + "-drop3");
+
+	if (document.body.id === "index") {
+		itemImg.setAttribute("src", items[`id${idOfCurrentItem}`].imgDist);
+	} else {
+		itemImg.setAttribute("src", "." + items[`id${idOfCurrentItem}`].imgDist);
+	}
+
+	itemImg.setAttribute("alt", items[`id${idOfCurrentItem}`].name);
+
+	item.style.order = `-${dropListOrder}`;
+	item.append(itemImg, itemBg);
+	lastDropList.append(item);
+
+	if (lastDropList.childElementCount > 25) {
+		lastDropListFirstChild.remove();
+	}
+};
+
+const createDropFromBattles = (itemsWon) => {
+	dropListOrder++;
+	const idOfCurrentItem =
+		casesItems[currentBattleCases[0]][`${itemsWon.id}`].id;
+	const lastDropListFirstChild = lastDropList.firstElementChild;
+	const item = document.createElement("li");
+	const itemBg = document.createElement("div");
+	const itemImg = document.createElement("img");
+	item.classList.add("drop__item");
+	itemBg.classList.add("drop__item-bg");
+	itemImg.classList.add("drop__img");
+
+	item.classList.add(items[`id${idOfCurrentItem}`].color + "-drop3");
+
+	if (document.body.id === "index") {
+		itemImg.setAttribute("src", items[`id${idOfCurrentItem}`].imgDist);
+	} else {
+		itemImg.setAttribute("src", "." + items[`id${idOfCurrentItem}`].imgDist);
+	}
+
+	itemImg.setAttribute("alt", items[`id${idOfCurrentItem}`].name);
 
 	item.style.order = `-${dropListOrder}`;
 	item.append(itemImg, itemBg);

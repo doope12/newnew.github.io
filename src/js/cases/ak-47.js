@@ -289,9 +289,9 @@ const createItemsInChest = () => {
 				randomItem = 8;
 			} else if (randomNumber <= 3419) {
 				randomItem = 9;
-			}else if (randomNumber <= 5419) {
+			} else if (randomNumber <= 5419) {
 				randomItem = 10;
-			}else if (randomNumber <= 7419) {
+			} else if (randomNumber <= 7419) {
 				randomItem = 11;
 			} else {
 				randomItem = 12;
@@ -324,7 +324,10 @@ const createItemsInChest = () => {
 
 const setBtnText = () => {
 	// function to set button text content
-	if (parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount) {
+	if (
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >=
+		casePrice * casesAmount
+	) {
 		spinBtn.textContent = `open ${casePrice * casesAmount}.00$`; // if user have enought balance set button to show how much it cost
 	} else {
 		spinBtn.textContent = "add balance"; // if not set it to "add balance"
@@ -337,7 +340,8 @@ const spinCase = () => {
 
 	if (
 		// if balance of player is higher than case cost and case is not spinning then continue
-		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >= casePrice * casesAmount &&
+		parseFloat(localStorage.getItem("Balance").slice(0, -1)) >=
+			casePrice * casesAmount &&
 		spinBtn.textContent !== "spining"
 	) {
 		const caseOpeningSound = new Audio("../dist/audio/open.mp3"); // set open audio
@@ -368,11 +372,12 @@ const spinCase = () => {
 			box.style.left = howStrongSpin + "px"; // set how strong spin is
 			box.style.transition = "left 5s cubic-bezier(0,1,0.5,1)"; // set its animation
 
-			// after animation end, find winning item 
+			// after animation end, find winning item
 			setTimeout(() => {
 				function getWinningItem() {
 					// get position of middle point
-					const redLineX = box.parentElement.children[0].getBoundingClientRect().x;
+					const redLineX =
+						box.parentElement.children[0].getBoundingClientRect().x;
 
 					const items = box.querySelectorAll(".case__item"); // get all items of current case box
 					let closestItem = null;
@@ -409,6 +414,8 @@ const spinCase = () => {
 					winningItemName.textContent = items2[`${winningItem.id}`].name;
 					winningItemPrice.textContent =
 						items2[`${winningItem.id}`].price + "$";
+
+					createDropFromCases(winningItem);
 					hideWinPopup();
 				}
 			}, 5000); // start after end of anim (5s)
@@ -606,4 +613,4 @@ createItemsInChest();
 setBtnText();
 createInfoAboutItemsInChest();
 addEventListeners();
-setMuteSound()
+setMuteSound();

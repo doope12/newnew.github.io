@@ -262,6 +262,7 @@ const spinCase = () => {
 					winningItemPrice.textContent =
 						items2[`${winningItem.id}`].price + "$";
 					hideWinPopup();
+					createDropFromCases(winningItem)
 				}
 			}, 5000); // start after end of anim (5s)
 		});
@@ -376,6 +377,7 @@ const setMuteSound = () => {
 		muteBtn.classList.remove("not-muted");
 	}
 };
+
 const createBoxes = () => {
 	// function to create case boxes
 	for (i = 0; i < casesAmount; i++) {

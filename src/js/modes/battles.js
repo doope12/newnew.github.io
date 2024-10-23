@@ -3261,6 +3261,7 @@ const spinCase = () => {
 						.children[1];
 
 				createDrop(dropItems, winningItem);
+				createDropFromBattles(winningItem);
 
 				const amountValue =
 					winningItem.parentElement.parentElement.nextElementSibling

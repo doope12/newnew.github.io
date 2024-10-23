@@ -471,7 +471,7 @@ const createRandomPlayers = () => {
 			if (i === 0) {
 				itemName.textContent = "Cat";
 			} else if (i === 1) {
-				itemName.textContent = "Haster";
+				itemName.textContent = "Hamster";
 			} else {
 				itemName.textContent = "Rat";
 			}
@@ -501,7 +501,7 @@ const createRandomPlayers = () => {
 			if (i === 0) {
 				itemName.textContent = "Cat";
 			} else if (i === 1) {
-				itemName.textContent = "Haster";
+				itemName.textContent = "Hamster";
 			} else {
 				itemName.textContent = "Rat";
 			}

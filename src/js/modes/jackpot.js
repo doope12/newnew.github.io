@@ -1401,7 +1401,8 @@ const totalPageText = document.querySelector("#page-total");
 const difficultyText = document.querySelector("#diff");
 const playerPercentText = document.querySelector("#playerPercent");
 const totalText = document.querySelector("#totalValue");
-const noItemsText = document.querySelector(".noitems-text")
+const noItemsText = document.querySelector(".noitems-text");
+const countItemsAmount = Object.keys(allItems).length;
 const timeForStart = 30000;
 const timeForRestart = 29950;
 let itemsToWin = [];
@@ -1838,7 +1839,7 @@ const countTotalValue = () => {
 // restart everything in jackpot
 const restartJackpot = () => {
 	jackpotColors.innerHTML = "";
-	jackpotColors.style.transition = "0.1s"
+	jackpotColors.style.transition = "0.1s";
 	jackpotColors.style.left = "0px";
 	itemsToWin = [];
 	playersDiv.innerHTML = "";
@@ -2256,10 +2257,10 @@ const renderItems = () => {
 	if (allUserItemsPages < 1) {
 		currentPageText.textContent = 0;
 		currentPageText.parentElement.classList.add("hidden");
-		noItemsText.classList.remove("hidden")
+		noItemsText.classList.remove("hidden");
 	} else {
 		currentPageText.parentElement.classList.remove("hidden");
-		noItemsText.classList.add("hidden")
+		noItemsText.classList.add("hidden");
 	}
 
 	if (currentPage === 1) {

@@ -306,6 +306,8 @@ const spinCase = () => {
 					winningItemName.textContent = items2[`${winningItem.id}`].name;
 					winningItemPrice.textContent =
 						items2[`${winningItem.id}`].price + "$";
+
+					createDropFromCases(winningItem);
 					hideWinPopup();
 				}
 			}, 5000); // start after end of anim (5s)

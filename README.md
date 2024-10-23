@@ -49,7 +49,7 @@ Link to [website](https://ludzikk.github.io/CS-Gambling/), it was built using [G
 
   ![](readmegifs/coinflip.gif)
 
-- #### Saper
+- #### Mines
 
   ![](readmegifs/saper.gif)
 

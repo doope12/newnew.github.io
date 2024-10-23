@@ -359,7 +359,8 @@ const playerLost = () => {
 const playerCheckAll = () => {
 	fieldBg.classList.remove("hidden");
 	fieldBg.style.color = "rgb(113, 214, 77)";
-	fieldBg.textContent = "You Won " + currentAmountOfWin + "$";
+	fieldBg.textContent =
+		"You Won " + parseFloat(currentAmountOfWin).toFixed(2) + "$";
 	withdrawBtn.classList.add("hidden");
 	startBtn.classList.remove("hidden");
 
@@ -378,7 +379,7 @@ const playerCheckAll = () => {
 	});
 
 	const saperWonToAdd = parseInt(localStorage.getItem("saperWon")) + 1;
-		localStorage.setItem("saperWon", saperWonToAdd); // Update stats
+	localStorage.setItem("saperWon", saperWonToAdd); // Update stats
 
 	resetVariables();
 };

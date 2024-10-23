@@ -377,6 +377,9 @@ const playerCheckAll = () => {
 		}
 	});
 
+	const saperWonToAdd = parseInt(localStorage.getItem("saperWon")) + 1;
+		localStorage.setItem("saperWon", saperWonToAdd); // Update stats
+
 	resetVariables();
 };
 

@@ -269,17 +269,19 @@
 		}
 
 		&-item {
-			background-color: red;
 			width: 200px;
+			width: 150px;
 			margin: 0.5em;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			border-radius: 10px;
-			background-color: $main-color;
+			background: $battles-drop-bg;
+			border: 1px solid $border-color;
 			box-shadow: $normal-boxshadow;
 			font-size: 1.4rem;
 			cursor: pointer;
+			overflow: hidden;
 			transition: 0.5s;
 
 			&:hover {
@@ -294,6 +296,16 @@
 				padding: 1em;
 				width: 100%;
 				transition: scale 0.5s;
+			}
+
+			&-name,
+			&-skin {
+				padding: 0 1em;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				text-align: center;
+				width: 80%;
+				overflow: hidden;
 			}
 
 			&-skin {
@@ -311,7 +323,7 @@
 			justify-content: center;
 			align-items: flex-start;
 			flex-wrap: wrap;
-			min-height: 509px;
+			min-height: 431px;
 		}
 
 		&-btn {
@@ -334,4 +346,3 @@
 		}
 	}
 }
-

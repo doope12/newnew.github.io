@@ -1411,7 +1411,7 @@ const currentPageText = document.querySelector("#page-current");
 const totalPageText = document.querySelector("#page-total");
 const noItemsText = document.querySelector(".noitems-text")
 let currentPage = 1; // current page of user items
-const itemsPerPage = 10; // max items per page
+const itemsPerPage = 14; // max items per page
 
 const getUserInfo = () => {
 	// this function add all info
@@ -1479,6 +1479,7 @@ const addAllUserItems = () => {
 		for (j = 0; j < itemCount; j++) {
 			// create items based on how many player does have
 			const itemBox = document.createElement("div"); // item elements
+			const itemBg = document.createElement("div")
 			const itemImg = document.createElement("img");
 			const itemName = document.createElement("p");
 			const itemSkin = document.createElement("p");
@@ -1487,6 +1488,7 @@ const addAllUserItems = () => {
 
 			itemBox.classList.add("profile__item"); // item classes
 			itemBox.classList.add(allItems[`id${i}`].color + "-drop2");
+			itemBg.classList.add("profile__item-bg")
 			itemImg.classList.add("profile__item-img");
 			itemName.classList.add("profile__item-name");
 			itemSkin.classList.add("profile__item-skin");
@@ -1502,7 +1504,8 @@ const addAllUserItems = () => {
 			itemPrice.textContent = allItems[`id${i}`].price + "$";
 			itemBtn.textContent = "sell";
 
-			itemBox.append(itemImg, itemName, itemSkin, itemPrice, itemBtn); // append everything to item
+			itemBg.append(itemBtn)
+			itemBox.append(itemImg, itemName, itemSkin, itemPrice, itemBg); // append everything to item
 			itemsBox.append(itemBox); // apeend item to items container
 		}
 	}
@@ -1542,17 +1545,17 @@ const countTotalValueOfSkins = () => {
 function sellItem() {
 	// function to sell individual items
 	const currentBalance = localStorage.getItem("Balance"); // check current balance
-	const itemToSellPrice = this.parentElement.children[3].textContent; // price of item we want to sell
+	const itemToSellPrice = this.parentElement.parentElement.children[3].textContent; // price of item we want to sell
 	const newBalance = parseFloat(currentBalance) + parseFloat(itemToSellPrice); // balance of player, after selling that item
 
 	localStorage.setItem("Balance", newBalance + "$"); // set balance after selling item to localStorage
 
-	const idOfCurrentItem = this.parentElement.id; // check id of item we sold
+	const idOfCurrentItem = this.parentElement.parentElement.id; // check id of item we sold
 
 	const itemToSell = parseInt(localStorage.getItem(`id${idOfCurrentItem}`)) - 1; // set new amount of that item in player inventory
 	localStorage.setItem(`id${idOfCurrentItem}`, itemToSell); // set new amount of item to localStorage
 
-	this.parentElement.remove(); // remove sold item
+	this.parentElement.parentElement.remove(); // remove sold item
 
 	const allItemsOfUser = document.querySelectorAll(".profile__item"); // get all items of player
 	const totalUserItems = allItemsOfUser.length; // get total amount of player items

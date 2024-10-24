@@ -53,5 +53,9 @@ Link to [website](https://ludzikk.github.io/CS-Gambling/), it was built using [G
 
   ![](readmegifs/saper.gif)
 
+- #### Crash
+
+  ![](readmegifs/crash.gif)
+
 - #### User inventory
   ![](readmegifs/playerinv.gif)

@@ -7,7 +7,7 @@
 		border-radius: 20px;
 		border: 1px solid $border-color;
 		box-shadow: $normal-boxshadow;
-		background: $dropbox-bg
+		background: $dropbox-bg;
 	}
 
 	&__items {
@@ -74,7 +74,7 @@
 		box-shadow: $normal-boxshadow;
 		color: $text-color;
 		background: $tiles-color;
-		 
+
 		&:focus {
 			outline: 1px solid $secondary-color;
 		}
@@ -103,7 +103,7 @@
 			border: 2px solid rgb(223, 68, 68);
 			background-color: rgba(223, 68, 68, 0.4);
 			box-shadow: rgba(223, 68, 68, 0.16) 0px 3px 6px,
-			rgba(223, 68, 68, 0.23) 0px 3px 6px;;
+				rgba(223, 68, 68, 0.23) 0px 3px 6px;
 
 			&:hover {
 				background-color: rgba(223, 68, 68, 0.7);
@@ -152,26 +152,32 @@
 			justify-content: center;
 			align-items: flex-start;
 			flex-wrap: wrap;
-			min-height: 600px;
+			min-height: 431px;
 		}
 	}
 
 	&__item {
-		background-color: red;
-		width: 200px;
+		position: relative;
+		width: 150px;
 		margin: 0.5em;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		border-radius: 10px;
-		background-color: $main-color;
+		background: $battles-drop-bg;
+		border: 1px solid $border-color;
 		box-shadow: $normal-boxshadow;
 		font-size: 1.4rem;
-		cursor: pointer;
+		overflow: hidden;
 		transition: 0.5s;
 
 		&:hover {
 			transform: translateY(-5px);
+		}
+
+		&:hover &-bg {
+			// display: flex;
+			opacity: 1;
 		}
 
 		&:hover img {
@@ -184,8 +190,34 @@
 			transition: scale 0.5s;
 		}
 
+		&-name,
+		&-skin {
+			padding: 0 1em;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			text-align: center;
+			width: 80%;
+			overflow: hidden;
+		}
+
+		&-bg {
+			display: flex;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			justify-content: center;
+			align-items: center;
+			opacity: 0;
+			background: rgba(0, 0, 0, 0.4);
+			transition: opacity 0.5s;
+		}
+
 		&-skin {
 			padding: 0.25em 0;
+		}
+
+		&-price {
+			padding-bottom: 0.25em;
 		}
 
 		&-btn {

@@ -1369,10 +1369,21 @@ const items = {
 	},
 };
 const countItemsAmount1 = Object.keys(items).length;
+const itemsArray = Object.keys(items).map(key => items[key]);
 const lastDropList = document.querySelector(".drop__list");
 const dropBox = document.querySelector(".drop__box");
 let dropListOrder = 0;
 const speedOfCreatingDrop = 2500;
+
+// Sortowanie według ceny
+itemsArray.sort((a, b) => a.price - b.price);
+
+// Tworzenie nowego obiektu z nowymi id
+const sortedItems = {};
+itemsArray.forEach((item, index) => {
+	sortedItems[`id${index}`] = item;
+});
+
 
 const setDropBoxHeight = () => {
 	dropBox.style.height = lastDropList.offsetHeight + "px";

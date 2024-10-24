@@ -1423,7 +1423,7 @@ let medium = false;
 let easy = false;
 let choosedDiff = false;
 let currentPage = 1;
-const itemsPerPage = 10;
+const itemsPerPage = 14;
 const maxItems = 10;
 let valueOfJackpot = 0;
 

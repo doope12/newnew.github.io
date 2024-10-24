@@ -31,83 +31,83 @@ let pickedItemId = "";
 
 // Funkcja dodająca obrazy przedmiotów do UI
 const addCreateBet = () => {
-	crashTop.innerHTML = "";
-	crashBottom.innerHTML = "";
-    crashBox.classList.value = ""
-    crashBox.classList.add("crash__box")
+    crashTop.innerHTML = "";
+    crashBottom.innerHTML = "";
+    crashBox.classList.value = "";
+    crashBox.classList.add("crash__box");
 
-	const imgTop = document.createElement("img");
-	const imgBottom = document.createElement("img");
-	imgTop.classList.add("crash__img", "crash__img--main");
-	imgBottom.classList.add("crash__img", "crash__img--next", "add-next-item");
+    const imgTop = document.createElement("img");
+    const imgBottom = document.createElement("img");
+    imgTop.classList.add("crash__img", "crash__img--main");
+    imgBottom.classList.add("crash__img", "crash__img--next", "add-next-item");
 
-crashBox.classList.add(items[`id${currentItem}`].color + "-crash-box")
+    crashBox.classList.add(items[`id${currentItem}`].color + "-crash-box");
 
-	colorOfItem.classList.value = "";
-	nameOfItem.textContent = items[`id${currentItem}`].name;
-	colorOfItem.classList.add(
-		items[`id${currentItem}`].color + "-crash",
-		"crash__item-color"
-	);
+    colorOfItem.classList.value = "";
+    nameOfItem.textContent = items[`id${currentItem}`].name;
+    colorOfItem.classList.add(
+        items[`id${currentItem}`].color + "-crash",
+        "crash__item-color"
+    );
 
-	const currentItemPrice = items[`id${currentItem}`].price;
+    const currentItemPrice = items[`id${currentItem}`].price;
 
-	// Znajdź następny przedmiot, który jest droższy od bieżącego
-	for (i = 0; i < countItemsAmount1; i++) {
-		if (sortedItems[`id${i}`].price > currentItemPrice) {
-			nextItem = sortedItems[`id${i}`].id;
-			break;
-		}
-	}
+    // Find the next item that is more expensive
+    nextItem = undefined; // Reset nextItem to avoid issues with previous values
+    for (i = 0; i < countItemsAmount1; i++) {
+        if (sortedItems[`id${i}`].price > currentItemPrice) {
+            nextItem = sortedItems[`id${i}`].id;
+            break;
+        }
+    }
 
-	// Ustaw obraz bieżącego przedmiotu
-	imgTop.setAttribute("src", "." + items[`id${currentItem}`].imgDist);
-	imgTop.setAttribute("alt", items[`id${currentItem}`].name);
-	crashTop.append(imgTop);
+    // Set the image for the current item
+    imgTop.setAttribute("src", "." + items[`id${currentItem}`].imgDist);
+    imgTop.setAttribute("alt", items[`id${currentItem}`].name);
+    crashTop.append(imgTop);
 
-	// Ustaw obraz następnego przedmiotu
-	if (
-		nextItem !== undefined &&
-		!(sortedItems[`id${currentItem}`].id === sortedItems[`id${nextItem}`].id)
-	) {
-		imgBottom.setAttribute("src", "." + items[`id${nextItem}`].imgDist);
-		imgBottom.setAttribute("alt", items[`id${nextItem}`].name);
-		crashBottom.append(imgBottom);
-	} else {
-		crashBottom.innerHTML = "";
-	}
+    // Only set the next item image if there is a next item
+    if (nextItem !== undefined) {
+        imgBottom.setAttribute("src", "." + items[`id${nextItem}`].imgDist);
+        imgBottom.setAttribute("alt", items[`id${nextItem}`].name);
+        crashBottom.append(imgBottom);
+    } else {
+        // If there is no next item, ensure the crashBottom is empty
+        crashBottom.innerHTML = "";
+    }
 };
+
 
 // Funkcja ustawiająca mnożnik i sprawdzająca warunki
 const setMultiplier = () => {
-	multiplier.textContent = parseFloat(multiplierAmount).toFixed(2);
+    multiplier.textContent = parseFloat(multiplierAmount).toFixed(2);
 
-	// Poprawione porównanie: używamy ceny startowej pomnożonej przez mnożnik
-	const multipliedPrice = parseFloat(
-		(startingPrice * multiplierAmount).toFixed(2)
-	);
+    const multipliedPrice = parseFloat(
+        (startingPrice * multiplierAmount).toFixed(2)
+    );
 
-	if (didWithdraw === false) {
-		// Jeśli cena po mnożniku przekracza cenę następnego przedmiotu, zmień przedmiot
-		if (multipliedPrice > items[`id${nextItem}`].price && !isItemChanging) {
-			isItemChanging = true; // Set flag to prevent multiple triggers
-			currentItem = nextItem; // Zaktualizuj przedmiot na nowy
-			currentPrice = items[`id${currentItem}`].price; // Zaktualizuj cenę na nową
+    if (!didWithdraw) {
+        // Only attempt to change items if there is a next item
+        if (nextItem !== undefined && multipliedPrice > items[`id${nextItem}`].price && !isItemChanging) {
+            isItemChanging = true; // Set flag to prevent multiple triggers
+            currentItem = nextItem; // Update the current item to the next one
+            currentPrice = items[`id${currentItem}`].price; // Update the current price to the new item
 
-			const imgTop = document.querySelector(".crash__img--main");
-			const imgNext = document.querySelector(".crash__img--next");
+            const imgTop = document.querySelector(".crash__img--main");
+            const imgNext = document.querySelector(".crash__img--next");
 
-			imgNext.classList.remove("add-next-item");
-			imgTop.classList.add("hide-main-item");
-			imgNext.classList.add("show-next-item");
+            imgNext.classList.remove("add-next-item");
+            imgTop.classList.add("hide-main-item");
+            imgNext.classList.add("show-next-item");
 
-			setTimeout(() => {
-				addCreateBet();
-				isItemChanging = false; // Reset flag after UI update
-			}, 250);
-		}
-	}
+            setTimeout(() => {
+                addCreateBet();
+                isItemChanging = false; // Reset flag after UI update
+            }, 250);
+        }
+    }
 };
+
 
 const startCrash = () => {
 	amountOfWin.textContent = (startingPrice * multiplierAmount).toFixed(2);
@@ -188,35 +188,39 @@ function addPlayerBet() {
 }
 
 const withdrawFromCrash = () => {
-	didWithdraw = true;
-	withdrawBtn.classList.add("hidden");
-	crashBottom.firstElementChild.remove();
+    didWithdraw = true;
+    withdrawBtn.classList.add("hidden");
 
-	if (
-		localStorage.getItem(`id${currentItem}`) === null ||
-		localStorage.getItem(`id${currentItem}`) === NaN
-	) {
-		localStorage.setItem(`id${currentItem}`, 1);
-	} else {
-		const itemToAdd = parseInt(localStorage.getItem(`id${currentItem}`)) + 1;
-		localStorage.setItem(`id${currentItem}`, itemToAdd);
-	}
+    if (crashBottom.firstElementChild) {
+        crashBottom.firstElementChild.remove(); // Remove only if exists
+    }
 
-	const moneyToAdd =
-		startingPrice * multiplierAmount -
-		items[`id${currentItem}`].price +
-		parseFloat(localStorage.getItem("Balance"));
-	localStorage.setItem("Balance", parseFloat(moneyToAdd).toFixed(2) + "$");
+    if (
+        localStorage.getItem(`id${currentItem}`) === null ||
+        isNaN(localStorage.getItem(`id${currentItem}`))
+    ) {
+        localStorage.setItem(`id${currentItem}`, 1);
+    } else {
+        const itemToAdd = parseInt(localStorage.getItem(`id${currentItem}`)) + 1;
+        localStorage.setItem(`id${currentItem}`, itemToAdd);
+    }
 
-	const crashToAdd = parseInt(localStorage.getItem("crashWon")) + 1;
-	localStorage.setItem("crashWon", crashToAdd);
+    const moneyToAdd =
+        startingPrice * multiplierAmount -
+        items[`id${currentItem}`].price +
+        parseFloat(localStorage.getItem("Balance"));
+    localStorage.setItem("Balance", parseFloat(moneyToAdd).toFixed(2) + "$");
 
-	itemsBox.innerHTML = "";
-	addAllUserItems();
-	setItemsOrder();
-	renderItems();
-	setBalance();
+    const crashToAdd = parseInt(localStorage.getItem("crashWon")) + 1;
+    localStorage.setItem("crashWon", crashToAdd);
+
+    itemsBox.innerHTML = "";
+    addAllUserItems();
+    setItemsOrder();
+    renderItems();
+    setBalance();
 };
+
 
 const addAllUserItems = () => {
 	// function that adds all player items

@@ -10,25 +10,25 @@
 	&__box {
 		position: relative;
 		margin: 2em auto;
-		width: 400px;
-		height: 400px;
+		width: 300px;
+		height: 300px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		border-radius: 20px;
-        box-shadow: $normal-boxshadow;
+		box-shadow: $normal-boxshadow;
 		background: $battles-blank-item;
 		overflow: hidden;
 
-        &-bg {
-            margin: 0.5em 0;
-            position: absolute;
-			width: 450px;
-			height: 450px;
-            border-radius: 20px;
-            box-shadow: $normal-boxshadow;
+		&-bg {
+			margin: 0.5em 0;
+			position: absolute;
+			width: 350px;
+			height: 350px;
+			border-radius: 20px;
+			box-shadow: $normal-boxshadow;
 			background: $tiles-color;
-        }
+		}
 	}
 
 	&__multiplier {
@@ -57,7 +57,7 @@
 	}
 
 	&__iteminfo {
-        padding-top: 1em;
+		padding-top: 1em;
 		display: flex;
 		align-items: center;
 		justify-content: center;

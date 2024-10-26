@@ -46,6 +46,12 @@
 			width: 25%;
 		}
 	}
+
+	.mines {
+		&__field {
+			width: calc((100px + 6.5px) * 5);
+		}
+	}
 }
 
 @media (min-width: 768px) {
@@ -206,6 +212,18 @@
 				&::before {
 					transform: translate(-50%, -50%) skew(-25deg);
 				}
+			}
+		}
+	}
+
+	.crash {
+		&__box {
+			width: 400px;
+			height: 400px;
+
+			&-bg {
+				width: 450px;
+				height: 450px;
 			}
 		}
 	}
